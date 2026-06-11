@@ -1,6 +1,6 @@
 import streamlit as st
 
-# ---- 頁面佈局與風格設定 ----
+# ---- 頁面佈局設定 ----
 st.set_page_config(
     page_title="中高級認證 App 模擬器",
     page_icon="🎓",
@@ -8,35 +8,54 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 自訂 CSS 讓介面更像手機 App 的高質感深色風格
+# ---- 自動適應雙模式的 CSS 設計 ----
+# 這裡使用 Streamlit 的原生變數，當使用者切換系統明暗時，顏色會自動變白或變黑
+# 同時保持精緻的框線與元件質感
 st.markdown("""
     <style>
-    .main {
-        background-color: #0F172A;
-    }
+    /* 卡片式容器：自動適應背景與文字顏色，並加上細緻的主題框線 */
     div[data-testid="stVerticalBlock"] > div:has(div.stMarkdown) {
-        background-color: #1E293B;
-        padding: 20px;
-        border-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        margin-bottom: 15px;
+        background-color: var(--secondary-background-color);
+        padding: 24px;
+        border-radius: 16px;
+        border: 1px solid rgba(128, 128, 128, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
     }
+    
+    /* 標題與重點文字：使用亮眼且百搭的青色（Teal），在明暗模式下都有極佳的閱讀性 */
     h1, h2, h3 {
-        color: #14B8A6 !important;
+        color: #0D9488 !important; /* 調整為明暗皆宜的深青色 */
     }
-    p {
-        color: #94A3B8;
+    
+    /* 當處於暗黑模式時，微調標題顏色使其更亮眼 */
+    @media (prefers-color-scheme: dark) {
+        h1, h2, h3 {
+            color: #2DD4BF !important; /* 亮青色 */
+        }
+    }
+    
+    /* 調整副標題與說明文字的顏色透明度，確保層級分明 */
+    .stMarkdown p {
+        color: var(--text-color);
+        opacity: 0.85;
+    }
+    
+    /* 提示區塊的自訂微調 */
+    .stAlert {
+        border-radius: 12px !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
 # ---- App 頂部導覽列 ----
 st.title("🎓 中高級認證")
-st.caption("族語認證數位學習平台 ｜ 模擬視覺介面")
+st.caption("族語認證數位學習平台 ｜ 自動適應明暗模式 UI")
 st.write("---")
 
 # ---- 第一層：五個主要選項 (導覽選單) ----
-# 使用 segmented_control 模擬 App 的底部分頁或主要切換頁籤
+# segmented_control 在 Streamlit 官方原生設計中就完美支援雙模式切換
 main_options = ["📋 測驗說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
 current_tab = st.segmented_control(
     "主選單導覽", 
@@ -55,18 +74,17 @@ if current_tab == "📋 測驗說明":
     st.markdown("""
     歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。
     
-    💡 **使用指南：**
-    * 請點選上方切換 **聽力**、**口說**、**閱讀**、**寫作** 四大模組。
-    * 目前架構已設定完成，內容將於後續更新中陸續添加。
+    💡 **介面更新提示：**
+    * 本界面已導入動態主題變數。
+    * 您可以點擊 Streamlit 右上角的 **三條線選單 ➔ Settings ➔ Theme** 手動切換 Light/Dark 模式，測試視覺效果！
     """)
-    st.info("📌 目前進度：系統基礎骨架建置完成，等待題庫導入。")
+    st.info("📌 目前進度：系統基礎骨架建置完成，支援雙模式視覺適應。")
 
 # 2. 聽力模組
 elif current_tab == "🎧 聽力":
     st.subheader("🎧 聽力模組 (Pitengilan)")
     st.write("請選擇下方的題型開始練習：")
     
-    # 第二層選項
     listening_sub = st.radio(
         "聽力題型選擇：",
         ["選擇題-聽音選詞", "選擇題-對話理解"],
@@ -76,7 +94,6 @@ elif current_tab == "🎧 聽力":
     if listening_sub == "選擇題-聽音選詞":
         st.markdown("### 🔍 選擇題 - 聽音選詞")
         st.warning("🚧 【內容建置中】此處未來將播放單詞音檔，並提供選項供使用者辨識詞根。")
-        # 預留未來互動元件空間
         st.button("播放音檔 🔊", disabled=True)
         
     elif listening_sub == "選擇題-對話理解":
@@ -88,7 +105,6 @@ elif current_tab == "🗣️ 口說":
     st.subheader("🗣️ 口說模組 (Pisowalan)")
     st.write("請選擇下方的題型開始練習：")
     
-    # 第二層選項
     speaking_sub = st.radio(
         "口說題型選擇：",
         ["段落朗讀", "情境問答", "看圖表達"],
@@ -112,7 +128,6 @@ elif current_tab == "📖 閱讀":
     st.subheader("📖 閱讀模組 (Piasipan)")
     st.write("請選擇下方的題型開始練習：")
     
-    # 第二層選項
     reading_sub = st.radio(
         "閱讀題型選擇：",
         ["選擇題-詞彙語意", "選擇題-語言結構"],
@@ -132,7 +147,6 @@ elif current_tab == "✍️ 寫作":
     st.subheader("✍️ 寫作模組 (Pitilidan)")
     st.write("請選擇下方的題型開始練習：")
     
-    # 第二層選項
     writing_sub = st.radio(
         "寫作題型選擇：",
         ["句子聽寫", "問答"],
@@ -151,4 +165,4 @@ elif current_tab == "✍️ 寫作":
 
 # ---- App 底部註腳 ----
 st.write("---")
-st.caption("© 2026 中高級認證 App 開發團隊 ｜ 暫時架構建置版")
+st.caption("© 2026 中高級認證 App 開發團隊 ｜ 雙模式 UI 測試版")
