@@ -2,7 +2,7 @@ import streamlit as st
 
 # ---- 頁面佈局設定 ----
 st.set_page_config(
-    page_title="中高級認證 App 模擬器",
+    page_title="中高級認證",
     page_icon="🎓",
     layout="centered",
     initial_sidebar_state="collapsed"
@@ -70,7 +70,7 @@ st.write("") # 留空行增加視覺舒適度
 
 # 1. 測驗說明頁面
 if current_tab == "📋 測驗說明":
-    st.subheader("📋 測驗說明 (Pacihanan)")
+    st.subheader("📋 測驗說明 (Saheci)")
     st.markdown("""
     歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。
     
