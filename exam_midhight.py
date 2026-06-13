@@ -63,7 +63,7 @@ st.write("")
 # ---- 10-4. 原始靜態題庫 (15題標準數據庫，對齊 10-5 詞彙規範) ----
 QUIZ_DATA = [
     {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) riyar", "(2) 'alo", "(3) fanaw", "(4) sa'owac"], "correct_index": 0},
-    {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔 =選出語音中所唸的正確詞彙：", "options": ["(1) korkor", "(2) rohayan", "(3) romakat", "(4) rotarot"], "correct_index": 2},
+    {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) korkor", "(2) rohayan", "(3) romakat", "(4) rotarot"], "correct_index": 2},
     {"id": 3, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-03.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) hadhad", "(2) hakhak", "(3) hawan", "(4) hafay"], "correct_index": 3},
     {"id": 4, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-04.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) tefo'", "(2) 'okoy", "(3) tafokod", "(4) tafolod"], "correct_index": 2},
     {"id": 5, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-05.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) fakar", "(2) tayhi", "(3) pitaw", "(4) tarakar"], "correct_index": 2},
@@ -81,13 +81,15 @@ QUIZ_DATA = [
 
 # ---- 第二層：根據選擇顯示對應架構 ----
 
+# 1. 測驗說明頁面
 if current_tab == "📋 測驗說明":
     st.subheader("📋 測驗說明 (Saheci)")
     st.markdown("""
     歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。
     """)
-    st.info("📌 目前進度：支援題目雙重隨機防禦（題目順序隨機 + 選項順序隨機）。")
+    st.info("📌 目前進度：系統基礎骨架建置完成，支援雙模式視覺適應與「全隨機不重複」抽題演算法。")
 
+# 2. 聽力模組
 elif current_tab == "🎧 聽力":
     st.subheader("🎧 聽力模組 (Pitengilan)")
     st.write("請選擇下方的題型開始練習：")
@@ -101,8 +103,8 @@ elif current_tab == "🎧 聽力":
     if listening_sub == "選擇題-聽音選詞":
         st.markdown("### 🔍 選擇題 - 聽音選詞")
         
-        # --- 🧠 雙重隨機核心初始化迴路 ---
-        # 1. 鎖定題目隨機順序
+        # --- 🧠 隨機不重複核心機制 (Fisher-Yates 狀態鎖) ---
+        # 如果隨機索引序列不存在，則初始化並打亂順序
         if "random_quiz_order" not in st.session_state:
             st.session_state.random_quiz_order = list(range(len(QUIZ_DATA)))
             random.shuffle(st.session_state.random_quiz_order)
@@ -114,58 +116,39 @@ elif current_tab == "🎧 聽力":
         if "submitted" not in st.session_state:
             st.session_state.submitted = False
 
-        # 2. 🚀 [本期亮眼特點] 鎖定當前題目的「隨機選項順序」
-        # 為避免網頁更新導致選項亂跳，我們在 Session State 中對每一題進行局部環境隔離
-        if "shuffled_options_map" not in st.session_state:
-            st.session_state.shuffled_options_map = {}
-
         ptr = st.session_state.current_pointer
         
+        # 判斷是否所有題目（15題）都出現過了
         if ptr < len(QUIZ_DATA):
+            # 透過隨機指針映射找出真正的題目數據
             true_quiz_id = st.session_state.random_quiz_order[ptr]
             current_quiz = QUIZ_DATA[true_quiz_id]
             
-            # 檢查這一題是否已經生成過隨機選項順序，若無則立刻原地洗牌
-            if true_quiz_id not in st.session_state.shuffled_options_map:
-                shuffled_opts = current_quiz["options"].copy()
-                random.shuffle(shuffled_opts)
-                
-                # 重新計算正確答案在洗牌後的新索引位置
-                original_correct_text = current_quiz["options"][current_quiz["correct_index"]]
-                new_correct_index = shuffled_opts.index(original_correct_text)
-                
-                # 將洗牌後的正確配對數據寫入快取鎖，實現反脆弱防護
-                st.session_state.shuffled_options_map[true_quiz_id] = {
-                    "options": shuffled_opts,
-                    "correct_index": new_correct_index
-                }
-            
-            # 從快取鎖讀取這題專屬的隨機選項與索引
-            live_quiz_data = st.session_state.shuffled_options_map[true_quiz_id]
-            
-            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題 (雙重隨機模式)**")
+            # 介面顯示進度
+            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題 (隨機模式)**")
             st.write(current_quiz["question_text"])
             
-            # --- 播放題目按鈕 ---
+            # --- 播放題目組件設計 ---
             if st.button("🔊 播放題目", key=f"play_{ptr}"):
                 st.session_state.audio_triggered = True
             
             if st.session_state.audio_triggered:
+                # 調用原生音訊引擎，按一次僅播放一遍音檔
                 st.audio(current_quiz["audio_path"], format="audio/mp3", autoplay=True)
                 st.session_state.audio_triggered = False
             
             st.write("---")
             
-            # --- 答案選項顯示 (使用已洗牌的選項) ---
+            # --- 答案選項顯示 (單選) ---
             user_choice = st.radio(
                 "請從下方選出正確答案：",
-                options=live_quiz_data["options"],
-                index=None,  # 預設不選取
+                options=current_quiz["options"],
+                index=None,  # 預設不選取任何選項，防止誘導
                 key=f"radio_{ptr}",
                 disabled=st.session_state.submitted
             )
             
-            # --- 提交與判定機制 ---
+            # --- 提交答案與 「✓」/「✕」 判定邏輯 ---
             if not st.session_state.submitted:
                 if st.button("📥 提交答案", key=f"submit_{ptr}"):
                     if user_choice is None:
@@ -174,10 +157,10 @@ elif current_tab == "🎧 聽力":
                         st.session_state.submitted = True
                         st.rerun()
             else:
-                # 拿當前的單選索引，與快取鎖中的 live_quiz_data["correct_index"] 進行精準對帳
-                selected_index = live_quiz_data["options"].index(user_choice)
-                correct_idx = live_quiz_data["correct_index"]
-                correct_answer_text = live_quiz_data["options"][correct_idx]
+                # 執行大 O(1) 複雜度查表對帳 
+                selected_index = current_quiz["options"].index(user_choice)
+                correct_idx = current_quiz["correct_index"]
+                correct_answer_text = current_quiz["options"][correct_idx]
                 
                 if selected_index == correct_idx:
                     st.markdown(f"### 🔴 答題結果：✓")
@@ -192,24 +175,57 @@ elif current_tab == "🎧 聽力":
                     st.session_state.submitted = False
                     st.rerun()
         else:
+            # 🔴 觸發均值回歸與重新洗牌機制：當所有題目出完後，重置並開啟新一輪隨機
             st.balloons()
-            st.success("🎉 您已完成本輪全部 15 道雙重隨機題目！系統正在為您重新洗牌出題...")
+            st.success("🎉 您已完成本輪全部 15 道隨機題目！系統正在為您重新洗牌出題...")
             
             if st.button("🔄 開始下一輪隨機挑戰"):
-                # 清空題號與選項快取，全面重新洗牌，開啟下一輪閉環
+                # 重新洗牌，清空狀態，實現無限不重複循環
                 random.shuffle(st.session_state.random_quiz_order)
-                st.session_state.shuffled_options_map = {}
                 st.session_state.current_pointer = 0
                 st.session_state.submitted = False
                 st.rerun()
         
     elif listening_sub == "選擇題-對話理解":
         st.markdown("### 💬 選擇題 - 對話理解")
-        st.warning("🚧 【內容建置中】")
+        st.warning("🚧 【內容建置中】此處未來將播放部落生活情境對話，並測試長句理解能力。")
 
-else:
+# 3. 口說模組
+elif current_tab == "🗣️ 口說":
+    st.subheader("🗣️ 口說模組 (Pisowalan)")
+    st.write("請選擇下方的題型開始練習：")
+    
+    speaking_sub = st.radio(
+        "口說題型選擇：",
+        ["段落朗模", "情境問答", "看圖表達"],
+        horizontal=True
+    )
+    st.warning("🚧 【內容建置中】")
+
+# 4. 閱讀模組
+elif current_tab == "📖 閱讀":
+    st.subheader("📖 閱讀模組 (Piasipan)")
+    st.write("請選擇下方的題型開始練習：")
+    
+    reading_sub = st.radio(
+        "閱讀題型選擇：",
+        ["選擇題-詞彙語意", "選擇題-語言結構"],
+        horizontal=True
+    )
+    st.warning("🚧 【內容建置中】")
+
+# 5. 寫作模組
+elif current_tab == "✍️ 寫作":
+    st.subheader("✍️ 寫作模組 (Pitilidan)")
+    st.write("請選擇下方的題型開始練習：")
+    
+    writing_sub = st.radio(
+        "寫作題型選擇：",
+        ["句子聽寫", "問答"],
+        horizontal=True
+    )
     st.warning("🚧 【內容建置中】")
 
 # ---- App 底部註腳 ----
 st.write("---")
-st.caption("© 2026 中高級認證 App 開發團隊 ｜ 題目+選項雙隨機安全版")
+st.caption("© 2026 中高級認證 App 開發團隊 ｜ 雙模式 15 題隨機不重複循環版")
