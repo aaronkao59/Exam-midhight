@@ -1,6 +1,5 @@
 import streamlit as st
-import json
-import os
+import random
 
 # ---- 10-1. 頁面佈局設定 (Code-CRF v9.0 運行時配置) ----
 st.set_page_config(
@@ -61,9 +60,7 @@ current_tab = st.segmented_control(
 
 st.write("") 
 
-# ---- 10-4. 模擬獨立資料庫加載 (Integ-CRF v9.0 轉接器模式防禦) ----
-# 實務佈署時會透過 json.load() 讀取 data/listening_quiz.json 檔案
-# 這裡先預載您提供的 15 題完整標準數據，並做正字法與索引清洗
+# ---- 10-4. 原始靜態題庫 (15題標準數據庫，對齊 10-5 阿美語詞彙規範) ----
 QUIZ_DATA = [
     {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) riyar", "(2) 'alo", "(3) fanaw", "(4) sa'owac"], "correct_index": 0},
     {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) korkor", "(2) rohayan", "(3) romakat", "(4) rotarot"], "correct_index": 2},
@@ -87,10 +84,8 @@ QUIZ_DATA = [
 # 1. 測驗說明頁面
 if current_tab == "📋 測驗說明":
     st.subheader("📋 測驗說明 (Saheci)")
-    st.markdown("""
-    歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。
-    """)
-    st.info("📌 目前進度：系統基礎骨架建置完成，支援雙模式視覺適應。")
+    st.markdown("歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。")
+    st.info("📌 目前進度：支援題目與選項「雙重隨機快取鎖」機制，其餘大題第二層架構已完整保留。")
 
 # 2. 聽力模組
 elif current_tab == "🎧 聽力":
@@ -106,80 +101,86 @@ elif current_tab == "🎧 聽力":
     if listening_sub == "選擇題-聽音選詞":
         st.markdown("### 🔍 選擇題 - 聽音選詞")
         
-        # --- 狀態管理器 (Session State) 初始化 ---
-        # 用來紀錄目前使用者回答到第幾題，避免重新渲染時狀態遺失
-        if "current_quiz_index" not in st.session_state:
-            st.session_state.current_quiz_index = 0
+        # --- 🧠 雙隨機防禦快取初始化迴路 ---
+        if "random_quiz_order" not in st.session_state:
+            st.session_state.random_quiz_order = list(range(len(QUIZ_DATA)))
+            random.shuffle(st.session_state.random_quiz_order)
+            
+        if "current_pointer" not in st.session_state:
+            st.session_state.current_pointer = 0
         if "audio_triggered" not in st.session_state:
             st.session_state.audio_triggered = False
         if "submitted" not in st.session_state:
             st.session_state.submitted = False
+        if "shuffled_options_map" not in st.session_state:
+            st.session_state.shuffled_options_map = {}
 
-        idx = st.session_state.current_quiz_index
+        ptr = st.session_state.current_pointer
         
-        # 實作「每次只出現一題」機制
-        if idx < len(QUIZ_DATA):
-            current_quiz = QUIZ_DATA[idx]
+        if ptr < len(QUIZ_DATA):
+            true_quiz_id = st.session_state.random_quiz_order[ptr]
+            current_quiz = QUIZ_DATA[true_quiz_id]
             
-            # 顯示題號與題幹
-            st.write(f"**第 {idx + 1} 題 / 共 {len(QUIZ_DATA)} 題**")
+            if true_quiz_id not in st.session_state.shuffled_options_map:
+                shuffled_opts = current_quiz["options"].copy()
+                random.shuffle(shuffled_opts)
+                original_correct_text = current_quiz["options"][current_quiz["correct_index"]]
+                
+                st.session_state.shuffled_options_map[true_quiz_id] = {
+                    "options": shuffled_opts,
+                    "correct_text": original_correct_text
+                }
+            
+            live_quiz_data = st.session_state.shuffled_options_map[true_quiz_id]
+            
+            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題 (雙重隨機防禦版)**")
             st.write(current_quiz["question_text"])
             
-            # --- 播放題目組件設計 ---
-            # 點擊按鈕觸發單次播放音檔
-            if st.button("🔊 播放題目", key=f"play_{idx}"):
+            if st.button("🔊 播放題目", key=f"play_{ptr}"):
                 st.session_state.audio_triggered = True
             
             if st.session_state.audio_triggered:
-                # 使用 Streamlit 原生播放組件，對齊自適應明暗模式
                 st.audio(current_quiz["audio_path"], format="audio/mp3", autoplay=True)
-                # 播放完畢後將開關重設，確保只觸發播放一遍
                 st.session_state.audio_triggered = False
             
             st.write("---")
             
-            # --- 答案選項顯示 (單選) ---
-            # 若已提交，則鎖定選項禁止修改
             user_choice = st.radio(
                 "請從下方選出正確答案：",
-                options=current_quiz["options"],
-                index=None,  # 預設不選取，防止先入為主的提示
-                key=f"radio_{idx}",
+                options=live_quiz_data["options"],
+                index=None,
+                key=f"radio_{ptr}",
                 disabled=st.session_state.submitted
             )
             
-            # --- 提交與判定機制 ---
             if not st.session_state.submitted:
-                if st.button("📥 提交答案", key=f"submit_{idx}"):
+                if st.button("📥 提交答案", key=f"submit_{ptr}"):
                     if user_choice is None:
                         st.warning("⚠️ 請先選擇一個選項再行提交！")
                     else:
                         st.session_state.submitted = True
                         st.rerun()
             else:
-                # 取得使用者選取的陣列索引與正確索引進行對帳
-                selected_index = current_quiz["options"].index(user_choice)
-                correct_idx = current_quiz["correct_index"]
-                correct_answer_text = current_quiz["options"][correct_idx]
+                correct_answer_text = live_quiz_data["correct_text"]
                 
-                # 以 "✓" 或 "✕" 表示答題結果並顯示正確答案
-                if selected_index == correct_idx:
+                if user_choice == correct_answer_text:
                     st.markdown(f"### 🔴 答題結果：✓")
                     st.success(f" Fangcal! 答對了！正確答案就是：**{correct_answer_text}**")
                 else:
                     st.markdown(f"### 🔴 答題結果：✕")
                     st.error(f" 再接再厲！正確答案應該是：**{correct_answer_text}**")
                 
-                # 下一題導覽按鈕
-                if st.button("➡️ 下一題", key=f"next_{idx}"):
-                    st.session_state.current_quiz_index += 1
+                if st.button("➡️ 下一題", key=f"next_{ptr}"):
+                    st.session_state.current_pointer += 1
                     st.session_state.submitted = False
                     st.rerun()
         else:
             st.balloons()
-            st.success("🎉 恭喜您！已完成「聽音選詞」全部 15 道題目的練習。")
-            if st.button("🔄 重新挑戰"):
-                st.session_state.current_quiz_index = 0
+            st.success("🎉 您已完成本輪全部 15 道隨機題目！系統正在為您重新洗牌出題...")
+            if st.button("🔄 開始下一輪隨機挑戰"):
+                random.shuffle(st.session_state.random_quiz_order)
+                st.session_state.shuffled_options_map = {}
+                st.session_state.current_pointer = 0
                 st.session_state.submitted = False
                 st.rerun()
         
@@ -187,7 +188,7 @@ elif current_tab == "🎧 聽力":
         st.markdown("### 💬 選擇題 - 對話理解")
         st.warning("🚧 【內容建置中】此處未來將播放部落生活情境對話，並測試長句理解能力。")
 
-# 3. 口說模組
+# 3. 口說模組 (已完整還原您寫好的第二層架構)
 elif current_tab == "🗣️ 口說":
     st.subheader("🗣️ 口說模組 (Pisowalan)")
     st.write("請選擇下方的題型開始練習：")
@@ -208,7 +209,7 @@ elif current_tab == "🗣️ 口說":
         st.markdown("### 🖼️ 看圖表達")
         st.warning("🚧 【內容建置中】")
 
-# 4. 閱讀模組
+# 4. 閱讀模組 (已完整還原您寫好的第二層架構)
 elif current_tab == "📖 閱讀":
     st.subheader("📖 閱讀模組 (Piasipan)")
     st.write("請選擇下方的題型開始練習：")
@@ -226,7 +227,7 @@ elif current_tab == "📖 閱讀":
         st.markdown("### ⛓️ 選擇題 - 語言結構")
         st.warning("🚧 【內容建置中】")
 
-# 5. 寫作模組
+# 5. 寫作模組 (已完整還原您寫好的第二層架構)
 elif current_tab == "✍️ 寫作":
     st.subheader("✍️ 寫作模組 (Pitilidan)")
     st.write("請選擇下方的題型開始練習：")
@@ -246,4 +247,4 @@ elif current_tab == "✍️ 寫作":
 
 # ---- App 底部註腳 ----
 st.write("---")
-st.caption("© 2026 中高級認證 App 開發團隊 ｜ 雙模式 15 題全功能完整版")
+st.caption("© 2026 中高級認證 App 開發團隊 ｜ 題目+選項雙隨機安全穩定版")
