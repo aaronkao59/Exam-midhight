@@ -10,20 +10,22 @@ st.set_page_config(
 )
 
 # ---- 2. 自動適應雙模式的 CSS 設計 (UIUX-CRF v9.0 視覺熵減) ----
+# 精準限定只有題目的 .quiz-card 容器才能擁有框線與背景，徹底杜絕原生組件被錯誤渲染成黑框
 st.markdown("""
     <style>
-    /* 卡片式容器：自動適應背景與文字顏色，加上細緻的主題框線 */
-    div[data-testid="stVerticalBlock"] > div:has(div.stMarkdown) {
+    /* 核心題目卡片式容器：只有顯式宣告的卡片才會擁有此風格 */
+    .quiz-card {
         background-color: var(--secondary-background-color);
         padding: 24px;
         border-radius: 16px;
         border: 1px solid rgba(128, 128, 128, 0.2);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        margin-bottom: 20px;
+        margin-top: 15px;
+        margin-bottom: 25px;
         transition: all 0.3s ease;
     }
     
-    /* 標題與重點文字：使用亮眼且百搭的青色，明暗模式下皆具備優異閱讀性 */
+    /* 標題與重點文字：使用亮眼且百搭的青色 */
     h1, h2, h3 {
         color: #0D9488 !important;
     }
@@ -39,8 +41,17 @@ st.markdown("""
         opacity: 0.85;
     }
     
+    /* 覆寫提示區塊與非必要組件的預設外框，強制清除視覺干擾 */
     .stAlert {
         border-radius: 12px !important;
+        border: none !important;
+    }
+    
+    /* 清除 segmented_control 和 radio 可能觸發的隱性原生區塊背景 */
+    div[data-testid="stHorizontalBlock"] {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -58,20 +69,18 @@ current_tab = st.segmented_control(
     label_visibility="collapsed"
 )
 
-st.write("") 
-
 # ---- 🧠 [核心防護補丁] 跨頁面狀態解耦防腐層 ----
 if "previous_tab" not in st.session_state:
     st.session_state.previous_tab = "📋 測驗說明"
 
-# 當偵測到使用者切換了最上方的五個大頁籤時，無情清空過往的局部點擊狀態，阻斷跨分頁記憶體污染
+# 當偵測到使用者切換了最上方的五個大頁籤時，無情清空過往的局部點擊狀態，阻斷跨分頁記憶體污染 [cite: 22]
 if st.session_state.previous_tab != current_tab:
     st.session_state.submitted = False
     st.session_state.audio_triggered = False
     st.session_state.previous_tab = current_tab
     st.rerun()
 
-# ---- 3. 原始靜態題庫 (15題標準數據庫，對齊 10-5 阿美語純詞彙與字串對帳規範) ----
+# ---- 3. 原始靜態題庫 (15題標準數據庫，對齊 10-5 阿美語純詞彙與字串對帳規範) [cite: 29] ----
 QUIZ_DATA = [
     {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["riyar", "'alo", "fanaw", "sa'owac"], "correct_text": "riyar"},
     {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["korkor", "rohayan", "romakat", "rotarot"], "correct_text": "romakat"},
@@ -96,7 +105,7 @@ QUIZ_DATA = [
 if current_tab == "📋 測驗說明":
     st.subheader("📋 測驗說明 (Saheci)")
     st.markdown("歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。")
-    st.info("📌 目前進度：題目與選項「雙重隨機快取鎖」建置完成，已阻斷跨分頁記憶體逃逸風險。")
+    st.info("📌 目前進度：空白渲染外框已無情抹除，視覺熵值收斂完畢。")
 
 # 2. 聽力測驗
 elif current_tab == "🎧 聽力":
@@ -110,6 +119,8 @@ elif current_tab == "🎧 聽力":
     )
     
     if listening_sub == "選擇題-聽音選詞":
+        # 💡 將整個測驗互動塞入專屬的 HTML .quiz-card div 中，確保外框精準。
+        st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
         st.markdown("### 🔍 選擇題 - 聽音選詞")
         
         # --- 🧠 雙隨機防禦快取初始化迴路 ---
@@ -203,6 +214,8 @@ elif current_tab == "🎧 聽力":
                 st.session_state.current_pointer = 0
                 st.session_state.submitted = False
                 st.rerun()
+                
+        st.markdown('</div>', unsafe_allow_html=True) # 關閉卡片容器
         
     elif listening_sub == "選擇題-對話理解":
         st.markdown("### 💬 選擇題 - 對話理解")
