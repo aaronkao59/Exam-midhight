@@ -10,7 +10,6 @@ st.set_page_config(
 )
 
 # ---- 2. 自動適應雙模式的 CSS 設計 (UIUX-CRF v9.0 視覺熵減) ----
-# 精準限定只有題目的 .quiz-card 容器才能擁有框線與背景，徹底杜絕原生組件被錯誤渲染成黑框
 st.markdown("""
     <style>
     /* 核心題目卡片式容器：只有顯式宣告的卡片才會擁有此風格 */
@@ -58,7 +57,7 @@ st.markdown("""
 
 # ---- App 頂部導覽列 ----
 st.title("🎓 中高級認證")
-st.caption("認證說明與選擇測驗平台")
+st.caption("族語認證數位學習平台")
 
 # ---- 第一層：五個主要選項 (導覽選單) ----
 main_options = ["📋 測驗說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
@@ -69,18 +68,17 @@ current_tab = st.segmented_control(
     label_visibility="collapsed"
 )
 
-# ---- 🧠 [核心防護補丁] 跨頁面狀態解耦防腐層 ----
+# ---- 🧠 跨頁面狀態解耦防腐層 ----
 if "previous_tab" not in st.session_state:
     st.session_state.previous_tab = "📋 測驗說明"
 
-# 當偵測到使用者切換了最上方的五個大頁籤時，無情清空過往的局部點擊狀態，阻斷跨分頁記憶體污染 [cite: 22]
 if st.session_state.previous_tab != current_tab:
     st.session_state.submitted = False
     st.session_state.audio_triggered = False
     st.session_state.previous_tab = current_tab
     st.rerun()
 
-# ---- 3. 原始靜態題庫 (15題標準數據庫，對齊 10-5 阿美語純詞彙與字串對帳規範) [cite: 29] ----
+# ---- 3. 原始靜態題庫 (15題標準數據庫，對齊 10-5 阿美語純詞彙與字串對帳規範) ----
 QUIZ_DATA = [
     {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["riyar", "'alo", "fanaw", "sa'owac"], "correct_text": "riyar"},
     {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["korkor", "rohayan", "romakat", "rotarot"], "correct_text": "romakat"},
@@ -101,11 +99,39 @@ QUIZ_DATA = [
 
 # ---- 第二層：根據選擇顯示對應架構 ----
 
-# 1. 測驗說明頁面
+# 1. 測驗說明頁面 (已完全替換為最新認證指南官方文字)
 if current_tab == "📋 測驗說明":
     st.subheader("📋 測驗說明 (Saheci)")
-    st.markdown("歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。")
-    st.info("📌 目前進度：空白渲染外框已無情抹除，視覺熵值收斂完畢。")
+    
+    st.markdown("### 1. 詞彙範圍與參考教材")
+    st.markdown("""
+    * **詞彙範圍：** 原住民族語言學習詞表1至800詞，以及其衍生詞 。
+    * **參考教材：** 包含12階教材（第1階至第9階）、原住民族語初級教材-生活會話篇，以及原住民族民族語中級教材-閱讀書寫篇 。
+    """)
+    
+    st.markdown("### 2. 測驗架構與題型配分（滿分100分）")
+    st.markdown("""
+    中高級認證總分為100分，由聽力（20分）、口說（30分）、閱讀（30分）與寫作（20分）四個項目組成 ：
+
+    * **〖聽力測驗〗（佔20%）**
+      * 聽音選詞（5題，佔10%）：聽完族語句子後，從4個詞彙或詞組選項中，選出與該句最相關的答案 。
+      * 對話理解（5題，佔10%）：根據2位族人的對話內容，從4個文字選項中選出最適當的答案 。
+    * **〖口說測驗〗（佔30%）**
+      * 段落朗讀（1題，佔10%）：朗讀約40至50詞的短文（備答1分半鐘，作答1分半鐘） 。
+      * 情境問答（5題，佔10%）：每一題包含2句（第1句為情境鋪陳），聽完後須以完整句子表達個人看法（每題含備答時間約40秒） 。
+      * 看圖表達（1題，佔10%）：依圖片情境以族語表達想法（備答2分鐘，作答2分鐘） 。
+    * **〖閱讀測驗〗（佔30%）**
+      * 詞彙語意（5題，佔10%）：依提示於4個選項中選出最符合語意的答案 。
+      * 語言結構（10題，佔20%）：依提示於4個選項中選出最符合語法結構的答案 。
+    * **〖寫作測驗〗（佔20%）**
+      * 句子聽寫（5題，佔10%）：聽寫族語句子，每題播放2遍 。
+      * 問答題（5題，佔10%）：依題目指示，以完整的族語句子作答 。
+    """)
+    
+    st.markdown("### 3. 合格標準總結")
+    st.markdown("""
+    滿分100分中，**總分達60分以上**，且單項成績達**聽力15分、口說15分、閱讀18分、寫作12分以上**，即可取得「通過聽說讀寫」的完整資格 。考生亦可依對應門檻獨立取得「通過聽說」或「通過讀寫」的資格 。
+    """)
 
 # 2. 聽力測驗
 elif current_tab == "🎧 聽力":
@@ -119,7 +145,6 @@ elif current_tab == "🎧 聽力":
     )
     
     if listening_sub == "選擇題-聽音選詞":
-        # 💡 將整個測驗互動塞入專屬的 HTML .quiz-card div 中，確保外框精準。
         st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
         st.markdown("### 🔍 選擇題 - 聽音選詞")
         
@@ -215,7 +240,7 @@ elif current_tab == "🎧 聽力":
                 st.session_state.submitted = False
                 st.rerun()
                 
-        st.markdown('</div>', unsafe_allow_html=True) # 關閉卡片容器
+        st.markdown('</div>', unsafe_allow_html=True)
         
     elif listening_sub == "選擇題-對話理解":
         st.markdown("### 💬 選擇題 - 對話理解")
