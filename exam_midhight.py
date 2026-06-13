@@ -76,7 +76,7 @@ QUIZ_DATA = [
     {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["riyar", "'alo", "fanaw", "sa'owac"], "correct_text": "riyar"},
     {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["korkor", "rohayan", "romakat", "rotarot"], "correct_text": "romakat"},
     {"id": 3, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-03.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["hadhad", "hakhak", "hawan", "hafay"], "correct_text": "hafay"},
-    {"id": 4, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-04.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["tefo'", "'okoy", "tafokod", "tafolod"], "correct_index": 2, "correct_text": "tafokod"},
+    {"id": 4, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-04.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["tefo'", "'okoy", "tafokod", "tafolod"], "correct_text": "tafokod"},
     {"id": 5, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-05.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["fakar", "tayhi", "pitaw", "tarakar"], "correct_text": "pitaw"},
     {"id": 6, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-06.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["sariri'", "riri'", "siri", "riyar"], "correct_text": "siri"},
     {"id": 7, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-07.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["koleto", "lokot", "kewaw", "kakorot"], "correct_text": "koleto"},
@@ -96,7 +96,7 @@ QUIZ_DATA = [
 if current_tab == "📋 測驗說明":
     st.subheader("📋 測驗說明 (Saheci)")
     st.markdown("歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。")
-    st.info("📌 目前進度：題目與選項「雙重隨機防禦快取鎖」建置完成，已阻斷跨分頁記憶體逃逸風險。")
+    st.info("📌 目前進度：雙隨機安全快取鎖升級，已排除 NameError 語法異常。")
 
 # 2. 聽力模組
 elif current_tab == "🎧 聽力":
@@ -113,7 +113,6 @@ elif current_tab == "🎧 聽力":
         st.markdown("### 🔍 選擇題 - 聽音選詞")
         
         # --- 🧠 雙隨機防禦快取初始化迴路 ---
-        # 1. 初始化題目隨機序列（15 題全部隨機輪流出現）
         if "random_quiz_order" not in st.session_state:
             st.session_state.random_quiz_order = list(range(len(QUIZ_DATA)))
             random.shuffle(st.session_state.random_quiz_order)
@@ -124,8 +123,6 @@ elif current_tab == "🎧 聽力":
             st.session_state.audio_triggered = False
         if "submitted" not in st.session_state:
             st.session_state.submitted = False
-            
-        # 2. 初始化每一題的局部選項快取鎖
         if "shuffled_options_map" not in st.session_state:
             st.session_state.shuffled_options_map = {}
 
@@ -136,17 +133,22 @@ elif current_tab == "🎧 聽力":
             true_quiz_id = st.session_state.random_quiz_order[ptr]
             current_quiz = QUIZ_DATA[true_quiz_id]
             
-            # 如果這一題還沒被洗牌過，在此處進行「一次性打亂選項」並鎖定
+            # 🛡️ 核心修復補丁：使用高內聚低耦合的查表架構，徹底抹除未定義變數漏洞
             if true_quiz_id not in st.session_state.shuffled_options_map:
                 shuffled_raw_opts = current_quiz["options"].copy()
                 random.shuffle(shuffled_raw_opts) # 隨機打亂四個選項順序
                 
-                # 動態在文字前方套用「(編號)」標籤，確保畫面格式完美符合要求
-                formatted_opts = [f"({i+1}) {word}" for i, word in enumerate(shuffled_raw_opts)]
-                
-                # 找出正確答案文字在前台對應的完整隨機選項字串
+                # 建立新一輪帶有編號的動態格式化清單
+                formatted_opts = []
+                correct_text_formatted = ""
                 correct_word_raw = current_quiz["correct_text"]
-                correct_text_formatted = [f for f in formatted_opts if word in f][0] if (correct_text_formatted := [f for f in formatted_opts if f.endswith(f" {correct_word_raw}")]) else [f for f in formatted_opts if correct_word_raw in f][0]
+                
+                for i, word_item in enumerate(shuffled_raw_opts):
+                    display_text = f"({i+1}) {word_item}"
+                    formatted_opts.append(display_text)
+                    # 精準鎖定正確字串的渲染結果
+                    if word_item == correct_word_raw:
+                        correct_text_formatted = display_text
                 
                 # 物理防護層：鎖定快取狀態
                 st.session_state.shuffled_options_map[true_quiz_id] = {
