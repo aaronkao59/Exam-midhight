@@ -144,6 +144,7 @@ elif current_tab == "🎧 聽力":
     )
     
     if listening_sub == "選擇題-聽音選詞":
+        st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
         st.markdown("### 🔍 選擇題 - 聽音選詞")
         
         # --- 🧠 雙隨機防禦快取初始化迴路 ---
