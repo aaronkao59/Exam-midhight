@@ -242,6 +242,7 @@ elif current_tab == "🎧 聽力":
         st.markdown('</div>', unsafe_allow_html=True)
         
     elif listening_sub == "選擇題-對話理解":
+st.write("---")
         st.markdown("### 💬 選擇題 - 對話理解")
         st.warning("🚧 【內容建置中】此處未來將播放部落生活情境對話，並測試長句理解能力。")
 
