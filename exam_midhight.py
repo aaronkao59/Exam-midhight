@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 
-# ---- 10-1. 頁面佈局設定 (Code-CRF v9.0 運行時配置) ----
+# ---- 1. 頁面佈局設定 (Code-CRF v9.0 運行時配置) ----
 st.set_page_config(
     page_title="中高級認證",
     page_icon="🎓",
@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ---- 10-3. 自動適應雙模式的 CSS 設計 (UIUX-CRF v9.0 視覺熵減) ----
+# ---- 2. 自動適應雙模式的 CSS 設計 (UIUX-CRF v9.0 視覺熵減) ----
 st.markdown("""
     <style>
     /* 卡片式容器：自動適應背景與文字顏色 */
@@ -60,7 +60,18 @@ current_tab = st.segmented_control(
 
 st.write("") 
 
-# ---- 10-4. 原始靜態題庫 (15題標準數據庫，對齊 10-5 阿美語詞彙規範) ----
+# ---- 🧠 [核心防護補丁] 跨頁面狀態解耦防腐層 ----
+if "previous_tab" not in st.session_state:
+    st.session_state.previous_tab = "📋 測驗說明"
+
+# 當使用者切換了上方的大分頁時，無情抹除過往的局部點擊狀態，阻斷黑天鵝連鎖反應
+if st.session_state.previous_tab != current_tab:
+    st.session_state.submitted = False
+    st.session_state.audio_triggered = False
+    st.session_state.previous_tab = current_tab
+    st.rerun()
+
+# ---- 3. 原始靜態題庫 (15題標準數據庫，對齊 10-5 阿美語詞彙規範) ----
 QUIZ_DATA = [
     {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) riyar", "(2) 'alo", "(3) fanaw", "(4) sa'owac"], "correct_index": 0},
     {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) korkor", "(2) rohayan", "(3) romakat", "(4) rotarot"], "correct_index": 2},
@@ -85,7 +96,7 @@ QUIZ_DATA = [
 if current_tab == "📋 測驗說明":
     st.subheader("📋 測驗說明 (Saheci)")
     st.markdown("歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。")
-    st.info("📌 目前進度：支援題目與選項「雙重隨機快取鎖」機制，其餘大題第二層架構已完整保留。")
+    st.info("📌 目前進度：雙重隨機快取除錯成功。已阻斷跨分頁記憶體逃逸風險。")
 
 # 2. 聽力模組
 elif current_tab == "🎧 聽力":
@@ -121,6 +132,7 @@ elif current_tab == "🎧 聽力":
             true_quiz_id = st.session_state.random_quiz_order[ptr]
             current_quiz = QUIZ_DATA[true_quiz_id]
             
+            # 安全防護層：初始化防禦洗牌鎖
             if true_quiz_id not in st.session_state.shuffled_options_map:
                 shuffled_opts = current_quiz["options"].copy()
                 random.shuffle(shuffled_opts)
@@ -188,7 +200,7 @@ elif current_tab == "🎧 聽力":
         st.markdown("### 💬 選擇題 - 對話理解")
         st.warning("🚧 【內容建置中】此處未來將播放部落生活情境對話，並測試長句理解能力。")
 
-# 3. 口說模組 (已完整還原您寫好的第二層架構)
+# 3. 口說模組
 elif current_tab == "🗣️ 口說":
     st.subheader("🗣️ 口說模組 (Pisowalan)")
     st.write("請選擇下方的題型開始練習：")
@@ -209,7 +221,7 @@ elif current_tab == "🗣️ 口說":
         st.markdown("### 🖼️ 看圖表達")
         st.warning("🚧 【內容建置中】")
 
-# 4. 閱讀模組 (已完整還原您寫好的第二層架構)
+# 4. 閱讀模組
 elif current_tab == "📖 閱讀":
     st.subheader("📖 閱讀模組 (Piasipan)")
     st.write("請選擇下方的題型開始練習：")
@@ -227,7 +239,7 @@ elif current_tab == "📖 閱讀":
         st.markdown("### ⛓️ 選擇題 - 語言結構")
         st.warning("🚧 【內容建置中】")
 
-# 5. 寫作模組 (已完整還原您寫好的第二層架構)
+# 5. 寫作模組
 elif current_tab == "✍️ 寫作":
     st.subheader("✍️ 寫作模組 (Pitilidan)")
     st.write("請選擇下方的題型開始練習：")
@@ -247,4 +259,4 @@ elif current_tab == "✍️ 寫作":
 
 # ---- App 底部註腳 ----
 st.write("---")
-st.caption("© 2026 中高級認證 App 開發團隊 ｜ 題目+選項雙隨機安全穩定版")
+st.caption("© 2026 中高級認證 App 開發團隊 ｜ 雙重隨機全防禦穩定版")
