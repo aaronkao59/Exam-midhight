@@ -50,7 +50,7 @@ st.title("🎓 中高級認證")
 st.caption("族語認證數位學習平台")
 
 # ---- 第一層：五個主要選項 (導覽選單) ----
-main_options = ["📋 認證考試", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
+main_options = ["📋 測驗說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
 current_tab = st.segmented_control(
     "主選單導覽", 
     main_options, 
@@ -100,7 +100,7 @@ if current_tab == "📋 測驗說明":
 
 # 2. 聽力模組
 elif current_tab == "🎧 聽力":
-    st.subheader("🎧 聽力測驗 (Pitengilan)")
+    st.subheader("🎧 聽力模組 (Pitengilan)")
     st.write("請選擇下方的題型開始練習：")
     
     listening_sub = st.radio(
@@ -222,7 +222,7 @@ elif current_tab == "🎧 聽力":
 
 # 3. 口說模組
 elif current_tab == "🗣️ 口說":
-    st.subheader("🗣️ 口說測驗 (Pisowalan)")
+    st.subheader("🗣️ 口說模組 (Pisowalan)")
     st.write("請選擇下方的題型開始練習：")
     
     speaking_sub = st.radio(
@@ -243,7 +243,7 @@ elif current_tab == "🗣️ 口說":
 
 # 4. 閱讀模組
 elif current_tab == "📖 閱讀":
-    st.subheader("📖 閱讀測驗 (Piasipan)")
+    st.subheader("📖 閱讀模組 (Piasipan)")
     st.write("請選擇下方的題型開始練習：")
     
     reading_sub = st.radio(
@@ -261,7 +261,7 @@ elif current_tab == "📖 閱讀":
 
 # 5. 寫作模組
 elif current_tab == "✍️ 寫作":
-    st.subheader("✍️ 寫作測驗 (Pitilidan)")
+    st.subheader("✍️ 寫作模組 (Pitilidan)")
     st.write("請選擇下方的題型開始練習：")
     
     writing_sub = st.radio(
