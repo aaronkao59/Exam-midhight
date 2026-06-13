@@ -44,7 +44,6 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-st.caption("族語認證數位學習平台")
 
 # ---- App 頂部導覽列 ----
 st.title("🎓 中高級認證")
