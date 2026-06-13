@@ -1,11 +1,7 @@
 import streamlit as st
 import random
-import json
-import os
 
-# ==========================================
-# 1. 系統運行時配置 (Code-CRF v9.0 核心)
-# ==========================================
+# ---- 1. 頁面佈局設定 (Code-CRF v9.0 運行時配置) ----
 st.set_page_config(
     page_title="中高級認證",
     page_icon="🎓",
@@ -13,9 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ==========================================
-# 2. 雙模式自適應 CSS (UIUX-CRF v9.0 視覺熵減)
-# ==========================================
+# ---- 2. 自動適應雙模式的 CSS 設計 (UIUX-CRF v9.0 視覺熵減) ----
 st.markdown("""
     <style>
     /* 卡片式容器：自動適應背景與文字顏色，並加上細緻的主題框線 */
@@ -55,9 +49,7 @@ st.markdown("""
 st.title("🎓 中高級認證")
 st.caption("族語認證數位學習平台")
 
-# ==========================================
-# 3. 穩定版分頁導覽列 (徹底消除空框框隱患)
-# ==========================================
+# ---- 3. 第一層導覽選單更換 (改用穩定版 st.tabs，徹底消除空框框) ----
 main_options = ["📋 測驗說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
 tab_objects = st.tabs(main_options)
 
@@ -65,50 +57,33 @@ tab_objects = st.tabs(main_options)
 current_tab = "📋 測驗說明"
 for i, tab in enumerate(tab_objects):
     with tab:
-        if st.runtime.exists(): 
+        if st.runtime.exists(): # 確保在 Streamlit 運行時環境下正常映射
             current_tab = main_options[i]
 
-st.write("") # 視覺緩衝空行
+st.write("") # 留空行增加視覺舒適度
 
-# ==========================================
-# 4. 題庫資料加載器 (Integ-CRF v9.0 備援防禦)
-# ==========================================
-# 優先嘗試讀取獨立的 JSON 題庫檔案；若檔案不存在，則無縫啟動內建的靜態安全備援庫，防止系統閃退。
-json_path = "data/listening_quiz.json"
-QUIZ_DATA = []
+# ---- 4. 原始靜態題庫 (15題標準數據庫，對齊 10-5 詞彙規範) ----
+QUIZ_DATA = [
+    {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) riyar", "(2) 'alo", "(3) fanaw", "(4) sa'owac"], "correct_index": 0},
+    {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) korkor", "(2) rohayan", "(3) romakat", "(4) rotarot"], "correct_index": 2},
+    {"id": 3, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-03.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) hadhad", "(2) hakhak", "(3) hawan", "(4) hafay"], "correct_index": 3},
+    {"id": 4, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-04.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) tefo'", "(2) 'okoy", "(3) tafokod", "(4) tafolod"], "correct_index": 2},
+    {"id": 5, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-05.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) fakar", "(2) tayhi", "(3) pitaw", "(4) tarakar"], "correct_index": 2},
+    {"id": 6, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-06.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) sariri'", "(2) riri'", "(3) siri", "(4) riyar"], "correct_index": 2},
+    {"id": 7, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-07.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) koleto", "(2) lokot", "(3) kewaw", "(4) kakorot"], "correct_index": 0},
+    {"id": 8, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-08.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) siwoy", "(2) kodasing", "(3) konga", "(4) damay"], "correct_index": 2},
+    {"id": 9, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-09.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) mali'", "(2) tikami", "(3) tilifi", "(4) pawli"], "correct_index": 2},
+    {"id": 10, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-10.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) picakay", "(2) pitangtang", "(3) picaliw", "(4) pafeli'"], "correct_index": 0},
+    {"id": 11, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-11.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) 'olaw", "(2) 'alo", "(3) fao", "(4) tao"], "correct_index": 3},
+    {"id": 12, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-12.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) rorang", "(2) kolong", "(3) lotong", "(4) ekong"], "correct_index": 2},
+    {"id": 13, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-13.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) Halitamako", "(2) Haliradiw", "(3) Haliepah", "(4) Hali'ecaw"], "correct_index": 2},
+    {"id": 14, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-14.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) dafak", "(2) a'ayad", "(3) dadaya", "(4) kamaya"], "correct_index": 2},
+    {"id": 15, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-15.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) sioy", "(2) simal", "(3) sinafel", "(4) simico"], "correct_index": 2}
+]
 
-if os.path.exists(json_path):
-    try:
-        with open(json_path, "r", encoding="utf-8") as f:
-            QUIZ_DATA = json.load(f)
-    except Exception as e:
-        st.error(f"題庫 JSON 讀取失敗，啟動備援庫。錯誤：{e}")
+# ---- 第二層：根據選擇顯示對應架構 ----
 
-# 內建安全備援數據庫 (對齊 10-5 阿美語羅馬字正字法規範)
-if not QUIZ_DATA:
-    QUIZ_DATA = [
-        {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) riyar", "(2) 'alo", "(3) fanaw", "(4) sa'owac"], "correct_index": 0},
-        {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) korkor", "(2) rohayan", "(3) romakat", "(4) rotarot"], "correct_index": 2},
-        {"id": 3, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-03.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) hadhad", "(2) hakhak", "(3) hawan", "(4) hafay"], "correct_index": 3},
-        {"id": 4, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-04.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) tefo'", "(2) 'okoy", "(3) tafokod", "(4) tafolod"], "correct_index": 2},
-        {"id": 5, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-05.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) fakar", "(2) tayhi", "(3) pitaw", "(4) tarakar"], "correct_index": 2},
-        {"id": 6, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-06.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) sariri'", "(2) riri'", "(3) siri", "(4) riyar"], "correct_index": 2},
-        {"id": 7, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-07.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) koleto", "(2) lokot", "(3) kewaw", "(4) kakorot"], "correct_index": 0},
-        {"id": 8, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-08.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) siwoy", "(2) kodasing", "(3) konga", "(4) damay"], "correct_index": 2},
-        {"id": 9, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-09.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) mali'", "(2) tikami", "(3) tilifi", "(4) pawli"], "correct_index": 2},
-        {"id": 10, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-10.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) picakay", "(2) pitangtang", "(3) picaliw", "(4) pafeli'"], "correct_index": 0},
-        {"id": 11, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-11.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) 'olaw", "(2) 'alo", "(3) fao", "(4) tao"], "correct_index": 3},
-        {"id": 12, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-12.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) rorang", "(2) kolong", "(3) lotong", "(4) ekong"], "correct_index": 2},
-        {"id": 13, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-13.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) Halitamako", "(2) Haliradiw", "(3) Haliepah", "(4) Hali'ecaw"], "correct_index": 2},
-        {"id": 14, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-14.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) dafak", "(2) a'ayad", "(3) dadaya", "(4) kamaya"], "correct_index": 2},
-        {"id": 15, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-15.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["(1) sioy", "(2) simal", "(3) sinafel", "(4) simico"], "correct_index": 2}
-    ]
-
-# ==========================================
-# 5. 各大題分流渲染
-# ==========================================
-
-# 📋 (一) 測驗說明頁面
+# 1. 📋 測驗說明頁面 (已導入正式官方內容)
 if current_tab == "📋 測驗說明":
     st.subheader("📋 測驗說明 (Saheci)")
     
@@ -119,6 +94,8 @@ if current_tab == "📋 測驗說明":
     """)
     
     st.markdown("### 📊 2. 測驗架構與題型配分")
+    
+    # 建立高結構化表格呈現題型與比重
     st.markdown("""
     | 測驗項目 | 題型名稱 | 題數 | 配分比重 | 題型說明 |
     | :--- | :--- | :---: | :---: | :--- |
@@ -141,7 +118,7 @@ if current_tab == "📋 測驗說明":
     *💡 備註：考生亦可依對應門檻獨立取得「通過聽說」或「通過讀寫」的合格資格。*
     """)
 
-# 🎧 (二) 聽力模組 (雙隨機核心防護版)
+# 2. 🎧 聽力模組 (雙隨機核心防護版)
 elif current_tab == "🎧 聽力":
     st.subheader("🎧 聽力模組 (Pitengilan)")
     st.write("請選擇下方的題型開始練習：")
@@ -155,8 +132,6 @@ elif current_tab == "🎧 聽力":
     if listening_sub == "選擇題-聽音選詞":
         st.markdown("### 🔍 選擇題 - 聽音選詞 (5題，佔10%)")
         
-        # --- 🧠 雙重隨機核心初始化迴路 ---
-        # 1. 鎖定題目隨機順序
         if "random_quiz_order" not in st.session_state:
             st.session_state.random_quiz_order = list(range(len(QUIZ_DATA)))
             random.shuffle(st.session_state.random_quiz_order)
@@ -167,19 +142,15 @@ elif current_tab == "🎧 聽力":
             st.session_state.audio_triggered = False
         if "submitted" not in st.session_state:
             st.session_state.submitted = False
-
-        # 2. 鎖定當前題目的「隨機選項順序」，避免重新整理時選項亂跳
         if "shuffled_options_map" not in st.session_state:
             st.session_state.shuffled_options_map = {}
 
         ptr = st.session_state.current_pointer
         
-        # 判定是否 15 題全部出完
         if ptr < len(QUIZ_DATA):
             true_quiz_id = st.session_state.random_quiz_order[ptr]
             current_quiz = QUIZ_DATA[true_quiz_id]
             
-            # 檢查這一題是否已經生成過隨機選項順序，若無則原地洗牌並重新計算正確答案的索引
             if true_quiz_id not in st.session_state.shuffled_options_map:
                 shuffled_opts = current_quiz["options"].copy()
                 random.shuffle(shuffled_opts)
@@ -192,30 +163,26 @@ elif current_tab == "🎧 聽力":
             
             live_quiz_data = st.session_state.shuffled_options_map[true_quiz_id]
             
-            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題 (隨機模式)**")
+            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題**")
             st.write(current_quiz["question_text"])
             
-            # --- 播放題目按鈕 ---
             if st.button("🔊 播放題目", key=f"play_{ptr}"):
                 st.session_state.audio_triggered = True
             
             if st.session_state.audio_triggered:
-                # 調用原生音訊引擎，按一次僅播放一遍音檔
                 st.audio(current_quiz["audio_path"], format="audio/mp3", autoplay=True)
                 st.session_state.audio_triggered = False
             
             st.write("---")
             
-            # --- 答案選項顯示 (單選，使用洗牌後的隨機選項) ---
             user_choice = st.radio(
                 "請從下方選出正確答案：",
                 options=live_quiz_data["options"],
-                index=None,  # 預設不選取任何選項，防止誘導
+                index=None,
                 key=f"radio_{ptr}",
                 disabled=st.session_state.submitted
             )
             
-            # --- 提交與判定機制 ---
             if not st.session_state.submitted:
                 if st.button("📥 提交答案", key=f"submit_{ptr}"):
                     if user_choice is None:
@@ -224,7 +191,6 @@ elif current_tab == "🎧 聽力":
                         st.session_state.submitted = True
                         st.rerun()
             else:
-                # 與局部快取鎖中的正確答案進行比對
                 selected_index = live_quiz_data["options"].index(user_choice)
                 correct_idx = live_quiz_data["correct_index"]
                 correct_answer_text = live_quiz_data["options"][correct_idx]
@@ -236,16 +202,13 @@ elif current_tab == "🎧 聽力":
                     st.markdown(f"### 🔴 答題結果：✕")
                     st.error(f" 再接再厲！正確答案應該是：**{correct_answer_text}**")
                 
-                # 下一題導覽
                 if st.button("➡️ 下一題", key=f"next_{ptr}"):
                     st.session_state.current_pointer += 1
                     st.session_state.submitted = False
                     st.rerun()
         else:
-            # 🔴 當 15 題全部出完後，重置並開啟新一輪隨機打亂出題
             st.balloons()
-            st.success("🎉 您已完成本輪全部 15 道隨機練習題目！系統正在為您重新洗牌出題...")
-            
+            st.success("🎉 您已完成本輪全部 15 道隨機練習題目！")
             if st.button("🔄 開始下一輪隨機挑戰"):
                 random.shuffle(st.session_state.random_quiz_order)
                 st.session_state.shuffled_options_map = {}
@@ -255,9 +218,9 @@ elif current_tab == "🎧 聽力":
         
     elif listening_sub == "選擇題-對話理解":
         st.markdown("### 💬 選擇題 - 對話理解 (5題，佔10%)")
-        st.warning("🚧 【內容建置中】預計加載 4 選 1 情境對話解析判讀組件。")
+        st.warning("🚧 【內容建置中】預計依據雙人生活對話文本，加載 4 選 1 字串判讀組件。")
 
-# 🗣️ (三) 口說模組 (未來預留區)
+# 3. 🗣️ 口說模組
 elif current_tab == "🗣️ 口說":
     st.subheader("🗣️ 口說模組 (Pisowalan)")
     st.write("請選擇下方的題型開始練習：")
@@ -276,9 +239,9 @@ elif current_tab == "🗣️ 口說":
         st.warning("🚧 【內容建置中】預計導入雙句情境音檔，並開通 40 秒完整句答題錄音。")
     elif speaking_sub == "看圖表達":
         st.markdown("### 🖼️ 看圖表達 (1題，佔10%)")
-        st.warning("🚧 【內容建置中】預計導入文化插圖格柵口說練習。")
+        st.warning("🚧 【內容建置中】預計導入文化插圖格柵，並開啟 2 分鐘多巴胺成癮式口說練習。")
 
-# 📖 (四) 閱讀模組 (未來預留區)
+# 4. 📖 閱讀模組
 elif current_tab == "📖 閱讀":
     st.subheader("📖 閱讀模組 (Piasipan)")
     st.write("請選擇下方的題型開始練習：")
@@ -296,7 +259,7 @@ elif current_tab == "📖 閱讀":
         st.markdown("### ⛓️ 選擇題 - 語言結構 (10題，佔20%)")
         st.warning("🚧 【內容建置中】預計針對 VSO 結構、主事/受事焦點系統進行題庫擴充。")
 
-# ✍️ (五) 寫作模組 (未來預留區)
+# 5. ✍️ 寫作模組
 elif current_tab == "✍️ 寫作":
     st.subheader("✍️ 寫作模組 (Pitilidan)")
     st.write("請選擇下方的題型開始練習：")
@@ -316,4 +279,4 @@ elif current_tab == "✍️ 寫作":
 
 # ---- App 底部註腳 ----
 st.write("---")
-st.caption("© 2026 中高級認證 App 開發團隊 ｜ 題目+選項雙隨機安全版")
+st.caption("© 2026 中高級認證 App 開發團隊 ｜ 雙模式官方簡章同步版")
