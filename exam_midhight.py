@@ -96,11 +96,11 @@ QUIZ_DATA = [
 if current_tab == "📋 測驗說明":
     st.subheader("📋 測驗說明 (Saheci)")
     st.markdown("歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。")
-    st.info("📌 目前進度：雙隨機安全快取鎖升級，已排除 NameError 語法異常。")
+    st.info("📌 目前進度：題目與選項「雙重隨機快取鎖」建置完成，已阻斷跨分頁記憶體逃逸風險。")
 
-# 2. 聽力模組
+# 2. 聽力測驗
 elif current_tab == "🎧 聽力":
-    st.subheader("🎧 聽力模組 (Pitengilan)")
+    st.subheader("🎧 聽力測驗 (Pitengilan)")
     st.write("請選擇下方的題型開始練習：")
     
     listening_sub = st.radio(
@@ -128,17 +128,14 @@ elif current_tab == "🎧 聽力":
 
         ptr = st.session_state.current_pointer
         
-        # 判斷一輪（15 題）是否全部作答完畢
         if ptr < len(QUIZ_DATA):
             true_quiz_id = st.session_state.random_quiz_order[ptr]
             current_quiz = QUIZ_DATA[true_quiz_id]
             
-            # 🛡️ 核心修復補丁：使用高內聚低耦合的查表架構，徹底抹除未定義變數漏洞
             if true_quiz_id not in st.session_state.shuffled_options_map:
                 shuffled_raw_opts = current_quiz["options"].copy()
-                random.shuffle(shuffled_raw_opts) # 隨機打亂四個選項順序
+                random.shuffle(shuffled_raw_opts)
                 
-                # 建立新一輪帶有編號的動態格式化清單
                 formatted_opts = []
                 correct_text_formatted = ""
                 correct_word_raw = current_quiz["correct_text"]
@@ -146,23 +143,19 @@ elif current_tab == "🎧 聽力":
                 for i, word_item in enumerate(shuffled_raw_opts):
                     display_text = f"({i+1}) {word_item}"
                     formatted_opts.append(display_text)
-                    # 精準鎖定正確字串的渲染結果
                     if word_item == correct_word_raw:
                         correct_text_formatted = display_text
                 
-                # 物理防護層：鎖定快取狀態
                 st.session_state.shuffled_options_map[true_quiz_id] = {
                     "options": formatted_opts,
                     "correct_text": correct_text_formatted
                 }
             
-            # 從防護鎖中取出穩定的隨機選項數據
             live_quiz_data = st.session_state.shuffled_options_map[true_quiz_id]
             
             st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題 (雙重隨機防禦版)**")
             st.write(current_quiz["question_text"])
             
-            # --- 播放題目按鈕 ---
             if st.button("🔊 播放題目", key=f"play_{ptr}"):
                 st.session_state.audio_triggered = True
             
@@ -172,16 +165,14 @@ elif current_tab == "🎧 聽力":
             
             st.write("---")
             
-            # --- 答案選項顯示 (單選，綁定快取後的隨機編號清單) ---
             user_choice = st.radio(
                 "請從下方選出正確答案：",
                 options=live_quiz_data["options"],
-                index=None, # 預設不選取，避免誘導
+                index=None,
                 key=f"radio_{ptr}",
                 disabled=st.session_state.submitted
             )
             
-            # --- 提交與 「✓」/「✕」 判定機制 ---
             if not st.session_state.submitted:
                 if st.button("📥 提交答案", key=f"submit_{ptr}"):
                     if user_choice is None:
@@ -190,7 +181,6 @@ elif current_tab == "🎧 聽力":
                         st.session_state.submitted = True
                         st.rerun()
             else:
-                # 字串安全對帳：直接拿點選文字跟快取中的正確答案字串比對，100% 關閉 ValueError 漏洞
                 correct_answer_text = live_quiz_data["correct_text"]
                 
                 if user_choice == correct_answer_text:
@@ -200,19 +190,17 @@ elif current_tab == "🎧 聽力":
                     st.markdown(f"### 🔴 答題結果：✕")
                     st.error(f" 再接再厲！正確答案應該是：**{correct_answer_text}**")
                 
-                # 下一題導覽
                 if st.button("➡️ 下一題", key=f"next_{ptr}"):
                     st.session_state.current_pointer += 1
                     st.session_state.submitted = False
                     st.rerun()
         else:
-            # 觸發均值回歸與重新洗牌：15 題全部輪完後，清除舊快取，全面重新隨機洗牌，且不重複出現
             st.balloons()
             st.success("🎉 您已完成本輪全部 15 道隨機題目！系統正在為您重新洗牌出題...")
             if st.button("🔄 開始下一輪隨機挑戰"):
-                random.shuffle(st.session_state.random_quiz_order) # 重新排序題序
-                st.session_state.shuffled_options_map = {}         # 清空並重置選項洗牌鎖
-                st.session_state.current_pointer = 0                # 指針歸零
+                random.shuffle(st.session_state.random_quiz_order)
+                st.session_state.shuffled_options_map = {}
+                st.session_state.current_pointer = 0
                 st.session_state.submitted = False
                 st.rerun()
         
@@ -220,9 +208,9 @@ elif current_tab == "🎧 聽力":
         st.markdown("### 💬 選擇題 - 對話理解")
         st.warning("🚧 【內容建置中】此處未來將播放部落生活情境對話，並測試長句理解能力。")
 
-# 3. 口說模組
+# 3. 口說測驗
 elif current_tab == "🗣️ 口說":
-    st.subheader("🗣️ 口說模組 (Pisowalan)")
+    st.subheader("🗣️ 口說測驗 (Pisowalan)")
     st.write("請選擇下方的題型開始練習：")
     
     speaking_sub = st.radio(
@@ -241,9 +229,9 @@ elif current_tab == "🗣️ 口說":
         st.markdown("### 🖼️ 看圖表達")
         st.warning("🚧 【內容建置中】")
 
-# 4. 閱讀模組
+# 4. 閱讀測驗
 elif current_tab == "📖 閱讀":
-    st.subheader("📖 閱讀模組 (Piasipan)")
+    st.subheader("📖 閱讀測驗 (Piasipan)")
     st.write("請選擇下方的題型開始練習：")
     
     reading_sub = st.radio(
@@ -259,9 +247,9 @@ elif current_tab == "📖 閱讀":
         st.markdown("### ⛓️ 選擇題 - 語言結構")
         st.warning("🚧 【內容建置中】")
 
-# 5. 寫作模組
+# 5. 寫作測驗
 elif current_tab == "✍️ 寫作":
-    st.subheader("✍️ 寫作模組 (Pitilidan)")
+    st.subheader("✍️ 寫作測驗 (Pitilidan)")
     st.write("請選擇下方的題型開始練習：")
     
     writing_sub = st.radio(
