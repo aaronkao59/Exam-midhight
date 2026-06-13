@@ -88,7 +88,7 @@ if current_tab == "📋 測驗說明":
     st.info("📌 目前進度：支援題目雙重隨機防禦（題目順序隨機 + 選項順序隨機）。")
 
 elif current_tab == "🎧 聽力":
-    st.subheader("🎧 聽力模組 (Pitengilan)")
+    st.subheader("🎧 聽力測驗 (Pitengilan)")
     st.write("請選擇下方的題型開始練習：")
     
     listening_sub = st.radio(
