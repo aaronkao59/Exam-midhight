@@ -34,7 +34,7 @@ st.markdown("""
         }
     }
     
-    .stMarkdown p, .stMarkdown li {
+    .stMarkdown p {
         color: var(--text-color);
         opacity: 0.85;
     }
@@ -49,16 +49,14 @@ st.markdown("""
 st.title("🎓 中高級認證")
 st.caption("族語認證數位學習平台")
 
-# ---- [原生組件套利] 第一層導覽選單更換 (使用 st.tabs 徹底排除空框框問題) ----
+# ---- 第一層：五個主要選項 (導覽選單) ----
 main_options = ["📋 測驗說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
-tab_objects = st.tabs(main_options)
-
-# 透過指標迴圈動態映射目前所在的 Active Tab 狀態
-current_tab = "📋 測驗說明"
-for i, tab in enumerate(tab_objects):
-    with tab:
-        if st.runtime.exists():
-            current_tab = main_options[i]
+current_tab = st.segmented_control(
+    "主選單導覽", 
+    main_options, 
+    default="📋 測驗說明",
+    label_visibility="collapsed"
+)
 
 st.write("") 
 
@@ -83,42 +81,13 @@ QUIZ_DATA = [
 
 # ---- 第二層：根據選擇顯示對應架構 ----
 
-# 1. 📋 測驗說明頁面 (Saheci)
 if current_tab == "📋 測驗說明":
     st.subheader("📋 測驗說明 (Saheci)")
-    
-    st.markdown("### 📘 1. 詞彙範圍與參考教材")
     st.markdown("""
-    * **詞彙範圍：** 原住民族語言學習詞表 1 至 800 詞，以及其衍生詞。
-    * **參考教材：** 包含 12 階教材（第 1 階至第 9 階）、原住民族語初級教材-生活會話篇，以及原住民族語中級教材-閱讀書寫篇。
+    歡迎使用**中高級認證學習 App**！本系統專為族語中高級認證測驗設計。
     """)
-    
-    st.markdown("### 📊 2. 測驗架構與題型配分（滿分 100 分）")
-    st.markdown("""
-    中高級認證總分為 100 分，由聽力（20分）、口說（30分）、閱讀（30分）與寫作（20分）四個項目組成：
-    
-    | 測驗項目 | 題型名稱 | 題數 | 配分比重 | 題型功能與設計說明 |
-    | :--- | :--- | :---: | :---: | :--- |
-    | **🎧 聽力測驗**<br>(佔 20%) | 聽音選詞<br>對話理解 | 5 題<br>5 題 | 10%<br>10% | 聽完族語句子後，從 4 個詞彙或詞組選項中，選出與該句最相關的答案。<br>根據 2 位族人的對話內容，從 4 個文字選項中選出最適當的答案。 |
-    | **🗣️ 口說測驗**<br>(佔 30%) | 段落朗讀<br>情境問答<br>看圖表達 | 1 題<br>5 題<br>1 題 | 10%<br>10%<br>10% | 朗讀約 40 至 50 詞的短文（備答 1 分半鐘，作答 1 分半鐘）。<br>每一題包含 2 句（第 1 句為情境鋪陳），聽完後須以完整句子表達個人看法（每題含備答時間約 40 秒）。<br>依圖片情境以族語表達想法（備答 2 分鐘，作答 2 分鐘）。 |
-    | **📖 閱讀測驗**<br>(佔 30%) | 詞彙語意<br>語言結構 | 5 題<br>10 題 | 10%<br>20% | 依提示於 4 個選項中選出最符合語意的答案。<br>依提示於 4 個選項中選出最符合語法結構的答案。 |
-    | **✍️ 寫作測驗**<br>(佔 20%) | 句子聽寫<br>問答題 | 5 題<br>5 題 | 10%<br>10% | 聽寫族語句子，每題播放 2 遍。<br>依題目指示，以完整的族語句子作答。 |
-    """)
-    
-    st.markdown("### 🏆 3. 合格標準總結")
-    st.success("""
-    **🎯 完整合格門檻（總分達 60 分以上通過）：**
-    * 滿分 100 分中，總分達 **60 分** 以上。
-    * 且單項成績同時達到以下門檻限制：
-        * **聽力單項：** 15 分 以上 (滿分 20)
-        * **口說單項：** 15 分 以上 (滿分 30)
-        * **閱讀單項：** 18 分 以上 (滿分 30)
-        * **寫作單項：** 12 分 以上 (滿分 20)
-    
-    *💡 備註說明：考生亦可依對應門檻獨立取得「通過聽說」或「通過讀寫」的合格認證資格。*
-    """)
+    st.info("📌 目前進度：支援題目雙重隨機防禦（題目順序隨機 + 選項順序隨機）。")
 
-# 2. 🎧 聽力模組
 elif current_tab == "🎧 聽力":
     st.subheader("🎧 聽力模組 (Pitengilan)")
     st.write("請選擇下方的題型開始練習：")
@@ -133,6 +102,7 @@ elif current_tab == "🎧 聽力":
         st.markdown("### 🔍 選擇題 - 聽音選詞")
         
         # --- 🧠 雙重隨機核心初始化迴路 ---
+        # 1. 鎖定題目隨機順序
         if "random_quiz_order" not in st.session_state:
             st.session_state.random_quiz_order = list(range(len(QUIZ_DATA)))
             random.shuffle(st.session_state.random_quiz_order)
@@ -143,6 +113,9 @@ elif current_tab == "🎧 聽力":
             st.session_state.audio_triggered = False
         if "submitted" not in st.session_state:
             st.session_state.submitted = False
+
+        # 2. 🚀 [本期亮眼特點] 鎖定當前題目的「隨機選項順序」
+        # 為避免網頁更新導致選項亂跳，我們在 Session State 中對每一題進行局部環境隔離
         if "shuffled_options_map" not in st.session_state:
             st.session_state.shuffled_options_map = {}
 
@@ -152,17 +125,22 @@ elif current_tab == "🎧 聽力":
             true_quiz_id = st.session_state.random_quiz_order[ptr]
             current_quiz = QUIZ_DATA[true_quiz_id]
             
+            # 檢查這一題是否已經生成過隨機選項順序，若無則立刻原地洗牌
             if true_quiz_id not in st.session_state.shuffled_options_map:
                 shuffled_opts = current_quiz["options"].copy()
                 random.shuffle(shuffled_opts)
+                
+                # 重新計算正確答案在洗牌後的新索引位置
                 original_correct_text = current_quiz["options"][current_quiz["correct_index"]]
                 new_correct_index = shuffled_opts.index(original_correct_text)
                 
+                # 將洗牌後的正確配對數據寫入快取鎖，實現反脆弱防護
                 st.session_state.shuffled_options_map[true_quiz_id] = {
                     "options": shuffled_opts,
                     "correct_index": new_correct_index
                 }
             
+            # 從快取鎖讀取這題專屬的隨機選項與索引
             live_quiz_data = st.session_state.shuffled_options_map[true_quiz_id]
             
             st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題 (雙重隨機模式)**")
@@ -178,11 +156,11 @@ elif current_tab == "🎧 聽力":
             
             st.write("---")
             
-            # --- 答案選項顯示 ---
+            # --- 答案選項顯示 (使用已洗牌的選項) ---
             user_choice = st.radio(
                 "請從下方選出正確答案：",
                 options=live_quiz_data["options"],
-                index=None,
+                index=None,  # 預設不選取
                 key=f"radio_{ptr}",
                 disabled=st.session_state.submitted
             )
@@ -196,6 +174,7 @@ elif current_tab == "🎧 聽力":
                         st.session_state.submitted = True
                         st.rerun()
             else:
+                # 拿當前的單選索引，與快取鎖中的 live_quiz_data["correct_index"] 進行精準對帳
                 selected_index = live_quiz_data["options"].index(user_choice)
                 correct_idx = live_quiz_data["correct_index"]
                 correct_answer_text = live_quiz_data["options"][correct_idx]
@@ -207,6 +186,7 @@ elif current_tab == "🎧 聽力":
                     st.markdown(f"### 🔴 答題結果：✕")
                     st.error(f" 再接再厲！正確答案應該是：**{correct_answer_text}**")
                 
+                # 下一題導覽
                 if st.button("➡️ 下一題", key=f"next_{ptr}"):
                     st.session_state.current_pointer += 1
                     st.session_state.submitted = False
@@ -216,6 +196,7 @@ elif current_tab == "🎧 聽力":
             st.success("🎉 您已完成本輪全部 15 道雙重隨機題目！系統正在為您重新洗牌出題...")
             
             if st.button("🔄 開始下一輪隨機挑戰"):
+                # 清空題號與選項快取，全面重新洗牌，開啟下一輪閉環
                 random.shuffle(st.session_state.random_quiz_order)
                 st.session_state.shuffled_options_map = {}
                 st.session_state.current_pointer = 0
