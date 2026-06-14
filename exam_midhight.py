@@ -395,7 +395,6 @@ elif current_tab == "✍️ 寫作":
                     with col1:
                         st.button("📥 提交答案", key=f"w_sub_dis_{w_ptr}", disabled=True)
                     with col2:
-                        # 🛠️ 根據要求進行精準熵減微調：不顯示「✓/✕」與「再接再厲/Fangcal」，按鈕右側直接印出純淨標準答案
                         st.info(f"💡 正確答案：**{correct_sentence}**")
                     
                     st.write("")
@@ -414,7 +413,7 @@ elif current_tab == "✍️ 寫作":
                     
             st.markdown('</div>', unsafe_allow_html=True)
             
-        # ─── 題型二：問答 ───
+        # ─── 題型二：問答（已物理移除學生書寫打字區） ───
         elif writing_sub == "問答":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 📝 寫作測驗 - 問答")
@@ -441,48 +440,27 @@ elif current_tab == "✍️ 寫作":
                 
                 st.write("---")
                 
-                user_q_answer = st.text_area(
-                    "請寫下您的回答：",
-                    placeholder="內容添加後即可輸入...",
-                    key=f"q_input_{q_ptr}",
-                    disabled=st.session_state.q_submitted
-                )
-                
+                # 🛠️ 介面優化迴路：不需要任何打字輸入框，點擊按鈕直接開啟參考答案與音檔
                 if not st.session_state.q_submitted:
-                    if st.button("📥 提交答案", key=f"q_submit_{q_ptr}"):
-                        if not user_q_answer.strip():
-                            st.warning("⚠️ 請先在欄位中寫下您的回答再行提交！")
-                        else:
-                            st.session_state.q_submitted = True
-                            st.rerun()
+                    if st.button("📥 顯示參考答案", key=f"q_submit_{q_ptr}"):
+                        st.session_state.q_submitted = True
+                        st.rerun()
                 else:
                     suggested_ans = current_q_quiz["suggested_answer"]
-                    st.success(f"✨ 參考答案：**{suggested_ans}**")
                     
+                    # 左右排版：按鈕外顯鎖定在左，答案在右
+                    col1, col2 = st.columns([1, 3])
+                    with col1:
+                        st.button("📥 顯示參考答案", key=f"q_sub_dis_{q_ptr}", disabled=True)
+                    with col2:
+                        st.success(f"✨ 參考答案：**{suggested_ans}**")
+                    
+                    st.write("")
+                    
+                    # 播放參考答案語音
                     if st.button("🔊 播放參考答案音檔", key=f"q_audio_btn_{q_ptr}"):
                         st.session_state.q_audio_triggered = True
                         
                     if st.session_state.q_audio_triggered:
                         if os.path.exists(current_q_quiz["audio_path"]):
-                            st.audio(current_q_quiz["audio_path"], format="audio/mp3", autoplay=True)
-                        else:
-                            st.error(f"⚠️ 找不到音檔！請確認此檔案是否已正確上傳至 GitHub 儲存庫：\n`{current_q_quiz['audio_path']}`")
-                        st.session_state.q_audio_triggered = False
-                    
-                    st.write("")
-                    if st.button("➡️ 下一題", key=f"q_next_{q_ptr}"):
-                        st.session_state.q_pointer += 1
-                        st.session_state.q_submitted = False
-                        st.rerun()
-            else:
-                st.success("🎉 您已完成「問答」全部題目的練習！")
-                if st.button("🔄 重新挑戰", key="reset_questions"):
-                    st.session_state.q_pointer = 0
-                    st.session_state.q_submitted = False
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-
-# ---- App 底部註腳 ----
-st.write("---")
-st.caption("© 2026 中高級認證 App 三一開發團隊 ｜ 雙重隨機全防禦穩定版")
+                            st.audio(current_
