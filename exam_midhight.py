@@ -389,19 +389,14 @@ elif current_tab == "✍️ 寫作":
                             st.session_state.writing_submitted = True
                             st.rerun()
                 else:
-                    # 🛡️ 核心修復補丁：修正拼字錯誤，將變數對齊為 current_w_quiz
                     correct_sentence = current_w_quiz["correct_text"]
                     
                     col1, col2 = st.columns([1, 3])
                     with col1:
                         st.button("📥 提交答案", key=f"w_sub_dis_{w_ptr}", disabled=True)
                     with col2:
-                        if user_typed_answer.strip() == correct_sentence.strip():
-                            st.markdown(f"### 🔴 答題結果：✓")
-                            st.success(f" Fangcal! 標準答案：**{correct_sentence}**")
-                        else:
-                            st.markdown(f"### 🔴 答題結果：✕")
-                            st.error(f" 再接再厲！標準答案：**{correct_sentence}**")
+                        # 🛠️ 根據要求進行精準熵減微調：不顯示「✓/✕」與「再接再厲/Fangcal」，按鈕右側直接印出純淨標準答案
+                        st.info(f"💡 正確答案：**{correct_sentence}**")
                     
                     st.write("")
                     if st.button("➡️ 下一題", key=f"w_next_{w_ptr}"):
