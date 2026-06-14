@@ -188,7 +188,7 @@ elif current_tab == "🎧 聽力":
             
             live_quiz_data = st.session_state.shuffled_options_map[true_quiz_id]
             
-            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題 (雙重隨機防禦版)**")
+            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題**")
             st.write(current_quiz["question_text"])
             
             if st.button("🔊 播放題目", key=f"play_{ptr}"):
