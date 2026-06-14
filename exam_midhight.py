@@ -60,7 +60,7 @@ st.markdown("""
 st.title("🎓 中高級認證")
 st.caption("[練習平台選擇器]")
 
-# ---- 第一層：五個主要選項 (導覽選單) ----
+# ---- 第一層：五個主要選項 (導選單) ----
 main_options = ["📋 認證考試說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
 current_tab = st.segmented_control(
     "主選單導覽", 
@@ -387,60 +387,4 @@ elif current_tab == "✍️ 寫作":
                             st.session_state.writing_submitted = True
                             st.rerun()
                 else:
-                    correct_sentence = current_w_quiz["correct_text"]
-                    
-                    col1, col2 = st.columns([1, 3])
-                    with col1:
-                        st.button("📥 提交答案", key=f"w_sub_dis_{w_ptr}", disabled=True)
-                    with col2:
-                        if user_typed_answer.strip() == correct_sentence.strip():
-                            st.markdown(f"### 🔴 答題結果：✓")
-                            st.success(f" Fangcal! 標準答案：**{correct_sentence}**")
-                        else:
-                            st.markdown(f"### 🔴 答題結果：✕")
-                            st.error(f" 再接再厲！標準答案：**{correct_sentence}**")
-                    
-                    st.write("")
-                    if st.button("➡️ 下一題", key=f"w_next_{w_ptr}"):
-                        st.session_state.writing_pointer += 1
-                        st.session_state.writing_submitted = False
-                        st.rerun()
-            else:
-                st.balloons()
-                st.success("🎉 您已完成本輪全部 5 道隨機聽寫題目！")
-                if st.button("🔄 開始下一輪隨機挑戰", key="reset_writing"):
-                    random.shuffle(st.session_state.writing_dictation_order)
-                    st.session_state.writing_pointer = 0
-                    st.session_state.writing_submitted = False
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-            
-        # ─── 題型二：問答 ───
-        elif writing_sub == "問答":
-            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            st.markdown("### 📝 寫作測驗 - 問答")
-            
-            question_db = [item for item in all_writing_data if item["type"] == "question"]
-            
-            if "q_pointer" not in st.session_state:
-                st.session_state.q_pointer = 0
-            if "q_audio_triggered" not in st.session_state:
-                st.session_state.q_audio_triggered = False
-            if "q_submitted" not in st.session_state:
-                st.session_state.q_submitted = False
-
-            q_ptr = st.session_state.q_pointer
-            
-            if q_ptr < len(question_db):
-                current_q_quiz = question_db[q_ptr]
-                
-                st.write(f"**當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題**")
-                st.markdown(f"#### ❓ 問：{current_q_quiz['question_text']}")
-                
-                if st.button("👁️ 顯示中文翻譯", key=f"q_trans_{q_ptr}"):
-                    st.info(f"💡 中文提示：{current_q_quiz['chinese_translation']}")
-                
-                st.write("---")
-                
-                user_q_answer = st.text_area(
+                    correct_sentence = current_w
