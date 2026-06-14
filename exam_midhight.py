@@ -79,10 +79,12 @@ if st.session_state.previous_tab != current_tab:
     st.session_state.audio_triggered = False
     if "writing_submitted" in st.session_state:
         st.session_state.writing_submitted = False
+    
+    # 🛡️ 鋼鐵補丁：修復 AttributeError。使用 del 安全移出屬性，避免字典化退化導致死當
     if "q_show_trans" in st.session_state:
-        st.session_state.q_show_trans = {}
+        del st.session_state["q_show_trans"]
     if "q_show_ans" in st.session_state:
-        st.session_state.q_show_ans = {}
+        del st.session_state["q_show_ans"]
         
     st.session_state.previous_tab = current_tab
     st.rerun()
@@ -282,7 +284,6 @@ elif current_tab == "🗣️ 口說":
             
             st.divider()
             
-            # 🛡️ 鋼鐵防禦安全降級補丁：攔截預設標題，杜絕 next() 因查表落空而導致的 StopIteration 崩潰
             if selected_quiz == "題目選單...":
                 st.info("💡 點選上方選單，選擇想要挑戰的題目。")
             else:
@@ -307,7 +308,7 @@ elif current_tab == "🗣️ 口說":
         st.markdown("### 🖼️ 看圖表達")
         st.warning("🚧 【內容建置中】")
 
-# 4. 📖 閱讀測驗 (本次升級核心：完全串接外部 JSON，整合雙隨機與任意上下跳題功能)
+# 4. 📖 閱讀測驗
 elif current_tab == "📖 閱讀":
     st.subheader("📖 閱讀測驗 (Piasipan)")
     st.divider()
@@ -317,7 +318,6 @@ elif current_tab == "📖 閱讀":
         horizontal=True
     )
     
-    # ─── 🛡️ 載入外部資料庫 ───
     try:
         with open("data/reading_quiz.json", "r", encoding="utf-8") as f:
             all_reading_data = json.load(f)
@@ -326,11 +326,9 @@ elif current_tab == "📖 閱讀":
         all_reading_data = []
 
     if all_reading_data:
-        # 決定當前要抽取的題型標籤
         target_type = "vocabulary" if reading_sub == "選擇題-詞彙語意" else "structure"
         reading_db = [item for item in all_reading_data if item["type"] == target_type]
         
-        # 為兩種子題型配置獨立的 Session State 快取防腐層
         state_order_key = f"r_{target_type}_order"
         state_ptr_key = f"r_{target_type}_ptr"
         state_opts_key = f"r_{target_type}_opts_map"
@@ -366,7 +364,6 @@ elif current_tab == "📖 閱讀":
             if true_r_id not in st.session_state[state_choice_key]:
                 st.session_state[state_choice_key][true_r_id] = None
                 
-            # ─── 4答案選項的順序隨機排列 ───
             if true_r_id not in st.session_state[state_opts_key]:
                 shuffled_raw_opts = current_r_quiz["options"].copy()
                 random.shuffle(shuffled_raw_opts)
@@ -388,7 +385,6 @@ elif current_tab == "📖 閱讀":
                 
             live_r_data = st.session_state[state_opts_key][true_r_id]
             
-            # 🛠️ 核心修復補丁：完整閉合字串與括號，徹底消除 unterminated f-string literal 語法死當
             st.write(f"**當前進度：第 {r_ptr + 1} 題 / 共 {len(reading_db)} 題 (隨機出題組模式)**")
             st.write(current_r_quiz["question_text"])
             st.write("---")
@@ -407,7 +403,6 @@ elif current_tab == "📖 閱讀":
             if not st.session_state[state_submit_key][true_r_id]:
                 st.session_state[state_choice_key][true_r_id] = user_r_choice
             
-            # ─── 提交答案 ───
             if not st.session_state[state_submit_key][true_r_id]:
                 if st.button("📥 提交答案", key=f"r_submit_btn_{target_type}_{r_ptr}"):
                     if user_r_choice is None:
@@ -426,7 +421,6 @@ elif current_tab == "📖 閱讀":
             
             st.write("")
             
-            # ─── 導覽按鈕設計：[上一題]、[下一題]，未答題亦可自由換題組 ───
             nav_col1, nav_col2 = st.columns(2)
             with nav_col1:
                 if st.button("⬅️ 上一題", key=f"r_prev_btn_{target_type}_{r_ptr}", disabled=(r_ptr == 0)):
@@ -562,6 +556,12 @@ elif current_tab == "✍️ 寫作":
             if q_ptr < len(question_db):
                 current_q_quiz = question_db[q_ptr]
                 
+                # ─── 🛡️ 核心修復防禦線：使用符合 Streamlit 機制的字典安全宣告 ───
+                if "q_show_trans" not in st.session_state:
+                    st.session_state.q_show_trans = {}
+                if "q_show_ans" not in st.session_state:
+                    st.session_state.q_show_ans = {}
+                    
                 if q_ptr not in st.session_state.q_show_trans:
                     st.session_state.q_show_trans[q_ptr] = False
                 if q_ptr not in st.session_state.q_show_ans:
@@ -613,8 +613,10 @@ elif current_tab == "✍️ 寫作":
                 st.success("🎉 您已完成「問答」全部題目的練習！")
                 if st.button("🔄 重新挑戰", key="reset_questions"):
                     st.session_state.q_pointer = 0
-                    st.session_state.q_show_trans = {}
-                    st.session_state.q_show_ans = {}
+                    if "q_show_trans" in st.session_state:
+                        del st.session_state["q_show_trans"]
+                    if "q_show_ans" in st.session_state:
+                        del st.session_state["q_show_ans"]
                     st.rerun()
                     
             st.markdown('</div>', unsafe_allow_html=True)
