@@ -127,7 +127,7 @@ if current_tab == "📋 認證考試說明":
       * 情境問答(5題/10%)：每題包含2句(第1句為情境鋪陳)，以族語表達看法(每題含備答時間約40秒)。
       * 看圖表達(1題/10%)：依圖片情境以族語表達想法（備答2分鐘，作答2分鐘)。
     * **〖閱讀測驗〗**
-      * 詞彙語意(5題/10%)：依提示於4個選項中選出答案.
+      * 詞彙語意(5題/10%)：依提示於4個選項中選出答案。
       * 語言結構(10題/20%)：依提示於4個選項中選出答案。
     * **〖寫作測驗〗**
       * 句子聽寫(5題/10%)：聽寫族語句子，每題播放2遍。
@@ -318,7 +318,7 @@ elif current_tab == "📖 閱讀":
         st.markdown("### ⛓️ 選擇題 - 語言結構")
         st.warning("🚧 【內容建置中】")
 
-# 5. ✍️ 寫作測驗（本次完全整合外掛題庫與雙重隨機防禦機制）
+# 5. ✍️ 寫作測驗
 elif current_tab == "✍️ 寫作":
     st.subheader("✍️ 寫作測驗 (Pitilidan)")
     st.divider()
@@ -328,7 +328,6 @@ elif current_tab == "✍️ 寫作":
         horizontal=True
     )
     
-    # ─── 🛡️ 載入寫作題庫外部 JSON 檔案 ───
     try:
         with open("data/writing_quiz.json", "r", encoding="utf-8") as f:
             all_writing_data = json.load(f)
@@ -344,7 +343,6 @@ elif current_tab == "✍️ 寫作":
             
             dictation_db = [item for item in all_writing_data if item["type"] == "dictation"]
             
-            # 狀態初始化：鎖定句子聽寫的隨機順序
             if "writing_dictation_order" not in st.session_state:
                 st.session_state.writing_dictation_order = list(range(len(dictation_db)))
                 random.shuffle(st.session_state.writing_dictation_order)
@@ -365,7 +363,6 @@ elif current_tab == "✍️ 寫作":
                 st.write(f"**當前進度：第 {w_ptr + 1} 題 / 共 {len(dictation_db)} 題**")
                 st.write(current_w_quiz["question_text"])
                 
-                # 按一次播放音檔一遍
                 if st.button("🔊 播放題目", key=f"w_play_{w_ptr}"):
                     st.session_state.writing_audio_triggered = True
                 
@@ -375,7 +372,6 @@ elif current_tab == "✍️ 寫作":
                 
                 st.write("---")
                 
-                # 打字輸入欄位
                 user_typed_answer = st.text_input(
                     "請在此輸入聽到的完整族語句子（注意大小寫與標點符號）：",
                     placeholder="請輸入答案...",
@@ -383,7 +379,6 @@ elif current_tab == "✍️ 寫作":
                     disabled=st.session_state.writing_submitted
                 )
                 
-                # 提交答案判定區（左右排版：按鈕在左，標準答案在右）
                 if not st.session_state.writing_submitted:
                     if st.button("📥 提交答案", key=f"w_submit_{w_ptr}"):
                         if not user_typed_answer.strip():
@@ -421,7 +416,7 @@ elif current_tab == "✍️ 寫作":
                     
             st.markdown('</div>', unsafe_allow_html=True)
             
-        # ─── 題型二：問答（隱藏中文，點擊顯示、參考答案播放功能） ───
+        # ─── 題型二：問答 ───
         elif writing_sub == "問答":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 📝 寫作測驗 - 問答")
@@ -441,24 +436,11 @@ elif current_tab == "✍️ 寫作":
                 current_q_quiz = question_db[q_ptr]
                 
                 st.write(f"**當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題**")
-                
-                # 顯示題目（族語問句）
                 st.markdown(f"#### ❓ 問：{current_q_quiz['question_text']}")
                 
-                # 中文翻譯預設隱藏，按鈕壓下才顯示
                 if st.button("👁️ 顯示中文翻譯", key=f"q_trans_{q_ptr}"):
                     st.info(f"💡 中文提示：{current_q_quiz['chinese_translation']}")
                 
                 st.write("---")
                 
-                # 開放文字輸入框讓學生練習作答
                 user_q_answer = st.text_area(
-                    "請寫下您的回答：",
-                    placeholder="內容添加後即可輸入...",
-                    key=f"q_input_{q_ptr}",
-                    disabled=st.session_state.q_submitted
-                )
-                
-                # 提交答案
-                if not st.session_state.q_submitted:
-                    if st.
