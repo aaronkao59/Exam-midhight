@@ -428,4 +428,83 @@ elif current_tab == "✍️ 寫作":
             # 初始化開關狀態字典（若不存在），以題目的資料庫 index 作為金鑰
             if "q_show_trans" not in st.session_state:
                 st.session_state.q_show_trans = {}
-            if "q_show_ans" not in st.
+            if "q_show_ans" not in st.session_state:
+                st.session_state.q_show_ans = {}
+            if "q_audio_triggered" not in st.session_state:
+                st.session_state.q_audio_triggered = False
+            if "q_pointer" not in st.session_state:
+                st.session_state.q_pointer = 0
+
+            q_ptr = st.session_state.q_pointer
+            
+            if q_ptr < len(question_db):
+                current_q_quiz = question_db[q_ptr]
+                
+                # 確保當前題目在狀態字典中擁有預設值（預設關閉為 False）
+                if q_ptr not in st.session_state.q_show_trans:
+                    st.session_state.q_show_trans[q_ptr] = False
+                if q_ptr not in st.session_state.q_show_ans:
+                    st.session_state.q_show_ans[q_ptr] = False
+                
+                st.write(f"**當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題**")
+                st.markdown(f"#### ❓ 問：{current_q_quiz['question_text']}")
+                
+                # ─── 1. 中文翻譯開關迴路 ───
+                # 動態決定按鈕文字
+                trans_btn_label = "🔄 關閉中文翻譯" if st.session_state.q_show_trans[q_ptr] else "👁️ 顯示中文翻譯"
+                if st.button(trans_btn_label, key=f"q_trans_toggle_{q_ptr}"):
+                    # 狀態反轉取反 (Toggle)
+                    st.session_state.q_show_trans[q_ptr] = not st.session_state.q_show_trans[q_ptr]
+                    st.rerun()
+                
+                # 根據開關狀態決定是否展開內容
+                if st.session_state.q_show_trans[q_ptr]:
+                    st.info(f"💡 中文提示：{current_q_quiz['chinese_translation']}")
+                
+                st.write("---")
+                
+                # ─── 2. 參考答案開關迴路 ───
+                ans_btn_label = "🔄 關閉參考答案" if st.session_state.q_show_ans[q_ptr] else "📥 顯示參考答案"
+                
+                col1, col2 = st.columns([1, 3])
+                with col1:
+                    if st.button(ans_btn_label, key=f"q_ans_toggle_{q_ptr}"):
+                        st.session_state.q_show_ans[q_ptr] = not st.session_state.q_show_ans[q_ptr]
+                        st.rerun()
+                
+                with col2:
+                    if st.session_state.q_show_ans[q_ptr]:
+                        suggested_ans = current_q_quiz["suggested_answer"]
+                        st.success(f"✨ 參考答案：**{suggested_ans}**")
+                
+                # ─── 3. 音檔與導覽列（僅在參考答案開啟時延伸揭露） ───
+                if st.session_state.q_show_ans[q_ptr]:
+                    st.write("")
+                    if st.button("🔊 播放參考答案音檔", key=f"q_audio_btn_{q_ptr}"):
+                        st.session_state.q_audio_triggered = True
+                        
+                    if st.session_state.q_audio_triggered:
+                        if os.path.exists(current_q_quiz["audio_path"]):
+                            st.audio(current_q_quiz["audio_path"], format="audio/mp3", autoplay=True)
+                        else:
+                            st.error(f"⚠️ 找不到音檔！請確認此檔案是否已正確上傳至 GitHub 儲存庫：\n`{current_q_quiz['audio_path']}`")
+                        st.session_state.q_audio_triggered = False
+                    
+                    st.write("")
+                    if st.button("➡️ 下一題", key=f"q_next_{q_ptr}"):
+                        # 切往下題前，主動初始化並清空下一題的開關狀態，維持高標準低熵使用者體驗
+                        st.session_state.q_pointer += 1
+                        st.rerun()
+            else:
+                st.success("🎉 您已完成「問答」全部題目的練習！")
+                if st.button("🔄 重新挑戰", key="reset_questions"):
+                    st.session_state.q_pointer = 0
+                    st.session_state.q_show_trans = {}
+                    st.session_state.q_show_ans = {}
+                    st.rerun()
+                    
+            st.markdown('</div>', unsafe_allow_html=True)
+
+# ---- App 底部註腳 ----
+st.write("---")
+st.caption("© 2026 中高級認證 App 三一開發團隊 ｜ 雙重隨機全防禦穩定版")
