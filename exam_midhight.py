@@ -128,7 +128,7 @@ if current_tab == "📋 認證考試說明":
       * 問答題(5題/10%)：依題目指示，以族語句子回答。
     """)
     
-    st.markdown("### 3. 合格標準總結")
+    st.markdown("### 3. 合格標準")
     st.markdown("""
     滿分100分中，**總分達60分以上**，且單項成績達**聽力15分、口說15分、閱讀18分、寫作12分以上**，即可取得「通過聽說讀寫」的完整資格 。考生亦可依對應門檻獨立取得「通過聽說」或「通過讀寫」的資格 。
     """)
@@ -188,7 +188,7 @@ elif current_tab == "🎧 聽力":
             
             live_quiz_data = st.session_state.shuffled_options_map[true_quiz_id]
             
-            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題 (雙重隨機防禦版)**")
+            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題**")
             st.write(current_quiz["question_text"])
             
             if st.button("🔊 播放題目", key=f"play_{ptr}"):
@@ -220,10 +220,10 @@ elif current_tab == "🎧 聽力":
                 
                 if user_choice == correct_answer_text:
                     st.markdown(f"### 🔴 答題結果：✓")
-                    st.success(f" Fangcal! 答對了！正確答案就是：**{correct_answer_text}**")
+                    st.success(f" Fangcal! 正確答案：**{correct_answer_text}**")
                 else:
                     st.markdown(f"### 🔴 答題結果：✕")
-                    st.error(f" 再接再厲！正確答案應該是：**{correct_answer_text}**")
+                    st.error(f" 再接再厲！正確答案：**{correct_answer_text}**")
                 
                 if st.button("➡️ 下一題", key=f"next_{ptr}"):
                     st.session_state.current_pointer += 1
@@ -301,4 +301,4 @@ elif current_tab == "✍️ 寫作":
 
 # ---- App 底部註腳 ----
 st.write("---")
-st.caption("© 2026 中高級認證 App 開發團隊 ｜ 雙重隨機全防禦穩定版")
+st.caption("© 2026 中高級認證 App 三一開發團隊 ｜ 雙重隨機全防禦穩定版")
