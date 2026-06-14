@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+import json
 
 # ---- 1. 頁面佈局設定 (Code-CRF v9.0 運行時配置) ----
 st.set_page_config(
@@ -256,8 +257,44 @@ elif current_tab == "🗣️ 口說":
     )
     
     if speaking_sub == "段落朗讀":
-        st.markdown("### 📖 段落朗讀")
-        st.warning("🚧 【內容建置中】")
+        # 💡 外層包裹專屬 CSS 測驗卡片，物理隔絕空白黑框
+        st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
+        st.markdown("### 📖 口說測驗 - 段落朗讀")
+        
+        # 🛡️ 零號協議風控防禦：嘗試讀取外部 JSON，若檔案遺失則優雅降級提示
+        try:
+            with open("data/speaking_quiz.json", "r", encoding="utf-8") as f:
+                speaking_db = json.load(f)
+                
+            # 自動解耦組裝：從 JSON 中動態提取題號與標題，組裝成下拉選單的選項
+            menu_options = ["請選擇題目..."] + [f"題目{item['quiz_id']}：{item['title']}" for item in speaking_db]
+            
+            selected_quiz = st.selectbox(
+                "請選擇您要朗讀的題目：",
+                options=menu_options,
+                index=0,
+                key="speaking_quiz_selector"
+            )
+            
+            st.divider() # 渲染原生分隔線
+            
+            # 萬能查表動態渲染迴路
+            if selected_quiz == "請選擇題目...":
+                st.info("💡 請點選上方下拉選單，自由選擇您想要挑戰的朗讀題目。")
+            else:
+                # 擷取題號，精準在解耦資料庫中進行 $O(1)$ 查表抽題
+                current_id = selected_quiz.split("：")[0].replace("題目", "")
+                current_article = next(item for item in speaking_db if item["quiz_id"] == current_id)
+                
+                st.markdown(f"#### 🎯 {current_article['title']}")
+                # 呼叫型 Info 框，自動適應雙模式並精準呈現喉塞音等族語特殊符號
+                st.info(current_article["content"])
+                st.caption(f"來源：{current_article['source']} ｜ 建議準備時間：1分半鐘 ｜ 建議朗讀時間：1分半鐘")
+                
+        except FileNotFoundError:
+            st.error("☠️ 系統性毀滅異常：偵測到 `data/speaking_quiz.json` 檔案遺失，請檢查 GitHub 儲存庫路徑！")
+            
+        st.markdown('</div>', unsafe_allow_html=True) # 關閉卡片容器
     elif speaking_sub == "情境問答":
         st.markdown("### ❓ 情境問答")
         st.warning("🚧 【內容建置中】")
