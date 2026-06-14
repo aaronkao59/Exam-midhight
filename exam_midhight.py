@@ -79,8 +79,13 @@ if st.session_state.previous_tab != current_tab:
     st.session_state.audio_triggered = False
     if "writing_submitted" in st.session_state:
         st.session_state.writing_submitted = False
-    if "q_submitted" in st.session_state:
-        st.session_state.q_submitted = False
+    
+    # 物理清除問答題專屬的開關記憶體，切換大分頁時自動重置歸零
+    if "q_show_trans" in st.session_state:
+        st.session_state.q_show_trans = {}
+    if "q_show_ans" in st.session_state:
+        st.session_state.q_show_ans = {}
+        
     st.session_state.previous_tab = current_tab
     st.rerun()
 
@@ -413,75 +418,14 @@ elif current_tab == "✍️ 寫作":
                     
             st.markdown('</div>', unsafe_allow_html=True)
             
-        # ─── 題型二：問答（已物理移除學生書寫打字區） ───
+        # ─── 題型二：問答（本次升級核心：雙向獨立開關鎖） ───
         elif writing_sub == "問答":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 📝 寫作測驗 - 問答")
             
             question_db = [item for item in all_writing_data if item["type"] == "question"]
             
-            if "q_pointer" not in st.session_state:
-                st.session_state.q_pointer = 0
-            if "q_audio_triggered" not in st.session_state:
-                st.session_state.q_audio_triggered = False
-            if "q_submitted" not in st.session_state:
-                st.session_state.q_submitted = False
-
-            q_ptr = st.session_state.q_pointer
-            
-            if q_ptr < len(question_db):
-                current_q_quiz = question_db[q_ptr]
-                
-                st.write(f"**當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題**")
-                st.markdown(f"#### ❓ 問：{current_q_quiz['question_text']}")
-                
-                if st.button("👁️ 顯示中文翻譯", key=f"q_trans_{q_ptr}"):
-                    st.info(f"💡 中文提示：{current_q_quiz['chinese_translation']}")
-                
-                st.write("---")
-                
-                # 🛠️ 介面優化迴路：不需要任何打字輸入框，點擊按鈕直接開啟參考答案與音檔
-                if not st.session_state.q_submitted:
-                    if st.button("📥 顯示參考答案", key=f"q_submit_{q_ptr}"):
-                        st.session_state.q_submitted = True
-                        st.rerun()
-                else:
-                    suggested_ans = current_q_quiz["suggested_answer"]
-                    
-                    # 左右排版：按鈕外顯鎖定在左，答案在右
-                    col1, col2 = st.columns([1, 3])
-                    with col1:
-                        st.button("📥 顯示參考答案", key=f"q_sub_dis_{q_ptr}", disabled=True)
-                    with col2:
-                        st.success(f"✨ 參考答案：**{suggested_ans}**")
-                    
-                    st.write("")
-                    
-                    # 播放參考答案語音
-                    if st.button("🔊 播放參考答案音檔", key=f"q_audio_btn_{q_ptr}"):
-                        st.session_state.q_audio_triggered = True
-                        
-                    if st.session_state.q_audio_triggered:
-                        if os.path.exists(current_q_quiz["audio_path"]):
-                            st.audio(current_q_quiz["audio_path"], format="audio/mp3", autoplay=True)
-                        else:
-                            st.error(f"⚠️ 找不到音檔！請確認此檔案是否已正確上傳至 GitHub 儲存庫：\n`{current_q_quiz['audio_path']}`")
-                        st.session_state.q_audio_triggered = False
-                    
-                    st.write("")
-                    if st.button("➡️ 下一題", key=f"q_next_{q_ptr}"):
-                        st.session_state.q_pointer += 1
-                        st.session_state.q_submitted = False
-                        st.rerun()
-            else:
-                st.success("🎉 您已完成「問答」全部題目的練習！")
-                if st.button("🔄 重新挑戰", key="reset_questions"):
-                    st.session_state.q_pointer = 0
-                    st.session_state.q_submitted = False
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-
-# ---- App 底部註腳 ----
-st.write("---")
-st.caption("© 2026 中高級認證 App 三一開發團隊 ｜ 雙重隨機全防禦穩定版")
+            # 初始化開關狀態字典（若不存在），以題目的資料庫 index 作為金鑰
+            if "q_show_trans" not in st.session_state:
+                st.session_state.q_show_trans = {}
+            if "q_show_ans" not in st.
