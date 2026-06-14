@@ -3,7 +3,7 @@
     "quiz_id": "01",
     "type": "dictation",
     "title": "句子聽寫-第1題",
-    "audio_path": "assets/audio/05_writing/writing_dictation/write-d1-01.mp3",
+    "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-01.mp3",
     "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
     "correct_text": "Caay pakasoelin kako tora mifotingay."
   },
@@ -11,7 +11,7 @@
     "quiz_id": "02",
     "type": "dictation",
     "title": "句子聽寫-第2題",
-    "audio_path": "assets/audio/05_writing/writing_dictation/write-d1-02.mp3",
+    "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-02.mp3",
     "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
     "correct_text": "Miwarwar to sota kora omaomahan."
   },
@@ -19,7 +19,7 @@
     "quiz_id": "03",
     "type": "dictation",
     "title": "句子聽寫-第3題",
-    "audio_path": "assets/audio/05_writing/writing_dictation/write-d1-03.mp3",
+    "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-03.mp3",
     "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
     "correct_text": "Pakayra to ma’efer koya adipangpang."
   },
@@ -27,7 +27,7 @@
     "quiz_id": "04",
     "type": "dictation",
     "title": "句子聽寫-第4題",
-    "audio_path": "assets/audio/05_writing/writing_dictation/write-d1-04.mp3",
+    "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-04.mp3",
     "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
     "correct_text": "Kilimen koya hahawikiden iso a focol anocila."
   },
@@ -35,7 +35,7 @@
     "quiz_id": "05",
     "type": "dictation",
     "title": "句子聽寫-第5題",
-    "audio_path": "assets/audio/05_writing/writing_dictation/write-d1-05.mp3",
+    "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-05.mp3",
     "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
     "correct_text": "Paradid miasik to loma’ to dafak kora kapah."
   },
@@ -43,7 +43,7 @@
     "quiz_id": "01",
     "type": "question",
     "title": "問答題-第1題",
-    "audio_path": "assets/audio/05_writing/writing_questions/write-q1-01.mp3",
+    "audio_path": "assets/audio/04_writing/writing_questions/write-q1-01.mp3",
     "question_text": "Cima no paro no loma’ namo ko maolahay a comikay?",
     "chinese_translation": "你們家有誰喜歡跑步?",
     "suggested_answer": "Ci mama ako ko maolahay a comikay."
@@ -52,7 +52,7 @@
     "quiz_id": "02",
     "type": "question",
     "title": "問答題-第2題",
-    "audio_path": "assets/audio/05_writing/writing_questions/write-q1-02.mp3",
+    "audio_path": "assets/audio/04_writing/writing_questions/write-q1-02.mp3",
     "question_text": "Pina to a miheca ko pinanam iso to no Pangcah?",
     "chinese_translation": "你學族語學幾年了?",
     "suggested_answer": "Lima to a mihacaan ko pinanam ako to no Pangcah."
@@ -61,7 +61,7 @@
     "quiz_id": "03",
     "type": "question",
     "title": "問答題-第3題",
-    "audio_path": "assets/audio/05_writing/writing_questions/write-q1-03.mp3",
+    "audio_path": "assets/audio/04_writing/writing_questions/write-q1-03.mp3",
     "question_text": "Samaanen iso a minanam to serangawan no niyaro’?",
     "chinese_translation": "你如何學習部落的文化?",
     "suggested_answer": "To mihecahecaan minokay i niyaro’ mikihatiya to ilisin."
@@ -70,7 +70,7 @@
     "quiz_id": "04",
     "type": "question",
     "title": "問答題-第4題",
-    "audio_path": "assets/audio/05_writing/writing_questions/write-q1-04.mp3",
+    "audio_path": "assets/audio/04_writing/writing_questions/write-q1-04.mp3",
     "question_text": "O maan a hecian no losay ko kaolahan iso a komaen? I hacowa kiso a komaen to heci no losay?",
     "chinese_translation": "你最喜歡吃什麼水果?你什麼時候吃水果?",
     "suggested_answer": "O kiyafes ko kaolahan ako a hecian no losay, i herek no lahok ko kakomaen ako to heci no losay."
@@ -79,7 +79,7 @@
     "quiz_id": "05",
     "type": "question",
     "title": "問答題-第5題",
-    "audio_path": "assets/audio/05_writing/writing_questions/write-q1-05.mp3",
+    "audio_path": "assets/audio/04_writing/writing_questions/write-q1-05.mp3",
     "question_text": "Maolah kiso komaen to siraw haw? Naw?",
     "chinese_translation": "你喜歡吃醃肉嗎?為什麼?",
     "suggested_answer": "Hai, maolah kako komaen to siraw, nawhani fangsis ko siraw."
@@ -88,7 +88,7 @@
     "quiz_id": "06",
     "type": "question",
     "title": "問答題-第6題",
-    "audio_path": "assets/audio/05_writing/writing_questions/write-q1-06.mp3",
+    "audio_path": "assets/audio/04_writing/writing_questions/write-q1-06.mp3",
     "question_text": "O maan ko kaolahan iso a cengel?",
     "chinese_translation": "你最喜歡的顏色是什麼?",
     "suggested_answer": "O kahengangay ko kaolahan ako a cengel."
@@ -97,7 +97,7 @@
     "quiz_id": "07",
     "type": "question",
     "title": "問答題-第7題",
-    "audio_path": "assets/audio/05_writing/writing_questions/write-q1-07.mp3",
+    "audio_path": "assets/audio/04_writing/writing_questions/write-q1-07.mp3",
     "question_text": "Pararid kiso a mipadang to tayal no loma’ to romi’ami’ad?",
     "chinese_translation": "你常常幫忙做家事嗎?",
     "suggested_answer": "Hai, paraded kako a mipadang to tayal no loma’ to romi’ami’ad."
@@ -106,9 +106,9 @@
     "quiz_id": "08",
     "type": "question",
     "title": "問答題-第8題",
-    "audio_path": "assets/audio/05_writing/writing_questions/write-q1-08.mp3",
+    "audio_path": "assets/audio/04_writing/writing_questions/write-q1-08.mp3",
     "question_text": "Maolah kiso a komaen to dongec? naw?",
     "chinese_translation": "你喜歡吃藤心嗎?為什麼?",
-    "suggested_answer": "Hai, maolah kako a komaen to dongec, nawhani o sakanga’ay no tiring."
+    "suggested_answer": "Hai, maolah kako a mipadang to tayal no loma’ to romi’ami’ad."
   }
 ]
