@@ -124,7 +124,7 @@ if current_tab == "📋 認證考試說明":
       * 聽音選詞(5題/10%)：聽族語句子，從4個詞彙或詞組選項中，選出答案。
       * 對話理解(5題/10%)：根據2位族人的對話，從4個選項中選出答案。
     * **〖口說測驗〗**
-      * 段落朗讀(1題/10%)：朗讀40至50詞的短文(備答1分半鐘，作答1分半鐘)。
+      * 段落朗隔(1題/10%)：朗讀40至50詞的短文(備答1分半鐘，作答1分半鐘)。
       * 情境問答(5題/10%)：每題包含2句(第1句為情境鋪陳)，以族語表達看法(每題含備答時間約40秒)。
       * 看圖表達(1題/10%)：依圖片情境以族語表達想法（備答2分鐘，作答2分鐘)。
     * **〖閱讀測驗〗**
@@ -282,15 +282,19 @@ elif current_tab == "🗣️ 口說":
             
             st.divider()
             
-            if selected_quiz == "請選擇題目...":
+            # 🛡️ 鋼鐵防禦補丁：全面攔截預設字串，防範 next() 拋出 StopIteration 異常崩潰
+            if selected_quiz == "題目選單...":
                 st.info("💡 點選上方選單，選擇想要挑戰的題目。")
             else:
                 current_id = selected_quiz.split("：")[0].replace("題目", "")
-                current_article = next(item for item in speaking_db if item["quiz_id"] == current_id)
+                current_article = next((item for item in speaking_db if str(item["quiz_id"]) == str(current_id)), None)
                 
-                st.markdown(f"#### 🎯 {current_article['title']}")
-                st.info(current_article["content"])
-                st.caption(f"來源：{current_article['source']} ｜ 建議準備時間：1分半鐘 ｜ 建議朗讀時間：1分半鐘")
+                if current_article:
+                    st.markdown(f"#### 🎯 {current_article['title']}")
+                    st.info(current_article["content"])
+                    st.caption(f"來源：{current_article['source']} ｜ 建議準備時間：1分半鐘 ｜ 建議朗讀時間：1分半鐘")
+                else:
+                    st.error("⚠️ 偵測到教材庫與索引撕裂，找不到該題目的實體內容。")
                 
         except FileNotFoundError:
             st.error("☠️ 系統性毀滅異常：偵測到 `data/speaking_quiz.json` 檔案遺失，請檢查 GitHub 儲存庫路徑！")
@@ -313,7 +317,7 @@ elif current_tab == "📖 閱讀":
         horizontal=True
     )
     
-    # ─── 🛡️ 載入外部資料庫 ───
+    # ─── 🛡️ 載入外部純文字大數據題庫 ───
     try:
         with open("data/reading_quiz.json", "r", encoding="utf-8") as f:
             all_reading_data = json.load(f)
@@ -322,11 +326,11 @@ elif current_tab == "📖 閱讀":
         all_reading_data = []
 
     if all_reading_data:
-        # 決定當前要抽取的題型標籤
+        # 分流群組標籤
         target_type = "vocabulary" if reading_sub == "選擇題-詞彙語意" else "structure"
         reading_db = [item for item in all_reading_data if item["type"] == target_type]
         
-        # 為兩種子題型配置獨立的 Session State 快取防腐層，防止交叉技術污染
+        # 記憶體隔離狀態鎖
         state_order_key = f"r_{target_type}_order"
         state_ptr_key = f"r_{target_type}_ptr"
         state_opts_key = f"r_{target_type}_opts_map"
@@ -354,7 +358,7 @@ elif current_tab == "📖 閱讀":
         if r_ptr < len(reading_db):
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             
-            # 獲取清洗排序後的真實題組
+            # 獲取清洗排序後的真實隨機題組
             true_r_id = st.session_state[state_order_key][r_ptr]
             current_r_quiz = reading_db[true_r_id]
             
@@ -386,243 +390,4 @@ elif current_tab == "📖 閱讀":
                 
             live_r_data = st.session_state[state_opts_key][true_r_id]
             
-            st.write(f"**當前進度：第 {r_ptr + 1} 題 / 共 {len(reading_db)} 題**")
-            st.write(current_r_quiz["question_text"])
-            st.write("---")
-            
-            # 使用者選擇綁定快取
-            saved_choice = st.session_state[state_choice_key][true_r_id]
-            # 如果已經有紀錄，找出其在 formatted_opts 中的 index
-            saved_index = live_r_data["options"].index(saved_choice) if saved_choice in live_r_data["options"] else None
-            
-            user_r_choice = st.radio(
-                "請選出正確的選項：",
-                options=live_r_data["options"],
-                index=saved_index,
-                key=f"r_radio_{target_type}_{r_ptr}",
-                disabled=st.session_state[state_submit_key][true_r_id]
-            )
-            
-            # 即時儲存選擇，確保換題回來時不留白
-            if not st.session_state[state_submit_key][true_r_id]:
-                st.session_state[state_choice_key][true_r_id] = user_r_choice
-            
-            # ─── 提交答案判定區 ───
-            if not st.session_state[state_submit_key][true_r_id]:
-                if st.button("📥 提交答案", key=f"r_submit_btn_{target_type}_{r_ptr}"):
-                    if user_r_choice is None:
-                        st.warning("⚠️ 請先選擇一個選項再行提交！")
-                    else:
-                        st.session_state[state_submit_key][true_r_id] = True
-                        st.rerun()
-            else:
-                correct_ans_str = live_r_data["correct_text"]
-                if user_r_choice == correct_ans_str:
-                    st.markdown(f"### 🔴 答題結果：✓")
-                    st.success(f" Fangcal! 正確答案：**{correct_ans_str}**")
-                else:
-                    st.markdown(f"### 🔴 答題結果：✕")
-                    st.error(f" 再接再厲！正確答案：**{correct_ans_str}**")
-            
-            st.write("")
-            
-            # ─── 導覽按鈕設計：[上一題]、[下一題] ───
-            nav_col1, nav_col2 = st.columns(2)
-            with nav_col1:
-                # 只有大於第 1 題時才開放按上一題
-                if st.button("⬅️ 上一題", key=f"r_prev_btn_{target_type}_{r_ptr}", disabled=(r_ptr == 0)):
-                    st.session_state[state_ptr_key] -= 1
-                    st.rerun()
-            with nav_col2:
-                if st.button("➡️ 下一題", key=f"r_next_btn_{target_type}_{r_ptr}"):
-                    st.session_state[state_ptr_key] += 1
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-        else:
-            # 本輪全部完成
-            st.balloons()
-            st.success(f"🎉 您已瀏覽完本輪全部 {len(reading_db)} 道題目！")
-            if st.button("🔄 重新洗牌挑戰", key=f"r_reset_{target_type}"):
-                random.shuffle(st.session_state[state_order_key])
-                st.session_state[state_ptr_key] = 0
-                st.session_state[state_opts_key] = {}
-                st.session_state[state_submit_key] = {}
-                st.session_state[state_choice_key] = {}
-                st.rerun()
-
-# 5. ✍️ 寫作測驗
-elif current_tab == "✍️ 寫作":
-    st.subheader("✍️ 寫作測驗 (Pitilidan)")
-    st.divider()
-    writing_sub = st.radio(
-        "寫作題型選擇：",
-        ["句子聽寫", "問答"],
-        horizontal=True
-    )
-    
-    try:
-        with open("data/writing_quiz.json", "r", encoding="utf-8") as f:
-            all_writing_data = json.load(f)
-    except FileNotFoundError:
-        st.error("☠️ 系統性毀滅異常：偵測到 `data/writing_quiz.json` 檔案遺失，請檢查儲存庫路徑！")
-        all_writing_data = []
-
-    if all_writing_data:
-        # ─── 題型一：句子聽寫 ───
-        if writing_sub == "句子聽寫":
-            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            st.markdown("### ✍️ 寫作測驗 - 句子聽寫")
-            
-            dictation_db = [item for item in all_writing_data if item["type"] == "dictation"]
-            
-            if "writing_dictation_order" not in st.session_state:
-                st.session_state.writing_dictation_order = list(range(len(dictation_db)))
-                random.shuffle(st.session_state.writing_dictation_order)
-                
-            if "writing_pointer" not in st.session_state:
-                st.session_state.writing_pointer = 0
-            if "writing_audio_triggered" not in st.session_state:
-                st.session_state.writing_audio_triggered = False
-            if "writing_submitted" not in st.session_state:
-                st.session_state.writing_submitted = False
-
-            w_ptr = st.session_state.writing_pointer
-            
-            if w_ptr < len(dictation_db):
-                true_w_id = st.session_state.writing_dictation_order[w_ptr]
-                current_w_quiz = dictation_db[true_w_id]
-                
-                st.write(f"**當前進度：第 {w_ptr + 1} 題 / 共 {len(dictation_db)} 題**")
-                st.write(current_w_quiz["question_text"])
-                
-                if st.button("🔊 播放題目", key=f"w_play_{w_ptr}"):
-                    st.session_state.writing_audio_triggered = True
-                
-                if st.session_state.writing_audio_triggered:
-                    if os.path.exists(current_w_quiz["audio_path"]):
-                        st.audio(current_w_quiz["audio_path"], format="audio/mp3", autoplay=True)
-                    else:
-                        st.error(f"⚠️ 找不到音檔！請確認此檔案是否已正確上傳至 GitHub 儲存庫：\n`{current_w_quiz['audio_path']}`")
-                    st.session_state.writing_audio_triggered = False
-                
-                st.write("---")
-                
-                user_typed_answer = st.text_input(
-                    "請在此輸入聽到的完整族語句子（注意大小寫與標點符號）：",
-                    placeholder="請輸入答案...",
-                    key=f"w_input_{w_ptr}",
-                    disabled=st.session_state.writing_submitted
-                )
-                
-                if not st.session_state.writing_submitted:
-                    if st.button("📥 提交答案", key=f"w_submit_{w_ptr}"):
-                        if not user_typed_answer.strip():
-                            st.warning("⚠️ 請先在輸入框打字再行提交！")
-                        else:
-                            st.session_state.writing_submitted = True
-                            st.rerun()
-                else:
-                    correct_sentence = current_w_quiz["correct_text"]
-                    
-                    col1, col2 = st.columns([1, 3])
-                    with col1:
-                        st.button("📥 提交答案", key=f"w_sub_dis_{w_ptr}", disabled=True)
-                    with col2:
-                        st.info(f"💡 正確答案：**{correct_sentence}**")
-                    
-                    st.write("")
-                    if st.button("➡️ 下一題", key=f"w_next_{w_ptr}"):
-                        st.session_state.writing_pointer += 1
-                        st.session_state.writing_submitted = False
-                        st.rerun()
-            else:
-                st.balloons()
-                st.success("🎉 您已完成本輪全部 5 道隨機聽寫題目！")
-                if st.button("🔄 開始下一輪隨機挑戰", key="reset_writing"):
-                    random.shuffle(st.session_state.writing_dictation_order)
-                    st.session_state.writing_pointer = 0
-                    st.session_state.writing_submitted = False
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-            
-        # ─── 題型二：問答 ───
-        elif writing_sub == "問答":
-            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            st.markdown("### 📝 寫作測驗 - 問答")
-            
-            question_db = [item for item in all_writing_data if item["type"] == "question"]
-            
-            if "q_pointer" not in st.session_state:
-                st.session_state.q_pointer = 0
-            if "q_audio_triggered" not in st.session_state:
-                st.session_state.q_audio_triggered = False
-            if "q_submitted" not in st.session_state:
-                st.session_state.q_submitted = False
-
-            q_ptr = st.session_state.q_pointer
-            
-            if q_ptr < len(question_db):
-                current_q_quiz = question_db[q_ptr]
-                
-                if q_ptr not in st.session_state.q_show_trans:
-                    st.session_state.q_show_trans[q_ptr] = False
-                if q_ptr not in st.session_state.q_show_ans:
-                    st.session_state.q_show_ans[q_ptr] = False
-                
-                st.write(f"**當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題**")
-                st.markdown(f"#### ❓ 問：{current_q_quiz['question_text']}")
-                
-                trans_btn_label = "🔄 關閉中文翻譯" if st.session_state.q_show_trans[q_ptr] else "👁️ 顯示中文翻譯"
-                if st.button(trans_btn_label, key=f"q_trans_toggle_{q_ptr}"):
-                    st.session_state.q_show_trans[q_ptr] = not st.session_state.q_show_trans[q_ptr]
-                    st.rerun()
-                
-                if st.session_state.q_show_trans[q_ptr]:
-                    st.info(f"💡 中文提示：{current_q_quiz['chinese_translation']}")
-                
-                st.write("---")
-                
-                ans_btn_label = "🔄 關閉參考答案" if st.session_state.q_show_ans[q_ptr] else "📥 顯示參考答案"
-                
-                col1, col2 = st.columns([1, 3])
-                with col1:
-                    if st.button(ans_btn_label, key=f"q_ans_toggle_{q_ptr}"):
-                        st.session_state.q_show_ans[q_ptr] = not st.session_state.q_show_ans[q_ptr]
-                        st.rerun()
-                
-                with col2:
-                    if st.session_state.q_show_ans[q_ptr]:
-                        suggested_ans = current_q_quiz["suggested_answer"]
-                        st.success(f"✨ 參考答案：**{suggested_ans}**")
-                
-                if st.session_state.q_show_ans[q_ptr]:
-                    st.write("")
-                    if st.button("🔊 播放參考答案音檔", key=f"q_audio_btn_{q_ptr}"):
-                        st.session_state.q_audio_triggered = True
-                        
-                    if st.session_state.q_audio_triggered:
-                        if os.path.exists(current_q_quiz["audio_path"]):
-                            st.audio(current_q_quiz["audio_path"], format="audio/mp3", autoplay=True)
-                        else:
-                            st.error(f"⚠️ 找不到音檔！請確認此檔案是否已正確上傳至 GitHub 儲存庫：\n`{current_q_quiz['audio_path']}`")
-                        st.session_state.q_audio_triggered = False
-                    
-                    st.write("")
-                    if st.button("➡️ 下一題", key=f"q_next_{q_ptr}"):
-                        st.session_state.q_pointer += 1
-                        st.rerun()
-            else:
-                st.success("🎉 您已完成「問答」全部題目的練習！")
-                if st.button("🔄 重新挑戰", key="reset_questions"):
-                    st.session_state.q_pointer = 0
-                    st.session_state.q_show_trans = {}
-                    st.session_state.q_show_ans = {}
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-
-# ---- App 底部註腳 ----
-st.write("---")
-st.caption("© 2026 中高級認證 App 三一開發團隊 ｜ 雙重隨機全防禦穩定版")
+            st.write(f"**當前進度：第 {r_ptr + 1} 題 / 共 {len(reading_db)} 題 (隨機出
