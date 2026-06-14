@@ -248,7 +248,7 @@ elif current_tab == "🎧 聽力":
 # 3. 口說測驗
 elif current_tab == "🗣️ 口說":
     st.subheader("🗣️ 口說測驗 (Pisowalan)")
-    
+    st.divider()
     speaking_sub = st.radio(
         "口說題型選擇：",
         ["段落朗讀", "情境問答", "看圖表達"],
@@ -268,7 +268,7 @@ elif current_tab == "🗣️ 口說":
 # 4. 閱讀測驗
 elif current_tab == "📖 閱讀":
     st.subheader("📖 閱讀測驗 (Piasipan)")
-    
+    st.divider()
     reading_sub = st.radio(
         "閱讀題型選擇：",
         ["選擇題-詞彙語意", "選擇題-語言結構"],
@@ -285,7 +285,7 @@ elif current_tab == "📖 閱讀":
 # 5. 寫作測驗
 elif current_tab == "✍️ 寫作":
     st.subheader("✍️ 寫作測驗 (Pitilidan)")
-    
+    st.divider()
     writing_sub = st.radio(
         "寫作題型選擇：",
         ["句子聽寫", "問答"],
