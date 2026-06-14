@@ -1,1 +1,442 @@
-
+[
+  {
+    "quiz_id": "01",
+    "type": "vocabulary",
+    "title": "詞彙語意-第1題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nO cinah i ________.",
+    "options": ["kaheciday", "koesanay", "kacedahay", "'anengelay"],
+    "correct_text": "kaheciday"
+  },
+  {
+    "quiz_id": "02",
+    "type": "vocabulary",
+    "title": "詞彙語意-第2題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nNga'ayay ko ____ ato tatalikan a misatoron.",
+    "options": ["'asolo", "salongawit", "cakelis", "rinom"],
+    "correct_text": "'asolo"
+  },
+  {
+    "quiz_id": "03",
+    "type": "vocabulary",
+    "title": "詞彙語意-第3題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nAdihay ko foting i _________.",
+    "options": ["fanafanawan", "seraseraan", "kilakilangan", "ilalan"],
+    "correct_text": "fanafanawan"
+  },
+  {
+    "quiz_id": "04",
+    "type": "vocabulary",
+    "title": "詞彙語意-第4題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\n___________ no faliyos kora kilang inacila.",
+    "options": ["Mapiloh", "Mawakang", "Mapedoc", "Matengteng"],
+    "correct_text": "Mapiloh"
+  },
+  {
+    "quiz_id": "05",
+    "type": "vocabulary",
+    "title": "詞彙語意-第5題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nMimingay kona ca'ang no kilang; caayay ko _________.",
+    "options": ["tata'akay", "ma'icangay", "kifetolay", "matoni'ay"],
+    "correct_text": "tata'akay"
+  },
+  {
+    "quiz_id": "06",
+    "type": "vocabulary",
+    "title": "詞彙語意-第6題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\n___________ to ko falo.",
+    "options": ["Mafohatay", "Mafitelakay", "Maledatay", "Mafelihay"],
+    "correct_text": "Mafitelakay"
+  },
+  {
+    "quiz_id": "07",
+    "type": "vocabulary",
+    "title": "詞彙語意-第7題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nMapatedil no cidal, ____________ a masoni.",
+    "options": ["mi'ang'ang", "pacedi'", "maka'ka'", "marohroh"],
+    "correct_text": "pacedi'"
+  },
+  {
+    "quiz_id": "08",
+    "type": "vocabulary",
+    "title": "詞彙語意-第8題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nCecay a _______________ ko misakohawan nira to no titi.",
+    "options": ["dangah", "sala", "kopid", "'atal"],
+    "correct_text": "dangah"
+  },
+  {
+    "quiz_id": "09",
+    "type": "vocabulary",
+    "title": "詞彙語意-第9題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nI kawili no katatopitopan no tosaay a ____________ ko paniyaro’an no Ciwidian.",
+    "options": ["lalan", "kengkeng", "riyar", "sa’owac"],
+    "correct_text": "sa’owac"
+  },
+  {
+    "quiz_id": "10",
+    "type": "vocabulary",
+    "title": "詞彙語意-第10題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nO ____________ no ina ko pidoedoan a misaparod.",
+    "options": ["tatiihay", "ikakaay", "lawlaay", "’alingay"],
+    "correct_text": "ikakaay"
+  },
+  {
+    "quiz_id": "11",
+    "type": "vocabulary",
+    "title": "詞彙語意-第11題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nCaay ka nikaw to ____________ ko Pangcah.",
+    "options": ["dateng", "payso", "loma'", "cocad"],
+    "correct_text": "dateng"
+  },
+  {
+    "quiz_id": "12",
+    "type": "vocabulary",
+    "title": "詞彙語意-第12題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nCaay ka cango’ot kita to saka ’orip ato ____________.",
+    "options": ["tatayalen", "kakaenen", "sasalamaen", "haharatengen"],
+    "correct_text": "kakaenen"
+  },
+  {
+    "quiz_id": "13",
+    "type": "vocabulary",
+    "title": "詞彙語意-第13題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\n____________ to kiso to tafok no riyar?",
+    "options": ["Maharateng", "Ma’ilol", "Ｍararom", "Malalisan"],
+    "correct_text": "Ma’ilol"
+  },
+  {
+    "quiz_id": "14",
+    "type": "vocabulary",
+    "title": "詞彙語意-第14題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\n____________ to fafoy no lotok ci Foyan faki i nacila saan.",
+    "options": ["Ｍapacok", "Ｍahafikod", "Cietan", "Citama"],
+    "correct_text": "Citama"
+  },
+  {
+    "quiz_id": "15",
+    "type": "vocabulary",
+    "title": "詞彙語意-第15題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\n____________ sa to romi’ami’ad caay ka tayal, ’esam sa koya mama nangra.",
+    "options": ["Fafoti'", "Nanawang", "Raradiw", "Langiwngiw"],
+    "correct_text": "Fafoti'"
+  },
+  {
+    "quiz_id": "16",
+    "type": "vocabulary",
+    "title": "詞彙語意-第16題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nMafana’ to kako to kahirahira, ____________ no serangawan no Taywan.",
+    "options": ["congo'ot", "sonol", "pawan", "kadofah"],
+    "correct_text": "kadofah"
+  },
+  {
+    "quiz_id": "17",
+    "type": "vocabulary",
+    "title": "詞彙語意-第17題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nAdihay ko ______________ no mato’asay to pakiniay to fenek no mi’adopay.",
+    "options": ["patedo", "pangiwngiw", "caciyaw", "makitohay"],
+    "correct_text": "makitohay"
+  },
+  {
+    "quiz_id": "18",
+    "type": "vocabulary",
+    "title": "詞彙語意-第18題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\n____________ ci ama aci faki to fonos ato kowang a malingad to dadaya.",
+    "options": ["Miala", "Mihawikid", "Mikoyod", "Mi'afas"],
+    "correct_text": "Mihawikid"
+  },
+  {
+    "quiz_id": "19",
+    "type": "vocabulary",
+    "title": "詞彙語意-第19題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nHakelong han no kadit, matiya o fali, _____________ sato ko faloco’ ako.",
+    "options": ["selen", "pawpaw", "fiwfiw", "lahedaw"],
+    "correct_text": "pawpaw"
+  },
+  {
+    "quiz_id": "20",
+    "type": "vocabulary",
+    "title": "詞彙語意-第20題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nmangicngic to a malangal ko faloco’, o mama _____________ sato!",
+    "options": ["sied", "da’at", "'iyak", "feded"],
+    "correct_text": "da’at"
+  },
+  {
+    "quiz_id": "21",
+    "type": "vocabulary",
+    "title": "詞彙語意-第21題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\n_____________ sa ko fali, Ira i fafa’ed no kakarayan ko cidal.",
+    "options": ["pakpak", "feriwferiw", "Seriwseriw", "kelongkelong"],
+    "correct_text": "feriwferiw"
+  },
+  {
+    "quiz_id": "22",
+    "type": "vocabulary",
+    "title": "詞彙語意-第22題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nMaherek _____________ ko pakarongay macakat to selal, misatapang to matayal to demak no niyaro’.",
+    "options": ["malalefo", "matayal", "malingad", "maparengreng"],
+    "correct_text": "maparengreng"
+  },
+  {
+    "quiz_id": "23",
+    "type": "vocabulary",
+    "title": "詞彙語意-第23題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nO mama no kapah, citodongay to _____________ to kalomaan no niyaro’.",
+    "options": ["misawkit", "mipacoyak", "mipaising", "saliway"],
+    "correct_text": "misawkit"
+  },
+  {
+    "quiz_id": "24",
+    "type": "vocabulary",
+    "title": "詞彙語意-第24題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\n_____________ ko rakat no kamoko’ay a rinom.",
+    "options": ["Matayo", "Mapatay", "Matai", "Maketon"],
+    "correct_text": "Matayo"
+  },
+  {
+    "quiz_id": "25",
+    "type": "vocabulary",
+    "title": "詞彙語意-第25題",
+    "question_text": "請根據提示，選出最符合語意的正確選項：\nO _____________ niyam a mitilid anini a romi’ad.",
+    "options": ["pisawadan", "picorahan", "pakaenan", "pidangoyan"],
+    "correct_text": "pisawadan"
+  },
+  {
+    "quiz_id": "01",
+    "type": "structure",
+    "title": "語言結構-第1題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n_________ to dateng ci ama ako.",
+    "options": ["micikcik", "macikcik", "picikcik", "sapicikcik"],
+    "correct_text": "micikcik"
+  },
+  {
+    "quiz_id": "02",
+    "type": "structure",
+    "title": "語言結構-第2題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nCaayay _________ takowanan koni waco.",
+    "options": ["pikalat", "mikalat", "makalat", "mamikalat"],
+    "correct_text": "pikalat"
+  },
+  {
+    "quiz_id": "03",
+    "type": "structure",
+    "title": "語言結構-第3題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n_________ inacila kora kaying.",
+    "options": ["matolo'ay", "sakatolo'", "mamatolo'", "sapipatolo'"],
+    "correct_text": "matolo'ay"
+  },
+  {
+    "quiz_id": "04",
+    "type": "structure",
+    "title": "語言結構-第4題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nCaay ka pitengil to sowal kiso aci Panay, maketer ci ina i ___________.",
+    "options": ["tamowanan", "kamiyanan", "kitaanan", "cangranan"],
+    "correct_text": "tamowanan"
+  },
+  {
+    "quiz_id": "05",
+    "type": "structure",
+    "title": "語言結構-第5題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n_________ niyam kora loma'.",
+    "options": ["Kamaro'an", "Mimaro'", "Pamaro'", "Aro"],
+    "correct_text": "Kamaro'an"
+  },
+  {
+    "quiz_id": "06",
+    "type": "structure",
+    "title": "語言結構-第6題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nAdihay tato ko makaenay ningra, __________ adada ko tiyad.",
+    "options": ["orasaka", "ano", "latek", "nawhani"],
+    "correct_text": "orasaka"
+  },
+  {
+    "quiz_id": "07",
+    "type": "structure",
+    "title": "語言結構-第7題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n_________ ko 'afala iso?",
+    "options": ["mamaan", "cima", "anohakowa", "maan"],
+    "correct_text": "mamaan"
+  },
+  {
+    "quiz_id": "08",
+    "type": "structure",
+    "title": "語言結構-第8題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nKalamkamen a mifalod! _________ to ko widi ita.",
+    "options": ["Awa", "Caay", "Naay", "Fokil"],
+    "correct_text": "Awa"
+  },
+  {
+    "quiz_id": "09",
+    "type": "structure",
+    "title": "語言結構-第9題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nAka ___________ cilinay!",
+    "options": ["pitawal", "matawal", "matawalay", "mitawal"],
+    "correct_text": "pitawal"
+  },
+  {
+    "quiz_id": "10",
+    "type": "structure",
+    "title": "語言結構-第10題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nMaolah _________ to kilang ko malinaay nira.",
+    "options": ["mikalic", "makalic", "mamikalic", "kalic"],
+    "correct_text": "mikalic"
+  },
+  {
+    "quiz_id": "11",
+    "type": "structure",
+    "title": "語言結構-第11題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nTayni ____________ kiso anodafak?",
+    "options": ["masa’opo", "misa'opo", "pisa'opoan", "sa'opo"],
+    "correct_text": "masa’opo"
+  },
+  {
+    "quiz_id": "12",
+    "type": "structure",
+    "title": "語言結構-第12題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nKalipahak to ____________ iso!",
+    "options": ["kahofoc", "kahofocan", "mahofocay", "mamahofoc"],
+    "correct_text": "kahofocan"
+  },
+  {
+    "quiz_id": "13",
+    "type": "structure",
+    "title": "語言結構-第13題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n____________ ko mama ako a palatamdaw i tamiyanan.",
+    "options": ["Cifaloco’ ay", "Fafaloco’en", "Cafaloco’", "Cifaloco’"],
+    "correct_text": "Cifaloco’ ay"
+  },
+  {
+    "quiz_id": "14",
+    "type": "structure",
+    "title": "語言結構-第14題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nNa adada cingra caay to ____________ ko pidipot to wawa.",
+    "options": ["kadepoc", "midepocay", "madepocay", "cidepoc"],
+    "correct_text": "kadepoc"
+  },
+  {
+    "quiz_id": "15",
+    "type": "structure",
+    "title": "語言結構-第15題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nkalamkamen, ____________ kako.",
+    "options": ["matamoray", "matamor", "katamor", "matamoren"],
+    "correct_text": "matamoray"
+  },
+  {
+    "quiz_id": "16",
+    "type": "structure",
+    "title": "語言結構-第16題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nMafana’ kiso romadiw tono ____________ a radiw ato patikiri?",
+    "options": ["tato’asan", "tato’as", "mato’asay", "to’as"],
+    "correct_text": "tato’asan"
+  },
+  {
+    "quiz_id": "17",
+    "type": "structure",
+    "title": "語言結構-第17題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nManga’ay tayra i riyar ____________ ato komaen to kolikolian.",
+    "options": ["midangoy", "madangoy", "pidangoyan", "dadangoy"],
+    "correct_text": "midangoy"
+  },
+  {
+    "quiz_id": "18",
+    "type": "structure",
+    "title": "語言結構-第18題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nMinokay i ____________ no niyaro’ kiso?",
+    "options": ["kailisinan", "piilisinan", "ilisin", "ilisinan"],
+    "correct_text": "kailisinan"
+  },
+  {
+    "quiz_id": "19",
+    "type": "structure",
+    "title": "語言結構-第19題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nO wina ko ____________ no loma’, mialaay ko fafahiyan to fa’inay.",
+    "options": ["tatapangan", "tapangan", "tapang", "satapangan"],
+    "correct_text": "tatapangan"
+  },
+  {
+    "quiz_id": "20",
+    "type": "structure",
+    "title": "語言結構-第20題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nTadalimela no ngasaw to ____________ to salawinawina.",
+    "options": ["laloma’an", "loma’", "laloma’", "loma’an"],
+    "correct_text": "laloma’an"
+  },
+  {
+    "quiz_id": "21",
+    "type": "structure",
+    "title": "語言結構-第21題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nO cacitodong ------------- to pitilidan niyam kako.",
+    "options": ["mamifawah", "mifawahay", "mamafawah", "mifawah"],
+    "correct_text": "mamifawah"
+  },
+  {
+    "quiz_id": "22",
+    "type": "structure",
+    "title": "語言結構-第22題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n-------------- to nananomen kako.",
+    "options": ["Miladom", "Maladom", "Ladomen", "Piladom"],
+    "correct_text": "Miladom"
+  },
+  {
+    "quiz_id": "23",
+    "type": "structure",
+    "title": "語言結構-第23題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n-------------- i papotal kako, ira i laloma’ ko safawah.",
+    "options": ["Macaniker", "Mamacaniker", "Micanikeray", "Cacanikeren"],
+    "correct_text": "Macaniker"
+  },
+  {
+    "quiz_id": "24",
+    "type": "structure",
+    "title": "語言結構-第24題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n-------------- nanamen ko caciyaw no Pangcah haw?",
+    "options": ["Ko'esitay", "Ko’esit", "Kako'esit", "Ko'esiten"],
+    "correct_text": "Ko'esitay"
+  },
+  {
+    "quiz_id": "25",
+    "type": "structure",
+    "title": "語言結構-第25題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nadihay ko -------------- a caciyaw no Pangcah.",
+    "options": ["makakitingay", "kakitingen", "makakiting", "kakitingay"],
+    "correct_text": "makakitingay"
+  },
+  {
+    "quiz_id": "26",
+    "type": "structure",
+    "title": "語言結構-第26題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n-------------- to ko patelaw ako, caayto pakatekol to mali.",
+    "options": ["Madoka’", "Cidoka’", "Madoka’ ay", "Midikaa'ay"],
+    "correct_text": "Madoka’"
+  },
+  {
+    "quiz_id": "27",
+    "type": "structure",
+    "title": "語言結構-第27題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nMahapinang ko pising iso, sedi saan caay ____________ caciyaw to tingwa.",
+    "options": ["pitolas", "papitolas", "tolasen", "tolas"],
+    "correct_text": "pitolas"
+  },
+  {
+    "quiz_id": "28",
+    "type": "structure",
+    "title": "語言結構-第28題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\niraay ko likakawa to ____________ ato likoda no niyaro’.",
+    "options": ["pisacepo’ an", "sacepo’", "misacepo’", "misacepo’ ay"],
+    "correct_text": "pisacepo’ an"
+  },
+  {
+    "quiz_id": "29",
+    "type": "structure",
+    "title": "語言結構-第29題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\nMipatalay to ____________ no fa’inayan a misahemay ato mitalik to toron.",
+    "options": ["nafotingan", "mifotingay", "pifoting", "pinafoting"],
+    "correct_text": "nafotingan"
+  },
+  {
+    "quiz_id": "30",
+    "type": "structure",
+    "title": "語言結構-第30題",
+    "question_text": "請根據提示，選出最符合語法結構的正確選項：\n-------------- ako ci kaka ako.",
+    "options": ["patikamien", "patikami", "tikamien", "patikamieay"],
+    "correct_text": "patikamien"
+  }
+]
