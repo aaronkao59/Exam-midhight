@@ -79,8 +79,6 @@ if st.session_state.previous_tab != current_tab:
     st.session_state.audio_triggered = False
     if "writing_submitted" in st.session_state:
         st.session_state.writing_submitted = False
-    
-    # 物理清除問答題專屬的開關記憶體，切換大分頁時自動重置歸零
     if "q_show_trans" in st.session_state:
         st.session_state.q_show_trans = {}
     if "q_show_ans" in st.session_state:
@@ -89,7 +87,7 @@ if st.session_state.previous_tab != current_tab:
     st.session_state.previous_tab = current_tab
     st.rerun()
 
-# ---- 3. 原始靜態題庫 (15題標準數據庫) ----
+# ---- 3. 原始聽力題庫 (15題標準數據庫) ----
 QUIZ_DATA = [
     {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["riyar", "'alo", "fanaw", "sa'owac"], "correct_text": "riyar"},
     {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "請聽音檔，選出語音中所唸的正確詞彙：", "options": ["korkor", "rohayan", "romakat", "rotarot"], "correct_text": "romakat"},
@@ -110,7 +108,7 @@ QUIZ_DATA = [
 
 # ---- 第二層：根據選擇顯示對應架構 ----
 
-# 1. 測驗說明頁面
+# 1. 📋 認證考試說明頁面
 if current_tab == "📋 認證考試說明":
     st.subheader("📋 認證考試說明")
     st.divider()
@@ -141,7 +139,7 @@ if current_tab == "📋 認證考試說明":
     滿分100分中，**總分達60分以上**，且單項成績達**聽力15分、口說15分、閱讀18分、寫作12分以上**，即可取得「通過聽說讀寫」的完整資格 。考生亦可依對應門檻獨立取得「通過聽說」或「通過讀寫」的資格 。
     """)
 
-# 2. 聽力測驗
+# 2. 🎧 聽力測驗
 elif current_tab == "🎧 聽力":
     st.subheader("🎧 聽力測驗 (Pitengilan)")
     st.divider()
@@ -255,7 +253,7 @@ elif current_tab == "🎧 聽力":
         st.markdown("### 💬 選擇題 - 對話理解")
         st.warning("🚧 【內容建置中】此處未來將播放部落生活情境對話，並測試長句理解能力。")
 
-# 3. 口說測驗
+# 3. 🗣️ 口說測驗
 elif current_tab == "🗣️ 口說":
     st.subheader("🗣️ 口說測驗 (Pisowalan)")
     st.divider()
@@ -305,7 +303,7 @@ elif current_tab == "🗣️ 口說":
         st.markdown("### 🖼️ 看圖表達")
         st.warning("🚧 【內容建置中】")
 
-# 4. 閱讀測驗
+# 4. 📖 閱讀測驗 (本次升級核心：完全串接外部 JSON，整合雙隨機與任意上下跳題功能)
 elif current_tab == "📖 閱讀":
     st.subheader("📖 閱讀測驗 (Piasipan)")
     st.divider()
@@ -315,12 +313,143 @@ elif current_tab == "📖 閱讀":
         horizontal=True
     )
     
-    if reading_sub == "選擇題-詞彙語意":
-        st.markdown("### 🏷️ 選擇題 - 詞彙語意")
-        st.warning("🚧 【內容建置中】")
-    elif reading_sub == "選擇題-語言結構":
-        st.markdown("### ⛓️ 選擇題 - 語言結構")
-        st.warning("🚧 【內容建置中】")
+    # ─── 🛡️ 載入外部資料庫 ───
+    try:
+        with open("data/reading_quiz.json", "r", encoding="utf-8") as f:
+            all_reading_data = json.load(f)
+    except FileNotFoundError:
+        st.error("☠️ 系統性毀滅異常：偵測到 `data/reading_quiz.json` 檔案遺失，請確認檔案是否已放置於 data/ 資料夾。")
+        all_reading_data = []
+
+    if all_reading_data:
+        # 決定當前要抽取的題型標籤
+        target_type = "vocabulary" if reading_sub == "選擇題-詞彙語意" else "structure"
+        reading_db = [item for item in all_reading_data if item["type"] == target_type]
+        
+        # 為兩種子題型配置獨立的 Session State 快取防腐層，防止交叉技術污染
+        state_order_key = f"r_{target_type}_order"
+        state_ptr_key = f"r_{target_type}_ptr"
+        state_opts_key = f"r_{target_type}_opts_map"
+        state_submit_key = f"r_{target_type}_submit_map" # 記錄各題的提交狀態字典
+        state_choice_key = f"r_{target_type}_choice_map" # 記錄各題的使用者選擇字典
+        
+        if state_order_key not in st.session_state:
+            st.session_state[state_order_key] = list(range(len(reading_db)))
+            random.shuffle(st.session_state[state_order_key])
+            
+        if state_ptr_key not in st.session_state:
+            st.session_state[state_ptr_key] = 0
+            
+        if state_opts_key not in st.session_state:
+            st.session_state[state_opts_key] = {}
+            
+        if state_submit_key not in st.session_state:
+            st.session_state[state_submit_key] = {}
+            
+        if state_choice_key not in st.session_state:
+            st.session_state[state_choice_key] = {}
+
+        r_ptr = st.session_state[state_ptr_key]
+        
+        if r_ptr < len(reading_db):
+            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
+            
+            # 獲取清洗排序後的真實題組
+            true_r_id = st.session_state[state_order_key][r_ptr]
+            current_r_quiz = reading_db[true_r_id]
+            
+            # 初始化該題的獨立提交與選擇紀錄
+            if true_r_id not in st.session_state[state_submit_key]:
+                st.session_state[state_submit_key][true_r_id] = False
+            if true_r_id not in st.session_state[state_choice_key]:
+                st.session_state[state_choice_key][true_r_id] = None
+                
+            # ─── 4答案選項的順序隨機排列 ───
+            if true_r_id not in st.session_state[state_opts_key]:
+                shuffled_raw_opts = current_r_quiz["options"].copy()
+                random.shuffle(shuffled_raw_opts)
+                
+                formatted_opts = []
+                correct_text_formatted = ""
+                correct_word_raw = current_r_quiz["correct_text"]
+                
+                for i, word_item in enumerate(shuffled_raw_opts):
+                    display_text = f"({i+1}) {word_item}"
+                    formatted_opts.append(display_text)
+                    if word_item == correct_word_raw:
+                        correct_text_formatted = display_text
+                        
+                st.session_state[state_opts_key][true_r_id] = {
+                    "options": formatted_opts,
+                    "correct_text": correct_text_formatted
+                }
+                
+            live_r_data = st.session_state[state_opts_key][true_r_id]
+            
+            st.write(f"**當前進度：第 {r_ptr + 1} 題 / 共 {len(reading_db)} 題**")
+            st.write(current_r_quiz["question_text"])
+            st.write("---")
+            
+            # 使用者選擇綁定快取
+            saved_choice = st.session_state[state_choice_key][true_r_id]
+            # 如果已經有紀錄，找出其在 formatted_opts 中的 index
+            saved_index = live_r_data["options"].index(saved_choice) if saved_choice in live_r_data["options"] else None
+            
+            user_r_choice = st.radio(
+                "請選出正確的選項：",
+                options=live_r_data["options"],
+                index=saved_index,
+                key=f"r_radio_{target_type}_{r_ptr}",
+                disabled=st.session_state[state_submit_key][true_r_id]
+            )
+            
+            # 即時儲存選擇，確保換題回來時不留白
+            if not st.session_state[state_submit_key][true_r_id]:
+                st.session_state[state_choice_key][true_r_id] = user_r_choice
+            
+            # ─── 提交答案判定區 ───
+            if not st.session_state[state_submit_key][true_r_id]:
+                if st.button("📥 提交答案", key=f"r_submit_btn_{target_type}_{r_ptr}"):
+                    if user_r_choice is None:
+                        st.warning("⚠️ 請先選擇一個選項再行提交！")
+                    else:
+                        st.session_state[state_submit_key][true_r_id] = True
+                        st.rerun()
+            else:
+                correct_ans_str = live_r_data["correct_text"]
+                if user_r_choice == correct_ans_str:
+                    st.markdown(f"### 🔴 答題結果：✓")
+                    st.success(f" Fangcal! 正確答案：**{correct_ans_str}**")
+                else:
+                    st.markdown(f"### 🔴 答題結果：✕")
+                    st.error(f" 再接再厲！正確答案：**{correct_ans_str}**")
+            
+            st.write("")
+            
+            # ─── 導覽按鈕設計：[上一題]、[下一題] ───
+            nav_col1, nav_col2 = st.columns(2)
+            with nav_col1:
+                # 只有大於第 1 題時才開放按上一題
+                if st.button("⬅️ 上一題", key=f"r_prev_btn_{target_type}_{r_ptr}", disabled=(r_ptr == 0)):
+                    st.session_state[state_ptr_key] -= 1
+                    st.rerun()
+            with nav_col2:
+                if st.button("➡️ 下一題", key=f"r_next_btn_{target_type}_{r_ptr}"):
+                    st.session_state[state_ptr_key] += 1
+                    st.rerun()
+                    
+            st.markdown('</div>', unsafe_allow_html=True)
+        else:
+            # 本輪全部完成
+            st.balloons()
+            st.success(f"🎉 您已瀏覽完本輪全部 {len(reading_db)} 道題目！")
+            if st.button("🔄 重新洗牌挑戰", key=f"r_reset_{target_type}"):
+                random.shuffle(st.session_state[state_order_key])
+                st.session_state[state_ptr_key] = 0
+                st.session_state[state_opts_key] = {}
+                st.session_state[state_submit_key] = {}
+                st.session_state[state_choice_key] = {}
+                st.rerun()
 
 # 5. ✍️ 寫作測驗
 elif current_tab == "✍️ 寫作":
@@ -418,29 +547,25 @@ elif current_tab == "✍️ 寫作":
                     
             st.markdown('</div>', unsafe_allow_html=True)
             
-        # ─── 題型二：問答（本次升級核心：雙向獨立開關鎖） ───
+        # ─── 題型二：問答 ───
         elif writing_sub == "問答":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 📝 寫作測驗 - 問答")
             
             question_db = [item for item in all_writing_data if item["type"] == "question"]
             
-            # 初始化開關狀態字典（若不存在），以題目的資料庫 index 作為金鑰
-            if "q_show_trans" not in st.session_state:
-                st.session_state.q_show_trans = {}
-            if "q_show_ans" not in st.session_state:
-                st.session_state.q_show_ans = {}
-            if "q_audio_triggered" not in st.session_state:
-                st.session_state.q_audio_triggered = False
             if "q_pointer" not in st.session_state:
                 st.session_state.q_pointer = 0
+            if "q_audio_triggered" not in st.session_state:
+                st.session_state.q_audio_triggered = False
+            if "q_submitted" not in st.session_state:
+                st.session_state.q_submitted = False
 
             q_ptr = st.session_state.q_pointer
             
             if q_ptr < len(question_db):
                 current_q_quiz = question_db[q_ptr]
                 
-                # 確保當前題目在狀態字典中擁有預設值（預設關閉為 False）
                 if q_ptr not in st.session_state.q_show_trans:
                     st.session_state.q_show_trans[q_ptr] = False
                 if q_ptr not in st.session_state.q_show_ans:
@@ -449,21 +574,16 @@ elif current_tab == "✍️ 寫作":
                 st.write(f"**當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題**")
                 st.markdown(f"#### ❓ 問：{current_q_quiz['question_text']}")
                 
-                # ─── 1. 中文翻譯開關迴路 ───
-                # 動態決定按鈕文字
                 trans_btn_label = "🔄 關閉中文翻譯" if st.session_state.q_show_trans[q_ptr] else "👁️ 顯示中文翻譯"
                 if st.button(trans_btn_label, key=f"q_trans_toggle_{q_ptr}"):
-                    # 狀態反轉取反 (Toggle)
                     st.session_state.q_show_trans[q_ptr] = not st.session_state.q_show_trans[q_ptr]
                     st.rerun()
                 
-                # 根據開關狀態決定是否展開內容
                 if st.session_state.q_show_trans[q_ptr]:
                     st.info(f"💡 中文提示：{current_q_quiz['chinese_translation']}")
                 
                 st.write("---")
                 
-                # ─── 2. 參考答案開關迴路 ───
                 ans_btn_label = "🔄 關閉參考答案" if st.session_state.q_show_ans[q_ptr] else "📥 顯示參考答案"
                 
                 col1, col2 = st.columns([1, 3])
@@ -477,7 +597,6 @@ elif current_tab == "✍️ 寫作":
                         suggested_ans = current_q_quiz["suggested_answer"]
                         st.success(f"✨ 參考答案：**{suggested_ans}**")
                 
-                # ─── 3. 音檔與導覽列（僅在參考答案開啟時延伸揭露） ───
                 if st.session_state.q_show_ans[q_ptr]:
                     st.write("")
                     if st.button("🔊 播放參考答案音檔", key=f"q_audio_btn_{q_ptr}"):
@@ -492,7 +611,6 @@ elif current_tab == "✍️ 寫作":
                     
                     st.write("")
                     if st.button("➡️ 下一題", key=f"q_next_{q_ptr}"):
-                        # 切往下題前，主動初始化並清空下一題的開關狀態，維持高標準低熵使用者體驗
                         st.session_state.q_pointer += 1
                         st.rerun()
             else:
