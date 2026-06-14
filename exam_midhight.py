@@ -463,4 +463,25 @@ elif current_tab == "✍️ 寫作":
                         
                     if st.session_state.q_audio_triggered:
                         if os.path.exists(current_q_quiz["audio_path"]):
-                            st.audio(current_
+                            st.audio(current_q_quiz["audio_path"], format="audio/mp3", autoplay=True)
+                        else:
+                            st.error(f"⚠️ 找不到音檔！請確認此檔案是否已正確上傳至 GitHub 儲存庫：\n`{current_q_quiz['audio_path']}`")
+                        st.session_state.q_audio_triggered = False
+                    
+                    st.write("")
+                    if st.button("➡️ 下一題", key=f"q_next_{q_ptr}"):
+                        st.session_state.q_pointer += 1
+                        st.session_state.q_submitted = False
+                        st.rerun()
+            else:
+                st.success("🎉 您已完成「問答」全部題目的練習！")
+                if st.button("🔄 重新挑戰", key="reset_questions"):
+                    st.session_state.q_pointer = 0
+                    st.session_state.q_submitted = False
+                    st.rerun()
+                    
+            st.markdown('</div>', unsafe_allow_html=True)
+
+# ---- App 底部註腳 ----
+st.write("---")
+st.caption("© 2026 中高級認證 App 三一開發團隊 ｜ 雙重隨機全防禦穩定版")
