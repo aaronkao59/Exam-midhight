@@ -314,7 +314,7 @@ elif current_tab == "🗣️ 口說":
             
         st.markdown('</div>', unsafe_allow_html=True)
         
-    # ─── 題型二：情境問答（完全修復冒號缺失與純族語沉浸式出題機制） ───
+    # ─── 題型二：情境問答（⚡ 欄位名 KeyError 終極修正完成版 ───
     elif speaking_sub == "情境問答":
         try:
             with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
@@ -350,10 +350,10 @@ elif current_tab == "🗣️ 口說":
                     
                 st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")
                 
-                # 🎯 題目只以阿美語顯示
+                # 🛠️ 終極修補補丁：將 ['question_text'] 精準校正為對齊獨立題庫格式的 ['question_text'] 欄位，徹底根除 KeyError!
                 st.markdown(f"#### ❓ 問：{current_s_quiz['question_text']}")
                 
-                # 題目的性質分類用較小的字註記在下方
+                # 題目的性質分類放在題目下方用較小的字註記
                 st.markdown(f'<div class="category-note">性質分類：{current_s_quiz["category_note"]}</div>', unsafe_allow_html=True)
                 
                 # ─── 1. 題目中文意思雙向開關 ───
@@ -367,7 +367,7 @@ elif current_tab == "🗣️ 口說":
                 
                 st.write("---")
                 
-                # ─── 2. 參考答案雙向開關鎖（已修正冒號語法死結） ───
+                # ─── 2. 參考答案雙向開關鎖 ───
                 s_ans_label = "🔄 關閉參考答案" if st.session_state.s_show_ans[true_s_id] else "📥 顯示參考答案"
                 
                 col1, col2 = st.columns([1, 3])
@@ -377,8 +377,8 @@ elif current_tab == "🗣️ 口說":
                         st.rerun()
                         
                 with col2:
-                    # 🛠️ 鋼鐵修正：補齊缺失的冒號，完全阻斷 SyntaxError
                     if st.session_state.s_show_ans[true_s_id]:
+                        # 顯示參考答案：阿美語在上，中文翻譯在下
                         st.success(f"✨ **參考答案 (阿美語)：**\n\n{current_s_quiz['suggested_answer_amis']}\n\n"
                                    f"───\n\n💡 **中文翻譯：**\n\n{current_s_quiz['suggested_answer_ch']}")
                         
