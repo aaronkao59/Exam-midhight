@@ -97,6 +97,10 @@ if st.session_state.previous_tab != current_tab:
         del st.session_state["s_show_q_trans"]
     if "s_show_ans" in st.session_state:
         del st.session_state["s_show_ans"]
+    if "img_show_draft" in st.session_state:
+        del st.session_state["img_show_draft"]
+    if "img_show_ans" in st.session_state:
+        del st.session_state["img_show_ans"]
         
     st.session_state.previous_tab = current_tab
     st.rerun()
@@ -314,7 +318,6 @@ elif current_tab == "🗣️ 口說":
             
         st.markdown('</div>', unsafe_allow_html=True)
         
-    # ─── 題型二：情境問答（⚡ 欄位名 KeyError 完美校正重組版 ───
     elif speaking_sub == "情境問答":
         try:
             with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
@@ -350,13 +353,10 @@ elif current_tab == "🗣️ 口說":
                     
                 st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")
                 
-                # 🛠️ 終極修復對帳點：將原先打錯的 ['question_text'] 精準校正為符合新題庫的 ['question_amis']
                 st.markdown(f"#### ❓ 問：{current_s_quiz['question_amis']}")
                 
-                # 題目的性質分類放在題目下方用較小的字註記
                 st.markdown(f'<div class="category-note">性質分類：{current_s_quiz["category_note"]}</div>', unsafe_allow_html=True)
                 
-                # ─── 1. 題目中文意思雙向開關 ───
                 s_q_trans_label = "🔄 關閉中文意思" if st.session_state.s_show_q_trans[true_s_id] else "👁️ 顯示中文意思"
                 if st.button(s_q_trans_label, key=f"s_q_trans_btn_{s_ptr}"):
                     st.session_state.s_show_q_trans[true_s_id] = not st.session_state.s_show_q_trans[true_s_id]
@@ -367,7 +367,6 @@ elif current_tab == "🗣️ 口說":
                 
                 st.write("---")
                 
-                # ─── 2. 參考答案雙向開關鎖 ───
                 s_ans_label = "🔄 關閉參考答案" if st.session_state.s_show_ans[true_s_id] else "📥 顯示參考答案"
                 
                 col1, col2 = st.columns([1, 3])
@@ -378,13 +377,11 @@ elif current_tab == "🗣️ 口說":
                         
                 with col2:
                     if st.session_state.s_show_ans[true_s_id]:
-                        # 顯示參考答案：阿美語在上，中文翻譯在下
                         st.success(f"✨ **參考答案 (阿美語)：**\n\n{current_s_quiz['suggested_answer_amis']}\n\n"
                                    f"───\n\n💡 **中文翻譯：**\n\n{current_s_quiz['suggested_answer_ch']}")
                         
                 if st.session_state.s_show_ans[true_s_id]:
                     st.write("")
-                    # 留存參考音檔播放器位置（目前暫時留空）
                     st.caption("🔊 參考答案語音音檔 (製作中，目前暫時留空)")
                     
                     st.write("")
@@ -405,9 +402,90 @@ elif current_tab == "🗣️ 口說":
                     
             st.markdown('</div>', unsafe_allow_html=True)
             
+    # ─── 題型三：看圖表達（本次全新實作核心：內建主題選擇、開關式草稿區與開關式參考答案） ───
     elif speaking_sub == "看圖表達":
-        st.markdown("### 🖼️ 看圖表達")
-        st.warning("🚧 【內容建置中】")
+        try:
+            with open("data/speaking_images.json", "r", encoding="utf-8") as f:
+                speaking_img_db = json.load(f)
+        except FileNotFoundError:
+            st.error("☠️ 系統性毀滅異常：偵測到 `data/speaking_images.json` 檔案遺失，請確認是否建立！")
+            speaking_img_db = []
+
+        if speaking_img_db:
+            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
+            st.markdown("### 🖼️ 口說測驗 - 看圖表達")
+            
+            # 初始化看圖表達大題專屬開關狀態
+            if "img_show_draft" not in st.session_state:
+                st.session_state.img_show_draft = False
+            if "img_show_ans" not in st.session_state:
+                st.session_state.img_show_ans = False
+            if "draft_text_cache" not in st.session_state:
+                st.session_state.draft_text_cache = {}
+
+            # 建立選單選項
+            img_menu_options = ["請選擇題目..."] + [item["title"] for item in speaking_img_db]
+            
+            selected_img_title = st.selectbox(
+                "主題選擇：",
+                options=img_menu_options,
+                index=0,
+                key="img_quiz_selector"
+            )
+            
+            st.divider()
+            
+            if selected_img_title == "請選擇題目...":
+                st.info("💡 請點選上方選單，自由選擇您想要挑戰的看圖表達主題。")
+            else:
+                # 尋找當前選中的資料物件
+                current_img_quiz = next(item for item in speaking_img_db if item["title"] == selected_img_title)
+                q_id = current_img_quiz["quiz_id"]
+                
+                # 渲染主題圖片
+                if os.path.exists(current_img_quiz["image_path"]):
+                    st.image(current_img_quiz["image_path"], use_container_width=True)
+                else:
+                    st.error(f"⚠️ 找不到題目對應的實體圖片檔案：`{current_img_quiz['image_path']}`，請確認已上傳。")
+                
+                st.write("---")
+                
+                # ─── 1. 草稿區開關迴路 ───
+                draft_btn_label = "🔄 關閉草稿區" if st.session_state.img_show_draft else "📝 顯示草稿區"
+                if st.button(draft_btn_label, key="img_draft_toggle_btn"):
+                    st.session_state.img_show_draft = not st.session_state.img_show_draft
+                    st.rerun()
+                
+                # 如果開啟草稿區，渲染打字欄位並將文字寫入快取（確保收合時不會不見）
+                if st.session_state.img_show_draft:
+                    if q_id not in st.session_state.draft_text_cache:
+                        st.session_state.draft_text_cache[q_id] = ""
+                        
+                    user_draft = st.text_area(
+                        "請寫下您的回答提示或小抄（提供學習者書寫打字）：",
+                        value=st.session_state.draft_text_cache[q_id],
+                        placeholder="在此輸入內容，隱藏草稿區後內容會安全保留...",
+                        key=f"img_draft_input_{q_id}"
+                    )
+                    st.session_state.draft_text_cache[q_id] = user_draft
+                
+                st.write("")
+                
+                # ─── 2. 參考答案開關迴路 ───
+                img_ans_label = "🔄 關閉參考答案" if st.session_state.img_show_ans else "📥 顯示參考答案"
+                
+                col_ans1, col_ans2 = st.columns([1, 3])
+                with col_ans1:
+                    if st.button(img_ans_label, key="img_ans_toggle_btn"):
+                        st.session_state.img_show_ans = not st.session_state.img_show_ans
+                        st.rerun()
+                        
+                with col_ans2:
+                    if st.session_state.img_show_ans:
+                        st.success(f"✨ **內建參考答案 (阿美語)：**\n\n{current_img_quiz['suggested_answer_amis']}\n\n"
+                                   f"───\n\n💡 **中文翻譯：**\n\n{current_img_quiz['suggested_answer_ch']}")
+            
+            st.markdown('</div>', unsafe_allow_html=True)
 
 # 4. 📖 閱讀測驗
 elif current_tab == "📖 閱讀":
