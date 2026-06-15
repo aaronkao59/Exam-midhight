@@ -88,7 +88,7 @@ if st.session_state.previous_tab != current_tab:
     if "writing_submitted" in st.session_state:
         st.session_state.writing_submitted = False
     
-    # 🛡️ 鋼鐵防禦補丁：使用 del 安全註銷屬性，徹底根除問答題切換分頁時的 AttributeError 閃退死結
+    # 🛡️ 鋼鐵防禦：使用 del 安全註銷屬性，徹底根除問答題切換分頁時的 AttributeError 閃退死結
     if "q_show_trans" in st.session_state:
         del st.session_state["q_show_trans"]
     if "q_show_ans" in st.session_state:
@@ -142,7 +142,7 @@ if current_tab == "📋 認證考試說明":
       * 情境問答(5題/10%)：每題包含2句(第1句為情境鋪陳)，以族語表達看法(每題含備答時間約40秒)。
       * 看圖表達(1題/10%)：依圖片情境以族語表達想法（備答2分鐘，作答2分鐘)。
     * **〖閱讀測驗〗**
-      * 詞彙語意(5題/10%)：依提示於4個選項中選出答案.
+      * 詞彙語意(5題/10%)：依提示於4個選項中選出答案。
       * 語言結構(10題/20%)：依提示於4個選項中選出答案。
     * **〖寫作測驗〗**
       * 句子聽寫(5題/10%)：聽寫族語句子，每題播放2遍。
@@ -314,7 +314,7 @@ elif current_tab == "🗣️ 口說":
             
         st.markdown('</div>', unsafe_allow_html=True)
         
-    # ─── 題型二：情境問答（更正代碼：純族語出題、中文解釋按鈕開關、答案阿美語在上中文在下） ───
+    # ─── 題型二：情境問答（完全修復冒號缺失與純族語沉浸式出題機制） ───
     elif speaking_sub == "情境問答":
         try:
             with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
@@ -350,13 +350,13 @@ elif current_tab == "🗣️ 口說":
                     
                 st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")
                 
-                # 🎯 題目「只以阿美族語」顯示
+                # 🎯 題目只以阿美語顯示
                 st.markdown(f"#### ❓ 問：{current_s_quiz['question_text']}")
                 
-                # 題目的性質分類放在題目下方用較小的字註記
+                # 題目的性質分類用較小的字註記在下方
                 st.markdown(f'<div class="category-note">性質分類：{current_s_quiz["category_note"]}</div>', unsafe_allow_html=True)
                 
-                # ─── 1. 題目中文意思雙向開關鎖 ───
+                # ─── 1. 題目中文意思雙向開關 ───
                 s_q_trans_label = "🔄 關閉中文意思" if st.session_state.s_show_q_trans[true_s_id] else "👁️ 顯示中文意思"
                 if st.button(s_q_trans_label, key=f"s_q_trans_btn_{s_ptr}"):
                     st.session_state.s_show_q_trans[true_s_id] = not st.session_state.s_show_q_trans[true_s_id]
@@ -367,7 +367,7 @@ elif current_tab == "🗣️ 口說":
                 
                 st.write("---")
                 
-                # ─── 2. 參考答案雙向開關鎖 ───
+                # ─── 2. 參考答案雙向開關鎖（已修正冒號語法死結） ───
                 s_ans_label = "🔄 關閉參考答案" if st.session_state.s_show_ans[true_s_id] else "📥 顯示參考答案"
                 
                 col1, col2 = st.columns([1, 3])
@@ -377,14 +377,14 @@ elif current_tab == "🗣️ 口說":
                         st.rerun()
                         
                 with col2:
-                    # 🛡️ 鋼鐵修復：精準補齊冒號「:」，並規範阿美語在上、中文在下的橫向面板對帳
+                    # 🛠️ 鋼鐵修正：補齊缺失的冒號，完全阻斷 SyntaxError
                     if st.session_state.s_show_ans[true_s_id]:
                         st.success(f"✨ **參考答案 (阿美語)：**\n\n{current_s_quiz['suggested_answer_amis']}\n\n"
                                    f"───\n\n💡 **中文翻譯：**\n\n{current_s_quiz['suggested_answer_ch']}")
                         
                 if st.session_state.s_show_ans[true_s_id]:
                     st.write("")
-                    # 留存參考音檔播放器位置 (暫時留空佔位)
+                    # 留存參考音檔播放器位置（目前暫時留空）
                     st.caption("🔊 參考答案語音音檔 (製作中，目前暫時留空)")
                     
                     st.write("")
