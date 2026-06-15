@@ -1,0 +1,16 @@
+[
+  {
+    "quiz_id": "01",
+    "title": "O demak no pisalamaan 公園的活動",
+    "image_path": "01.jpg",
+    "suggested_answer_amis": "I pisalamaan i, macidal a saemel ko fali.\n'Aloman ko tamdaw i tini a misarakarakat a comikay a lipahak to cilimaway a romi'ad.\nIra ko mikeriday to waco, tada lipahak koya waco a mafekac.\nIra ko madakaway to fatikar a mita'elif toya i lidongay a lalan.\nI rengorengosan i, miwi'awi' ko 'alomanay a miundo, tada 'arik'ik caira.\nMalawla ko wawawawa a misalama, caay katerep ko tawa.\nO fangcalay a pipahanhanan i ningri kina pala. Manga'ay a pasinoway to faloco', a mahapinang ko kafangcal no hekal ato 'orip ita.",
+    "suggested_answer_ch": "公園裡陽光明媚，許多人散步、慢跑、運動，享受戶外時光。有人遛狗、有人騎單車，孩子們嬉戲玩耍，處處充滿歡笑與活力，讓身心都感到放鬆與愉悅。"
+  },
+  {
+    "quiz_id": "02",
+    "title": "O ontokay no pitilidan 學校運動會",
+    "image_path": "02.jpg",
+    "suggested_answer_amis": "Tada lipahak ko ontokay no pitilidan, \nmisa'icel ko mitiliday a malalifet i kacomikayan, tahira tahini ko ngiha' no mipa'icelay i lawac. \nYo mipatong a comikay, pacedi san a comikay ko milifetay a miala to lita'ang no kasacefang. \nO miki'araway a singsi ato mitiliday i, tano laha' san a mihemek, miwatawat to hata a hata a pahapinang to kilemel ato nika lacecay.\nO caayay ka tawal a harateng konini.",
+    "suggested_answer_ch": "學校運動會熱鬧非凡，同學們在跑道上奮力競賽，場邊加油聲此起彼落。大家團結合作，發揮實力，展現運動精神，留下難忘回憶。"
+  }
+]
