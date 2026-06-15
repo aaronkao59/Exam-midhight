@@ -54,6 +54,14 @@ st.markdown("""
         border: none !important;
         box-shadow: none !important;
     }
+    
+    /* 小字註記樣式 */
+    .category-note {
+        font-size: 13px !important;
+        color: gray !important;
+        margin-top: -10px;
+        margin-bottom: 15px;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -80,11 +88,13 @@ if st.session_state.previous_tab != current_tab:
     if "writing_submitted" in st.session_state:
         st.session_state.writing_submitted = False
     
-    # 🛡️ 鋼鐵補丁：修復 AttributeError。使用 del 安全移出屬性，避免字典化退化導致死當
+    # 物理安全註銷開關快取，防止分頁污染
     if "q_show_trans" in st.session_state:
         del st.session_state["q_show_trans"]
     if "q_show_ans" in st.session_state:
         del st.session_state["q_show_ans"]
+    if "s_show_ans" in st.session_state:
+        del st.session_state["s_show_ans"]
         
     st.session_state.previous_tab = current_tab
     st.rerun()
@@ -124,7 +134,7 @@ if current_tab == "📋 認證考試說明":
     中高級認證總分為100分，[聽力(20分)/口說(30分)/閱讀(30分)/寫作(20分)四個項目]
     * **〖聽力測驗〗**
       * 聽音選詞(5題/10%)：聽族語句子，從4個詞彙或詞組選項中，選出答案。
-      * 對話理解(5題/10%)：根據2位族人的對話，從4個選項中選出答案。
+      * 對話理解(5題/10%)：根據2位族人的對話，從4個選項中選出答案.
     * **〖口說測驗〗**
       * 段落朗讀(1題/10%)：朗讀40至50詞的短文(備答1分半鐘，作答1分半鐘)。
       * 情境問答(5題/10%)：每題包含2句(第1句為情境鋪陳)，以族語表達看法(每題含備答時間約40秒)。
@@ -295,15 +305,86 @@ elif current_tab == "🗣️ 口說":
                     st.info(current_article["content"])
                     st.caption(f"來源：{current_article['source']} ｜ 建議準備時間：1分半鐘 ｜ 建議朗讀時間：1分半鐘")
                 else:
-                    st.error("⚠️ 找不到該題目的對應內容，請重新選擇。")
+                    st.error("⚠️ 偵測到教材庫與索引撕裂，找不到該題目的實體內容。")
                 
         except FileNotFoundError:
             st.error("☠️ 系統性毀滅異常：偵測到 `data/speaking_quiz.json` 檔案遺失，請檢查 GitHub 儲存庫路徑！")
             
         st.markdown('</div>', unsafe_allow_html=True)
+        
+    # ─── 題型二：情境問答（本次升級核心：完全參考寫作問答排版，帶開關與性質小字註記） ───
     elif speaking_sub == "情境問答":
-        st.markdown("### ❓ 情境問答")
-        st.warning("🚧 【內容建置中】")
+        try:
+            with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
+                speaking_situation_db = json.load(f)
+        except FileNotFoundError:
+            st.error("☠️ 系統性毀滅異常：偵測到 `data/speaking_situations.json` 檔案遺失，請確認是否建立！")
+            speaking_situation_db = []
+
+        if speaking_situation_db:
+            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
+            st.markdown("### 🗣️ 口說測驗 - 情境問答")
+            
+            # 初始化隨機題組迴路
+            if "s_random_order" not in st.session_state:
+                st.session_state.s_random_order = list(range(len(speaking_situation_db)))
+                random.shuffle(st.session_state.s_random_order)
+            if "s_pointer" not in st.session_state:
+                st.session_state.s_pointer = 0
+            if "s_show_ans" not in st.session_state:
+                st.session_state.s_show_ans = {}
+                
+            s_ptr = st.session_state.s_pointer
+            
+            if s_ptr < len(speaking_situation_db):
+                true_s_id = st.session_state.s_random_order[s_ptr]
+                current_s_quiz = speaking_situation_db[true_s_id]
+                
+                if true_s_id not in st.session_state.s_show_ans:
+                    st.session_state.s_show_ans[true_s_id] = False
+                    
+                st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")
+                st.markdown(f"#### ❓ 問：{current_s_quiz['question_text']}")
+                
+                # 題目的性質分類用較小的字註記在下方
+                st.markdown(f'<div class="category-note">註記：{current_s_quiz["category_note"]}</div>', unsafe_allow_html=True)
+                st.write("---")
+                
+                # 參考答案開關鎖
+                s_ans_label = "🔄 關閉參考答案" if st.session_state.s_show_ans[true_s_id] else "📥 顯示參考答案"
+                
+                col1, col2 = st.columns([1, 3])
+                with col1:
+                    if st.button(s_ans_label, key=f"s_ans_btn_{s_ptr}"):
+                        st.session_state.s_show_ans[true_s_id] = not st.session_state.s_show_ans[true_s_id]
+                        st.rerun()
+                        
+                with col2:
+                    if st.session_state.s_show_ans[true_s_id]:
+                        # 顯示參考答案：阿美語在上，中文翻譯在下
+                        st.success(f"✨ **參考答案 (阿美語)：**\n\n{current_s_quiz['suggested_answer_amis']}\n\n"
+                                   f"───\n\n💡 **中文翻譯：**\n\n{current_s_quiz['suggested_answer_ch']}")
+                        
+                if st.session_state.s_show_ans[true_s_id]:
+                    st.write("")
+                    # 留存參考音檔播放器位置（暫時不亮播放，防禦極端當機）
+                    st.caption("🔊 參考答案語音音檔 (製作中，目前暫時留空)")
+                    
+                    st.write("")
+                    if st.button("➡️ 下一題", key=f"s_next_{s_ptr}"):
+                        st.session_state.s_pointer += 1
+                        st.rerun()
+            else:
+                st.success("🎉 恭喜！您已完成全部口說情境問答的隨機練習！")
+                if st.button("🔄 重新挑戰", key="reset_speaking_situations"):
+                    st.session_state.s_pointer = 0
+                    if "s_show_ans" in st.session_state:
+                        del st.session_state["s_show_ans"]
+                    random.shuffle(st.session_state.s_random_order)
+                    st.rerun()
+                    
+            st.markdown('</div>', unsafe_allow_html=True)
+            
     elif speaking_sub == "看圖表達":
         st.markdown("### 🖼️ 看圖表達")
         st.warning("🚧 【內容建置中】")
@@ -461,6 +542,7 @@ elif current_tab == "✍️ 寫作":
         all_writing_data = []
 
     if all_writing_data:
+        # ─── 題型一：句子聽寫 ───
         if writing_sub == "句子聽寫":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### ✍️ 寫作測驗 - 句子聽寫")
@@ -538,6 +620,7 @@ elif current_tab == "✍️ 寫作":
                     
             st.markdown('</div>', unsafe_allow_html=True)
             
+        # ─── 題型二：問答 ───
         elif writing_sub == "問答":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 📝 寫作測驗 - 問答")
@@ -556,7 +639,6 @@ elif current_tab == "✍️ 寫作":
             if q_ptr < len(question_db):
                 current_q_quiz = question_db[q_ptr]
                 
-                # ─── 🛡️ 核心修復防禦線：使用符合 Streamlit 機制的字典安全宣告 ───
                 if "q_show_trans" not in st.session_state:
                     st.session_state.q_show_trans = {}
                 if "q_show_ans" not in st.session_state:
