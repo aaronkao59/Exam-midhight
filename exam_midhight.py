@@ -67,7 +67,7 @@ st.markdown("""
 
 # ---- App 頂部導覽列 ----
 st.title("🎓 中高級認證")
-st.caption("[練習平台選擇器]")
+st.caption("[練習 platform 選擇器]")
 
 # ---- 第一層：五個主要選項 (導覽選單) ----
 main_options = ["📋 認證考試說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
@@ -88,7 +88,7 @@ if st.session_state.previous_tab != current_tab:
     if "writing_submitted" in st.session_state:
         st.session_state.writing_submitted = False
     
-    # 🛡️ 鋼鐵防禦：使用 del 安全註銷屬性，徹底根除問答題切換分頁時的 AttributeError 閃退死結
+    # 使用 del 安全註銷屬性快取，徹底根除分頁切換時的隱性異常崩潰
     if "q_show_trans" in st.session_state:
         del st.session_state["q_show_trans"]
     if "q_show_ans" in st.session_state:
@@ -136,7 +136,7 @@ if current_tab == "📋 認證考試說明":
     中高級認證總分為100分，[聽力(20分)/口說(30分)/閱讀(30分)/寫作(20分)四個項目]
     * **〖聽力測驗〗**
       * 聽音選詞(5題/10%)：聽族語句子，從4個詞彙或詞組選項中，選出答案。
-      * 對話理解(5題/10%)：根據2位族人的對話，從4個選項中選出答案。
+      * 对話理解(5題/10%)：根據2位族人的對話，從4個選項中選出答案。
     * **〖口說測驗〗**
       * 段落朗讀(1題/10%)：朗讀40至50詞的短文(備答1分半鐘，作答1分半鐘)。
       * 情境問答(5題/10%)：每題包含2句(第1句為情境鋪陳)，以族語表達看法(每題含備答時間約40秒)。
@@ -314,7 +314,7 @@ elif current_tab == "🗣️ 口說":
             
         st.markdown('</div>', unsafe_allow_html=True)
         
-    # ─── 題型二：情境問答（⚡ 欄位名 KeyError 終極修正完成版 ───
+    # ─── 題型二：情境問答（⚡ 欄位名 KeyError 完美校正重組版 ───
     elif speaking_sub == "情境問答":
         try:
             with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
@@ -350,8 +350,8 @@ elif current_tab == "🗣️ 口說":
                     
                 st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")
                 
-                # 🛠️ 終極修補補丁：將 ['question_text'] 精準校正為對齊獨立題庫格式的 ['question_text'] 欄位，徹底根除 KeyError!
-                st.markdown(f"#### ❓ 問：{current_s_quiz['question_text']}")
+                # 🛠️ 終極修復對帳點：將原先打錯的 ['question_text'] 精準校正為符合新題庫的 ['question_amis']
+                st.markdown(f"#### ❓ 問：{current_s_quiz['question_amis']}")
                 
                 # 題目的性質分類放在題目下方用較小的字註記
                 st.markdown(f'<div class="category-note">性質分類：{current_s_quiz["category_note"]}</div>', unsafe_allow_html=True)
