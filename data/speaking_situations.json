@@ -2,7 +2,7 @@
   {
     "quiz_id": "01",
     "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_text": "O mamamaan ko pisadotoc to serangawan no kapah, o caayay pakafohat a minokay i niyaro' a mikapot to kasaselal i kailisinan nawhani mademet ko tayal i ningri hakini?",
+    "question_amis": "O mamamaan ko pisadotoc to serangawan no kapah, o caayay pakafohat a minokay i niyaro' a mikapot to kasaselal i kailisinan nawhani mademet ko tayal i ningri hakini?",
     "question_ch": "旅居都會區青年因工作排班困難無法回鄉參與歲時祭儀階層集訓，如何維繫文化臍帶？",
     "suggested_answer_amis": "Padamain ko sa'opo i ningri a milongoc to pahanhanan no ilisin i siyfu, ano eca i, pili'ayaw a mipalisawot to selal i ningri a minanam. Sakapolongen ko kikay no aniniay a patenak to nafaloco'an no ilisin, ta caay kapiteka ko nika o Pangcah kako sanay a harateng no kapah i raay.",
     "suggested_answer_ch": "應輔導同鄉會爭取官方規定的文化假，或在都會區預先凝聚年齡階層進行前置訓練。同時善用線上科技同步傳遞祭典精神，確保青年的族群認同不因空間而斷裂。"
@@ -10,7 +10,7 @@
   {
     "quiz_id": "02",
     "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_text": "Nano to'as o pitatengilan no fa'inayan ko talo'an, o kapaysinan no fafahiyan konini, o mamicowa a pasifana' to kapah to sakalalen no tiring i matini hakini?",
+    "question_amis": "Nano to'as o pitatengilan no fa'inayan ko talo'an, o kapaysinan no fafahiyan konini, o mamicowa a pasifana' to kapah to sakalalen no tiring i matini hakini?",
     "question_ch": "傳統上集會所是男子的訓練中心，女性有禁忌，現代如何向年輕人闡述其主體性？",
     "suggested_answer_amis": "O kasasiwasiw to tatayalen no to'as konini, caay ko pisakakinih to fafahiyan. O mamidipot to dafong no loma' ko fafahiyan, o mamikowan to demak no niyaro' ato mipa'ading ko fa'inayan. Malecad ko 'icel naira a tatosa i niyaro', masasipa'ayaw a mangodo.",
     "suggested_answer_ch": "這並非性別歧視，而是傳統兩性分工。女性掌管家庭財產繼承，男性負責會所公共事務與外防。兩者各司其職，在部落治理與社會地位上完全對等且互相尊重。"
@@ -18,7 +18,7 @@
   {
     "quiz_id": "03",
     "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_text": "O mamalasawad to ko radiw no mato'asay i ilisin, o mamimaan kiso a mipadotoc tonini a radiw hakini?",
+    "question_amis": "O mamalasawad to ko radiw no mato'asay i ilisin, o mamimaan kiso a mipadotoc tonini a radiw hakini?",
     "question_ch": "部落耆老在祭典中所吟唱的古調面臨失傳，你會採取什麼具體的系統化保存方案？",
     "suggested_answer_amis": "Misaharateng a patingwa a misopet to ngiha ato radiw no mato'asay. O satadamaanay i, o mamipasifana' i sa'opo no selal to sapicaradaw ato sapa'ayaw a romadiw, ta mapadocos no wawa ko taneng no to'as.",
     "suggested_answer_ch": "應發起數位紀錄計畫，採集並保存耆老的珍貴口傳音訊建立資料庫。最關鍵的是必須在年齡階層聚會中安排領唱與答唱實體教唱，落實跨世代傳承。"
@@ -26,7 +26,7 @@
   {
     "quiz_id": "04",
     "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_text": "Ano masaco'a'ang ko rikec no siyfu ato misacepo'ay a lisin no Pangcah i, o mamimaan kiso a mikihatiya a masasowal?",
+    "question_amis": "Ano masaco'a'ang ko rikec no siyfu ato misacepo'ay a lisin no Pangcah i, o mamimaan kiso a mikihatiya a masasowal?",
     "question_ch": "當傳統捕魚祭與現代水域管制產生法規衝突時，你如何站在族群立場進行協調？",
     "suggested_answer_amis": "Midoedo to rikec no Yencumin a mipa'ading to 'orip ita. Pasowalen ko tapang to nika o citanengay to riyar ko misacepo'ay, ira ko paysin to romi'ad ato tata'ang no salil, mapadang ko pido'edo to pinanowang no riyar, saka o mamingodo ko siyfu to lisin no mita.",
     "suggested_answer_ch": "依原基法捍衛權益。向主管機關強調捕魚祭蘊含的海洋永續智慧，有嚴格的季節禁忌與網目限制，證明傳統生態規範與現代保育完全相容，應予以特許尊重。"
@@ -34,7 +34,7 @@
   {
     "quiz_id": "05",
     "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_text": "O kasaniyaro' i, kasasiroma ko losid ato sa'eres. Ano mafokil ko misa'isay to matiniay, o mamicowa kiso a patatongal to sowal?",
+    "question_amis": "O kasaniyaro' i, kasasiroma ko losid ato sa'eres. Ano mafokil ko misa'isay to matiniay, o mamicowa kiso a patatongal to sowal?",
     "question_ch": "各語群的服飾與配飾差異極大，若評審因主觀認知誤判，你如何進行專業申覆？",
     "suggested_answer_amis": "Patahekal to codad no kasasiroma no serangawan, pasapinang to nika ira ko cidekay a faco ato cengel no kasaniyaro'. O satadamaanay a dafong ita kina kasasiroma, caay ka nga'ay a miala to cecayay a pitek a palasawad to no roma a niyaro' a serangawan.",
     "suggested_answer_ch": "提交區域文化差異報告，說明各語群因歷史發展，擁有獨特的織紋圖騰與色彩系統。強調多元性是我族資產，不應以單一區域標準抹煞其他語群的正統與獨特性。"
@@ -42,7 +42,7 @@
   {
     "quiz_id": "06",
     "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_text": "I pikasawan no selal i, maedes ko pilifet to tiring. Ano masowal no tao to tatiihay konini i, o mamicowa kiso a pacof?",
+    "question_amis": "I pikasawan no selal i, maedes ko pilifet to tiring. Ano masowal no tao to tatiihay konini i, o mamicowa kiso a pacof?",
     "question_ch": "在年齡階層晉升儀式中要接受嚴苛體能考驗，若被質疑不人道，你如何反駁？",
     "suggested_answer_amis": "O pilicekah to sakaci'icel no faloco' konini, caay ko pasamanaan a minanam to tiring. Pakayni tonini a pilifet ko kapah a paheci to pidipot to niyaro' ato loma', o saka lalomowad no fa'inayan a masakapot ato sakaci'icel a mipa'ading to niyaro'.",
     "suggested_answer_ch": "這是淬鍊責任心的成年禮儀，絕非單純體能訓練。青年透過晉升考驗展現保護部落與承擔家計的決心，是建構男子階層集體認同與勇士精神的關鍵核心，成功維持社會穩定。"
@@ -50,15 +50,15 @@
   {
     "quiz_id": "07",
     "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_text": "Ano masasiiked ko selal nawhani o singkiyo no aniniay, a mikawa to pisahalakawan to ilisin i, o mamicowa kiso a palamenmeng to faloco'?",
+    "question_amis": "Ano masasiiked ko selal nawhani o singkiyo no aniniay, a mikawa to pisahalakawan to ilisin i, o mamicowa kiso a palamenmeng to faloco'?",
     "question_ch": "當部落因現代選舉導致年齡階層內部出現派系裂痕，影響歲時祭儀籌辦時，你該如何彌合？",
     "suggested_answer_amis": "Mipalisawot to kakeridan no selal, midoedo to rikec a mido'edo to sowal no kaka a milalang to kacacoli. Pasowalen to nika nga'ay a kasasiroma ko harateng i papotal, nika minokay i niyaro' i, o mamifalah to kanget, kakakayat a malikoda a midipot to ilisin.",
-    "suggested_answer_ch": "召開階層核心會議，運用嚴格服從長兄的鐵律約束內部爭議。強調在外政治立場可不同，回到部落就必須放下成見，牽起手展現團結圍舞精神共同守護祭典。"
+    "suggested_answer_ch": "召開階層核心會議，運用嚴格服從長兄的鐵律約束內部爭議。強調在外政治立場可不同，回到部落就必須放下成見，牽起手展現團團結圍舞精神共同守護祭典。"
   },
   {
     "quiz_id": "08",
     "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_text": "O mamicowa kiso a miharateng to nika malecad ko kilac no fa'inayan ato fafahiyan to dafong i rikec no aniniay, a mico'a'ang to pidotoc no serangawan no fafahiyan hakini?",
+    "question_amis": "O mamicowa kiso a miharateng to nika malecad ko kilac no fa'inayan ato fafahiyan to dafong i rikec no aniniay, a mico'a'ang to pidotoc no serangawan no fafahiyan hakini?",
     "question_ch": "現代民法財產男女均分對母系繼承造成衝擊，你如何看待傳統與現代法律的調適？",
     "suggested_answer_amis": "I rikec i, o mamingodo kita, nika i tayal i, palali'ayen no kasalaloma'an. O mamili'ayaw a pafeli to sera ato loma' no to'as to fafahiyan, oya mangalayay a moko i niyaro' a midimokos to mato'asay ato lisin, ta nga'ay masalalen ko rikec ato serangawan.",
     "suggested_answer_ch": "法律上尊重民法，執行上透過家族和諧協調。將象徵部落根基與血脈延續的土地與祖屋，優先保留給願意留在部落承擔文化祭祀與照顧長輩的女性，在法律與文化間雙贏。"
@@ -66,7 +66,7 @@
   {
     "quiz_id": "09",
     "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_text": "I no to'as a loma' i, tada tata'ang ko 'icel no faki a milimo'ot to wawa no fafahiyan a safa saca kaka, ano masasi'inget caira i matini i, o mamicowa kiso a palali'ay hakini?",
+    "question_amis": "I no to'as a loma' i, tada tata'ang ko 'icel no faki a milimo'ot to wawa no fafahiyan a safa saca kaka, ano masasi'inget caira i matini i, o mamicowa kiso a palali'ay hakini?",
     "question_ch": "在傳統家庭中舅舅對外甥有極高管教權，若現代因管教發生衝突，你如何排解？",
     "suggested_answer_amis": "Pasifana'en ko wawa to nika o faki i, malo mama i loma' no Pangcah. Milongoc to mato'asay a fafahiyan a papipalali'ay, mipadang to faki a misafaeloh to pipasowal, pakayni i sowal no mita ato pingodo to loma' a misafaeloh a masasowal.",
     "suggested_answer_ch": "引導晚輩理解舅舅在母系制度中扮演代理父親的文化責任。建請女性長輩從中調和，協助長輩調整溝通口吻，用族語與家庭尊重的核心價值重新搭建理性對話。"
@@ -74,7 +74,7 @@
   {
     "quiz_id": "10",
     "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_text": "O pikadafo no fa'inayan ko serangawan ita, o mamicowa kiso a pasifana' to kapah i ningri to sakanga'ay nonini a lekakawa hakini?",
+    "question_amis": "O pikadafo no fa'inayan ko serangawan ita, o mamicowa kiso a pasifana' to kapah i ningri to sakanga'ay nonini a lekakawa hakini?",
     "question_ch": "傳統婚俗有招贅傳統，你如何向都會區原住民青年解釋其社會穩定功能？",
     "suggested_answer_amis": "O pikadafo i, o sakadadotoc no 'icel a matayal ato dafong no ina. Paheciay konini to nipita'ong no to'as to pakayniay i fafahiyan a midipot to loma', ta mala o nika o misa'alingayay no ina ko loma'.",
     "suggested_answer_ch": "招贅婚的文化根源是為了確保母系家族勞動力的完整與財產的永續延續。這反映出傳統文化中，對於女性持家能力與家族命脈延續的崇高尊崇與制度化保障。"
@@ -82,7 +82,7 @@
   {
     "quiz_id": "11",
     "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_text": "O fafahiyan a mato'asay ko mamikowan to pifetin to to'as, ano mangalay ko kapah a mikowan i, o mamicowa kiso a milalang?",
+    "question_amis": "O fafahiyan a mato'asay ko mamikowan to pifetin to to'as, ano mangalay ko kapah a mikowan i, o mamicowa kiso a milalang?",
     "question_ch": "家族祭祖儀式傳統由年長女性主持，若年輕男性企圖搶奪主導權，你如何勸導？",
     "suggested_answer_amis": "Paki'emelen a mipa'ading to 'icel no fafahiyan i lisin. I harateng no to'as i, o fafahiyan ko tatapangan no 'icel no loma'. Pasowalen ko kapah, dengan o pingodo to kakeridan no fafahiyan a mililid to lisin, nga'ay a mapalemed no to'as ko kasalaloma'an.",
     "suggested_answer_ch": "堅定捍衛傳統女性的祭祀主權。在傳統世界觀中，女性是家與家族最核心的精神力量。向年輕一輩說明，唯有尊重女長老的外在儀式引導，家族才能獲得祖靈最完整的庇佑。"
@@ -90,7 +90,7 @@
   {
     "quiz_id": "12",
     "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_text": "Ano ma'araw ko tao ano eca o kapah patelac ko pica'elay to dofot a mala o miparatoihay to patay i, o mamicowa kiso a mipahapinang?",
+    "question_amis": "Ano ma'araw ko tao ano eca o kapah patelac ko pica'elay to dofot a mala o miparatoihay to patay i, o mamicowa kiso a mipahapinang?",
     "question_ch": "若看見外族人或年輕族人錯誤配戴情人袋變成報喪，你如何進行澄清？",
     "suggested_answer_amis": "O ca'elay i, o ci fangcalay a lemed no ina ano eca o ngohah. Nani kawanan a pa'edeng tangasa i kawili a pasay'ayaw ko ngoso' i, o lipahak ato mikapot to ilisin; ano nani kawili i, o miparatoihay to patay ano eca o tatiihay a demak no loma', caay ka nga'ay a patelacen ko serangawan.",
     "suggested_answer_ch": "情人袋是蘊含母親或愛人祝福的聖物。由右肩斜背至左髖部袋口朝前代表平安喜樂與參與慶典；若反方向左肩斜背在傳統上則代表報喪或家有變故，文化細節不容混淆。"
@@ -98,15 +98,15 @@
   {
     "quiz_id": "13",
     "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_text": "Ma'apil ko fafahiyan no Pangcah i tokay to pipadama to loma' ato pikaomah a mi'etan, o mamicowa ko siyfu a misahalaka to padama to 'orip naira i tokay hakini?",
+    "question_amis": "Ma'apil ko fafahiyan no Pangcah i tokay to pipadama to loma' ato pikaomah a mi'etan, o mamicowa ko siyfu a misahalaka to padama to 'orip naira i tokay hakini?",
     "question_ch": "都會區原住民婦女面臨文化照顧與職場經濟雙重壓力，政府應如何規劃都會長照政策？",
     "suggested_answer_amis": "Palowaden ko mapapadangay a harateng matiya o i niyaro'ay. Papisa'icelen no siyfu a patireng to pipapadangan a dimokos to wawa ato mato'asay, a pado'edo to sowal ato serangawan no Pangcah, ta mapapadang ko fafahiyan to roray a midimokos to loma'.",
-    "suggested_answer_ch": "倡導都會部落化與互助精神。政府應積極推動以族語與文化為核心的社區互助托育中心與文化健康站，重構都市親族支持網絡，由群體協力減輕婦源的照顧負擔。"
+    "suggested_answer_ch": "倡導都會部落化與互助精神。政府應積極推動以族語與文化為核心的社區互助托育中心與文化健康站，重構都市親族支持網絡，由群體協力減輕婦女的照顧負擔。"
   },
   {
     "quiz_id": "14",
     "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_text": "Caay ka olah ko micodaday a komaen to siraw nawhani tatiih i tatirengan saan, o mamicowa kiso a pakayni i taneng no kakaenen a mipahapinang hakini?",
+    "question_amis": "Caay ka olah ko micodaday a komaen to siraw nawhani tatiih i tatirengan saan, o mamicowa kiso a pakayni i taneng no kakaenen a mipahapinang hakini?",
     "question_ch": "學生因現代衛生觀念對醃肉生食表示反感，你如何從飲食文化角度正名？",
     "suggested_answer_amis": "O nipacilahan ko siraw, o taneng no to'as a misopet to titi i 'ayaw no pipatelian to ki'etecay. Caay ko kaeso'ay a kakaenen aca konini, o sapaheci to masasipada' ato kalipahakan no finawlan konini.",
     "suggested_answer_ch": "醃肉利用粗鹽進行脫水與嚴格厭氧發酵，是老祖先在缺乏冷凍設備年代，透過發酵科學保存蛋白質的智慧結晶。它不僅是美食，幕後更是凝聚族人分享與豐收的文化靈魂。"
@@ -114,7 +114,7 @@
   {
     "quiz_id": "15",
     "category_note": "三、 生態智慧、民族植物與土地利用 (O taneng no hekal, pinaloma ato pisaomah)",
-    "question_text": "O mamicowa kiso a mipa'ading to salongoc no dateng ita i matini, nawhani maemin a mafalic no misaromaay ko pala hakini?",
+    "question_amis": "O mamicowa kiso a mipa'ading to salongoc no dateng ita i matini, nawhani maemin a mafalic no misaromaay ko pala hakini?",
     "question_ch": "野生野菜因過度開發而大量減少，你認為該如何保衛野菜主權？",
     "suggested_answer_amis": "Malakapot ko niyaro' ato picodadan a misafa'eloh to pipalomaan to dateng. Falicen ko pilitod to dateng a mala o dadotocen a pikaomah, misanga' to sapidipot to sapaloma, a mipa'ading to kahirahira no kalomaamaan no kakaenen no mita.",
     "suggested_answer_ch": "結合部落與學界推動民族植物園與在地野菜復育基地。將傳統的採集文化轉化為精緻永續的綠色生態農業，建立保種機制，守護我族飲食文化主權與生物多樣性。"
@@ -122,7 +122,7 @@
   {
     "quiz_id": "16",
     "category_note": "三、 生態智慧、民族植物與土地利用 (O taneng no hekal, pinaloma ato pisaomah)",
-    "question_text": "I pisa'aol ato pisa'oway a misaloma' no to'as i, mico'a'ang to rikec no siyfu anini, o mamimaan kita a padotoc to taneng no to'as a misaloma' hakini?",
+    "question_amis": "I pisa'aol ato pisa'oway a misaloma' no to'as i, mico'a'ang to rikec no siyfu anini, o mamimaan kita a padotoc to taneng no to'as a misaloma' hakini?",
     "question_ch": "傳統建築大量使用箭竹與黃藤，在現代建管法規限制下，如何傳承傳統生態建築工法？",
     "suggested_answer_amis": "Milongoc to sapipatireng to talo'an i picodadan ano eca i pitatengilan. Papikeriden ko mato'asay to kapah a minanam to sapisa'osaw, sapisadadoedo ato sapisafali i pisaloma', ta mapalowad ko taneng no to'as a paloma'.",
     "suggested_answer_ch": "爭取將傳統工寮建築工法應用於校園文化教室或公共空間。邀請耆老帶領年輕族人在實作中習得防潮、抗震、通風的卡榫與自然材質運用智慧，使綠建築工法復活。"
@@ -130,7 +130,7 @@
   {
     "quiz_id": "17",
     "category_note": "三、 生態智慧、民族植物與土地利用 (O taneng no hekal, pinaloma ato pisaomah)",
-    "question_text": "O cifar ko sapitines to dateng, o mamicowa kiso a pacemahad to matiniay a nisafelan a mala o dadoedoan no i hekalay a finacadan hakini?",
+    "question_amis": "O cifar ko sapitines to dateng, o mamicowa kiso a pacemahad to matiniay a nisafelan a mala o dadoedoan no i hekalay a finacadan hakini?",
     "question_ch": "石頭火鍋利用檳榔葉鞘作容器，如何將這項廚藝推廣為國際低碳飲食典範？",
     "suggested_answer_amis": "Pahapinangen ko nika caay ko sokka, o nani hekalay ato mahefocay a fangcalay a harateng. Pasifana'en to nika caay ka kohkohan ko cifar, ato sakakaeso' no fa'edetay a fokeloh i nanom, a palowad to taneng no to'as i matiniay a pikaen.",
     "suggested_answer_ch": "強調其無塑、天然、可完全降解的永續環保思維。闡述檳榔葉鞘耐熱的物理特性，以及燒紅麥飯石瞬間鎖住鮮美的烹飪科學，將傳統智慧包裝為現代低碳綠色餐飲美學。"
@@ -138,7 +138,7 @@
   {
     "quiz_id": "18",
     "category_note": "三、 生態智慧、民族植物與土地利用 (O taneng no hekal, pinaloma ato pisaomah)",
-    "question_text": "Ma'eco no misalamaay ko pifotingan no Pangcah i lawac no riyar, o mamimaan kiso a pacoli pakayni i serangawan hakini?",
+    "question_amis": "Ma'eco no misalamaay ko pifotingan no Pangcah i lawac no riyar, o mamimaan kiso a pacoli pakayni i serangawan hakini?",
     "question_ch": "東沿岸觀光大開發限縮了傳統海域潮間帶採集空間，你如何提出文化申訴？",
     "suggested_answer_amis": "Pasowalen to nika o pifotingan i, o paca'edongan to kakaenen ato pitilidan no fafahiyan, ano pelengen konini i, o mamicikcik to ngasaw no serangawan no riyar. O mipa'ading kita to salongoc a midoedo to rikec, a papisingkiw to sakari'ang no tayal to serangawan ita.",
     "suggested_answer_ch": "聲明潮間帶是婦女的傳統冰箱與生態教室，破壞潮間帶採集空間將斬斷海洋文化生存根基。應依原基法捍衛知情同意權，要求開發案納入完整的文化影響評估。"
@@ -146,7 +146,7 @@
   {
     "quiz_id": "19",
     "category_note": "三、 生態智慧、民族植物與土地利用 (O taneng no hekal, pinaloma ato pisaomah)",
-    "question_text": "Ano ira ko patongalay to tayhi a mikaomah ta macakat ko nipalomaan saan i, o mamicowa kiso a milimo'ot to finawlan a midoedo to pikaomah no to'as hakini?",
+    "question_amis": "Ano ira ko patongalay to tayhi a mikaomah ta macakat ko nipalomaan saan i, o mamicowa kiso a milimo'ot to finawlan a midoedo to pikaomah no to'as hakini?",
     "question_ch": "部落有人提議引入大量化肥的慣行農法提高產量，你如何說服族人保留傳統農法？",
     "suggested_answer_amis": "Palowaden ko pidoedo to romi'ad no hekal a maomah, a misafa'eloh to fangcalay ato awaay ko warak a tayal, mipa'ading to caayay ka liyaw a sera. Pakayni i kitoh a micakat to 'aca no dateng, ta manga'ay ko pala ato nipili'aca.",
     "suggested_answer_ch": "倡導以順應自然的傳統耕作期為核心，轉型精緻無毒有機耕作，守護不可再生的土地。透過故事行銷提升農產品附加價值，打造兼顧生態多樣性與經濟的雙贏品牌。"
@@ -154,7 +154,7 @@
   {
     "quiz_id": "20",
     "category_note": "三、 生態智慧、民族植物與土地利用 (O taneng no hekal, pinaloma ato pisaomah)",
-    "question_text": "I pipasifana' to taneng no to'as a mifoting i, o mamicowa kiso a pahapinang to sakarihaday no tamdaw ato hekal hakini?",
+    "question_amis": "I pipasifana' to taneng no to'as a mifoting i, o mamicowa kiso a pahapinang to sakarihaday no tamdaw ato hekal hakini?",
     "question_ch": "在介紹傳統捕魚智慧時，如何向外界解釋其生態倫理？",
     "suggested_answer_amis": "O nika malacecay ko 'orip no tamdaw ato tarawadaw ato riyar. I pifotingan no to'as i, ira ko pipahanhanan, o lisin ato kasadak no salil. O matiniay a misamaedengay aca a harateng i, o satadamaanay a pingodo to hekal i matini.",
     "suggested_answer_ch": "族人視溪流與海洋為共生存在。傳統捕魚文化包含嚴格的休漁期規範、祭祀儀式及漁具網目限制。這種只取所需、絕不竭澤而漁的平衡觀念，是現代最推崇的生態倫理。"
@@ -162,7 +162,7 @@
   {
     "quiz_id": "21",
     "category_note": "三、 生態智慧、民族植物與土地利用 (O taneng no hekal, pinaloma ato pisaomah)",
-    "question_text": "Ano mangalay ko kosi no tao a misateked to heci no 'apalo i, o mamicowa kiso a mico'a'ang pakayni i taneng no to'as hakini?",
+    "question_amis": "Ano mangalay ko kosi no tao a misateked to heci no 'apalo i, o mamicowa kiso a mico'a'ang pakayni i taneng no to'as hakini?",
     "question_ch": "外來公司企圖將麵包樹果實註冊為專利，你如何從傳統知識角度抗衡？",
     "suggested_answer_amis": "Malakapot ko finawlan ato gihing a paheci to nika, halafin to ko 'apalo i kimad, i sikaen ato lisin no mita. O dafong no polong no finawlan konini, o caayay ka nga'ay a ma'afas no tao a taneng no serangawan.",
     "suggested_answer_ch": "聯合族人與法律專家，舉證證明麵包樹在神話、飲食與祭儀中已存在數百年。它屬於全體族人集體特有的非物質文化遺產，具有排他的傳統生物文化知識主權。"
@@ -170,15 +170,15 @@
   {
     "quiz_id": "22",
     "category_note": "四、 語言復振、跨文化溝通與都會原住民 (O palowad to sowal, pacacawma to kasasiroma a serangawan ato i tokayay a Pangcah)",
-    "question_text": "Ma'emin a malafas ko sowal no mita i tokay, o mamimaan kiso a mipalowad to sowal no Pangcah hakini?",
+    "question_amis": "Ma'emin a malafas ko sowal no mita i tokay, o mamimaan kiso a mipalowad to sowal no Pangcah hakini?",
     "question_ch": "都會區二、三代產生嚴重語言流失，你認為族語復振應採取何種創新策略？",
-    "suggested_answer_amis": "Palowaden ko sowal i 'orip ato i tingnaw. Paka i wanglu, misaniyaro' a minanam, palamlamen ko sowal i kapahay a radiw ato kacudo, ta mala o nika o lipahakay a 'orip no kapah i tokay konini.",
+    "suggested_answer_amis": "Palowaden ko sowal i 'orip ato i tingnaw. Paka i wanglu, misaniyaro' a minanam, palamlamen ko sowal i kapahay a radiw ato kacudo, ta mala o lipahakay a 'orip no kapah i tokay konini.",
     "suggested_answer_ch": "推動族語的生活化與數位社群化。利用網路播客、沉浸式都會族語營隊，並大膽將族語融入青少年喜愛的流行音樂與短影音中，營造說族語很潮的都會生活氛圍。"
   },
   {
     "quiz_id": "23",
     "category_note": "四、 語言復振、跨文化溝通與都會原住民 (O palowad to sowal, pacacawma to kasasiroma a serangawan ato i tokayay a Pangcah)",
-    "question_text": "Ano somowal ko gakkisiya to nika malasawad to ko pisa'alingay no ina saan i, o mamicowa kiso a pacof hakini?",
+    "question_amis": "Ano somowal ko gakkisiya to nika malasawad to ko pisa'alingay no ina saan i, o mamicowa kiso a pacof hakini?",
     "question_ch": "當學者指稱母系社會已經名存實亡，你該如何理性且專業地予以回應？",
     "suggested_answer_amis": "Mafalic ko wayway i papotal, nika caay ka lasawad ko nafaloco'an. I pilokelokel no loma', pipalali'ay to kasasi'inget, ato pita'ong to mato'asay a fafahiyan i, 'akawang ho ko 'icel no ina, a midoedo to 'orip no aniniay.",
     "suggested_answer_ch": "外部形式雖因現代化演變，但文化的內在精神並未消失。在婚喪喜慶決策、親族矛盾協調及對女性長輩的崇高尊崇上，母系核心精神依然強固，正以動態適應現代生活。"
@@ -186,7 +186,7 @@
   {
     "quiz_id": "24",
     "category_note": "四、 語言復振、跨文化溝通與都會原住民 (O palowad to sowal, pacacawma to kasasiroma a serangawan ato i tokayay a Pangcah)",
-    "question_text": "高級認證考試中的長篇演說題目，你該如何運用傳統修辭美學來架構？",
+    "question_amis": "I pisekingan to tata'angay a papelo i, o mamicowa kiso a midoedo to fangcalay a sowal no to'as a misafaco hakini?",
     "question_ch": "高級認證考試中的長篇演說題目，你該如何運用傳統修辭美學來架構？",
     "suggested_answer_amis": "I sa'ayaw i, misanoPangcah a mifohat a miliso' to to'as ato finawlan; i sifo' i, palamlamen ko taneng no to'as to pakayniay i kalalok ato nika lecad no riyar a maemin a midemak; i saikoray i, pasowalen ko kakakayat no selal a malacecay, a pahapinang to kapah no sowal ita.",
     "suggested_answer_ch": "開頭正式以族語向祖靈與聽眾問候；主體論述應融入刻苦耐勞與如海洋般包容的自然隱喻；結尾引用年齡階層牽手圍舞精神呼籲集體凝聚，展現古典修辭美學。"
@@ -194,15 +194,15 @@
   {
     "quiz_id": "25",
     "category_note": "四、 語言復振、跨文化溝通與都會原住民 (O palowad to sowal, pacacawma to kasasiroma a serangawan ato i tokayay a Pangcah)",
-    "question_text": "O nano Natawran a sowal ko no mita, malecad to sowal no Mawli ato Hawayi, o mamicowa kiso a pacici to kapah a minanam hakini?",
+    "question_amis": "O nano Natawran a sowal ko no mita, malecad to sowal no Mawli ato Hawayi, o mamicowa kiso a pacici to kapah a minanam hakini?",
     "question_ch": "族語屬於南島語系，與毛利語、夏威夷語高度親緣，你如何利用這點激發青年學習？",
-    "suggested_answer_amis": "Pahapinangen to nika o lalan a talahekal kina sowal ita. Pasowalen ko kapah i tokay, ano mafana' a somowal to no Pangcah i, matira o pakaalaay to sasi a mifohat to fawahan no Taypingyang, a nga'ay a masasowal ato i hekalay a Natawran a tamdaw, ta kitakit.",
+    "suggested_answer_amis": "Pahapinangen to nika o lalan a talahekal kina sowal ita. Pasowalen ko kapah i tokay, ano mafana' a somowal to no Pangcah i, matira o pakaalaay to sasi a mifohat to fawahan no Taypingyang, a nga'ay a masasowal ato i hekalay a Natawran a tamdaw, ta mala o lalan a talahekal kina sowal ita.",
     "suggested_answer_ch": "將族語翻轉為具備國際視野的南島語言。告訴都會青年，學好族語等於拿到打開太平洋南島大門的鑰匙，能與國際南島族群對話，提升為跨國文化外交優勢。"
   },
   {
     "quiz_id": "26",
     "category_note": "四、 語言復振、跨文化溝通與都會原住民 (O palowad to sowal, pacacawma to kasasiroma a serangawan ato i tokayay a Pangcah)",
-    "question_text": "Ano patelac ko nipitilid no codad to demak no to'as i, o mamicowa kiso a milongoc to siyfu a misalof hakini?",
+    "question_amis": "Ano patelac ko nipitilid no codad to demak no to'as i, o mamicowa kiso a milongoc to siyfu a misalof hakini?",
     "question_ch": "若教科書將歷史事件片面解讀，你如何提出官方修正意見？",
     "suggested_answer_amis": "Paki'emelen ko tireng i harateng no Pangcah a milongoc a pahapinang to so'elinay a demak. O mamicelol ko codad a pahapinang: yo mico'a'ang ko selal no fa'inayan to mikowanay a tao i, sa mipa'ading to sera ato ngangan no niyaro', a paheci to 'icel ato taneng naira.",
     "suggested_answer_ch": "站在原住民族主體史觀立場要求還原真相。教科書必須補正並強調：男子年齡階層在面對外來殖民政權時，為了捍衛土地與族群尊嚴，所展現的抵抗與政治智慧。"
@@ -210,15 +210,15 @@
   {
     "quiz_id": "27",
     "category_note": "四、 語言復振、跨文化溝通與都會原住民 (O palowad to sowal, pacacawma to kasasiroma a serangawan ato i tokayay a Pangcah)",
-    "question_text": "Ano misamangah ko tao a misanga' to dofot a pa'aca to tata'angay a 'aca a micawkiw to serangawan ita i, o mamimaan kiso a pasowal hakini?",
+    "question_amis": "Ano misamangah ko tao a misanga' to dofot a pa'aca to tata'angay a 'aca a micawkiw to serangawan ita i, o mamimaan kiso a pasowal hakini?",
     "question_ch": "商家將非正統織布製成仿製情人袋高價販售引發剽竊爭議，你如何發聲？",
     "suggested_answer_amis": "Midoedo to rikec a mipa'ading to serangawan no mita. Milalang to pisakemot no misanga'ay to tadamaanay a dafong no to'as, milongoc to kosi a masasowal ato niyaro' a pakayra i rikec a maala ko nika hayda, a mapapadang a mipa'ading to rikec no to'as.",
-    "suggested_answer_ch": "援引原住民族傳統智慧創作保護條例捍衛文化權。譴責消費主義對神盛文物的挪用，要求商家與部落建立合法的諮商取得同意機制，共同守護尊重祖先的文化規範。"
+    "suggested_answer_ch": "援引原住民族傳統智慧創作保護條例捍衛文化權。譴責消費主義對神聖文物的挪用，要求商家與部落建立合法的諮商取得同意機制，共同守護尊重祖先的文化規範。"
   },
   {
     "quiz_id": "28",
     "category_note": "四、 語言復振、跨文化溝通與都會原住民 (O palowad to sowal, pacacawma to kasasiroma a serangawan ato i tokayay a Pangcah)",
-    "question_text": "Caay kanga'ay a palamal ko kapah a mitapoh to to'as i loma' no tokay, o mamicowa kiso a pasifana' i cangraan hakini?",
+    "question_amis": "Caay kanga'ay a palamal ko kapah a mitapoh to to'as i loma' no tokay, o mamicowa kiso a pasifana' i cangraan hakini?",
     "question_ch": "都市大樓原住民青年反映因空間限制無法依傳統燃煙祭祖，你如何給予建議？",
     "suggested_answer_amis": "Manga'ay a mafalic ko lisin a midoedo to kaitiraan, o satadamaanay i mata no to'as i, o so'elinay a faloco' no wawa. I tokay a loma' i, manga'ay a miala to cecay a takid a nanom, so'elin ko faloco' a mitolon, ano eca pahereken ko radiw no lisin, pakayni i caayay paka'angtol a demak a mita'ong to to'as.",
     "suggested_answer_ch": "儀式可因應空間因地制宜，祖靈看重的是後代子孫內心的誠心意念。在都市大樓內，可改用一杯清水、誠心默禱，或播放吟唱祭歌，以低碳安全的方式實踐慎終追遠。"
@@ -226,7 +226,7 @@
   {
     "quiz_id": "29",
     "category_note": "四、 語言復振、跨文化溝通與都會原住民 (O palowad to sowal, pacacawma to kasasiroma a serangawan ato i tokayay a Pangcah)",
-    "question_text": "Ano ma'enel ko nika minanam i tingnaw a caay ka kapah ko nika minanam to sowal i, o mamicowa kiso a mipadama a mifohat tonini hakini?",
+    "question_amis": "Ano ma'enel ko nika minanam i tingnaw a caay ka kapah ko nika minanam to sowal i, o mamicowa kiso a mipadama a mifohat tonini hakini?",
     "question_ch": "局限於設備或線上互動冷冰冰，族語直播共學課程效果不彰，你如何運用互動文化打破僵局？",
     "suggested_answer_amis": "Palowaden ko lipahakay a wayway no Pangcah, palamlamen ko pacarcaray a radiw no to'as i nipasifana' i tingnaw. Pakayni i kaysing a misakero to kamay, pasadak to soni no Pangcah a malalitin, ta mala o lipahakay a 'orip no kapah i tokay konini.",
     "suggested_answer_ch": "發揮族人樂天幽默的特質，將傳統歌謠的應答結構導入線上教學。透過鏡頭進行互動手勢舞、族語語氣詞接龍，重塑課堂集體參與感，化被動聆聽為歡樂體驗。"
@@ -234,613 +234,9 @@
   {
     "quiz_id": "30",
     "category_note": "四、 語言復振、跨文化溝通與都會原住民 (O palowad to sowal, pacacawma to kasasiroma a serangawan ato i tokayay a Pangcah)",
-    "question_text": "Ano mafalic ko romi'ad a mangalay a malimad ko niyaro' i lawac no riyar i, o mamicowa kiso a palacecay to faloco' no finawlan hakini?",
+    "question_amis": "Ano mafalic ko romi'ad a mangalay a malimad ko niyaro' i lawac no riyar i, o mamicowa kiso a palacecay to faloco' no finawlan hakini?",
     "question_ch": "面臨氣候變遷，部分臨海部落面臨遷村抉擇，你如何凝聚族人共識？",
     "suggested_answer_amis": "Pasowalen to nika matiya o 'aol ko 'icel no finacadan ita. Talacowa mafalic ko kamaro'an, nika ano caay ka laliwasak ko selal, mado'edo ko sowal, caay ka lasawad ko nika kakakayat no finawlan i, i cowa ko sa'opo no finawlan, i tira ko loma' ita.",
     "suggested_answer_ch": "宣告我族性格如同竹子般堅韌。雖然居住環境改變了，但只要年齡階層組織不散、語言依然傳唱、族人彼此牽手的信念不滅，哪裡有群體凝聚，哪裡就是家。"
   }
 ]
-
-# ---- 第二層：根據選擇顯示對應架構 ----
-
-# 1. 📋 認證考試說明頁面
-if current_tab == "📋 認證考試說明":
-    st.subheader("📋 認證考試說明")
-    st.divider()
-    st.markdown("### 1. 詞彙範圍/參考教材")
-    st.markdown("""
-    * **詞彙範圍：** 學習詞表1至800詞，以及其衍生詞。
-    * **參考教材：** 包含（第1階至第9階）教材、生活會話篇、閱讀書寫篇。
-    """)
-    st.markdown("### 2. 測驗架構/題型配分")
-    st.markdown("""
-    中高級認證總分為100分，[聽力(20分)/口說(30分)/閱讀(30分)/寫作(20分)四個項目]
-    * **〖聽力測驗〗**
-      * 聽音選詞(5題/10%)：聽族語句子，從4個詞彙或詞組選項中，選出答案。
-      * 對話理解(5題/10%)：根據2位族人的對話，從4個選項中選出答案。
-    * **〖口說測驗〗**
-      * 段落朗讀(1題/10%)：朗讀40至50詞的短文(備答1分半鐘，作答1分半鐘)。
-      * 情境問答(5題/10%)：每題包含2句(第1句為情境鋪陳)，以族語表達看法(每題含備答時間約40秒)。
-      * 看圖表達(1題/10%)：依圖片情境以族語表達想法（備答2分鐘，作答2分鐘)。
-    * **〖閱讀測驗〗**
-      * 詞彙語意(5題/10%)：依提示於4個選項中選出答案。
-      * 語言結構(10題/20%)：依提示於4個選項中選出答案。
-    * **〖寫作測驗〗**
-      * 句子聽寫(5題/10%)：聽寫族語句子，每題播放2遍。
-      * 問答題(5題/10%)：依題目指示，以族語句子回答。
-    """)
-    st.markdown("### 3. 合格標準")
-    st.markdown("""
-    滿分100分中，**總分達60分以上**，且單項成績達**聽力15分、口說15分、閱讀18分、寫作12分以上**，即可取得「通過聽說讀寫」的完整資格 。考生亦可依對應門檻獨立取得「通過聽說」或「通過讀寫」的資格 。
-    """)
-
-# 2. 🎧 聽力測驗
-elif current_tab == "🎧 聽力":
-    st.subheader("🎧 聽力測驗 (Pitengilan)")
-    st.divider()
-    listening_sub = st.radio(
-        "聽力題型選擇：",
-        ["選擇題-聽音選詞", "選擇題-對話理解"],
-        horizontal=True
-    )
-    
-    if listening_sub == "選擇題-聽音選詞":
-        st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-        st.markdown("### 🔍 選擇題 - 聽音選詞")
-        
-        if "random_quiz_order" not in st.session_state:
-            st.session_state.random_quiz_order = list(range(len(QUIZ_DATA)))
-            random.shuffle(st.session_state.random_quiz_order)
-            
-        if "current_pointer" not in st.session_state:
-            st.session_state.current_pointer = 0
-        if "audio_triggered" not in st.session_state:
-            st.session_state.audio_triggered = False
-        if "submitted" not in st.session_state:
-            st.session_state.submitted = False
-        if "shuffled_options_map" not in st.session_state:
-            st.session_state.shuffled_options_map = {}
-
-        ptr = st.session_state.current_pointer
-        
-        if ptr < len(QUIZ_DATA):
-            true_quiz_id = st.session_state.random_quiz_order[ptr]
-            current_quiz = QUIZ_DATA[true_quiz_id]
-            
-            if true_quiz_id not in st.session_state.shuffled_options_map:
-                shuffled_raw_opts = current_quiz["options"].copy()
-                random.shuffle(shuffled_raw_opts)
-                
-                formatted_opts = []
-                correct_text_formatted = ""
-                correct_word_raw = current_quiz["correct_text"]
-                
-                for i, word_item in enumerate(shuffled_raw_opts):
-                    display_text = f"({i+1}) {word_item}"
-                    formatted_opts.append(display_text)
-                    if word_item == correct_word_raw:
-                        correct_text_formatted = display_text
-                
-                st.session_state.shuffled_options_map[true_quiz_id] = {
-                    "options": formatted_opts,
-                    "correct_text": correct_text_formatted
-                }
-            
-            live_quiz_data = st.session_state.shuffled_options_map[true_quiz_id]
-            
-            st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(QUIZ_DATA)} 題**")
-            st.write(current_quiz["question_text"])
-            
-            if st.button("🔊 播放題目", key=f"play_{ptr}"):
-                st.session_state.audio_triggered = True
-            
-            if st.session_state.audio_triggered:
-                if os.path.exists(current_quiz["audio_path"]):
-                    st.audio(current_quiz["audio_path"], format="audio/mp3", autoplay=True)
-                else:
-                    st.warning(f"⚠️ 找不到音檔：`{current_quiz['audio_path']}`，請確認檔案是否已上傳。")
-                st.session_state.audio_triggered = False
-            
-            st.write("---")
-            
-            user_choice = st.radio(
-                "請從下方選出正確答案：",
-                options=live_quiz_data["options"],
-                index=None,
-                key=f"radio_{ptr}",
-                disabled=st.session_state.submitted
-            )
-            
-            if not st.session_state.submitted:
-                if st.button("📥 提交答案", key=f"submit_{ptr}"):
-                    if user_choice is None:
-                        st.warning("⚠️ 請先選擇一個選項再行提交！")
-                    else:
-                        st.session_state.submitted = True
-                        st.rerun()
-            else:
-                correct_answer_text = live_quiz_data["correct_text"]
-                
-                if user_choice == correct_answer_text:
-                    st.markdown(f"### 🔴 答題結果：✓")
-                    st.success(f" Fangcal! 正確答案：**{correct_answer_text}**")
-                else:
-                    st.markdown(f"### 🔴 答題結果：✕")
-                    st.error(f" 再接再厲！正確答案：**{correct_answer_text}**")
-                
-                if st.button("➡️ 下一題", key=f"next_{ptr}"):
-                    st.session_state.current_pointer += 1
-                    st.session_state.submitted = False
-                    st.rerun()
-        else:
-            st.balloons()
-            st.success("🎉 您已完成本輪全部 15 道隨機題目！系統正在為您重新洗牌出題...")
-            if st.button("🔄 開始下一輪隨機挑戰"):
-                random.shuffle(st.session_state.random_quiz_order)
-                st.session_state.shuffled_options_map = {}
-                st.session_state.current_pointer = 0
-                st.session_state.submitted = False
-                st.rerun()
-                
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-    elif listening_sub == "選擇題-對話理解":
-        st.markdown("### 💬 選擇題 - 對話理解")
-        st.warning("🚧 【內容建置中】此處未來將播放部落生活情境對話，並測試長句理解能力。")
-
-# 3. 🗣️ 口說測驗
-elif current_tab == "🗣️ 口說":
-    st.subheader("🗣️ 口說測驗 (Pisowalan)")
-    st.divider()
-    speaking_sub = st.radio(
-        "口說題型選擇：",
-        ["段落朗讀", "情境問答", "看圖表達"],
-        horizontal=True
-    )
-    
-    if speaking_sub == "段落朗讀":
-        st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-        st.markdown("### 📖 口說測驗 - 段落朗讀")
-        
-        try:
-            with open("data/speaking_quiz.json", "r", encoding="utf-8") as f:
-                speaking_db = json.load(f)
-                
-            menu_options = ["題目選單..."] + [f"題目{item['quiz_id']}：{item['title']}" for item in speaking_db]
-            
-            selected_quiz = st.selectbox(
-                "請選擇朗讀題目：",
-                options=menu_options,
-                index=0,
-                key="speaking_quiz_selector"
-            )
-            
-            st.divider()
-            
-            if selected_quiz == "題目選單...":
-                st.info("💡 點選上方選單，選擇想要挑戰的題目。")
-            else:
-                current_id = selected_quiz.split("：")[0].replace("題目", "")
-                current_article = next((item for item in speaking_db if str(item["quiz_id"]) == str(current_id)), None)
-                
-                if current_article:
-                    st.markdown(f"#### 🎯 {current_article['title']}")
-                    st.info(current_article["content"])
-                    st.caption(f"來源：{current_article['source']} ｜ 建議準備時間：1分半鐘 ｜ 建議朗讀時間：1分半鐘")
-                else:
-                    st.error("⚠️ 找不到該題目的對應內容，請重新選擇。")
-                
-        except FileNotFoundError:
-            st.error("☠️ 系統性毀滅異常：偵測到 `data/speaking_quiz.json` 檔案遺失，請檢查 GitHub 儲存庫路徑！")
-            
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-    # ─── 題型二：情境問答（已完全修復冒號缺失死當，對齊寫作排版與小字註記） ───
-    elif speaking_sub == "情境問答":
-        try:
-            with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
-                speaking_situation_db = json.load(f)
-        except FileNotFoundError:
-            st.error("☠️ 系統性毀滅異常：偵測到 `data/speaking_situations.json` 檔案遺失，請確認是否建立！")
-            speaking_situation_db = []
-
-        if speaking_situation_db:
-            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            st.markdown("### 🗣️ 口說測驗 - 情境問答")
-            
-            if "s_random_order" not in st.session_state:
-                st.session_state.s_random_order = list(range(len(speaking_situation_db)))
-                random.shuffle(st.session_state.s_random_order)
-            if "s_pointer" not in st.session_state:
-                st.session_state.s_pointer = 0
-            if "s_show_q_trans" not in st.session_state:
-                st.session_state.s_show_q_trans = {}
-            if "s_show_ans" not in st.session_state:
-                st.session_state.s_show_ans = {}
-                
-            s_ptr = st.session_state.s_pointer
-            
-            if s_ptr < len(speaking_situation_db):
-                true_s_id = st.session_state.s_random_order[s_ptr]
-                current_s_quiz = speaking_situation_db[true_s_id]
-                
-                if true_s_id not in st.session_state.s_show_q_trans:
-                    st.session_state.s_show_q_trans[true_s_id] = False
-                if true_s_id not in st.session_state.s_show_ans:
-                    st.session_state.s_show_ans[true_s_id] = False
-                    
-                st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")
-                
-                # 題目只以「阿美族語」顯示
-                st.markdown(f"#### ❓ 問：{current_s_quiz['question_text']}")
-                
-                # 題目的性質分類放在題目下方用較小的字註記
-                st.markdown(f'<div class="category-note">性質分類：{current_s_quiz["category_note"]}</div>', unsafe_allow_html=True)
-                
-                # 題目中文意思雙向開關鎖
-                s_q_trans_label = "🔄 關閉中文意思" if st.session_state.s_show_q_trans[true_s_id] else "👁️ 顯示中文意思"
-                if st.button(s_q_trans_label, key=f"s_q_trans_btn_{s_ptr}"):
-                    st.session_state.s_show_q_trans[true_s_id] = not st.session_state.s_show_q_trans[true_s_id]
-                    st.rerun()
-                    
-                if st.session_state.s_show_q_trans[true_s_id]:
-                    st.info(f"💡 中文意思：{current_s_quiz['question_ch']}")
-                
-                st.write("---")
-                
-                # 參考答案雙向開關鎖
-                s_ans_label = "🔄 關閉參考答案" if st.session_state.s_show_ans[true_s_id] else "📥 顯示參考答案"
-                
-                col1, col2 = st.columns([1, 3])
-                with col1:
-                    if st.button(s_ans_label, key=f"s_ans_btn_{s_ptr}"):
-                        st.session_state.s_show_ans[true_s_id] = not st.session_state.s_show_ans[true_s_id]
-                        st.rerun()
-                        
-                with col2:
-                    if st.session_state.s_show_ans[true_s_id]:
-                        st.success(f"✨ **參考答案 (阿美語)：**\n\n{current_s_quiz['suggested_answer_amis']}\n\n"
-                                   f"───\n\n💡 **中文翻譯：**\n\n{current_s_quiz['suggested_answer_ch']}")
-                        
-                if st.session_state.s_show_ans[true_s_id]:
-                    st.write("")
-                    # 留存參考音檔播放器位置
-                    st.caption("🔊 參考答案語音音檔 (製作中，目前暫時留空)")
-                    
-                    st.write("")
-                    if st.button("➡️ 下一題", key=f"s_next_{s_ptr}"):
-                        st.session_state.s_pointer += 1
-                        st.rerun()
-            else:
-                st.balloons()
-                st.success("🎉 恭喜！您已完成全部口說情境問答的隨機練習！")
-                if st.button("🔄 重新挑戰", key="reset_speaking_situations"):
-                    st.session_state.s_pointer = 0
-                    if "s_show_ans" in st.session_state:
-                        del st.session_state["s_show_ans"]
-                    if "s_show_q_trans" in st.session_state:
-                        del st.session_state["s_show_q_trans"]
-                    random.shuffle(st.session_state.s_random_order)
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-            
-    elif speaking_sub == "看圖表達":
-        st.markdown("### 🖼️ 看圖表達")
-        st.warning("🚧 【內容建置中】")
-
-# 4. 📖 閱讀測驗
-elif current_tab == "📖 閱讀":
-    st.subheader("📖 閱讀測驗 (Piasipan)")
-    st.divider()
-    reading_sub = st.radio(
-        "閱讀題型選擇：",
-        ["選擇題-詞彙語意", "選擇題-語言結構"],
-        horizontal=True
-    )
-    
-    try:
-        with open("data/reading_quiz.json", "r", encoding="utf-8") as f:
-            all_reading_data = json.load(f)
-    except FileNotFoundError:
-        st.error("☠️ 系統性毀滅異常：偵測到 `data/reading_quiz.json` 檔案遺失，請確認檔案是否已放置於 data/ 資料夾。")
-        all_reading_data = []
-
-    if all_reading_data:
-        target_type = "vocabulary" if reading_sub == "選擇題-詞彙語意" else "structure"
-        reading_db = [item for item in all_reading_data if item["type"] == target_type]
-        
-        state_order_key = f"r_{target_type}_order"
-        state_ptr_key = f"r_{target_type}_ptr"
-        state_opts_key = f"r_{target_type}_opts_map"
-        state_submit_key = f"r_{target_type}_submit_map"
-        state_choice_key = f"r_{target_type}_choice_map"
-        
-        if state_order_key not in st.session_state:
-            st.session_state[state_order_key] = list(range(len(reading_db)))
-            random.shuffle(st.session_state[state_order_key])
-            
-        if state_ptr_key not in st.session_state:
-            st.session_state[state_ptr_key] = 0
-            
-        if state_opts_key not in st.session_state:
-            st.session_state[state_opts_key] = {}
-            
-        if state_submit_key not in st.session_state:
-            st.session_state[state_submit_key] = {}
-            
-        if state_choice_key not in st.session_state:
-            st.session_state[state_choice_key] = {}
-
-        r_ptr = st.session_state[state_ptr_key]
-        
-        if r_ptr < len(reading_db):
-            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            
-            true_r_id = st.session_state[state_order_key][r_ptr]
-            current_r_quiz = reading_db[true_r_id]
-            
-            if true_r_id not in st.session_state[state_submit_key]:
-                st.session_state[state_submit_key][true_r_id] = False
-            if true_r_id not in st.session_state[state_choice_key]:
-                st.session_state[state_choice_key][true_r_id] = None
-                
-            if true_r_id not in st.session_state[state_opts_key]:
-                shuffled_raw_opts = current_r_quiz["options"].copy()
-                random.shuffle(shuffled_raw_opts)
-                
-                formatted_opts = []
-                correct_text_formatted = ""
-                correct_word_raw = current_r_quiz["correct_text"]
-                
-                for i, word_item in enumerate(shuffled_raw_opts):
-                    display_text = f"({i+1}) {word_item}"
-                    formatted_opts.append(display_text)
-                    if word_item == correct_word_raw:
-                        correct_text_formatted = display_text
-                        
-                st.session_state[state_opts_key][true_r_id] = {
-                    "options": formatted_opts,
-                    "correct_text": correct_text_formatted
-                }
-                
-            live_r_data = st.session_state[state_opts_key][true_r_id]
-            
-            st.write(f"**當前進度：第 {r_ptr + 1} 題 / 共 {len(reading_db)} 題 (隨機出題組模式)**")
-            st.write(current_r_quiz["question_text"])
-            st.write("---")
-            
-            saved_choice = st.session_state[state_choice_key][true_r_id]
-            saved_index = live_r_data["options"].index(saved_choice) if saved_choice in live_r_data["options"] else None
-            
-            user_r_choice = st.radio(
-                "請選出正確的選項：",
-                options=live_r_data["options"],
-                index=saved_index,
-                key=f"r_radio_{target_type}_{r_ptr}",
-                disabled=st.session_state[state_submit_key][true_r_id]
-            )
-            
-            if not st.session_state[state_submit_key][true_r_id]:
-                st.session_state[state_choice_key][true_r_id] = user_r_choice
-            
-            if not st.session_state[state_submit_key][true_r_id]:
-                if st.button("📥 提交答案", key=f"r_submit_btn_{target_type}_{r_ptr}"):
-                    if user_r_choice is None:
-                        st.warning("⚠️ 請先選擇一個選項再行提交！")
-                    else:
-                        st.session_state[state_submit_key][true_r_id] = True
-                        st.rerun()
-            else:
-                correct_ans_str = live_r_data["correct_text"]
-                if user_r_choice == correct_ans_str:
-                    st.markdown(f"### 🔴 答題結果：✓")
-                    st.success(f" Fangcal! 正確答案：**{correct_ans_str}**")
-                else:
-                    st.markdown(f"### 🔴 答題結果：✕")
-                    st.error(f" 再接再厲！正確答案：**{correct_ans_str}**")
-            
-            st.write("")
-            
-            nav_col1, nav_col2 = st.columns(2)
-            with nav_col1:
-                if st.button("⬅️ 上一題", key=f"r_prev_btn_{target_type}_{r_ptr}", disabled=(r_ptr == 0)):
-                    st.session_state[state_ptr_key] -= 1
-                    st.rerun()
-            with nav_col2:
-                if st.button("➡️ 下一題", key=f"r_next_btn_{target_type}_{r_ptr}"):
-                    st.session_state[state_ptr_key] += 1
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-        else:
-            st.balloons()
-            st.success(f"🎉 恭喜！您已完成本項目全部 {len(reading_db)} 道隨機題組練習！")
-            if st.button("🔄 重新洗牌挑戰", key=f"r_reset_{target_type}"):
-                random.shuffle(st.session_state[state_order_key])
-                st.session_state[state_ptr_key] = 0
-                st.session_state[state_opts_key] = {}
-                st.session_state[state_submit_key] = {}
-                st.session_state[state_choice_key] = {}
-                st.rerun()
-
-# 5. ✍️ 寫作測驗
-elif current_tab == "✍️ 寫作":
-    st.subheader("✍️ 寫作測驗 (Pitilidan)")
-    st.divider()
-    writing_sub = st.radio(
-        "寫作題型選擇：",
-        ["句子聽寫", "問答"],
-        horizontal=True
-    )
-    
-    try:
-        with open("data/writing_quiz.json", "r", encoding="utf-8") as f:
-            all_writing_data = json.load(f)
-    except FileNotFoundError:
-        st.error("☠️ 系統性毀滅異常：偵測到 `data/writing_quiz.json` 檔案遺失，請檢查儲存庫路徑！")
-        all_writing_data = []
-
-    if all_writing_data:
-        if writing_sub == "句子聽寫":
-            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            st.markdown("### ✍️ 寫作測驗 - 句子聽寫")
-            
-            dictation_db = [item for item in all_writing_data if item["type"] == "dictation"]
-            
-            if "writing_dictation_order" not in st.session_state:
-                st.session_state.writing_dictation_order = list(range(len(dictation_db)))
-                random.shuffle(st.session_state.writing_dictation_order)
-                
-            if "writing_pointer" not in st.session_state:
-                st.session_state.writing_pointer = 0
-            if "writing_audio_triggered" not in st.session_state:
-                st.session_state.writing_audio_triggered = False
-            if "writing_submitted" not in st.session_state:
-                st.session_state.writing_submitted = False
-
-            w_ptr = st.session_state.writing_pointer
-            
-            if w_ptr < len(dictation_db):
-                true_w_id = st.session_state.writing_dictation_order[w_ptr]
-                current_w_quiz = dictation_db[true_w_id]
-                
-                st.write(f"**當前進度：第 {w_ptr + 1} 題 / 共 {len(dictation_db)} 題**")
-                st.write(current_w_quiz["question_text"])
-                
-                if st.button("🔊 播放題目", key=f"w_play_{w_ptr}"):
-                    st.session_state.writing_audio_triggered = True
-                
-                if st.session_state.writing_audio_triggered:
-                    if os.path.exists(current_w_quiz["audio_path"]):
-                        st.audio(current_w_quiz["audio_path"], format="audio/mp3", autoplay=True)
-                    else:
-                        st.error(f"⚠️ 找不到音檔！請確認此檔案是否已正確上傳至 GitHub 儲存庫：\n`{current_w_quiz['audio_path']}`")
-                    st.session_state.writing_audio_triggered = False
-                
-                st.write("---")
-                
-                user_typed_answer = st.text_input(
-                    "請在此輸入聽到的完整族語句子（注意大小寫與標點符號）：",
-                    placeholder="請輸入答案...",
-                    key=f"w_input_{w_ptr}",
-                    disabled=st.session_state.writing_submitted
-                )
-                
-                if not st.session_state.writing_submitted:
-                    if st.button("📥 提交答案", key=f"w_submit_{w_ptr}"):
-                        if not user_typed_answer.strip():
-                            st.warning("⚠️ 請先在輸入框打字再行提交！")
-                        else:
-                            st.session_state.writing_submitted = True
-                            st.rerun()
-                else:
-                    correct_sentence = current_w_quiz["correct_text"]
-                    
-                    col1, col2 = st.columns([1, 3])
-                    with col1:
-                        st.button("📥 提交答案", key=f"w_sub_dis_{w_ptr}", disabled=True)
-                    with col2:
-                        st.info(f"💡 正確答案：**{correct_sentence}**")
-                    
-                    st.write("")
-                    if st.button("➡️ 下一題", key=f"w_next_{w_ptr}"):
-                        st.session_state.writing_pointer += 1
-                        st.session_state.writing_submitted = False
-                        st.rerun()
-            else:
-                st.balloons()
-                st.success("🎉 您已完成本輪全部 5 道隨機聽寫題目！")
-                if st.button("🔄 開始下一輪隨機挑戰", key="reset_writing"):
-                    random.shuffle(st.session_state.writing_dictation_order)
-                    st.session_state.writing_pointer = 0
-                    st.session_state.writing_submitted = False
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-            
-        elif writing_sub == "問答":
-            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            st.markdown("### 📝 寫作測驗 - 問答")
-            
-            question_db = [item for item in all_writing_data if item["type"] == "question"]
-            
-            if "q_pointer" not in st.session_state:
-                st.session_state.q_pointer = 0
-            if "q_audio_triggered" not in st.session_state:
-                st.session_state.q_audio_triggered = False
-            if "q_submitted" not in st.session_state:
-                st.session_state.q_submitted = False
-
-            q_ptr = st.session_state.q_pointer
-            
-            if q_ptr < len(question_db):
-                current_q_quiz = question_db[q_ptr]
-                
-                if "q_show_trans" not in st.session_state:
-                    st.session_state.q_show_trans = {}
-                if "q_show_ans" not in st.session_state:
-                    st.session_state.q_show_ans = {}
-                    
-                if q_ptr not in st.session_state.q_show_trans:
-                    st.session_state.q_show_trans[q_ptr] = False
-                if q_ptr not in st.session_state.q_show_ans:
-                    st.session_state.q_show_ans[q_ptr] = False
-                
-                st.write(f"**當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題**")
-                st.markdown(f"#### ❓ 問：{current_q_quiz['question_text']}")
-                
-                trans_btn_label = "🔄 關閉中文翻譯" if st.session_state.q_show_trans[q_ptr] else "👁️ 顯示中文翻譯"
-                if st.button(trans_btn_label, key=f"q_trans_toggle_{q_ptr}"):
-                    st.session_state.q_show_trans[q_ptr] = not st.session_state.q_show_trans[q_ptr]
-                    st.rerun()
-                
-                if st.session_state.q_show_trans[q_ptr]:
-                    st.info(f"💡 中文提示：{current_q_quiz['chinese_translation']}")
-                
-                st.write("---")
-                
-                ans_btn_label = "🔄 關閉參考答案" if st.session_state.q_show_ans[q_ptr] else "📥 顯示參考答案"
-                
-                col1, col2 = st.columns([1, 3])
-                with col1:
-                    if st.button(ans_btn_label, key=f"q_ans_toggle_{q_ptr}"):
-                        st.session_state.q_show_ans[q_ptr] = not st.session_state.q_show_ans[q_ptr]
-                        st.rerun()
-                
-                with col2:
-                    if st.session_state.q_show_ans[q_ptr]:
-                        suggested_ans = current_q_quiz["suggested_answer"]
-                        st.success(f"✨ 參考答案：**{suggested_ans}**")
-                
-                if st.session_state.q_show_ans[q_ptr]:
-                    st.write("")
-                    if st.button("🔊 播放參考答案音檔", key=f"q_audio_btn_{q_ptr}"):
-                        st.session_state.q_audio_triggered = True
-                        
-                    if st.session_state.q_audio_triggered:
-                        if os.path.exists(current_q_quiz["audio_path"]):
-                            st.audio(current_q_quiz["audio_path"], format="audio/mp3", autoplay=True)
-                        else:
-                            st.error(f"⚠️ 找不到音檔！請確認此檔案是否已正確上傳至 GitHub 儲存庫：\n`{current_q_quiz['audio_path']}`")
-                        st.session_state.q_audio_triggered = False
-                    
-                    st.write("")
-                    if st.button("➡️ 下一題", key=f"q_next_{q_ptr}"):
-                        st.session_state.q_pointer += 1
-                        st.rerun()
-            else:
-                st.success("🎉 您已完成「問答」全部題目的練習！")
-                if st.button("🔄 重新挑戰", key="reset_questions"):
-                    st.session_state.q_pointer = 0
-                    if "q_show_trans" in st.session_state:
-                        del st.session_state["q_show_trans"]
-                    if "q_show_ans" in st.session_state:
-                        del st.session_state["q_show_ans"]
-                    st.rerun()
-                    
-            st.markdown('</div>', unsafe_allow_html=True)
-
-# ---- App 底部註腳 ----
-st.write("---")
-st.caption("© 2026 中高級認證 App 三一開發團隊 ｜ 雙重隨機全防禦穩定版")
