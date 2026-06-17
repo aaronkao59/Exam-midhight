@@ -97,10 +97,6 @@ if st.session_state.previous_tab != current_tab:
         del st.session_state["s_show_q_trans"]
     if "s_show_ans" in st.session_state:
         del st.session_state["s_show_ans"]
-    if "img_show_draft" in st.session_state:
-        del st.session_state["img_show_draft"]
-    if "img_show_ans" in st.session_state:
-        del st.session_state["img_show_ans"]
         
     st.session_state.previous_tab = current_tab
     st.rerun()
@@ -126,36 +122,42 @@ QUIZ_DATA = [
 
 # ---- 第二層：根據選擇顯示對應架構 ----
 
-# 1. 📋 認證考試說明頁面
+# 1. 📋 認證考試說明頁面 (⚡ 依要求重構為開關式顯示/隱藏細節架構)
 if current_tab == "📋 認證考試說明":
     st.subheader("📋 認證考試說明")
     st.divider()
-    st.markdown("### 1. 詞彙範圍/參考教材")
-    st.markdown("""
-    * **詞彙範圍：** 學習詞表1至800詞，以及其衍生詞。
-    * **參考教材：** 包含（第1階至第9階）教材、生活會話篇、閱讀書寫篇。
-    """)
-    st.markdown("### 2. 測驗架構/題型配分")
-    st.markdown("""
-    中高級認證總分為100分，[聽力(20分)/口說(30分)/閱讀(30分)/寫作(20分)四個項目]
-    * **〖聽力測驗〗**
-      * 聽音選詞(5題/10%)：聽族語句子，從4個詞彙或詞組選項中，選出答案。
-      * 对話理解(5題/10%)：根據2位族人的對話，從4個選項中選出答案。
-    * **〖口說測驗〗**
-      * 段落朗讀(1題/10%)：朗讀40至50詞的短文(備答1分半鐘，作答1分半鐘)。
-      * 情境問答(5題/10%)：每題包含2句(第1句為情境鋪陳)，以族語表達看法(每題含備答時間約40秒)。
-      * 看圖表達(1題/10%)：依圖片情境以族語表達想法（備答2分鐘，作答2分鐘)。
-    * **〖閱讀測驗〗**
-      * 詞彙語意(5題/10%)：依提示於4個選項中選出答案。
-      * 語言結構(10題/20%)：依提示於4個選項中選出答案。
-    * **〖寫作測驗〗**
-      * 句子聽寫(5題/10%)：聽寫族語句子，每題播放2遍。
-      * 問答題(5題/10%)：依題目指示，以族語句子回答。
-    """)
-    st.markdown("### 3. 合格標準")
-    st.markdown("""
-    滿分100分中，**總分達60分以上**，且單項成績達**聽力15分、口說15分、閱讀18分、寫作12分以上**，即可取得「通過聽說讀寫」的完整資格 。考生亦可依對應門檻獨立取得「通過聽說」或「通過讀寫」的資格 。
-    """)
+    
+    # ─── 部分一：詞彙範圍/參考教材 ───
+    with st.expander("1. 詞彙範圍/參考教材", expanded=False):
+        st.markdown("""
+        * **詞彙範圍：** 學習詞表1至800詞，以及其衍生詞。
+        * **參考教材：** 包含（第1階至第9階）教材、生活會話篇、閱讀書寫篇。
+        """)
+        
+    # ─── 部分二：測驗架構/題型配分 ───
+    with st.expander("2. 測驗架構/題型配分", expanded=False):
+        st.caption("中高級認證總分為100分，[聽力(20分)/口說(30分)/閱讀(30分)/寫作(20分)四個項目]")
+        st.markdown("""
+        * **〖聽力測驗〗**
+          * 聽音選詞(5題/10%)：聽族語句子，從4個詞彙或詞組選項中，選出答案。
+          * 对話理解(5題/10%)：根據2位族人的對話，從4個選項中選出答案。
+        * **〖口說測驗〗**
+          * 段落朗讀(1題/10%)：朗讀40至50詞的短文(備答1分半鐘，作答1分半鐘)。
+          * 情境問答(5題/10%)：每題包含2句(第1句為情境鋪陳)，以族語表達看法(每題含備答時間約40秒)。
+          * 看圖表達(1題/10%)：依圖片情境以族語表達想法（備答2分鐘，作答2分鐘)。
+        * **〖閱讀測驗〗**
+          * 詞彙語意(5題/10%)：依提示於4個選項中選出答案。
+          * 語言結構(10題/20%)：依提示於4個選項中選出答案。
+        * **〖寫作測驗〗**
+          * 句子聽寫(5題/10%)：聽寫族語句子，每題播放2遍。
+          * 問答題(5題/10%)：依題目指示，以族語句子回答。
+        """)
+        
+    # ─── 部分三：合格標準 ───
+    with st.expander("3. 合格標準", expanded=False):
+        st.markdown("""
+        滿分100分中，**總分達60分以上**，且單項成績達**聽力15分、口說15分、閱讀18分、寫作12分以上**，即可取得「通過聽說讀寫」的完整資格 。考生亦可依對應門檻獨立取得「通過聽說」或「通過讀寫」的資格 。
+        """)
 
 # 2. 🎧 聽力測驗
 elif current_tab == "🎧 聽力":
@@ -402,7 +404,6 @@ elif current_tab == "🗣️ 口說":
                     
             st.markdown('</div>', unsafe_allow_html=True)
             
-    # ─── 題型三：看圖表達（本次全新實作核心：內建主題選擇、開關式草稿區與開關式參考答案） ───
     elif speaking_sub == "看圖表達":
         try:
             with open("data/speaking_images.json", "r", encoding="utf-8") as f:
@@ -415,7 +416,6 @@ elif current_tab == "🗣️ 口說":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 🖼️ 口說測驗 - 看圖表達")
             
-            # 初始化看圖表達大題專屬開關狀態
             if "img_show_draft" not in st.session_state:
                 st.session_state.img_show_draft = False
             if "img_show_ans" not in st.session_state:
@@ -423,7 +423,6 @@ elif current_tab == "🗣️ 口說":
             if "draft_text_cache" not in st.session_state:
                 st.session_state.draft_text_cache = {}
 
-            # 建立選單選項
             img_menu_options = ["請選擇題目..."] + [item["title"] for item in speaking_img_db]
             
             selected_img_title = st.selectbox(
@@ -438,11 +437,9 @@ elif current_tab == "🗣️ 口說":
             if selected_img_title == "請選擇題目...":
                 st.info("💡 請點選上方選單，自由選擇您想要挑戰的看圖表達主題。")
             else:
-                # 尋找當前選中的資料物件
                 current_img_quiz = next(item for item in speaking_img_db if item["title"] == selected_img_title)
                 q_id = current_img_quiz["quiz_id"]
                 
-                # 渲染主題圖片
                 if os.path.exists(current_img_quiz["image_path"]):
                     st.image(current_img_quiz["image_path"], use_container_width=True)
                 else:
@@ -450,13 +447,11 @@ elif current_tab == "🗣️ 口說":
                 
                 st.write("---")
                 
-                # ─── 1. 草稿區開關迴路 ───
                 draft_btn_label = "🔄 關閉草稿區" if st.session_state.img_show_draft else "📝 顯示草稿區"
                 if st.button(draft_btn_label, key="img_draft_toggle_btn"):
                     st.session_state.img_show_draft = not st.session_state.img_show_draft
                     st.rerun()
                 
-                # 如果開啟草稿區，渲染打字欄位並將文字寫入快取（確保收合時不會不見）
                 if st.session_state.img_show_draft:
                     if q_id not in st.session_state.draft_text_cache:
                         st.session_state.draft_text_cache[q_id] = ""
@@ -471,7 +466,6 @@ elif current_tab == "🗣️ 口說":
                 
                 st.write("")
                 
-                # ─── 2. 參考答案開關迴路 ───
                 img_ans_label = "🔄 關閉參考答案" if st.session_state.img_show_ans else "📥 顯示參考答案"
                 
                 col_ans1, col_ans2 = st.columns([1, 3])
