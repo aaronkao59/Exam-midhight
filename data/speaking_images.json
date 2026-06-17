@@ -12,5 +12,26 @@
     "image_path": "02.jpg",
     "suggested_answer_amis": "Tada lipahak ko ontokay no pitilidan, \nmisa'icel ko mitiliday a malalifet i kacomikayan, tahira tahini ko ngiha' no mipa'icelay i lawac. \nYo mipatong a comikay, pacedi san a comikay ko milifetay a miala to lita'ang no kasacefang. \nO miki'araway a singsi ato mitiliday i, tano laha' san a mihemek, miwatawat to hata a hata a pahapinang to kilemel ato nika lacecay.\nO caayay ka tawal a harateng konini.",
     "suggested_answer_ch": "學校運動會熱鬧非凡，同學們在跑道上奮力競賽，場邊加油聲此起彼落。大家團結合作，發揮實力，展現運動精神，留下難忘回憶。"
+  },
+  {
+    "quiz_id": "03",
+    "title": "沙灘上的快樂夏日",
+    "image_path": "03.jpg",
+    "suggested_answer_amis": "Ma'edil ko cidal i lawac no riyar,\ntada lipahak ko mato'asay, wawa ato kapah a misalama.\nO roma i, misatafok, tatawa saan.\nO roma i, mipatikeday a mitala to foting.\nO roma i, midangoy i riyar a misalama, tada saepi'.\nO roma i, mikalic to sapidangoy a pakalaing.\nMaemin cangra a malipahak to nikafangcal no kaciherangan i riyar.",
+    "suggested_answer_ch": "陽光灑落海邊，大人、小孩與青年們各自享受著海洋的樂趣。有人在堆沙城堡，笑聲不斷；有人揮竿釣魚，靜待收穫；有人在海裡游泳嬉戲，清涼暢快；有人站上衝浪板，乘風破浪。大家在這片"
+  },
+  {
+    "quiz_id": "04",
+    "title": "一家人共耕田野",
+    "image_path": "04.jpg",
+    "suggested_answer_amis": "Mataengad ko cidal i omah,\nmapolong ko laloma'an a matayal.\nO mato'asay i,\no roma mikangkang to sera,\no roma mi'anip ato mipaloma,\no roma mipitpit to dateng.\nMinanam ko wawa i 'alaneng a mifotfot to dateng,\ntatawa saan.\Mipadang ko kapah a micolo' to capox ato nilitodan,\ntada ci'icel cangra. Mapapadang cangra a malalicay,\nmalipahak to nikaroray ato nikarimorak to kinaira,\npahapinang to nikafangcal no hekal.",
+    "suggested_answer_ch": "陽光灑落田野，大人們有的翻土整地，有的插秧播種，有的採收蔬菜。小孩們在田埂間學習拔蘿葡、摘菜，笑聲不斷。青年們協助搬運秧苗與收穫，活力四射。大家分工合作，彼此交流，享受勞動的樂趣與豐收的喜悦，感受大自然的美好與生活的充實。"
+  },
+  {
+    "quiz_id": "05",
+    "title": "家庭溪邊樂趣時光",
+    "image_path": "05.jpg",
+    "suggested_answer_amis": "Mataengad ko cidal i sa'owac,\ntada lipahak ko mato'asay, wawa ato kapah a misalama.\nO roma i, misalama to nanom ato mipasiyasing.\nO roma i, miki'araw to ma'oripay.\nO roma i, mipatiked.\nO roma i, masasisi'si' to nanom, tatawa saan.\nI hekal i, pahanhan ko faloco' naira a maemin,\nmihamham to saepi'ay a nanom ato fangcalay a fali.\nMiliwan to nikafangcal a hirateng, ato nika masasipatihi.",
+    "suggested_answer_ch": "陽光灑落溪流，大人、小孩與青年在溪邊盡情玩耍。有人戲水拍照，有人觀察生物，有人釣魚，有人打水仗，笑聲不斷。大自然中，大家放松心情，享受清涼溪水與新鮮空氣，留下美好回憶，感受自然的魅力與彼此的陪伴。"
   }
 ]
