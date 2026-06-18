@@ -459,7 +459,7 @@ elif current_tab == "🗣️ 口說":
             st.divider()
             
             if selected_quiz == "題目選單...":
-                st.info("💡 點選上方選單，選擇想要挑戰的題目。")
+                pass
             else:
                 current_id = selected_quiz.split("：")[0].replace("題目", "")
                 current_article = next((item for item in speaking_db if str(item["quiz_id"]) == str(current_id)), None)
@@ -632,7 +632,7 @@ elif current_tab == "🗣️ 口說":
             st.divider()
             
             if selected_img_title == "請選擇題目...":
-                st.info("💡 請點選上方選單，自由選擇您想要挑戰的看圖表達主題。")
+                pass
             else:
                 current_img_quiz = next(item for item in speaking_img_db if item["title"] == selected_img_title)
                 q_id = current_img_quiz["quiz_id"]
