@@ -4,7 +4,7 @@
     "type": "dictation",
     "title": "句子聽寫-第1題",
     "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-01.mp3",
-    "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
+    "question_text": "聆聽音檔，寫下完整族語句子：",
     "correct_text": "Caay pakasoelin kako tora mifotingay."
   },
   {
@@ -12,7 +12,7 @@
     "type": "dictation",
     "title": "句子聽寫-第2題",
     "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-02.mp3",
-    "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
+    "question_text": "聆聽音檔，寫下完整族語句子：",
     "correct_text": "Miwarwar to sota kora omaomahan."
   },
   {
@@ -20,7 +20,7 @@
     "type": "dictation",
     "title": "句子聽寫-第3題",
     "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-03.mp3",
-    "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
+    "question_text": "聆聽音檔，寫下完整族語句子：",
     "correct_text": "Pakayra to ma’efer koya adipangpang."
   },
   {
@@ -28,7 +28,7 @@
     "type": "dictation",
     "title": "句子聽寫-第4題",
     "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-04.mp3",
-    "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
+    "question_text": "聆聽音檔，寫下完整族語句子：",
     "correct_text": "Kilimen koya hahawikiden iso a focol anocila."
   },
   {
@@ -36,7 +36,7 @@
     "type": "dictation",
     "title": "句子聽寫-第5題",
     "audio_path": "assets/audio/04_writing/writing_dictation/write-d1-05.mp3",
-    "question_text": "請聽音檔，並在輸入框中寫下您聽到的完整族語句子：",
+    "question_text": "聆聽音檔，寫下完整族語句子：",
     "correct_text": "Pararid miasik to loma’ to dafak kora kapah."
   },
   {
