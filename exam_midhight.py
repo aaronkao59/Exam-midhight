@@ -20,10 +20,17 @@ st.caption("[練習平台 選擇器]")
 main_options = ["📋 認證考試說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
 current_tab = st.segmented_control("主選單導覽", main_options, default="📋 認證考試說明", label_visibility="collapsed")
 
+# 🧠 跨頁面狀態解耦
 if "previous_tab" not in st.session_state: st.session_state.previous_tab = current_tab
 if st.session_state.previous_tab != current_tab:
     st.session_state.previous_tab = current_tab
     st.rerun()
+
+# ---- 聽力題庫定義 ----
+QUIZ_DATA = [
+    {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["riyar", "'alo", "fanaw", "sa'owac"], "correct_text": "riyar"},
+    {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["korkor", "rohayan", "romakat", "rotarot"], "correct_text": "romakat"}
+]
 
 # ---- 🗣️ 口說測驗邏輯 ----
 if current_tab == "🗣️ 口說":
@@ -40,14 +47,13 @@ if current_tab == "🗣️ 口說":
 
         if db:
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            mode = st.radio("練習模式：", ["🎲 隨機挑戰題目", "📋 自由選擇題組"], horizontal=True)
+            mode = st.radio("練習模式：", ["🎲 隨機挑戰題目", "📋 自由選擇題組"], horizontal=True, key="s_mode")
             
             if "s_random_order" not in st.session_state:
                 st.session_state.s_random_order = list(range(len(db)))
                 random.shuffle(st.session_state.s_random_order)
             if "s_pointer" not in st.session_state: st.session_state.s_pointer = 0
             
-            # 處理題號選取
             if mode == "🎲 隨機挑戰題目":
                 idx = st.session_state.s_pointer % len(db)
                 true_id = st.session_state.s_random_order[idx]
@@ -57,39 +63,50 @@ if current_tab == "🗣️ 口說":
             
             quiz = db[true_id]
             
-            # 播放音檔區塊
             if st.button("🔊 播放題目語音音檔"):
-                audio_path = f"speaking_qa/situation_{str(quiz['quiz_id']).zfill(2)}.mp3"
-                if os.path.exists(audio_path):
-                    st.audio(audio_path, format="audio/mp3", autoplay=True)
+                fid = str(quiz['quiz_id']).zfill(2)
+                path = f"speaking_qa/situation_{fid}.mp3"
+                if os.path.exists(path):
+                    st.audio(path, format="audio/mp3", autoplay=True)
                 else:
-                    st.warning(f"💡 音檔製作中 (預期路徑: {audio_path})")
+                    st.warning(f"💡 音檔製作中: {path}")
 
-            # 文字隱藏顯示區塊
-            if "s_q_amis" not in st.session_state: st.session_state.s_q_amis = False
-            if "s_q_trans" not in st.session_state: st.session_state.s_q_trans = False
+            if "show_q" not in st.session_state: st.session_state.show_q = False
+            if "show_t" not in st.session_state: st.session_state.show_t = False
+            if "show_a" not in st.session_state: st.session_state.show_a = False
             
             col1, col2 = st.columns(2)
-            if col1.button("👁️ 顯示/隱藏族語文字"): st.session_state.s_q_amis = not st.session_state.s_q_amis
-            if col2.button("👁️ 顯示/隱藏中文意思"): st.session_state.s_q_trans = not st.session_state.s_q_trans
+            if col1.button("👁️ 顯示/隱藏族語"): st.session_state.show_q = not st.session_state.show_q
+            if col2.button("👁️ 顯示/隱藏中文"): st.session_state.show_t = not st.session_state.show_t
             
-            if st.session_state.s_q_amis: st.info(quiz['question_amis'])
-            if st.session_state.s_q_trans: st.markdown(f"> {quiz['question_ch']}")
+            if st.session_state.show_q: st.info(quiz['question_amis'])
+            if st.session_state.show_t: st.markdown(f"> {quiz['question_ch']}")
             
-            # 參考答案開關
-            if st.button("📥 顯示/隱藏參考答案"): st.session_state.s_ans = not st.session_state.get("s_ans", False)
-            if st.session_state.get("s_ans"):
+            if st.button("📥 顯示/隱藏參考答案"): st.session_state.show_a = not st.session_state.show_a
+            if st.session_state.show_a:
                 st.success(f"阿美語參考：\n{quiz['suggested_answer_amis']}\n\n中文參考：\n{quiz['suggested_answer_ch']}")
             
-            # 隨機模式的下一題按鈕
             if mode == "🎲 隨機挑戰題目" and st.button("➡️ 下一題"):
                 st.session_state.s_pointer += 1
-                st.session_state.s_q_amis = False
-                st.session_state.s_q_trans = False
-                st.session_state.s_ans = False
+                st.session_state.show_q = False
+                st.session_state.show_t = False
+                st.session_state.show_a = False
                 st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
-    
-    # 這裡保留看圖表達和其他功能...
+            
     elif speaking_sub == "看圖表達":
-        st.info("看圖表達功能正常運作中...")
+        st.info("看圖表達功能運作中...")
+
+# ---- 📖 閱讀測驗 ----
+elif current_tab == "📖 閱讀":
+    st.subheader("📖 閱讀測驗 (Piasipan)")
+    # ... (省略部分代碼以維持回應長度，請保留您原有的閱讀測驗區塊)
+
+# ---- ✍️ 寫作測驗 ----
+elif current_tab == "✍️ 寫作":
+    st.subheader("✍️ 寫作測驗 (Pitilidan)")
+    # ... (此處保留寫作測驗的邏輯)
+
+# ---- App 底部 ----
+st.write("---")
+st.caption("© 2026 中高級認證 App 三一開發團隊")
