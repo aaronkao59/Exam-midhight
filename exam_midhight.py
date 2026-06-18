@@ -114,6 +114,7 @@ QUIZ_DATA = [
     {"id": 3, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-03.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["hadhad", "hakhak", "hawan", "hafay"], "correct_text": "hafay"},
     {"id": 4, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-04.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["tefo'", "'okoy", "tafokod", "tafolod"], "correct_text": "tafokod"},
     {"id": 5, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-05.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["fakar", "tayhi", "pitaw", "tarakar"], "correct_text": "pitaw"},
+    {"id": 6, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-06.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["sariri'", "riri'", "siri", "riyar"], "correct_text": "siri"},
     {"id": 7, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-07.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["koleto", "lokot", "kewaw", "kakorot"], "correct_text": "koleto"},
     {"id": 8, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-08.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["siwoy", "kodasing", "konga", "damay"], "correct_text": "konga"},
     {"id": 9, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-09.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["mali'", "tikami", "tilifi", "pawli"], "correct_text": "tilifi"},
@@ -277,7 +278,7 @@ elif current_tab == "🎧 聽力":
 
 # 3. 🗣️ 口說測驗
 elif current_tab == "🗣️ 口說":
-    st.subheader("🗣️ 口說測驗 (Pisowalan)")
+    st.subheader("🗣️ 口說測營 (Pisowalan)")
     st.divider()
     speaking_sub = st.radio(
         "口說題型選擇：",
@@ -322,7 +323,7 @@ elif current_tab == "🗣️ 口說":
             
         st.markdown('</div>', unsafe_allow_html=True)
         
-    # ─── 題型二：情境問答（⚡ 依要求重構最新自選與隨機分流交互邏輯） ───
+    # ─── 題型二：情境問答（⚡ 語法錯誤完全除帳修正版） ───
     elif speaking_sub == "情境問答":
         try:
             with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
@@ -335,8 +336,7 @@ elif current_tab == "🗣️ 口說":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 🗣️ 口說測驗 - 情境問答")
             
-            # 🎯 調整 1：自由選擇題組與隨機挑戰題目的導覽分流器[cite: 12]
-            s_mode = st.radio("練習模式設定：", ["🎲 隨機挑戰題目", "📋 自由選擇題組"], horizontal=True, key="s_mode_switch")[cite: 12]
+            s_mode = st.radio("練習模式設定：", ["🎲 隨機挑戰題目", "📋 自由選擇題組"], horizontal=True, key="s_mode_switch")
             
             if "s_random_order" not in st.session_state:
                 st.session_state.s_random_order = list(range(len(speaking_situation_db)))
@@ -352,22 +352,21 @@ elif current_tab == "🗣️ 口說":
             if "s_audio_triggered" not in st.session_state:
                 st.session_state.s_audio_triggered = False
 
-            # 分流索引提取器[cite: 12]
-            if s_mode == "🎲 隨機挑戰題目":[cite: 12]
-                s_ptr = st.session_state.s_pointer[cite: 12]
-                if s_ptr < len(speaking_situation_db):[cite: 12]
-                    true_s_id = st.session_state.s_random_order[s_ptr][cite: 12]
-                    current_s_quiz = speaking_situation_db[true_s_id][cite: 12]
-                    st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")[cite: 12]
+            # 🛠️ 核心修復補丁：清除原本卡死系統的外部語法字元
+            if s_mode == "🎲 隨機挑戰題目":
+                s_ptr = st.session_state.s_pointer
+                if s_ptr < len(speaking_situation_db):
+                    true_s_id = st.session_state.s_random_order[s_ptr]
+                    current_s_quiz = speaking_situation_db[true_s_id]
+                    st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")
                 else:
                     true_s_id = None
             else:
-                # 📋 自由自選模式下拉選單[cite: 12]
-                s_select_options = [f"第 {i+1} 題：題組挑戰" for i in range(len(speaking_situation_db))][cite: 12]
-                selected_s_index_str = st.selectbox("請指定想要練習的題組：", options=s_select_options, index=0)[cite: 12]
-                true_s_id = s_select_options.index(selected_s_index_str)[cite: 12]
-                current_s_quiz = speaking_situation_db[true_s_id][cite: 12]
-                st.write(f"**當前進度：自主選定第 {true_s_id + 1} 題挑戰中**")[cite: 12]
+                s_select_options = [f"第 {i+1} 題：題組挑戰" for i in range(len(speaking_situation_db))]
+                selected_s_index_str = st.selectbox("請指定想要練習的題組：", options=s_select_options, index=0)
+                true_s_id = s_select_options.index(selected_s_index_str)
+                current_s_quiz = speaking_situation_db[true_s_id]
+                st.write(f"**當前進度：自主選定第 {true_s_id + 1} 題挑戰中**")
 
             if true_s_id is not None:
                 if true_s_id not in st.session_state.s_show_q_amis:
@@ -377,41 +376,37 @@ elif current_tab == "🗣️ 口說":
                 if true_s_id not in st.session_state.s_show_ans:
                     st.session_state.s_show_ans[true_s_id] = False
 
-                # 🎯 調整 2：題目改播放音檔，族語文字先隱藏，改從專屬資料夾讀取[cite: 12]
-                if st.button("🔊 播放題目語音音檔", key=f"s_play_btn_{true_s_id}"):[cite: 12]
-                    st.session_state.s_audio_triggered = True[cite: 12]
+                if st.button("🔊 播放題目語音音檔", key=f"s_play_btn_{true_s_id}"):
+                    st.session_state.s_audio_triggered = True
                 
-                if st.session_state.s_audio_triggered:[cite: 12]
-                    # 鋼鐵防禦：改用您的既有專屬路徑 speaking_qa/ 進行對帳，不符合則拋出黃色警告框提示[cite: 12]
-                    target_audio = f"speaking_qa/situation_{current_s_quiz['quiz_id']}.mp3"[cite: 12]
-                    if os.path.exists(target_audio):[cite: 12]
-                        st.audio(target_audio, format="audio/mp3", autoplay=True)[cite: 12]
-                    else:[cite: 12]
-                        st.warning(f"⚠️ 找不到題目對應的實體語音檔案：`{target_audio}`，音檔上傳就緒後即可播放。")
-                    st.session_state.s_audio_triggered = False[cite: 12]
+                if st.session_state.s_audio_triggered:
+                    target_audio = f"speaking_qa/situation_{current_s_quiz['quiz_id']}.mp3"
+                    # 🛠️ 核心修復補丁：配合要求，當音檔尚未上傳完成時，以黃色警告框提示，杜絕系統拋出報錯紅字
+                    if os.path.exists(target_audio):
+                        st.audio(target_audio, format="audio/mp3", autoplay=True)
+                    else:
+                        st.warning(f"💡 **題目語音音檔正在製作中**（預計路徑：`{target_audio}`），您可以點選下方按鈕直接展開族語或中文意思進行練習。")
+                    st.session_state.s_audio_triggered = False
 
-                # 族語文字與中文意思改為獨立按鈕顯示，需要時再按鈕開啟[cite: 12]
-                col_q1, col_q2 = st.columns(2)[cite: 12]
-                with col_q1:[cite: 12]
-                    s_q_amis_label = "🔄 隱藏族語文字" if st.session_state.s_show_q_amis[true_s_id] else "👁️ 顯示族語文字"[cite: 12]
-                    if st.button(s_q_amis_label, key=f"s_q_amis_toggle_{true_s_id}"):[cite: 12]
-                        st.session_state.s_show_q_amis[true_s_id] = not st.session_state.s_show_q_amis[true_s_id][cite: 12]
-                        st.rerun()[cite: 12]
-                with col_q2:[cite: 12]
-                    s_q_trans_label = "🔄 隱藏中文意思" if st.session_state.s_show_q_trans[true_s_id] else "👁️ 顯示中文意思"[cite: 12]
-                    if st.button(s_q_trans_label, key=f"s_q_trans_toggle_{true_s_id}"):[cite: 12]
-                        st.session_state.s_show_q_trans[true_s_id] = not st.session_state.s_show_q_trans[true_s_id][cite: 12]
-                        st.rerun()[cite: 12]
+                col_q1, col_q2 = st.columns(2)
+                with col_q1:
+                    s_q_amis_label = "🔄 隱藏族語文字" if st.session_state.s_show_q_amis[true_s_id] else "👁️ 顯示族語文字"
+                    if st.button(s_q_amis_label, key=f"s_q_amis_toggle_{true_s_id}"):
+                        st.session_state.s_show_q_amis[true_s_id] = not st.session_state.s_show_q_amis[true_s_id]
+                        st.rerun()
+                with col_q2:
+                    s_q_trans_label = "🔄 隱藏中文意思" if st.session_state.s_show_q_trans[true_s_id] else "👁️ 顯示中文意思"
+                    if st.button(s_q_trans_label, key=f"s_q_trans_toggle_{true_s_id}"):
+                        st.session_state.s_show_q_trans[true_s_id] = not st.session_state.s_show_q_trans[true_s_id]
+                        st.rerun()
 
-                if st.session_state.s_show_q_amis[true_s_id]:[cite: 12]
-                    st.info(f"💬 **阿美族語問句：**\n\n{current_s_quiz['question_amis']}")[cite: 12]
-                if st.session_state.s_show_q_trans[true_s_id]:[cite: 12]
-                    st.markdown(f"> 💡 **中文題目意思：** {current_s_quiz['question_ch']}")[cite: 12]
+                if st.session_state.s_show_q_amis[true_s_id]:
+                    st.info(f"💬 **阿美族語問句：**\n\n{current_s_quiz['question_amis']}")
+                if st.session_state.s_show_q_trans[true_s_id]:
+                    st.markdown(f"> 💡 **中文題目意思：** {current_s_quiz['question_ch']}")
 
-                # 🎯 調整 3：完全抹除 "性質分類" 卡片與展示模組[cite: 12]
-                st.write("---")[cite: 12]
+                st.write("---")
                 
-                # 參考答案雙向開關鎖
                 s_ans_label = "🔄 關閉參考答案" if st.session_state.s_show_ans[true_s_id] else "📥 顯示參考答案"
                 
                 col_ans1, col_ans2 = st.columns([1, 3])
