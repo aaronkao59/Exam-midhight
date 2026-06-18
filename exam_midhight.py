@@ -95,10 +95,14 @@ if st.session_state.previous_tab != current_tab:
         del st.session_state["q_show_ans"]
     if "s_show_q_trans" in st.session_state:
         del st.session_state["s_show_q_trans"]
+    if "s_show_q_amis" in st.session_state:
+        del st.session_state["s_show_q_amis"]
     if "s_show_ans" in st.session_state:
         del st.session_state["s_show_ans"]
     if "q_input_text_cache" in st.session_state:
         del st.session_state["q_input_text_cache"]
+    if "s_audio_triggered" in st.session_state:
+        del st.session_state["s_audio_triggered"]
         
     st.session_state.previous_tab = current_tab
     st.rerun()
@@ -319,6 +323,7 @@ elif current_tab == "🗣️ 口說":
             
         st.markdown('</div>', unsafe_allow_html=True)
         
+    # ─── 題型二：情境問答（⚡ 依最新要求改版操作方式） ───
     elif speaking_sub == "情境問答":
         try:
             with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
@@ -331,62 +336,97 @@ elif current_tab == "🗣️ 口說":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 🗣️ 口說測驗 - 情境問答")
             
+            # 🎯 調整 1：題組可自選及隨機交互控制器[cite: 14]
+            s_mode = st.radio("練習模式設定：", ["🎲 隨機挑戰題目", "📋 自由選擇題組"], horizontal=True, key="s_mode_switch")[cite: 14]
+            
             if "s_random_order" not in st.session_state:
                 st.session_state.s_random_order = list(range(len(speaking_situation_db)))
                 random.shuffle(st.session_state.s_random_order)
             if "s_pointer" not in st.session_state:
                 st.session_state.s_pointer = 0
+            if "s_show_q_amis" not in st.session_state:
+                st.session_state.s_show_q_amis = {}
             if "s_show_q_trans" not in st.session_state:
                 st.session_state.s_show_q_trans = {}
             if "s_show_ans" not in st.session_state:
                 st.session_state.s_show_ans = {}
-                
-            s_ptr = st.session_state.s_pointer
-            
-            if s_ptr < len(speaking_situation_db):
-                true_s_id = st.session_state.s_random_order[s_ptr]
-                current_s_quiz = speaking_situation_db[true_s_id]
-                
+            if "s_audio_triggered" not in st.session_state:
+                st.session_state.s_audio_triggered = False
+
+            if s_mode == "🎲 隨機挑戰題目":
+                s_ptr = st.session_state.s_pointer
+                if s_ptr < len(speaking_situation_db):
+                    true_s_id = st.session_state.s_random_order[s_ptr]
+                    current_s_quiz = speaking_situation_db[true_s_id]
+                    st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")[cite: 14]
+                else:
+                    true_s_id = None
+            else:
+                # 📋 自由自選模式下拉選單[cite: 14]
+                s_select_options = [f"第 {i+1} 題：題組挑戰" for i in range(len(speaking_situation_db))][cite: 14]
+                selected_s_index_str = st.selectbox("請指定想要練習的題組：", options=s_select_options, index=0)[cite: 14]
+                true_s_id = s_select_options.index(selected_s_index_str)[cite: 14]
+                current_s_quiz = speaking_situation_db[true_s_id][cite: 14]
+                st.write(f"**當前進度：自主選定第 {true_s_id + 1} 題挑戰中**")[cite: 14]
+
+            if true_s_id is not None:
+                if true_s_id not in st.session_state.s_show_q_amis:
+                    st.session_state.s_show_q_amis[true_s_id] = False
                 if true_s_id not in st.session_state.s_show_q_trans:
                     st.session_state.s_show_q_trans[true_s_id] = False
                 if true_s_id not in st.session_state.s_show_ans:
                     st.session_state.s_show_ans[true_s_id] = False
-                    
-                st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")
+
+                # 🎯 調整 2：題目改播放音檔，讀取新命名的資料夾目錄[cite: 14]
+                if st.button("🔊 播放題目語音音檔", key=f"s_play_btn_{true_s_id}"):[cite: 14]
+                    st.session_state.s_audio_triggered = True[cite: 14]
                 
-                st.markdown(f"#### ❓ 問：{current_s_quiz['question_amis']}")
-                
-                st.markdown(f'<div class="category-note">性質分類：{current_s_quiz["category_note"]}</div>', unsafe_allow_html=True)
-                
-                s_q_trans_label = "🔄 關閉中文意思" if st.session_state.s_show_q_trans[true_s_id] else "👁️ 顯示中文意思"
-                if st.button(s_q_trans_label, key=f"s_q_trans_btn_{s_ptr}"):
-                    st.session_state.s_show_q_trans[true_s_id] = not st.session_state.s_show_q_trans[true_s_id]
-                    st.rerun()
-                    
+                if st.session_state.s_audio_triggered:
+                    target_audio = current_s_quiz.get("audio_path", f"speaking_qa/situation_{current_s_quiz['quiz_id']}.mp3")
+                    if os.path.exists(target_audio):
+                        st.audio(target_audio, format="audio/mp3", autoplay=True)
+                    else:
+                        st.warning(f"⚠️ 找不到題目對應的實體語音檔案：`{target_audio}`，音檔製作就緒後即可播放。")[cite: 14]
+                    st.session_state.s_audio_triggered = False[cite: 14]
+
+                # 🎯 調整 3：族語文字與中文意思改為獨立按鈕顯示，預設全隱藏[cite: 14]
+                col_q1, col_q2 = st.columns(2)[cite: 14]
+                with col_q1:
+                    s_q_amis_label = "🔄 隱藏族語文字" if st.session_state.s_show_q_amis[true_s_id] else "👁️ 顯示族語文字"[cite: 14]
+                    if st.button(s_q_amis_label, key=f"s_q_amis_toggle_{true_s_id}"):[cite: 14]
+                        st.session_state.s_show_q_amis[true_s_id] = not st.session_state.s_show_q_amis[true_s_id][cite: 14]
+                        st.rerun()[cite: 14]
+                with col_q2:
+                    s_q_trans_label = "🔄 隱藏中文意思" if st.session_state.s_show_q_trans[true_s_id] else "👁️ 顯示中文意思"[cite: 14]
+                    if st.button(s_q_trans_label, key=f"s_q_trans_toggle_{true_s_id}"):[cite: 14]
+                        st.session_state.s_show_q_trans[true_s_id] = not st.session_state.s_show_q_trans[true_s_id][cite: 14]
+                        st.rerun()[cite: 14]
+
+                if st.session_state.s_show_q_amis[true_s_id]:
+                    st.info(f"💬 **阿美族語問句：**\n\n{current_s_quiz['question_amis']}")[cite: 14]
                 if st.session_state.s_show_q_trans[true_s_id]:
-                    st.info(f"💡 中文意思：{current_s_quiz['question_ch']}")
+                    st.markdown(f"> 💡 **中文題目意思：** {current_s_quiz['question_ch']}")[cite: 14]
+
+                # 🎯 調整 4：徹底刪除原本置於此處的「性質分類」展示代碼[cite: 14]
+                st.write("---")[cite: 14]
                 
-                st.write("---")
-                
+                # 參考答案雙向開關鎖
                 s_ans_label = "🔄 關閉參考答案" if st.session_state.s_show_ans[true_s_id] else "📥 顯示參考答案"
                 
-                col1, col2 = st.columns([1, 3])
-                with col1:
-                    if st.button(s_ans_label, key=f"s_ans_btn_{s_ptr}"):
+                col_ans1, col_ans2 = st.columns([1, 3])
+                with col_ans1:
+                    if st.button(s_ans_label, key=f"s_ans_btn_{true_s_id}"):
                         st.session_state.s_show_ans[true_s_id] = not st.session_state.s_show_ans[true_s_id]
                         st.rerun()
                         
-                with col2:
+                with col_ans2:
                     if st.session_state.s_show_ans[true_s_id]:
                         st.success(f"✨ **參考答案 (阿美語)：**\n\n{current_s_quiz['suggested_answer_amis']}\n\n"
                                    f"───\n\n💡 **中文翻譯：**\n\n{current_s_quiz['suggested_answer_ch']}")
                         
-                if st.session_state.s_show_ans[true_s_id]:
+                if st.session_state.s_show_ans[true_s_id] and s_mode == "🎲 隨機挑戰題目":
                     st.write("")
-                    st.caption("🔊 參考答案語音音檔 (製作中，目前暫時留空)")
-                    
-                    st.write("")
-                    if st.button("➡️ 下一題", key=f"s_next_{s_ptr}"):
+                    if st.button("➡️ 下一題", key=f"s_next_btn_{true_s_id}"):
                         st.session_state.s_pointer += 1
                         st.rerun()
             else:
@@ -398,6 +438,8 @@ elif current_tab == "🗣️ 口說":
                         del st.session_state["s_show_ans"]
                     if "s_show_q_trans" in st.session_state:
                         del st.session_state["s_show_q_trans"]
+                    if "s_show_q_amis" in st.session_state:
+                        del st.session_state["s_show_q_amis"]
                     random.shuffle(st.session_state.s_random_order)
                     st.rerun()
                     
@@ -532,7 +574,7 @@ elif current_tab == "📖 閱讀":
             current_r_quiz = reading_db[true_r_id]
             
             if true_r_id not in st.session_state[state_submit_key]:
-                st.session_state[state_submit_key][true_r_id] = False
+                st.session_state[st.session_state.submit_key] = False
             if true_r_id not in st.session_state[state_choice_key]:
                 st.session_state[state_choice_key][true_r_id] = None
                 
@@ -606,7 +648,7 @@ elif current_tab == "📖 閱讀":
             st.markdown('</div>', unsafe_allow_html=True)
         else:
             st.balloons()
-            st.success(f"🎉 恭喜！您已完成本項目全部 {len(reading_db)} 道隨機題組練習！")
+            st.success("🎉 恭喜！您已完成本項目全部 {len(reading_db)} 道隨機題組練習！")
             if st.button("🔄 重新洗牌挑戰", key=f"r_reset_{target_type}"):
                 random.shuffle(st.session_state[state_order_key])
                 st.session_state[state_ptr_key] = 0
@@ -710,7 +752,6 @@ elif current_tab == "✍️ 寫作":
                     
             st.markdown('</div>', unsafe_allow_html=True)
             
-        # ─── 📝 寫作問答題（⚡ 依要求移除了提交按鈕，保留全快取自由練習打字框） ───
         elif writing_sub == "問答":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 📝 寫作測驗 - 問答")
@@ -753,7 +794,6 @@ elif current_tab == "✍️ 寫作":
                 
                 st.write("---")
                 
-                # 🎯 配合指引修正：此文字框為純練習打字記錄用途，100% 保持開放且不設置提交答案鈕
                 user_typed_ans = st.text_input(
                     "請在此輸入答案進行練習（注意大小寫與標點符號）：",
                     value=st.session_state.q_input_text_cache[q_id],
@@ -764,7 +804,6 @@ elif current_tab == "✍️ 寫作":
                 
                 st.write("")
                 
-                # 參考答案開關鎖
                 ans_btn_label = "🔄 關閉參考答案" if st.session_state.q_show_ans[q_ptr] else "📥 顯示參考答案"
                 
                 col1, col2 = st.columns([1, 3])
