@@ -382,7 +382,11 @@ elif current_tab == "🗣️ 口說":
                 if st.session_state.s_audio_triggered:
                     # 🛠️ 補丁 1：強制執行字串補零對齊偵測，解決 01~05 題誤判為語音製作中的問題
                     raw_id = str(current_s_quiz['quiz_id']).strip().zfill(2)
-                    target_audio = f"speaking_qa/situation_{raw_id}.mp3"
+                    
+                    # 🚀 修正點：動態組裝正確的基礎資源路徑 (Base Asset Path)
+                    # 請依照您 GitHub 實際存放資料夾進行調整，若檔案只放在 speaking_qa/ 底下，請改為 base_audio_dir = "speaking_qa"
+                    base_audio_dir = "assets/audio/02_speaking/speaking_qa" 
+                    target_audio = current_s_quiz.get("audio_path", f"{base_audio_dir}/situation_{raw_id}.mp3")
                     
                     if os.path.exists(target_audio):
                         st.audio(target_audio, format="audio/mp3", autoplay=True)
