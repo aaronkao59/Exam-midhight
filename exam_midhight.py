@@ -273,8 +273,161 @@ elif current_tab == "🎧 聽力":
         st.markdown('</div>', unsafe_allow_html=True)
         
     elif listening_sub == "選擇題-對話理解":
-        st.markdown("### 💬 選擇題 - 對話理解")
-        st.warning("🚧 【內容建置中】此處未來將播放部落生活情境對話，並測試長句理解能力。")
+        try:
+            with open("data/listening_dialogue.json", "r", encoding="utf-8") as f:
+                ld_db = json.load(f)
+        except FileNotFoundError:
+            st.error("☠️ 系統性毀滅異常：偵測到 `data/listening_dialogue.json` 檔案遺失，請確認是否建立！")
+            ld_db = []
+
+        if ld_db:
+            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
+            st.markdown("### 💬 選擇題 - 對話理解")
+            
+            ld_mode = st.radio("練習模式設定：", ["🎲 隨機挑戰題目", "📋 自由選擇題組"], horizontal=True, key="ld_mode_switch")
+            
+            # --- 狀態變數初始化區塊 ---
+            if "ld_random_order" not in st.session_state:
+                st.session_state.ld_random_order = list(range(len(ld_db)))
+                random.shuffle(st.session_state.ld_random_order)
+            if "ld_pointer" not in st.session_state:
+                st.session_state.ld_pointer = 0
+            if "ld_show_text" not in st.session_state:
+                st.session_state.ld_show_text = {}
+            if "ld_audio_triggered" not in st.session_state:
+                st.session_state.ld_audio_triggered = False
+            if "ld_opts_map" not in st.session_state:
+                st.session_state.ld_opts_map = {}
+            if "ld_submit_map" not in st.session_state:
+                st.session_state.ld_submit_map = {}
+            if "ld_choice_map" not in st.session_state:
+                st.session_state.ld_choice_map = {}
+                
+            # --- 模式與指針判斷 ---
+            if ld_mode == "🎲 隨機挑戰題目":
+                ptr = st.session_state.ld_pointer
+                if ptr < len(ld_db):
+                    true_id = st.session_state.ld_random_order[ptr]
+                    current_quiz = ld_db[true_id]
+                    st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(ld_db)} 題 (隨機題組模式)**")
+                else:
+                    true_id = None
+            else:
+                select_options = [f"第 {i+1} 題：對話挑戰" for i in range(len(ld_db))]
+                selected_str = st.selectbox("請指定想要練習的題組：", options=select_options, index=0)
+                true_id = select_options.index(selected_str)
+                current_quiz = ld_db[true_id]
+                st.write(f"**當前進度：自主選定第 {true_id + 1} 題挑戰中**")
+
+            if true_id is not None:
+                q_id = current_quiz["quiz_id"]
+                
+                # 確保單題狀態隔離
+                if true_id not in st.session_state.ld_show_text:
+                    st.session_state.ld_show_text[true_id] = False
+                if true_id not in st.session_state.ld_submit_map:
+                    st.session_state.ld_submit_map[true_id] = False
+                if true_id not in st.session_state.ld_choice_map:
+                    st.session_state.ld_choice_map[true_id] = None
+                    
+                # 確保選項洗牌並固定快取
+                if true_id not in st.session_state.ld_opts_map:
+                    shuffled_opts = current_quiz["options"].copy()
+                    random.shuffle(shuffled_opts)
+                    
+                    formatted_opts = []
+                    correct_ans_formatted = ""
+                    for i, opt in enumerate(shuffled_opts):
+                        display_text = f"({i+1}) {opt}"
+                        formatted_opts.append(display_text)
+                        if opt == current_quiz["correct_text"]:
+                            correct_ans_formatted = display_text
+                            
+                    st.session_state.ld_opts_map[true_id] = {
+                        "options": formatted_opts,
+                        "correct_text": correct_ans_formatted
+                    }
+                
+                live_quiz_data = st.session_state.ld_opts_map[true_id]
+
+                # --- 題幹與音檔區塊 ---
+                st.write("請聆聽對話音檔，並從下方選出正確的描述：")
+                if st.button("🔊 播放對話音檔", key=f"ld_play_{true_id}"):
+                    st.session_state.ld_audio_triggered = True
+                    
+                if st.session_state.ld_audio_triggered:
+                    raw_id = str(q_id).strip().zfill(2)
+                    audio_folder = "assets/audio/01_listening/listening_dialogue"
+                    target_audio = f"{audio_folder}/dialogue_{raw_id}.mp3"
+                    
+                    if os.path.exists(target_audio):
+                        st.audio(target_audio, format="audio/mp3", autoplay=True)
+                    else:
+                        st.info("💡 **對話音檔正在製作中**，您可以點選下方按鈕直接展開族語文字進行練習。")
+                    st.session_state.ld_audio_triggered = False
+
+                st.write("---")
+                
+                # --- 文字提示切換區塊 ---
+                text_label = "🔄 隱藏對話文字" if st.session_state.ld_show_text[true_id] else "👁️ 顯示對話文字"
+                if st.button(text_label, key=f"ld_text_btn_{true_id}"):
+                    st.session_state.ld_show_text[true_id] = not st.session_state.ld_show_text[true_id]
+                    st.rerun()
+                    
+                if st.session_state.ld_show_text[true_id]:
+                    st.info(f"💬 **對話內容：**\n\n{current_quiz['dialogue_amis']}")
+                
+                st.write("---")
+                
+                # --- 答題與訂正區塊 ---
+                saved_choice = st.session_state.ld_choice_map[true_id]
+                saved_index = live_quiz_data["options"].index(saved_choice) if saved_choice in live_quiz_data["options"] else None
+                
+                user_choice = st.radio(
+                    "請從下方選出正確答案：",
+                    options=live_quiz_data["options"],
+                    index=saved_index,
+                    key=f"ld_radio_{true_id}",
+                    disabled=st.session_state.ld_submit_map[true_id]
+                )
+                
+                if not st.session_state.ld_submit_map[true_id]:
+                    st.session_state.ld_choice_map[true_id] = user_choice
+                
+                if not st.session_state.ld_submit_map[true_id]:
+                    if st.button("📥 提交答案", key=f"ld_submit_btn_{true_id}"):
+                        if user_choice is None:
+                            st.warning("⚠️ 請先選擇一個選項再行提交！")
+                        else:
+                            st.session_state.ld_submit_map[true_id] = True
+                            st.rerun()
+                else:
+                    correct_ans_str = live_quiz_data["correct_text"]
+                    if user_choice == correct_ans_str:
+                        st.markdown(f"### 🔴 答題結果：✓")
+                        st.success(f" Fangcal! 正確答案：**{correct_ans_str}**")
+                    else:
+                        st.markdown(f"### 🔴 答題結果：✕")
+                        st.error(f" 再接再厲！正確答案：**{correct_ans_str}**")
+                        
+                    if ld_mode == "🎲 隨機挑戰題目":
+                        st.write("")
+                        if st.button("➡️ 下一題 (隨機抽題)", key=f"ld_next_{true_id}"):
+                            st.session_state.ld_pointer += 1
+                            st.rerun()
+            else:
+                st.balloons()
+                st.success("🎉 恭喜！您已完成對話理解的全部隨機練習！")
+                if st.button("🔄 重新挑戰", key="ld_reset"):
+                    st.session_state.ld_pointer = 0
+                    random.shuffle(st.session_state.ld_random_order)
+                    st.session_state.ld_show_text = {}
+                    st.session_state.ld_submit_map = {}
+                    st.session_state.ld_opts_map = {}
+                    st.session_state.ld_choice_map = {}
+                    st.rerun()
+            
+            st.markdown('</div>', unsafe_allow_html=True)
 
 # 3. 🗣️ 口說測驗
 elif current_tab == "🗣️ 口說":
