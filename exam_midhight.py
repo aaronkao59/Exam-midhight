@@ -97,6 +97,8 @@ if st.session_state.previous_tab != current_tab:
         del st.session_state["s_show_q_trans"]
     if "s_show_ans" in st.session_state:
         del st.session_state["s_show_ans"]
+    if "q_input_text_cache" in st.session_state:
+        del st.session_state["q_input_text_cache"]
         
     st.session_state.previous_tab = current_tab
     st.rerun()
@@ -122,19 +124,17 @@ QUIZ_DATA = [
 
 # ---- 第二層：根據選擇顯示對應架構 ----
 
-# 1. 📋 認證考試說明頁面 (⚡ 依要求重構為開關式顯示/隱藏細節架構)
+# 1. 📋 認證考試說明頁面
 if current_tab == "📋 認證考試說明":
     st.subheader("📋 認證考試說明")
     st.divider()
     
-    # ─── 部分一：詞彙範圍/參考教材 ───
     with st.expander("1. 詞彙範圍/參考教材", expanded=False):
         st.markdown("""
         * **詞彙範圍：** 學習詞表1至800詞，以及其衍生詞。
         * **參考教材：** 包含（第1階至第9階）教材、生活會話篇、閱讀書寫篇。
         """)
         
-    # ─── 部分二：測驗架構/題型配分 ───
     with st.expander("2. 測驗架構/題型配分", expanded=False):
         st.caption("中高級認證總分為100分，[聽力(20分)/口說(30分)/閱讀(30分)/寫作(20分)四個項目]")
         st.markdown("""
@@ -153,7 +153,6 @@ if current_tab == "📋 認證考試說明":
           * 問答題(5題/10%)：依題目指示，以族語句子回答。
         """)
         
-    # ─── 部分三：合格標準 ───
     with st.expander("3. 合格標準", expanded=False):
         st.markdown("""
         滿分100分中，**總分達60分以上**，且單項成績達**聽力15分、口說15分、閱讀18分、寫作12分以上**，即可取得「通過聽說讀寫」的完整資格 。考生亦可依對應門檻獨立取得「通過聽說」或「通過讀寫」的資格 。
@@ -711,6 +710,7 @@ elif current_tab == "✍️ 寫作":
                     
             st.markdown('</div>', unsafe_allow_html=True)
             
+        # ─── 📝 寫作問答題（⚡ 依要求移除了提交按鈕，保留全快取自由練習打字框） ───
         elif writing_sub == "問答":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 📝 寫作測驗 - 問答")
@@ -719,15 +719,14 @@ elif current_tab == "✍️ 寫作":
             
             if "q_pointer" not in st.session_state:
                 st.session_state.q_pointer = 0
-            if "q_audio_triggered" not in st.session_state:
-                st.session_state.q_audio_triggered = False
-            if "q_submitted" not in st.session_state:
-                st.session_state.q_submitted = False
+            if "q_input_text_cache" not in st.session_state:
+                st.session_state.q_input_text_cache = {}
 
             q_ptr = st.session_state.q_pointer
             
             if q_ptr < len(question_db):
                 current_q_quiz = question_db[q_ptr]
+                q_id = current_q_quiz.get("id", q_ptr)
                 
                 if "q_show_trans" not in st.session_state:
                     st.session_state.q_show_trans = {}
@@ -738,6 +737,8 @@ elif current_tab == "✍️ 寫作":
                     st.session_state.q_show_trans[q_ptr] = False
                 if q_ptr not in st.session_state.q_show_ans:
                     st.session_state.q_show_ans[q_ptr] = False
+                if q_id not in st.session_state.q_input_text_cache:
+                    st.session_state.q_input_text_cache[q_id] = ""
                 
                 st.write(f"**當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題**")
                 st.markdown(f"#### ❓ 問：{current_q_quiz['question_text']}")
@@ -752,6 +753,18 @@ elif current_tab == "✍️ 寫作":
                 
                 st.write("---")
                 
+                # 🎯 配合指引修正：此文字框為純練習打字記錄用途，100% 保持開放且不設置提交答案鈕
+                user_typed_ans = st.text_input(
+                    "請在此輸入答案進行練習（注意大小寫與標點符號）：",
+                    value=st.session_state.q_input_text_cache[q_id],
+                    placeholder="在此輸入您的練習答案...",
+                    key=f"q_text_input_field_{q_id}"
+                )
+                st.session_state.q_input_text_cache[q_id] = user_typed_ans
+                
+                st.write("")
+                
+                # 參考答案開關鎖
                 ans_btn_label = "🔄 關閉參考答案" if st.session_state.q_show_ans[q_ptr] else "📥 顯示參考答案"
                 
                 col1, col2 = st.columns([1, 3])
@@ -767,17 +780,6 @@ elif current_tab == "✍️ 寫作":
                 
                 if st.session_state.q_show_ans[q_ptr]:
                     st.write("")
-                    if st.button("🔊 播放參考答案音檔", key=f"q_audio_btn_{q_ptr}"):
-                        st.session_state.q_audio_triggered = True
-                        
-                    if st.session_state.q_audio_triggered:
-                        if os.path.exists(current_q_quiz["audio_path"]):
-                            st.audio(current_q_quiz["audio_path"], format="audio/mp3", autoplay=True)
-                        else:
-                            st.error(f"⚠️ 找不到音檔！請確認此檔案是否已正確上傳至 GitHub 儲存庫：\n`{current_q_quiz['audio_path']}`")
-                        st.session_state.q_audio_triggered = False
-                    
-                    st.write("")
                     if st.button("➡️ 下一題", key=f"q_next_{q_ptr}"):
                         st.session_state.q_pointer += 1
                         st.rerun()
@@ -789,6 +791,8 @@ elif current_tab == "✍️ 寫作":
                         del st.session_state["q_show_trans"]
                     if "q_show_ans" in st.session_state:
                         del st.session_state["q_show_ans"]
+                    if "q_input_text_cache" in st.session_state:
+                        del st.session_state["q_input_text_cache"]
                     st.rerun()
                     
             st.markdown('</div>', unsafe_allow_html=True)
