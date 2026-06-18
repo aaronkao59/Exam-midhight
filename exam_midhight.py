@@ -67,7 +67,7 @@ st.markdown("""
 
 # ---- App 頂部導覽列 ----
 st.title("🎓 中高級認證")
-st.caption("[練習平台 選擇器]")
+st.caption("[請選擇練習平台]")
 
 # ---- 第一層：五個主要選項 (導覽選單) ----
 main_options = ["📋 認證考試說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
@@ -164,7 +164,7 @@ if current_tab == "📋 認證考試說明":
 
 # 2. 🎧 聽力測驗
 elif current_tab == "🎧 聽力":
-    st.subheader("🎧 聽力測驗 (Pitengilan)")
+    st.subheader("🎧 聽力測驗 (pitengilan)")
     st.divider()
     listening_sub = st.radio(
         "題型選擇：",
@@ -431,7 +431,7 @@ elif current_tab == "🎧 聽力":
 
 # 3. 🗣️ 口說測驗
 elif current_tab == "🗣️ 口說":
-    st.subheader("🗣️ 口說測驗 (Pisowalan)")
+    st.subheader("🗣️ 口說測驗 (pisowalan)")
     st.divider()
     speaking_sub = st.radio(
         "題型選擇：",
@@ -702,7 +702,7 @@ elif current_tab == "🗣️ 口說":
 
 # 4. 📖 閱讀測驗
 elif current_tab == "📖 閱讀":
-    st.subheader("📖 閱讀測驗 (Piasipan)")
+    st.subheader("📖 閱讀測驗 (piasipan)")
     st.divider()
     reading_sub = st.radio(
         "題型選擇：",
@@ -837,7 +837,7 @@ elif current_tab == "📖 閱讀":
 
 # 5. ✍️ 寫作測驗
 elif current_tab == "✍️ 寫作":
-    st.subheader("✍️ 寫作測驗 (Pitilidan)")
+    st.subheader("✍️ 寫作測驗 (pitilidan)")
     st.divider()
     writing_sub = st.radio(
         "題型選擇：",
