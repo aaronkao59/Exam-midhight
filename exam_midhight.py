@@ -533,15 +533,15 @@ elif current_tab == "🗣️ 口說":
                 if s_ptr < len(speaking_situations_db):
                     true_s_id = st.session_state.s_random_order[s_ptr]
                     current_s_quiz = speaking_situations_db[true_s_id]
-                    st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situations_db)} 題 (隨機題組模式)**")
+                    st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situations_db)} 題 (隨機模式)**")
                 else:
                     true_s_id = None
             else:
                 s_select_options = [f"第 {i+1} 題：題組挑戰" for i in range(len(speaking_situations_db))]
-                selected_s_index_str = st.selectbox("請指定想要練習的題組：", options=s_select_options, index=0)
+                selected_s_index_str = st.selectbox("選定題組：", options=s_select_options, index=0)
                 true_s_id = s_select_options.index(selected_s_index_str)
                 current_s_quiz = speaking_situations_db[true_s_id]
-                st.write(f"**當前進度：自主選定第 {true_s_id + 1} 題挑戰中**")
+                st.write(f"**當前進度：自選 第 {true_s_id + 1} 題練習中**")
 
             if true_s_id is not None:
                 if true_s_id not in st.session_state.s_show_q_amis:
@@ -551,7 +551,7 @@ elif current_tab == "🗣️ 口說":
                 if true_s_id not in st.session_state.s_show_ans:
                     st.session_state.s_show_ans[true_s_id] = False
 
-                if st.button("🔊 播放題目語音音檔", key=f"s_play_btn_{true_s_id}"):
+                if st.button("🔊 播放題目音檔", key=f"s_play_btn_{true_s_id}"):
                     st.session_state.s_audio_triggered = True
                 
                 # 🔴 核心修復區塊：無視 JSON 設定，強制鎖定實體路徑
@@ -571,20 +571,20 @@ elif current_tab == "🗣️ 口說":
 
                 col_q1, col_q2 = st.columns(2)
                 with col_q1:
-                    s_q_amis_label = "🔄 隱藏族語文字" if st.session_state.s_show_q_amis[true_s_id] else "👁️ 顯示族語文字"
+                    s_q_amis_label = "🔄 隱藏族語" if st.session_state.s_show_q_amis[true_s_id] else "👁️ 顯示族語"
                     if st.button(s_q_amis_label, key=f"s_q_amis_toggle_{true_s_id}"):
                         st.session_state.s_show_q_amis[true_s_id] = not st.session_state.s_show_q_amis[true_s_id]
                         st.rerun()
                 with col_q2:
-                    s_q_trans_label = "🔄 隱藏中文意思" if st.session_state.s_show_q_trans[true_s_id] else "👁️ 顯示中文意思"
+                    s_q_trans_label = "🔄 隱藏中文" if st.session_state.s_show_q_trans[true_s_id] else "👁️ 顯示中文"
                     if st.button(s_q_trans_label, key=f"s_q_trans_toggle_{true_s_id}"):
                         st.session_state.s_show_q_trans[true_s_id] = not st.session_state.s_show_q_trans[true_s_id]
                         st.rerun()
 
                 if st.session_state.s_show_q_amis[true_s_id]:
-                    st.info(f"💬 **阿美族語問句：**\n\n{current_s_quiz['question_amis']}")
+                    st.info(f"💬 **阿美族語：**\n\n{current_s_quiz['question_amis']}")
                 if st.session_state.s_show_q_trans[true_s_id]:
-                    st.markdown(f"> 💡 **中文題目意思：** {current_s_quiz['question_ch']}")
+                    st.markdown(f"> 💡 **中文：** {current_s_quiz['question_ch']}")
 
                 st.write("---")
                 
@@ -598,8 +598,8 @@ elif current_tab == "🗣️ 口說":
                         
                 with col_ans2:
                     if st.session_state.s_show_ans[true_s_id]:
-                        st.success(f"✨ **參考答案 (阿美語)：**\n\n{current_s_quiz['suggested_answer_amis']}\n\n"
-                                   f"───\n\n💡 **中文翻譯：**\n\n{current_s_quiz['suggested_answer_ch']}")
+                        st.success(f"✨ **阿美族語：**\n\n{current_s_quiz['suggested_answer_amis']}\n\n"
+                                   f"───\n\n💡 **中文：**\n\n{current_s_quiz['suggested_answer_ch']}")
                         
                 # 🛠️ 補丁 2：修正隨機挑戰題目模式下的換題切換指針
                 if s_mode == "🎲 隨機挑戰題目":
@@ -676,7 +676,7 @@ elif current_tab == "🗣️ 口說":
                         st.session_state.draft_text_cache[q_id] = ""
                         
                     user_draft = st.text_area(
-                        "請寫下您的回答提示或小抄（提供學習者書寫打字）：",
+                        "寫下你的回答提示（學習者書寫區）：",
                         value=st.session_state.draft_text_cache[q_id],
                         placeholder="在此輸入內容，隱藏草稿區後內容會安全保留...",
                         key=f"img_draft_input_{q_id}"
@@ -695,8 +695,8 @@ elif current_tab == "🗣️ 口說":
                         
                 with col_ans2:
                     if st.session_state.img_show_ans:
-                        st.success(f"✨ **內建參考答案 (阿美語)：**\n\n{current_img_quiz['suggested_answer_amis']}\n\n"
-                                   f"───\n\n💡 **中文翻譯：**\n\n{current_img_quiz['suggested_answer_ch']}")
+                        st.success(f"✨ **阿美族語：**\n\n{current_img_quiz['suggested_answer_amis']}\n\n"
+                                   f"───\n\n💡 **中文：**\n\n{current_img_quiz['suggested_answer_ch']}")
             
             st.markdown('</div>', unsafe_allow_html=True)
 
@@ -777,7 +777,7 @@ elif current_tab == "📖 閱讀":
                 
             live_r_data = st.session_state[state_opts_key][true_r_id]
             
-            st.write(f"**當前進度：第 {r_ptr + 1} 題 / 共 {len(reading_db)} 題 (隨機出題組模式)**")
+            st.write(f"**當前進度：第 {r_ptr + 1} 題 / 共 {len(reading_db)} 題 (隨機模式)**")
             st.write(current_r_quiz["question_text"])
             st.write("---")
             
@@ -785,7 +785,7 @@ elif current_tab == "📖 閱讀":
             saved_index = live_r_data["options"].index(saved_choice) if saved_choice in live_r_data["options"] else None
             
             user_r_choice = st.radio(
-                "請選出正確的選項：",
+                "選出正確選項：",
                 options=live_r_data["options"],
                 index=saved_index,
                 key=f"r_radio_{target_type}_{r_ptr}",
@@ -892,7 +892,7 @@ elif current_tab == "✍️ 寫作":
                 st.write("---")
                 
                 user_typed_answer = st.text_input(
-                    "請在此輸入聽到的完整族語句子（注意大小寫與標點符號）：",
+                    "輸入所聽到的完整句子（注意大小寫與標點符號）：",
                     placeholder="請輸入答案...",
                     key=f"w_input_{w_ptr}",
                     disabled=st.session_state.writing_submitted
@@ -973,7 +973,7 @@ elif current_tab == "✍️ 寫作":
                 st.write("---")
                 
                 user_typed_ans = st.text_input(
-                    "請在此輸入答案進行練習（注意大小寫與標點符號）：",
+                    "輸入答案進行練習（注意大小寫與標點符號）：",
                     value=st.session_state.q_input_text_cache[q_id],
                     placeholder="在此輸入您的練習答案...",
                     key=f"q_text_input_field_{q_id}"
