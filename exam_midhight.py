@@ -323,7 +323,7 @@ elif current_tab == "🗣️ 口說":
             
         st.markdown('</div>', unsafe_allow_html=True)
         
-    # ─── 題型二：情境問答（⚡ 終極修復：解決隨機模式切換與音檔強固辨識問題） ───
+    # ─── 題型二：情境問答（⚡ 終極修復：強制物理路徑鎖定與優雅降級） ───
     elif speaking_sub == "情境問答":
         try:
             with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
@@ -379,19 +379,19 @@ elif current_tab == "🗣️ 口說":
                 if st.button("🔊 播放題目語音音檔", key=f"s_play_btn_{true_s_id}"):
                     st.session_state.s_audio_triggered = True
                 
+                # 🔴 核心修復區塊：無視 JSON 設定，強制鎖定實體路徑
                 if st.session_state.s_audio_triggered:
-                    # 🛠️ 補丁 1：強制執行字串補零對齊偵測，解決 01~05 題誤判為語音製作中的問題
                     raw_id = str(current_s_quiz['quiz_id']).strip().zfill(2)
                     
-                    # 🚀 修正點：動態組裝正確的基礎資源路徑 (Base Asset Path)
-                    # 請依照您 GitHub 實際存放資料夾進行調整，若檔案只放在 speaking_qa/ 底下，請改為 base_audio_dir = "speaking_qa"
-                    base_audio_dir = "assets/audio/02_speaking/speaking_qa" 
-                    target_audio = current_s_quiz.get("audio_path", f"{base_audio_dir}/situation_{raw_id}.mp3")
+                    # 🚀 強制綁定您截圖中確認的 GitHub 真實路徑
+                    target_audio = f"assets/audio/02_speaking/speaking_qa/situation_{raw_id}.mp3"
                     
                     if os.path.exists(target_audio):
                         st.audio(target_audio, format="audio/mp3", autoplay=True)
                     else:
-                        st.warning(f"💡 **題目語音音檔正在製作中**（預計路徑：`{target_audio}`），您可以點選下方按鈕直接展開族語或中文意思進行練習。")
+                        # 優雅降級：檔案不存在時，不顯示任何錯誤碼，僅顯示溫和提示
+                        st.info("💡 **題目語音音檔正在製作中**，您可以點選下方按鈕直接展開族語或中文意思進行練習。")
+                        
                     st.session_state.s_audio_triggered = False
 
                 col_q1, col_q2 = st.columns(2)
