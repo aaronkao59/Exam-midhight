@@ -278,7 +278,7 @@ elif current_tab == "🎧 聽力":
 
 # 3. 🗣️ 口說測驗
 elif current_tab == "🗣️ 口說":
-    st.subheader("🗣️ 口說測營 (Pisowalan)")
+    st.subheader("🗣️ 口說測驗 (Pisowalan)")
     st.divider()
     speaking_sub = st.radio(
         "口說題型選擇：",
@@ -323,7 +323,7 @@ elif current_tab == "🗣️ 口說":
             
         st.markdown('</div>', unsafe_allow_html=True)
         
-    # ─── 題型二：情境問答（⚡ 語法錯誤完全除帳修正版） ───
+    # ─── 題型二：情境問答（⚡ 終極修復：解決隨機模式切換與音檔強固辨識問題） ───
     elif speaking_sub == "情境問答":
         try:
             with open("data/speaking_situations.json", "r", encoding="utf-8") as f:
@@ -332,14 +332,14 @@ elif current_tab == "🗣️ 口說":
             st.error("☠️ 系統性毀滅異常：偵測到 `data/speaking_situations.json` 檔案遺失，請確認是否建立！")
             speaking_situation_db = []
 
-        if speaking_situation_db:
+        if speaking_situations_db := speaking_situation_db:
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 🗣️ 口說測驗 - 情境問答")
             
             s_mode = st.radio("練習模式設定：", ["🎲 隨機挑戰題目", "📋 自由選擇題組"], horizontal=True, key="s_mode_switch")
             
             if "s_random_order" not in st.session_state:
-                st.session_state.s_random_order = list(range(len(speaking_situation_db)))
+                st.session_state.s_random_order = list(range(len(speaking_situations_db)))
                 random.shuffle(st.session_state.s_random_order)
             if "s_pointer" not in st.session_state:
                 st.session_state.s_pointer = 0
@@ -352,20 +352,20 @@ elif current_tab == "🗣️ 口說":
             if "s_audio_triggered" not in st.session_state:
                 st.session_state.s_audio_triggered = False
 
-            # 🛠️ 核心修復補丁：清除原本卡死系統的外部語法字元
+            # 分流索引提取器
             if s_mode == "🎲 隨機挑戰題目":
                 s_ptr = st.session_state.s_pointer
-                if s_ptr < len(speaking_situation_db):
+                if s_ptr < len(speaking_situations_db):
                     true_s_id = st.session_state.s_random_order[s_ptr]
-                    current_s_quiz = speaking_situation_db[true_s_id]
-                    st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situation_db)} 題 (隨機題組模式)**")
+                    current_s_quiz = speaking_situations_db[true_s_id]
+                    st.write(f"**當前進度：第 {s_ptr + 1} 題 / 共 {len(speaking_situations_db)} 題 (隨機題組模式)**")
                 else:
                     true_s_id = None
             else:
-                s_select_options = [f"第 {i+1} 題：題組挑戰" for i in range(len(speaking_situation_db))]
+                s_select_options = [f"第 {i+1} 題：題組挑戰" for i in range(len(speaking_situations_db))]
                 selected_s_index_str = st.selectbox("請指定想要練習的題組：", options=s_select_options, index=0)
                 true_s_id = s_select_options.index(selected_s_index_str)
-                current_s_quiz = speaking_situation_db[true_s_id]
+                current_s_quiz = speaking_situations_db[true_s_id]
                 st.write(f"**當前進度：自主選定第 {true_s_id + 1} 題挑戰中**")
 
             if true_s_id is not None:
@@ -380,8 +380,10 @@ elif current_tab == "🗣️ 口說":
                     st.session_state.s_audio_triggered = True
                 
                 if st.session_state.s_audio_triggered:
-                    target_audio = f"speaking_qa/situation_{current_s_quiz['quiz_id']}.mp3"
-                    # 🛠️ 核心修復補丁：配合要求，當音檔尚未上傳完成時，以黃色警告框提示，杜絕系統拋出報錯紅字
+                    # 🛠️ 補丁 1：強制執行字串補零對齊偵測，解決 01~05 題誤判為語音製作中的問題
+                    raw_id = str(current_s_quiz['quiz_id']).strip().zfill(2)
+                    target_audio = f"speaking_qa/situation_{raw_id}.mp3"
+                    
                     if os.path.exists(target_audio):
                         st.audio(target_audio, format="audio/mp3", autoplay=True)
                     else:
@@ -420,9 +422,10 @@ elif current_tab == "🗣️ 口說":
                         st.success(f"✨ **參考答案 (阿美語)：**\n\n{current_s_quiz['suggested_answer_amis']}\n\n"
                                    f"───\n\n💡 **中文翻譯：**\n\n{current_s_quiz['suggested_answer_ch']}")
                         
-                if st.session_state.s_show_ans[true_s_id] and s_mode == "🎲 隨機挑戰題目":
+                # 🛠️ 補丁 2：修正隨機挑戰題目模式下的換題切換指針
+                if s_mode == "🎲 隨機挑戰題目":
                     st.write("")
-                    if st.button("➡️ 下一題", key=f"s_next_btn_{true_s_id}"):
+                    if st.button("➡️ 下一題 (隨機抽題)", key=f"s_next_btn_{true_s_id}"):
                         st.session_state.s_pointer += 1
                         st.rerun()
             else:
