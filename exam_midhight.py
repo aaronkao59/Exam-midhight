@@ -3,10 +3,10 @@ import random
 import json
 import os
 
-# ---- 1. 頁面佈局設定 ----
+# ---- 頁面設定 ----
 st.set_page_config(page_title="中高級認證", page_icon="🎓", layout="centered", initial_sidebar_state="collapsed")
 
-# ---- 2. CSS 設計 ----
+# ---- CSS 設計 ----
 st.markdown("""
     <style>
     .quiz-card { background-color: var(--secondary-background-color); padding: 24px; border-radius: 16px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); margin-top: 15px; margin-bottom: 25px; }
@@ -15,22 +15,16 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("🎓 中高級認證")
-st.caption("[練習平台 選擇器]")
+st.caption("練習平台 選擇器")
 
+# ---- 選單 ----
 main_options = ["📋 認證考試說明", "🎧 聽力", "🗣️ 口說", "📖 閱讀", "✍️ 寫作"]
 current_tab = st.segmented_control("主選單導覽", main_options, default="📋 認證考試說明", label_visibility="collapsed")
 
-# 🧠 跨頁面狀態解耦
 if "previous_tab" not in st.session_state: st.session_state.previous_tab = current_tab
 if st.session_state.previous_tab != current_tab:
     st.session_state.previous_tab = current_tab
     st.rerun()
-
-# ---- 聽力題庫定義 ----
-QUIZ_DATA = [
-    {"id": 1, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-01.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["riyar", "'alo", "fanaw", "sa'owac"], "correct_text": "riyar"},
-    {"id": 2, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-02.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["korkor", "rohayan", "romakat", "rotarot"], "correct_text": "romakat"}
-]
 
 # ---- 🗣️ 口說測驗邏輯 ----
 if current_tab == "🗣️ 口說":
@@ -69,7 +63,7 @@ if current_tab == "🗣️ 口說":
                 if os.path.exists(path):
                     st.audio(path, format="audio/mp3", autoplay=True)
                 else:
-                    st.warning(f"💡 音檔製作中: {path}")
+                    st.warning(f"💡 音檔製作中 (路徑: {path})")
 
             if "show_q" not in st.session_state: st.session_state.show_q = False
             if "show_t" not in st.session_state: st.session_state.show_t = False
@@ -95,18 +89,59 @@ if current_tab == "🗣️ 口說":
             st.markdown('</div>', unsafe_allow_html=True)
             
     elif speaking_sub == "看圖表達":
-        st.info("看圖表達功能運作中...")
-
-# ---- 📖 閱讀測驗 ----
-elif current_tab == "📖 閱讀":
-    st.subheader("📖 閱讀測驗 (Piasipan)")
-    # ... (省略部分代碼以維持回應長度，請保留您原有的閱讀測驗區塊)
+        try:
+            with open("data/speaking_images.json", "r", encoding="utf-8") as f:
+                img_db = json.load(f)
+        except:
+            img_db = []
+            
+        if img_db:
+            st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
+            title = st.selectbox("主題選擇：", [item["title"] for item in img_db])
+            quiz = next(item for item in img_db if item["title"] == title)
+            
+            if os.path.exists(quiz["image_path"]):
+                st.image(quiz["image_path"], use_container_width=True)
+            
+            if "show_d" not in st.session_state: st.session_state.show_d = False
+            if st.button("📝 顯示/隱藏草稿區"): st.session_state.show_d = not st.session_state.show_d
+            if st.session_state.show_d: st.text_area("草稿區", key=f"draft_{quiz['quiz_id']}")
+            
+            if st.button("📥 顯示/隱藏參考答案"): st.session_state.show_ia = not st.session_state.get("show_ia", False)
+            if st.session_state.get("show_ia"):
+                st.success(f"參考答案：\n{quiz['suggested_answer_amis']}\n\n中文：{quiz['suggested_answer_ch']}")
+            st.markdown('</div>', unsafe_allow_html=True)
 
 # ---- ✍️ 寫作測驗 ----
 elif current_tab == "✍️ 寫作":
-    st.subheader("✍️ 寫作測驗 (Pitilidan)")
-    # ... (此處保留寫作測驗的邏輯)
+    st.subheader("✍️ 寫作測驗")
+    sub = st.radio("題型：", ["句子聽寫", "問答"], horizontal=True)
+    
+    if sub == "問答":
+        try:
+            with open("data/writing_quiz.json", "r", encoding="utf-8") as f:
+                all_data = json.load(f)
+            q_db = [item for item in all_data if item["type"] == "question"]
+        except:
+            q_db = []
+            
+        if q_db:
+            if "q_p" not in st.session_state: st.session_state.q_p = 0
+            idx = st.session_state.q_p % len(q_db)
+            quiz = q_db[idx]
+            
+            st.markdown(f"#### 問：{quiz['question_text']}")
+            if st.button("👁️ 顯示中文"): st.session_state.show_q_trans = not st.session_state.get("show_q_trans", False)
+            if st.session_state.get("show_q_trans"): st.info(quiz['chinese_translation'])
+            
+            st.text_input("輸入答案進行練習：")
+            
+            if st.button("📥 顯示/隱藏參考答案"): st.session_state.show_q_ans = not st.session_state.get("show_q_ans", False)
+            if st.session_state.get("show_q_ans"): st.success(quiz['suggested_answer'])
+            
+            if st.button("➡️ 下一題"):
+                st.session_state.q_p += 1
+                st.rerun()
 
-# ---- App 底部 ----
 st.write("---")
-st.caption("© 2026 中高級認證 App 三一開發團隊")
+st.caption("© 2026 中高級認證 App")
