@@ -466,7 +466,29 @@ elif current_tab == "🗣️ 口說":
                 
                 if current_article:
                     st.markdown(f"#### 🎯 {current_article['title']}")
-                    st.info(current_article["content"])
+                    
+                    # 🚀 新增：動態字體大小控制桿
+                    font_size = st.slider("🔍 調整文章字體大小", min_value=16, max_value=48, value=20, step=2)
+                    
+                    # 🎨 修改：使用帶有 CSS 樣式的 HTML 區塊來渲染文章，取代原先的 st.info
+                    st.markdown(
+                        f"""
+                        <div style="
+                            padding: 20px; 
+                            border-radius: 10px; 
+                            background-color: rgba(13, 148, 136, 0.1); 
+                            border-left: 5px solid #0D9488;
+                            font-size: {font_size}px; 
+                            line-height: 1.6;
+                            margin-bottom: 15px;
+                            color: var(--text-color);
+                        ">
+                            {current_article['content']}
+                        </div>
+                        """, 
+                        unsafe_allow_html=True
+                    )
+                    
                     st.caption(f"來源：{current_article['source']} ｜ 建議準備時間：1分半鐘 ｜ 建議朗讀時間：1分半鐘")
                 else:
                     st.error("⚠️ 找不到該題目的對應內容，請重新選擇。")
