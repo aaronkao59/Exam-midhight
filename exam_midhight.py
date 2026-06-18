@@ -284,7 +284,7 @@ elif current_tab == "🎧 聽力":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 💬 選擇題 - 對話理解")
             
-            ld_mode = st.radio("練習模式設定：", ["🎲 隨機挑戰題目", "📋 自由選擇題組"], horizontal=True, key="ld_mode_switch")
+            ld_mode = st.radio("選題模式：", ["🎲 隨機挑選題組", "📋 自由選擇題組"], horizontal=True, key="ld_mode_switch")
             
             # --- 狀態變數初始化區塊 ---
             if "ld_random_order" not in st.session_state:
@@ -304,20 +304,20 @@ elif current_tab == "🎧 聽力":
                 st.session_state.ld_choice_map = {}
                 
             # --- 模式與指針判斷 ---
-            if ld_mode == "🎲 隨機挑戰題目":
+            if ld_mode == "🎲 隨機挑選題組":
                 ptr = st.session_state.ld_pointer
                 if ptr < len(ld_db):
                     true_id = st.session_state.ld_random_order[ptr]
                     current_quiz = ld_db[true_id]
-                    st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(ld_db)} 題 (隨機題組模式)**")
+                    st.write(f"**當前進度：第 {ptr + 1} 題 / 共 {len(ld_db)} 題 (隨機模式)**")
                 else:
                     true_id = None
             else:
                 select_options = [f"第 {i+1} 題：對話挑戰" for i in range(len(ld_db))]
-                selected_str = st.selectbox("請指定想要練習的題組：", options=select_options, index=0)
+                selected_str = st.selectbox("指定練習題組：", options=select_options, index=0)
                 true_id = select_options.index(selected_str)
                 current_quiz = ld_db[true_id]
-                st.write(f"**當前進度：自主選定第 {true_id + 1} 題挑戰中**")
+                st.write(f"**當前進度：自選第 {true_id + 1} 題 練習中**")
 
             if true_id is not None:
                 q_id = current_quiz["quiz_id"]
@@ -384,7 +384,7 @@ elif current_tab == "🎧 聽力":
                 saved_index = live_quiz_data["options"].index(saved_choice) if saved_choice in live_quiz_data["options"] else None
                 
                 user_choice = st.radio(
-                    "請從下方選出正確答案：",
+                    "從下列選出正確答案：",
                     options=live_quiz_data["options"],
                     index=saved_index,
                     key=f"ld_radio_{true_id}",
@@ -410,7 +410,7 @@ elif current_tab == "🎧 聽力":
                         st.markdown(f"### 🔴 答題結果：✕")
                         st.error(f" 再接再厲！正確答案：**{correct_ans_str}**")
                         
-                    if ld_mode == "🎲 隨機挑戰題目":
+                    if ld_mode == "🎲 隨機挑選題組":
                         st.write("")
                         if st.button("➡️ 下一題 (隨機抽題)", key=f"ld_next_{true_id}"):
                             st.session_state.ld_pointer += 1
@@ -468,7 +468,7 @@ elif current_tab == "🗣️ 口說":
                     st.markdown(f"#### 🎯 {current_article['title']}")
                     
                     # 🚀 新增：動態字體大小控制桿
-                    font_size = st.slider("🔍 調整文章字體大小", min_value=16, max_value=48, value=20, step=2)
+                    font_size = st.slider("🔍 調整字體大小", min_value=16, max_value=48, value=20, step=2)
                     
                     # 🎨 修改：使用帶有 CSS 樣式的 HTML 區塊來渲染文章，取代原先的 st.info
                     st.markdown(
@@ -511,7 +511,7 @@ elif current_tab == "🗣️ 口說":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             st.markdown("### 🗣️ 口說測驗 - 情境問答")
             
-            s_mode = st.radio("練習模式設定：", ["🎲 隨機挑戰題目", "📋 自由選擇題組"], horizontal=True, key="s_mode_switch")
+            s_mode = st.radio("練習模式設定：", ["🎲 隨機挑選題組", "📋 自由選擇題組"], horizontal=True, key="s_mode_switch")
             
             if "s_random_order" not in st.session_state:
                 st.session_state.s_random_order = list(range(len(speaking_situations_db)))
@@ -528,7 +528,7 @@ elif current_tab == "🗣️ 口說":
                 st.session_state.s_audio_triggered = False
 
             # 分流索引提取器
-            if s_mode == "🎲 隨機挑戰題目":
+            if s_mode == "🎲 隨機挑選題組":
                 s_ptr = st.session_state.s_pointer
                 if s_ptr < len(speaking_situations_db):
                     true_s_id = st.session_state.s_random_order[s_ptr]
