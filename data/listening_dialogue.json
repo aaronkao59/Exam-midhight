@@ -1,1 +1,57 @@
-
+[
+  {
+    "quiz_id": 1,
+    "dialogue_amis": "A：O maan ko nialaan nora fa'inayan?\nB：Oya tefo'.",
+    "options": [
+      "Maala nora fa'inayan kora tefo'.",
+      "Maala nora fa'inayan kora a'ol.",
+      "Maala nora fa'inayan kora ca'ang no kilang.",
+      "Maala nora fa'inayan kora oway."
+    ],
+    "correct_text": "Maala nora fa'inayan kora tefo'."
+  },
+  {
+    "quiz_id": 2,
+    "dialogue_amis": "A：Icowaen a miteli ko sarosaros ningra?\nB：I laeno no takar.",
+    "options": [
+      "Telien i laeno no takar ko sarosaros ningra.",
+      "Telien i kafekang no takar ko sarosaros ningra.",
+      "Telien i ka'ayaw no takar ko sarosaros ningra.",
+      "Telien i kaikor no takar ko sarosaros ningra."
+    ],
+    "correct_text": "Telien i laeno no takar ko sarosaros ningra."
+  },
+  {
+    "quiz_id": 3,
+    "dialogue_amis": "A：Mana masadak koni a tamdaw?\nB：Mamifangad to konga cingra.",
+    "options": [
+      "Masadak mamikorkor to konga koni tamdaw.",
+      "Masadak mamitangtang to konga koni tamdaw.",
+      "Masadak mamipaloma to konga koni tamdaw.",
+      "Masadak mamitamek to konga koni tamdaw."
+    ],
+    "correct_text": "Masadak mamikorkor to konga koni tamdaw."
+  },
+  {
+    "quiz_id": 4,
+    "dialogue_amis": "A: O maan ko mipalomaan ni Panay iaikor no loma'?\nB: O kalitang ato 'adiyam.",
+    "options": [
+      "Mipaloma to kalitang ato 'adiyam ci Panay iaikor no loma'.",
+      "Mipaloma to kalitang ato 'ariray ci Panay iaikor no loma'.",
+      "Mipaloma to rara' ato 'adiyam ci Panay iaikor no loma'.",
+      "Mipaloma to 'ariray ato 'adiyam ci Panay iaikor no loma'."
+    ],
+    "correct_text": "Mipaloma to kalitang ato 'adiyam ci Panay iaikor no loma'."
+  },
+  {
+    "quiz_id": 5,
+    "dialogue_amis": "A: Makaen ni Marang ko ni'acaan ni ina inacila a mami' haw?\nB: Cecayay aca ko makaenay ningra, nawhan awaay ko salang noya mami'.",
+    "options": [
+      "Mahetecay ko ni'acaan ni ina a mami'.",
+      "Caay ka olah ci Marang a komaen to mami'.",
+      "Cecayay aca ko ni'acaan ni ina a mami'.",
+      "Caay ka komaen ci Marang to mami'."
+    ],
+    "correct_text": "Mahetecay ko ni'acaan ni ina a mami'."
+  }
+]
