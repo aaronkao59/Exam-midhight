@@ -901,7 +901,7 @@ elif current_tab == "✍️ 寫作":
                 if not st.session_state.writing_submitted:
                     if st.button("📥 提交答案", key=f"w_submit_{w_ptr}"):
                         if not user_typed_answer.strip():
-                            st.warning("⚠️ 請先在輸入框打字再行提交！")
+                            st.warning("⚠️ 未作答無法提交！")
                         else:
                             st.session_state.writing_submitted = True
                             st.rerun()
