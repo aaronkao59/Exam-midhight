@@ -92,16 +92,6 @@ if st.session_state.previous_tab != current_tab:
     st.session_state.audio_triggered = False
     if "writing_submitted" in st.session_state:
         st.session_state.writing_submitted = False
-
-# ---- 🧠 跨頁面狀態解耦防腐層 ----
-if "previous_tab" not in st.session_state:
-    st.session_state.previous_tab = "📋 認證考試說明"
-
-if st.session_state.previous_tab != current_tab:
-    st.session_state.submitted = False
-    st.session_state.audio_triggered = False
-    if "writing_submitted" in st.session_state:
-        st.session_state.writing_submitted = False
     
     # 使用 del 安全註銷屬性快取，徹底根除分頁切換時的隱性異常崩潰
     if "q_show_trans" in st.session_state:
@@ -617,7 +607,7 @@ elif current_tab == "🗣️ 口說":
                                    f"───\n\n💡 **中文：**\n\n{current_s_quiz['suggested_answer_ch']}")
                         
                 # 🛠️ 補丁 2：修正隨機挑戰題目模式下的換題切換指針
-                if s_mode == "🎲 隨機挑戰題目":
+                if s_mode == "🎲 隨機挑題":
                     st.write("")
                     if st.button("➡️ 下一題 (隨機抽題)", key=f"s_next_btn_{true_s_id}"):
                         st.session_state.s_pointer += 1
@@ -710,17 +700,17 @@ elif current_tab == "🗣️ 口說":
                         
                 with col_ans2:
                     if st.session_state.img_show_ans:
-                        st.success(f"✨ **阿美族語：**\n\n{current_img_quiz['suggested_answer_amis']}\n\n"
-                                   f"───\n\n💡 **中文：**\n\n{current_img_quiz['suggested_answer_ch']}")
+                        st.success(f"✨ **內建參考答案 (阿美語)：**\n\n{current_img_quiz['suggested_answer_amis']}\n\n"
+                                   f"───\n\n💡 **中文翻譯：**\n\n{current_img_quiz['suggested_answer_ch']}")
             
             st.markdown('</div>', unsafe_allow_html=True)
 
 # 4. 📖 閱讀測驗
 elif current_tab == "📖 閱讀":
-    st.subheader("📖 閱讀測驗 (piasipan)")
+    st.subheader("📖 閱讀測驗 (Piasipan)")
     st.divider()
     reading_sub = st.radio(
-        "題型選擇：",
+        "閱讀題型選擇：",
         ["選擇題-詞彙語意", "選擇題-語言結構"],
         horizontal=True
     )
@@ -792,7 +782,7 @@ elif current_tab == "📖 閱讀":
                 
             live_r_data = st.session_state[state_opts_key][true_r_id]
             
-            st.write(f"**[當前進度：第 {r_ptr + 1} 題 / 共 {len(reading_db)} 題 (隨機)]**")
+            st.write(f"**當前進度：第 {r_ptr + 1} 題 / 共 {len(reading_db)} 題 (隨機出題組模式)**")
             st.write(current_r_quiz["question_text"])
             st.write("---")
             
@@ -800,7 +790,7 @@ elif current_tab == "📖 閱讀":
             saved_index = live_r_data["options"].index(saved_choice) if saved_choice in live_r_data["options"] else None
             
             user_r_choice = st.radio(
-                "答案選項：",
+                "請選出正確的選項：",
                 options=live_r_data["options"],
                 index=saved_index,
                 key=f"r_radio_{target_type}_{r_ptr}",
@@ -813,18 +803,23 @@ elif current_tab == "📖 閱讀":
             if not st.session_state[state_submit_key][true_r_id]:
                 if st.button("📥 提交答案", key=f"r_submit_btn_{target_type}_{r_ptr}"):
                     if user_r_choice is None:
-                        st.warning("⚠️ 未作答無法提交！")
+                        st.warning("⚠️ 請先選擇一個選項再行提交！")
                     else:
                         st.session_state[state_submit_key][true_r_id] = True
                         st.rerun()
             else:
                 correct_ans_str = live_r_data["correct_text"]
+                
+                # 🚀 新增：動態讀取 JSON 中的中文解釋，並進行字串組裝
+                meaning = current_r_quiz.get("chinese_meaning", "")
+                display_correct_text = f"{correct_ans_str} （{meaning}）" if meaning else correct_ans_str
+                
                 if user_r_choice == correct_ans_str:
                     st.markdown(f"### 🔴 答題結果：✓")
-                    st.success(f" Fangcal! 正確答案：**{correct_ans_str}**")
+                    st.success(f" Fangcal! 正確答案：**{display_correct_text}**")
                 else:
                     st.markdown(f"### 🔴 答題結果：✕")
-                    st.error(f" 再接再厲！正確答案：**{correct_ans_str}**")
+                    st.error(f" 再接再厲！正確答案：**{display_correct_text}**")
             
             st.write("")
             
@@ -852,10 +847,10 @@ elif current_tab == "📖 閱讀":
 
 # 5. ✍️ 寫作測驗
 elif current_tab == "✍️ 寫作":
-    st.subheader("✍️ 寫作測驗 (pitilidan)")
+    st.subheader("✍️ 寫作測驗 (Pitilidan)")
     st.divider()
     writing_sub = st.radio(
-        "題型選擇：",
+        "寫作題型選擇：",
         ["句子聽寫", "問答"],
         horizontal=True
     )
@@ -870,7 +865,7 @@ elif current_tab == "✍️ 寫作":
     if all_writing_data:
         if writing_sub == "句子聽寫":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            st.markdown("### ✍️ 寫作 - 句子聽寫")
+            st.markdown("### ✍️ 寫作測驗 - 句子聽寫")
             
             dictation_db = [item for item in all_writing_data if item["type"] == "dictation"]
             
@@ -891,7 +886,7 @@ elif current_tab == "✍️ 寫作":
                 true_w_id = st.session_state.writing_dictation_order[w_ptr]
                 current_w_quiz = dictation_db[true_w_id]
                 
-                st.write(f"**[當前進度：第 {w_ptr + 1} 題 / 共 {len(dictation_db)} 題]**")
+                st.write(f"**當前進度：第 {w_ptr + 1} 題 / 共 {len(dictation_db)} 題**")
                 st.write(current_w_quiz["question_text"])
                 
                 if st.button("🔊 播放題目", key=f"w_play_{w_ptr}"):
@@ -907,7 +902,7 @@ elif current_tab == "✍️ 寫作":
                 st.write("---")
                 
                 user_typed_answer = st.text_input(
-                    "輸入所聽到的完整句子（注意大小寫與標點符號）：",
+                    "請在此輸入聽到的完整族語句子（注意大小寫與標點符號）：",
                     placeholder="請輸入答案...",
                     key=f"w_input_{w_ptr}",
                     disabled=st.session_state.writing_submitted
@@ -916,7 +911,7 @@ elif current_tab == "✍️ 寫作":
                 if not st.session_state.writing_submitted:
                     if st.button("📥 提交答案", key=f"w_submit_{w_ptr}"):
                         if not user_typed_answer.strip():
-                            st.warning("⚠️ 未作答無法提交！")
+                            st.warning("⚠️ 請先在輸入框打字再行提交！")
                         else:
                             st.session_state.writing_submitted = True
                             st.rerun()
@@ -947,7 +942,7 @@ elif current_tab == "✍️ 寫作":
             
         elif writing_sub == "問答":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-            st.markdown("### 📝 寫作 - 問答")
+            st.markdown("### 📝 寫作測驗 - 問答")
             
             question_db = [item for item in all_writing_data if item["type"] == "question"]
             
@@ -974,7 +969,7 @@ elif current_tab == "✍️ 寫作":
                 if q_id not in st.session_state.q_input_text_cache:
                     st.session_state.q_input_text_cache[q_id] = ""
                 
-                st.write(f"**[當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題]**")
+                st.write(f"**當前進度：第 {q_ptr + 1} 題 / 共 {len(question_db)} 題**")
                 st.markdown(f"#### ❓ 問：{current_q_quiz['question_text']}")
                 
                 trans_btn_label = "🔄 關閉中文翻譯" if st.session_state.q_show_trans[q_ptr] else "👁️ 顯示中文翻譯"
@@ -988,7 +983,7 @@ elif current_tab == "✍️ 寫作":
                 st.write("---")
                 
                 user_typed_ans = st.text_input(
-                    "輸入答案進行練習（注意大小寫與標點符號）：",
+                    "請在此輸入答案進行練習（注意大小寫與標點符號）：",
                     value=st.session_state.q_input_text_cache[q_id],
                     placeholder="在此輸入您的練習答案...",
                     key=f"q_text_input_field_{q_id}"
