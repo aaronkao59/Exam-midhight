@@ -67,6 +67,7 @@ st.markdown("""
 
 # ---- App 頂部導覽列 ----
 st.title("🎓 中高級認證")
+# 🛠️ 修正 1：對齊您截圖中的文字
 st.caption("[請選擇練習平台]")
 
 # ---- 第一層：五個主要選項 (導覽選單) ----
@@ -74,9 +75,20 @@ main_options = ["📋 認證考試說明", "🎧 聽力", "🗣️ 口說", "�
 current_tab = st.segmented_control(
     "主選單導覽", 
     main_options, 
-    default="📋 認證考試說明",
+    default=None,  # 🚀 修正 2：設為 None，代表一進來「不預設選取任何頁面」，保持畫面純淨
     label_visibility="collapsed"
 )
+
+# ---- 🧠 跨頁面狀態解耦防腐層 ----
+if "previous_tab" not in st.session_state:
+    # 🚀 修正 3：初始狀態同步設為 None
+    st.session_state.previous_tab = None
+
+if st.session_state.previous_tab != current_tab:
+    st.session_state.submitted = False
+    st.session_state.audio_triggered = False
+    if "writing_submitted" in st.session_state:
+        st.session_state.writing_submitted = False
 
 # ---- 🧠 跨頁面狀態解耦防腐層 ----
 if "previous_tab" not in st.session_state:
