@@ -5,7 +5,8 @@
     "title": "詞彙語意-第1題",
     "question_text": "題目：\nO cinah i, ______.",
     "options": ["kaheciday", "koesanay", "kacedahay", "'anengelay"],
-    "correct_text": "kaheciday"
+    "correct_text": "kaheciday",
+    "chinese_meaning": "鹹的"
   },
   {
     "quiz_id": "02",
@@ -13,7 +14,8 @@
     "title": "詞彙語意-第2題",
     "question_text": "題目：\nNga'ayay ko ______ ato tatalikan a misatoron.",
     "options": ["'asolo", "salongawit", "cakelis", "rinom"],
-    "correct_text": "'asolo"
+    "correct_text": "'asolo",
+    "chinese_meaning": "杵"
   },
   {
     "quiz_id": "03",
@@ -21,7 +23,8 @@
     "title": "詞彙語意-第3題",
     "question_text": "題目：\nAdihay ko foting i ______.",
     "options": ["fanafanawan", "seraseraan", "kilakilangan", "lalan"],
-    "correct_text": "fanafanawan"
+    "correct_text": "fanafanawan",
+    "chinese_meaning": "池塘 / 湖泊"
   },
   {
     "quiz_id": "04",
@@ -29,7 +32,8 @@
     "title": "詞彙語意-第4題",
     "question_text": "題目：\n ______ no faliyos kora kilang inacila.",
     "options": ["Mapiloh", "Mawakang", "Mapedoc", "Matengteng"],
-    "correct_text": "Mapiloh"
+    "correct_text": "Mapiloh",
+    "chinese_meaning": "倒塌"
   },
   {
     "quiz_id": "05",
@@ -37,7 +41,8 @@
     "title": "詞彙語意-第5題",
     "question_text": "題目：\nMimingay kona ca'ang no kilang; caayay ko ______.",
     "options": ["tata'akay", "ma'icangay", "kifetolay", "matoni'ay"],
-    "correct_text": "tata'akay"
+    "correct_text": "tata'akay",
+    "chinese_meaning": "大的"
   },
   {
     "quiz_id": "06",
@@ -45,7 +50,8 @@
     "title": "詞彙語意-第6題",
     "question_text": "題目：\n ______ to ko falo.",
     "options": ["Mafohatay", "Mafitelakay", "Maledatay", "Mafelihay"],
-    "correct_text": "Mafitelakay"
+    "correct_text": "Mafitelakay",
+    "chinese_meaning": "開花 / 綻放"
   },
   {
     "quiz_id": "07",
@@ -53,7 +59,8 @@
     "title": "詞彙語意-第7題",
     "question_text": "題目：\nMapatedil no cidal, ______ a masoni.",
     "options": ["mi'ang'ang", "pacedi'", "maka'ka'", "marohroh"],
-    "correct_text": "pacedi'"
+    "correct_text": "pacedi'",
+    "chinese_meaning": "蟬鳴 / 鳴叫"
   },
   {
     "quiz_id": "08",
@@ -61,7 +68,8 @@
     "title": "詞彙語意-第8題",
     "question_text": "題目：\nCecay a ______ ko misakohawan nira to no titi.",
     "options": ["dangah", "sala", "kopid", "'atal"],
-    "correct_text": "dangah"
+    "correct_text": "dangah",
+    "chinese_meaning": "鍋子"
   },
   {
     "quiz_id": "09",
@@ -69,7 +77,8 @@
     "title": "詞彙語意-第9題",
     "question_text": "題目：\nI kawili no katatopitopan no tosaay a ______ ko paniyaro’an no Ciwidian.",
     "options": ["lalan", "kengkeng", "riyar", "sa’owac"],
-    "correct_text": "sa’owac"
+    "correct_text": "sa’owac",
+    "chinese_meaning": "溪流"
   },
   {
     "quiz_id": "10",
@@ -77,7 +86,8 @@
     "title": "詞彙語意-第10題",
     "question_text": "題目：\nO ______ no ina ko pidoedoan a misaparod.",
     "options": ["tatiihay", "ikakaay", "lawlaay", "’alingay"],
-    "correct_text": "ikakaay"
+    "correct_text": "ikakaay",
+    "chinese_meaning": "年長者 / 長輩"
   },
   {
     "quiz_id": "11",
@@ -85,7 +95,8 @@
     "title": "詞彙語意-第11題",
     "question_text": "題目：\nCaay kanikaw to ______ ko Pangcah.",
     "options": ["dateng", "payso", "loma'", "cocad"],
-    "correct_text": "dateng"
+    "correct_text": "dateng",
+    "chinese_meaning": "蔬菜 / 野菜"
   },
   {
     "quiz_id": "12",
@@ -93,7 +104,8 @@
     "title": "詞彙語意-第12題",
     "question_text": "題目：\nCaay kacango’ot kita to saka’orip ato ______.",
     "options": ["tatayalen", "kakaenen", "sasalamaen", "haharatengen"],
-    "correct_text": "kakaenen"
+    "correct_text": "kakaenen",
+    "chinese_meaning": "食物"
   },
   {
     "quiz_id": "13",
@@ -101,7 +113,8 @@
     "title": "詞彙語意-第13題",
     "question_text": "題目：\n ______ to kiso to tafok no riyar?",
     "options": ["Maharateng", "Ma’ilol", "Ｍararom", "Malalisan"],
-    "correct_text": "Ma’ilol"
+    "correct_text": "Ma’ilol",
+    "chinese_meaning": "想念"
   },
   {
     "quiz_id": "14",
@@ -109,7 +122,8 @@
     "title": "詞彙語意-第14題",
     "question_text": "題目：\n ______ to fafoy no lotok ci Foyan faki inacila saan.",
     "options": ["Ｍapacok", "Ｍahafikod", "Cietan", "Citama"],
-    "correct_text": "Citama"
+    "correct_text": "Citama",
+    "chinese_meaning": "捕獲 / 抓到"
   },
   {
     "quiz_id": "15",
@@ -117,7 +131,8 @@
     "title": "詞彙語意-第15題",
     "question_text": "題目：\n ______ sa to romi’ami’ad caay ka tayal, ’esam sa koya mama nangra.",
     "options": ["Fafoti'", "Nanawang", "Raradiw", "Langiwngiw"],
-    "correct_text": "Fafoti'"
+    "correct_text": "Fafoti'",
+    "chinese_meaning": "睡覺 / 一直睡"
   },
   {
     "quiz_id": "16",
@@ -125,7 +140,8 @@
     "title": "詞彙語意-第16題",
     "question_text": "題目：\nMafana’ to kako to kahirahira, ______ no serangawan no Taywan.",
     "options": ["congo'ot", "sonol", "pawan", "kadofah"],
-    "correct_text": "kadofah"
+    "correct_text": "kadofah",
+    "chinese_meaning": "豐富 / 豐盛"
   },
   {
     "quiz_id": "17",
@@ -133,7 +149,8 @@
     "title": "詞彙語意-第17題",
     "question_text": "題目：\nAdihay ko ______ no mato’asay to pakiniay to fenek no mi’adopay.",
     "options": ["patedo", "pangiwngiw", "caciyaw", "makitohay"],
-    "correct_text": "makitohay"
+    "correct_text": "makitohay",
+    "chinese_meaning": "傳說 / 故事"
   },
   {
     "quiz_id": "18",
@@ -141,7 +158,8 @@
     "title": "詞彙語意-第18題",
     "question_text": "題目：\n ______ ci ama aci faki to fonos ato kowang a malingad to dadaya.",
     "options": ["Miala", "Mihawikid", "Mikoyod", "Mi'afas"],
-    "correct_text": "Mihawikid"
+    "correct_text": "Mihawikid",
+    "chinese_meaning": "攜帶 / 帶著"
   },
   {
     "quiz_id": "19",
@@ -149,7 +167,8 @@
     "title": "詞彙語意-第19題",
     "question_text": "題目：\nHakelong han no kadit, matiya o fali, ______ sato ko faloco’ ako.",
     "options": ["selen", "pawpaw", "fiwfiw", "lahedaw"],
-    "correct_text": "pawpaw"
+    "correct_text": "pawpaw",
+    "chinese_meaning": "漂浮"
   },
   {
     "quiz_id": "20",
@@ -157,7 +176,8 @@
     "title": "詞彙語意-第20題",
     "question_text": "題目：\nmangicngic to a malangal ko faloco’, o mama ______ sato!",
     "options": ["sied", "da’at", "'iyak", "feded"],
-    "correct_text": "da’at"
+    "correct_text": "da’at",
+    "chinese_meaning": "發脾氣 / 怒"
   },
   {
     "quiz_id": "21",
@@ -165,7 +185,8 @@
     "title": "詞彙語意-第21題",
     "question_text": "題目：\n ______ sa ko fali, Ira i fafa’ed no kakarayan ko cidal.",
     "options": ["pakpak", "feriwferiw", "Seriwseriw", "kelongkelong"],
-    "correct_text": "feriwferiw"
+    "correct_text": "feriwferiw",
+    "chinese_meaning": "吹拂"
   },
   {
     "quiz_id": "22",
@@ -173,7 +194,8 @@
     "title": "詞彙語意-第22題",
     "question_text": "題目：\nMaherek ______ ko pakarongay macakat to selal, misatapang to matayal to demak no niyaro’.",
     "options": ["malalefo", "matayal", "malingad", "maparengreng"],
-    "correct_text": "maparengreng"
+    "correct_text": "maparengreng",
+    "chinese_meaning": "被賦予責任 / 晉升"
   },
   {
     "quiz_id": "23",
@@ -181,7 +203,8 @@
     "title": "詞彙語意-第23題",
     "question_text": "題目：\nO mama no kapah, citodongay to ______ to kalomaan no niyaro’.",
     "options": ["misawkit", "mipacoyak", "mipaising", "saliway"],
-    "correct_text": "misawkit"
+    "correct_text": "misawkit",
+    "chinese_meaning": "審判 / 處理糾紛"
   },
   {
     "quiz_id": "24",
@@ -189,7 +212,8 @@
     "title": "詞彙語意-第24題",
     "question_text": "題目：\n ______ ko rakat no kamoko’ay a rinom.",
     "options": ["Matayo", "Mapatay", "Matai", "Maketon"],
-    "correct_text": "Matayo"
+    "correct_text": "Matayo",
+    "chinese_meaning": "停止 / 中斷"
   },
   {
     "quiz_id": "25",
@@ -197,7 +221,8 @@
     "title": "詞彙語意-第25題",
     "question_text": "題目：\nO ______ niyam a mitilid anini a romi’ad.",
     "options": ["pisawadan", "picorahan", "pakaenan", "pidangoyan"],
-    "correct_text": "pisawadan"
+    "correct_text": "pisawadan",
+    "chinese_meaning": "畢業 / 結束(學業)"
   },
   {
     "quiz_id": "01",
@@ -205,7 +230,8 @@
     "title": "語言結構-第1題",
     "question_text": "題目：\n ______ to dateng ci ama ako.",
     "options": ["micikcik", "macikcik", "picikcik", "sapicikcik"],
-    "correct_text": "micikcik"
+    "correct_text": "micikcik",
+    "chinese_meaning": "切"
   },
   {
     "quiz_id": "02",
@@ -213,7 +239,8 @@
     "title": "語言結構-第2題",
     "question_text": "題目：\nCaayay ______ takowanan koni waco.",
     "options": ["pikalat", "mikalat", "makalat", "mamikalat"],
-    "correct_text": "pikalat"
+    "correct_text": "pikalat",
+    "chinese_meaning": "咬"
   },
   {
     "quiz_id": "03",
@@ -221,7 +248,8 @@
     "title": "語言結構-第3題",
     "question_text": "題目：\n ______ inacila kora kaying.",
     "options": ["matolo'ay", "sakatolo'", "mamatolo'", "sapipatolo'"],
-    "correct_text": "matolo'ay"
+    "correct_text": "matolo'ay",
+    "chinese_meaning": "掉落"
   },
   {
     "quiz_id": "04",
@@ -229,7 +257,8 @@
     "title": "語言結構-第4題",
     "question_text": "題目：\nCaay ka pitengil to sowal kiso aci Panay, maketer ci ina i ______.",
     "options": ["tamowanan", "kamiyanan", "kitaanan", "cangranan"],
-    "correct_text": "tamowanan"
+    "correct_text": "tamowanan",
+    "chinese_meaning": "你們"
   },
   {
     "quiz_id": "05",
@@ -237,7 +266,8 @@
     "title": "語言結構-第5題",
     "question_text": "題目：\n ______ niyam kora loma'.",
     "options": ["Kamaro'an", "Mimaro'", "Pamaro'", "Aro"],
-    "correct_text": "Kamaro'an"
+    "correct_text": "Kamaro'an",
+    "chinese_meaning": "居住地 / 座位"
   },
   {
     "quiz_id": "06",
@@ -245,7 +275,8 @@
     "title": "語言結構-第6題",
     "question_text": "題目：\nAdihay tato ko makaenay ningra, ______ adada ko tiyad.",
     "options": ["orasaka", "ano", "latek", "nawhani"],
-    "correct_text": "orasaka"
+    "correct_text": "orasaka",
+    "chinese_meaning": "所以"
   },
   {
     "quiz_id": "07",
@@ -253,7 +284,8 @@
     "title": "語言結構-第7題",
     "question_text": "題目：\n ______ ko 'afala iso?",
     "options": ["mamaan", "cima", "anohakowa", "maan"],
-    "correct_text": "mamaan"
+    "correct_text": "mamaan",
+    "chinese_meaning": "怎麼了 / 發生什麼事"
   },
   {
     "quiz_id": "08",
@@ -261,7 +293,8 @@
     "title": "語言結構-第8題",
     "question_text": "題目：\nKalamkamen a mifalod! ______ to ko widi ita.",
     "options": ["Awa", "Caay", "Naay", "Fokil"],
-    "correct_text": "Awa"
+    "correct_text": "Awa",
+    "chinese_meaning": "沒有"
   },
   {
     "quiz_id": "09",
@@ -269,7 +302,8 @@
     "title": "語言結構-第9題",
     "question_text": "題目：\nAka ______ cilinay!",
     "options": ["pitawal", "matawal", "matawalay", "mitawal"],
-    "correct_text": "pitawal"
+    "correct_text": "pitawal",
+    "chinese_meaning": "忘記"
   },
   {
     "quiz_id": "10",
@@ -277,7 +311,8 @@
     "title": "語言結構-第10題",
     "question_text": "題目：\nMaolah ______ to kilang ko malinaay nira.",
     "options": ["mikalic", "makalic", "mamikalic", "kalic"],
-    "correct_text": "mikalic"
+    "correct_text": "mikalic",
+    "chinese_meaning": "爬"
   },
   {
     "quiz_id": "11",
@@ -285,7 +320,8 @@
     "title": "語言結構-第11題",
     "question_text": "題目：\nTayni ______ kiso anodafak?",
     "options": ["masa’opo", "misa'opo", "pisa'opoan", "sa'opo"],
-    "correct_text": "masa’opo"
+    "correct_text": "masa’opo",
+    "chinese_meaning": "聚集"
   },
   {
     "quiz_id": "12",
@@ -293,7 +329,8 @@
     "title": "語言結構-第12題",
     "question_text": "題目：\nKalipahak to ______ iso!",
     "options": ["kahofoc", "kahofocan", "mahofocay", "mamahofoc"],
-    "correct_text": "kahofocan"
+    "correct_text": "kahofocan",
+    "chinese_meaning": "生日 / 出生"
   },
   {
     "quiz_id": "13",
@@ -301,7 +338,8 @@
     "title": "語言結構-第13題",
     "question_text": "題目：\n ______ ko mama ako a palatamdaw i tamiyanan.",
     "options": ["Cifaloco’ay", "Fafaloco’en", "Cafaloco’", "Cifaloco’"],
-    "correct_text": "Cifaloco’ay"
+    "correct_text": "Cifaloco’ay",
+    "chinese_meaning": "有心的 / 用心的"
   },
   {
     "quiz_id": "14",
@@ -309,7 +347,8 @@
     "title": "語言結構-第14題",
     "question_text": "題目：\nNa adada cingra caay to ______ ko pidipot to wawa.",
     "options": ["kadepoc", "midepocay", "madepocay", "cidepoc"],
-    "correct_text": "kadepoc"
+    "correct_text": "kadepoc",
+    "chinese_meaning": "專心 / 照顧好"
   },
   {
     "quiz_id": "15",
@@ -317,7 +356,8 @@
     "title": "語言結構-第15題",
     "question_text": "題目：\nkalamkamen, ______ kako.",
     "options": ["matamoray", "matamor", "katamor", "matamoren"],
-    "correct_text": "matamoray"
+    "correct_text": "matamoray",
+    "chinese_meaning": "遲到"
   },
   {
     "quiz_id": "16",
@@ -325,7 +365,8 @@
     "title": "語言結構-第16題",
     "question_text": "題目：\nMafana’ kiso romadiw tono ______ a radiw ato patikiri?",
     "options": ["tato’asan", "tato’as", "mato’asay", "to’as"],
-    "correct_text": "tato’asan"
+    "correct_text": "tato’asan",
+    "chinese_meaning": "祖先"
   },
   {
     "quiz_id": "17",
@@ -333,7 +374,8 @@
     "title": "語言結構-第17題",
     "question_text": "題目：\nManga’ay tayra i riyar ______ ato komaen to kolikolian.",
     "options": ["midangoy", "madangoy", "pidangoyan", "dadangoy"],
-    "correct_text": "midangoy"
+    "correct_text": "midangoy",
+    "chinese_meaning": "游泳"
   },
   {
     "quiz_id": "18",
@@ -341,7 +383,8 @@
     "title": "語言結構-第18題",
     "question_text": "題目：\nMinokay i ______ no niyaro’ kiso?",
     "options": ["kailisinan", "piilisinan", "ilisin", "ilisinan"],
-    "correct_text": "kailisinan"
+    "correct_text": "kailisinan",
+    "chinese_meaning": "豐年祭期間"
   },
   {
     "quiz_id": "19",
@@ -349,7 +392,8 @@
     "title": "語言結構-第19題",
     "question_text": "題目：\nO wina ko ______ no loma’, mialaay ko fafahiyan to fa’inay.",
     "options": ["tatapangan", "tapangan", "tapang", "satapangan"],
-    "correct_text": "tatapangan"
+    "correct_text": "tatapangan",
+    "chinese_meaning": "根本 / 源頭"
   },
   {
     "quiz_id": "20",
@@ -357,7 +401,8 @@
     "title": "語言結構-第20題",
     "question_text": "題目：\nTadalimela no ngasaw to ______ to salawinawina.",
     "options": ["laloma’an", "loma’", "laloma’", "loma’an"],
-    "correct_text": "laloma’an"
+    "correct_text": "laloma’an",
+    "chinese_meaning": "家人 / 家族"
   },
   {
     "quiz_id": "21",
@@ -365,7 +410,8 @@
     "title": "語言結構-第21題",
     "question_text": "題目：\nO cacitodong ______ to pitilidan niyam kako.",
     "options": ["mamifawah", "mifawahay", "mamafawah", "mifawah"],
-    "correct_text": "mamifawah"
+    "correct_text": "mamifawah",
+    "chinese_meaning": "將要開"
   },
   {
     "quiz_id": "22",
@@ -373,7 +419,8 @@
     "title": "語言結構-第22題",
     "question_text": "題目：\n ______ to nananomen kako.",
     "options": ["Miladom", "Maladom", "Ladomen", "Piladom"],
-    "correct_text": "Miladom"
+    "correct_text": "Miladom",
+    "chinese_meaning": "打水"
   },
   {
     "quiz_id": "23",
@@ -381,7 +428,8 @@
     "title": "語言結構-第23題",
     "question_text": "題目：\n ______ i papotal kako, ira i laloma’ ko safawah.",
     "options": ["Macaniker", "Mamacaniker", "Micanikeray", "Cacanikeren"],
-    "correct_text": "Macaniker"
+    "correct_text": "Macaniker",
+    "chinese_meaning": "卡住 / 受困"
   },
   {
     "quiz_id": "24",
@@ -389,7 +437,8 @@
     "title": "語言結構-第24題",
     "question_text": "題目：\n ______ nanamen ko caciyaw no Pangcah haw?",
     "options": ["Ko'esitay", "Ko’esit", "Kako'esit", "Ko'esiten"],
-    "correct_text": "Ko'esitay"
+    "correct_text": "Ko'esitay",
+    "chinese_meaning": "困難的"
   },
   {
     "quiz_id": "25",
@@ -397,7 +446,8 @@
     "title": "語言結構-第25題",
     "question_text": "題目：\nadihay ko ______ a caciyaw no Pangcah.",
     "options": ["makakitingay", "kakitingen", "makakiting", "kakitingay"],
-    "correct_text": "makakitingay"
+    "correct_text": "makakitingay",
+    "chinese_meaning": "相連的 / 有關聯的"
   },
   {
     "quiz_id": "26",
@@ -405,7 +455,8 @@
     "title": "語言結構-第26題",
     "question_text": "題目：\n ______ to ko patelaw ako, caayto pakatekol to mali.",
     "options": ["Madoka’", "Cidoka’", "Madoka’ ay", "Midikaa'ay"],
-    "correct_text": "Madoka’"
+    "correct_text": "Madoka’",
+    "chinese_meaning": "受傷"
   },
   {
     "quiz_id": "27",
@@ -413,7 +464,8 @@
     "title": "語言結構-第27題",
     "question_text": "題目：\nMahapinang ko pising iso, sedi saan caay ______ caciyaw to tingwa.",
     "options": ["pitolas", "papitolas", "tolasen", "tolas"],
-    "correct_text": "pitolas"
+    "correct_text": "pitolas",
+    "chinese_meaning": "停止 / 中斷"
   },
   {
     "quiz_id": "28",
@@ -421,7 +473,8 @@
     "title": "語言結構-第28題",
     "question_text": "題目：\niraay ko likakawa to ______ ato likoda no niyaro’.",
     "options": ["pisacepo’an", "sacepo’", "misacepo’", "misacepo’ay"],
-    "correct_text": "pisacepo’an"
+    "correct_text": "pisacepo’an",
+    "chinese_meaning": "海祭 (時間或地點)"
   },
   {
     "quiz_id": "29",
@@ -429,7 +482,8 @@
     "title": "語言結構-第29題",
     "question_text": "題目：\nMipatalay to ______ no fa’inayan a misahemay ato mitalik to toron.",
     "options": ["nafotingan", "mifotingay", "pifoting", "pinafoting"],
-    "correct_text": "nafotingan"
+    "correct_text": "nafotingan",
+    "chinese_meaning": "捕到的魚"
   },
   {
     "quiz_id": "30",
@@ -437,6 +491,7 @@
     "title": "語言結構-第30題",
     "question_text": "題目：\n ______ ako ci kaka ako.",
     "options": ["patikamien", "patikami", "tikamien", "patikamieay"],
-    "correct_text": "patikamien"
+    "correct_text": "patikamien",
+    "chinese_meaning": "寄信"
   }
 ]
