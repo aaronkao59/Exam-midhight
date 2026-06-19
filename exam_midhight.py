@@ -3,6 +3,9 @@ import random
 import json
 import os  # 引入 OS 模組，用於物理檔案路徑防禦性偵測
 
+# 🚀 新增：定義全域系統版本號 (每次更新只需修改這裡)
+APP_VERSION = "v2.0.0 (Build 20260619)"
+
 # ---- 1. 頁面佈局設定 (Code-CRF v9.0 運行時配置) ----
 st.set_page_config(
     page_title="中高級認證",
@@ -1028,4 +1031,4 @@ elif current_tab == "✍️ 寫作":
 
 # ---- App 底部註腳 ----
 st.write("---")
-st.caption("© 2026 中高級認證 App 三一開發團隊 ｜ 雙重隨機全防禦穩定版")
+st.caption(f"© 2026 中高級認證 App 三一開發團隊 ｜ 系統版本：**{APP_VERSION}**")
