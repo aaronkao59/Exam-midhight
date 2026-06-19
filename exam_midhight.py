@@ -707,7 +707,7 @@ elif current_tab == "🗣️ 口說":
 
 # 4. 📖 閱讀測驗
 elif current_tab == "📖 閱讀":
-    st.subheader("📖 閱讀測驗 (Piasipan)")
+    st.subheader("📖 閱讀測驗 (piasipan)")
     st.divider()
     reading_sub = st.radio(
         "閱讀題型選擇：",
@@ -847,7 +847,7 @@ elif current_tab == "📖 閱讀":
 
 # 5. ✍️ 寫作測驗
 elif current_tab == "✍️ 寫作":
-    st.subheader("✍️ 寫作測驗 (Pitilidan)")
+    st.subheader("✍️ 寫作測驗 (pitilidan)")
     st.divider()
     writing_sub = st.radio(
         "寫作題型選擇：",
