@@ -2,11 +2,11 @@
   {
     "quiz_id": "01",
     "audio_path": "speaking_qa/situation_01.mp3",
-    "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_amis": "O mamamaan ko pisadotoc to serangawan no kapah, o caayay pakafohat a minokay i niyaro' a mikapot to kasaselal i kailisinan nawhani mademet ko tayal i ningri hakini?",
-    "question_ch": "旅居都會區青年因工作排班困難無法回鄉參與歲時祭儀階層集訓，如何維繫文化臍帶？",
-    "suggested_answer_amis": "Padamain ko sa'opo i ningri a milongoc to pahanhanan no ilisin i siyfu, ano eca i, pili'ayaw a mipalisawot to selal i ningri a minanam. Sakapolongen ko kikay no aniniay a patenak to nafaloco'an no ilisin, ta caay kapiteka ko nika o Pangcah kako sanay a harateng no kapah i raay.",
-    "suggested_answer_ch": "應輔導同鄉會爭取官方規定的文化假，或在都會區預先凝聚年齡階層進行前置訓練。同時善用線上科技同步傳遞祭典精神，確保青年的族群認同不因空間而斷裂。"
+    "category_note": "(文章來源:族語e樂園中高級句法演練)",
+    "question_amis": "Adihay ko tata’akay a konga i sadatengan ni ama haw?",
+    "question_ch": "阿嬤的菜園有很多大的地瓜嗎?",
+    "suggested_answer_amis": "Hai, adihay ko tata'akay a konga i sadatengan ni ama.",
+    "suggested_answer_ch": "是的,阿嬤的菜園有很多大的地瓜。"
   },
   {
     "quiz_id": "02",
