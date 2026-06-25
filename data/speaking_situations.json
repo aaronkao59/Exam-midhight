@@ -11,83 +11,83 @@
   {
     "quiz_id": "02",
     "audio_path": "speaking_qa/situation_02.mp3",
-    "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_amis": "Nano to'as o pitengilan no fa'inayan ko talo'an, o kapaysinan no fafahiyan konini, o mamicowa a pasifana' to kapah to sakalalen no tireng i matini hakini?",
-    "question_ch": "從古時候起，集會所就是男人聽訓議事的地方，這對女人是禁忌，在現代，將要如何教導青年們關於平權（人身平等）的觀念呢？",
-    "suggested_answer_amis": "O kasasiwasiw to tatayalen no to'as konini, caay ko pisakakinih to fafahiyan. O mamidipot to dafong no loma' ko fafahiyan, o mamikowan to demak no niyaro' ato mipa'ading ko fa'inayan. Malecad ko 'icel naira a tatosa i niyaro', masasipa'ayaw a mangodo.",
-    "suggested_answer_ch": "這並非性別歧視，而是傳統兩性分工。女性掌管家庭財產繼承，男性負責會所公共事務與外防。兩者各司其職，在部落治理與社會地位上完全對等且互相尊重。"
+    "category_note": " ",
+    "question_amis": "Ira aca ko niyaro'yaro' no cecacecay no tamdamdaw, icowaay  ko no miso a niyaro'?",
+    "question_ch": "每個人都會有自己的部落, 你的部落在哪裡呢？",
+    "suggested_answer_amis": "Hai, i Posong Kakacawan ko niyaro' no mako.",
+    "suggested_answer_ch": "是的,我的部落在台東長濱。"
   },
   {
     "quiz_id": "03",
     "audio_path": "speaking_qa/situation_03.mp3",
-    "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_amis": "O mamalasawad to ko radiw no mato'asay i ilisin, o mamimaan kiso a mipadotoc tonini a radiw hakini?",
-    "question_ch": "部落耆老在祭典中所吟唱的古調面臨失傳，你會採取什麼具體的系統化保存方案？",
-    "suggested_answer_amis": "Misaharateng a patingwa a misopet to ngiha ato radiw no mato'asay. O satadamaanay i, o mamipasifana' i sa'opo no selal to sapicaradaw ato sapa'ayaw a romadiw, ta mapadocos no wawa ko taneng no to'as.",
-    "suggested_answer_ch": "應發起數位紀錄計畫，採集並保存耆老的珍貴口傳音訊建立資料庫。最關鍵的是必須在年齡階層聚會中安排領唱與答唱實體教唱，落實跨世代傳承。"
+    "category_note": " ",
+    "question_amis": "Ano ira ko tosiya iso i, icowa ko sakatayraan iso a misalama?",
+    "question_ch": "如果你有車子，你會想去哪裡旅遊呢?",
+    "suggested_answer_amis": "Ano ira ko tosiya ako i, i Posong ko sakatayraan ako a misalama.",
+    "suggested_answer_ch": "如果我有車子，我會想去台東旅遊。"
   },
   {
     "quiz_id": "04",
     "audio_path": "speaking_qa/situation_04.mp3",
-    "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_amis": "Ano masaco'a'ang ko rikec no siyfu ato misacepo'ay a lisin no Pangcah i, o mamimaan kiso a mikihatiya a masasowal?",
-    "question_ch": "當傳統捕魚祭與現代水域管制產生法規衝突時，你如何站在族群立場進行協調？",
-    "suggested_answer_amis": "Midoedo to rikec no Yencumin a mipa'ading to 'orip ita. Pasowalen ko tapang to nika o citanengay to riyar ko misacepo'ay, ira ko paysin to romi'ad ato tata'ang no salil, mapadang ko pido'edo to pinanowang no riyar, saka o mamingodo ko siyfu to lisin no mita.",
-    "suggested_answer_ch": "依原基法捍衛權益。向主管機關強調捕魚祭蘊含的海洋永續智慧，有嚴格的季節禁忌與網目限制，證明傳統生態規範與現代保育完全相容，應予以特許尊重。"
+    "category_note": " ",
+    "question_amis": "Ira aca to mihecahecaan ko ilisin no niyaro', mikihatiyaay kiso a mikapot haw?",
+    "question_ch": "部落每年都會舉辦豐年祭，你也會參加嗎?",
+    "suggested_answer_amis": "Hai, caay kaeca mikihatiyaay kako a mikapot to mihecahecaan ko ilising no niyaro'",
+    "suggested_answer_ch": "是的,我每年總是會參加部落的豐年祭。"
   },
   {
     "quiz_id": "05",
     "audio_path": "speaking_qa/situation_05.mp3",
-    "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_amis": "O kasaniyaro' i, kasasiroma ko losid ato sa'eres. Ano mafokil ko misa'isay to matiniay, o mamicowa kiso a patatongal to sowal?",
-    "question_ch": "各語群的服飾與配飾差異極大，若評審因主觀認知誤判，你如何進行專業申覆？",
-    "suggested_answer_amis": "Patahekal to codad no kasasiroma no serangawan, pasapinang to nika ira ko cidekay a faco ato cengel no kasaniyaro'. O satadamaanay a dafong ita kina kasasiroma, caay ka nga'ay a miala to cecayay a pitek a palasawad to no roma a niyaro' a serangawan.",
-    "suggested_answer_ch": "提交區域文化差異報告，說明各語群因歷史發展，擁有獨特的織紋圖騰與色彩系統。強調多元性是我族資產，不應以單一區域標準抹煞其他語群的正統與獨特性。"
+    "category_note": " ",
+    "question_amis": "Mafana'ay kiso a mitilid to tilid no Pangcah? Icowa kiso a minanam?",
+    "question_ch": "你會書寫阿美族語嗎?你是在哪裡學習的？",
+    "suggested_answer_amis": "Hai, mafana'ay kako a mitilid to tilid no Pangcah, i pitilidan kako a minanam.",
+    "suggested_answer_ch": "提是的,我會書寫阿美族語,我是在學校學習的。"
   },
   {
     "quiz_id": "06",
     "audio_path": "speaking_qa/situation_06.mp3",
-    "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_amis": "I pikasawan no selal i, maedes ko pilifet to tiring. Ano masowal no tao to tatiihay konini i, o mamicowa kiso a pacof?",
-    "question_ch": "在年齡階層晉升儀式中要接受嚴苛體能考驗，若被質疑不人道，你如何反駁？",
-    "suggested_answer_amis": "O pilicekah to sakaci'icel no faloco' konini, caay ko pasamanaan a minanam to tiring. Pakayni tonini a pilifet ko kapah a paheci to pidipot to niyaro' ato loma', o saka lalomowad no fa'inayan a masakapot ato sakaci'icel a mipa'ading to niyaro'.",
-    "suggested_answer_ch": "這是淬鍊責任心的成年禮儀，絕非單純體能訓練。青年透過晉升考驗展現保護部落與承擔家計的決心，是建構男子階層集體認同與勇士精神的關鍵核心，成功維持社會穩定。"
+    "category_note": " ",
+    "question_amis": "Cecay 'afar mo^etep ko wa'ay, tolo ko 'afar pina ko wa'ay?",
+    "question_ch": "一隻蝦子有10隻腳, 3隻蝦子共幾隻腳?",
+    "suggested_answer_amis": "Tolo ko 'afar tolo polo' ko wa'ay.",
+    "suggested_answer_ch": "3隻蝦子共有30隻腳。"
   },
   {
     "quiz_id": "07",
     "audio_path": "speaking_qa/situation_07.mp3",
-    "category_note": "一、 歲時祭儀與年齡階層組織 (O lisin ato kasaselal no Pangcah)",
-    "question_amis": "Ano masasiiked ko selal nawhani o singkiyo no aniniay, a mikawa to pisahalakawan to ilisin i, o mamicowa kiso a palamenmeng to faloco'?",
-    "question_ch": "當部落因現代選舉導致年齡階層內部出現派系裂痕，影響歲時祭儀籌辦時，你該如何彌合？",
-    "suggested_answer_amis": "Mipalisawot to kakeridan no selal, midoedo to rikec a mido'edo to sowal no kaka a milalang to kacacoli. Pasowalen to nika nga'ay a kasasiroma ko harateng i papotal, nika minokay i niyaro' i, o mamifalah to kanget, kakakayat a malikoda a midipot to ilisin.",
-    "suggested_answer_ch": "召開階層核心會議，運用嚴格服從長兄的鐵律約束內部爭議。強調在外政治立場可不同，回到部落就必須放下成見，牽起手展現團結圍舞精神共同守護祭典。"
+    "category_note": " ",
+    "question_amis": "O maan ko kaolahan iso a miyatayat? Naw?",
+    "question_ch": "你喜歡什麼運動?為什麼?",
+    "suggested_answer_amis": "O miyakiway ko kaolahan ako a miyatayat? O sakanga’ay no tatirengan.",
+    "suggested_answer_ch": "我喜歡打捧球,因為可以使身體健康。"
   },
   {
     "quiz_id": "08",
     "audio_path": "speaking_qa/situation_08.mp3",
-    "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_amis": "O mamicowa kiso a miharateng to nika malecad ko kilac no fa'inayan ato fafahiyan to dafong i rikec no aniniay, a mico'a'ang to pidotoc no serangawan no fafahiyan hakini?",
-    "question_ch": "現代民法財產男女均分對母系繼承造成衝擊，你如何看待傳統與現代法律 the 調適？",
-    "suggested_answer_amis": "I rikec i, o mamingodo kita, nika i tayal i, palali'ayen no kasalaloma'an. O mamili'ayaw a pafeli to sera ato loma' no to'as to fafahiyan, oya mangalayay a moko i niyaro' a midimokos to mato'asay ato lisin, ta nga'ay masalalen ko rikec ato serangawan.",
-    "suggested_answer_ch": "法律上尊重民法，執行上透過家族和諧協調。將象徵部落根基與血脈延續的土地與祖屋，優先保留給願意留在部落承擔文化祭祀與照顧長輩的女性，在法律與文化間雙贏。"
+    "category_note": " ",
+    "question_amis": "Mafana' romadiw to radiw no Pangcah kiso haw?",
+    "question_ch": "你會唱阿美族的歌謠嗎?",
+    "suggested_answer_amis": "Hai, mafana' romadiw to radiw no Pangcah kako.",
+    "suggested_answer_ch": "是的,我會唱阿美族的歌謠。"
   },
   {
     "quiz_id": "09",
     "audio_path": "speaking_qa/situation_09.mp3",
-    "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_amis": "I no to'as a loma' i, tada tata'ang ko 'icel no faki a milimo'ot to wawa no fafahiyan a safa saca kaka, ano masasi'inget caira i matini i, o mamicowa kiso a palali'ay hakini?",
-    "question_ch": "在傳統家庭中舅舅對外甥有極高管教權，若現代因管教發生衝突，你如何排解？",
-    "suggested_answer_amis": "Pasifana'en ko wawa to nika o faki i, malo mama i loma' no Pangcah. Milongoc to mato'asay a fafahiyan a papipalali'ay, mipadang to faki a misafaeloh to pipasowal, pakayni i sowal no mita ato pingodo to loma' a misafaeloh a masasowal.",
-    "suggested_answer_ch": "引導晚輩理解舅舅在母系制度中扮演代理父親的文化責任。建請女性長輩從中調和，協助長輩調整溝通口吻，用族語與家庭尊重的核心價值重新搭建理性對話。"
+    "category_note": " ",
+    "question_amis": "Mafana' masakero to kero no Pangcah kiso haw?",
+    "question_ch": "你會跳阿美族的舞蹈嗎?",
+    "suggested_answer_amis": "Hai, mafana' masakero to kero no Pangcah kako.",
+    "suggested_answer_ch": "是的,我會跳阿美族的舞蹈。"
   },
   {
     "quiz_id": "10",
     "audio_path": "speaking_qa/situation_10.mp3",
-    "category_note": "二、 母系社會、親族制度與兩性分工 (O misa'alingayay no ina, kasalaloma'an ato kasasiwasiw to tatayalen no to'as)",
-    "question_amis": "O pikadafo no fa'inayan ko serangawan ita, o mamicowa kiso a pasifana' to kapah i ningri to sakanga'ay nonini a lekakawa hakini?",
-    "question_ch": "傳統婚俗有招贅傳統，你如何向都會區原住民青年解釋其社會穩定功能？",
-    "suggested_answer_amis": "O pikadafo i, o sakadadotoc no 'icel a matayal ato dafong no ina. Paheciay konini to nipita'ong no to'as to pakayniay i fafahiyan a midipot to loma', ta mala o nika o misa'alingayay no ina ko loma'.",
-    "suggested_answer_ch": "招贅婚的文化根源是為了確保母系家族勞動力的完整與財產的永續延續。這反映出傳統文化中，對於女性持家能力與家族命脈延續的崇高尊崇與制度化保障。"
+    "category_note": " ",
+    "question_amis": "Minokay tayra niyaro' i, o maan ko sakakomaenan iso a kakaenen?",
+    "question_ch": "傳回部落時,你會想吃什麼佳餚?",
+    "suggested_answer_amis": "Minokay tayra niyaro' i, o siraw ato toron ko sakakomaenan ako a kakaenen.",
+    "suggested_answer_ch": "回部落時,我會想吃鹹豬肉、麻糬。"
   },
   {
     "quiz_id": "11",
