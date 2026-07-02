@@ -31,7 +31,7 @@
     "audio_path": "speaking_qa/situation_04.mp3",
     "category_note": " ",
     "question_amis": "Ira aca to mihecahecaan ko ilisin no niyaro', mikihatiyaay kiso a mikapot haw?",
-    "question_ch": "部落每年都會舉辦豐年祭，你也會參加嗎?",
+    "question_ch": "部落每年都會舉辦豐年祭，你也會話題參加嗎?",
     "suggested_answer_amis": "Hai, caay kaeca mikihatiyaay kako a mikapot to mihecahecaan ko ilising no niyaro'",
     "suggested_answer_ch": "是的,我每年總是會參加部落的豐年祭。"
   },
@@ -75,7 +75,7 @@
     "quiz_id": "09",
     "audio_path": "speaking_qa/situation_09.mp3",
     "category_note": " ",
-    "question_amis": "Mafana' masakero to kero no Pangcah kiso haw?",
+    "question_amis": "Mafana' ballen masakero to kero no Pangcah kiso haw?",
     "question_ch": "你會跳阿美族的舞蹈嗎?",
     "suggested_answer_amis": "Hai, mafana' masakero to kero no Pangcah kako.",
     "suggested_answer_ch": "是的,我會跳阿美族的舞蹈。"
@@ -102,171 +102,81 @@
     "quiz_id": "12",
     "audio_path": "speaking_qa/situation_12.mp3",
     "category_note": " ",
-    "question_amis": " ",
-    "question_ch": " ",
-    "suggested_answer_amis": " ",
-    "suggested_answer_ch": " "
+    "question_amis": "O kaciherangan ko kaciheci no facidol, komaenay kiso to facidol haw?",
+    "question_ch": "麵包果是在夏天結果，你會吃麵包果嗎?",
+    "suggested_answer_amis": "Hai, maolahay komaen to facidol kako.",
+    "suggested_answer_ch": "是的,我喜歡吃麵包果。"
   },
   {
     "quiz_id": "13",
     "audio_path": "speaking_qa/situation_13.mp3",
     "category_note": " ",
-    "question_amis": " ",
-    "question_ch": " ",
-    "suggested_answer_amis": " ",
-    "suggested_answer_ch": " "
+    "question_amis": "O masasipadapadangay ko Pangcah, mipadangay kiso to widang iso haw?",
+    "question_ch": "阿美族人是會相互幫助的族群,你也會幫助你的朋友嗎?",
+    "suggested_answer_amis": "Hai, mipadangay kako to widang ako.",
+    "suggested_answer_ch": "是的,我也會幫助我的朋友。"
   },
   {
     "quiz_id": "14",
     "audio_path": "speaking_qa/situation_14.mp3",
     "category_note": " ",
-    "question_amis": " ",
-    "question_ch": " ",
-    "suggested_answer_amis": " ",
-    "suggested_answer_ch": " "
+    "question_amis": "Halafin to caka saso'araw ato widang, mangalay kiso tayra miliso' to widan haw?",
+    "question_ch": "很久沒有見到朋友了，你會想去拜訪朋友嗎?",
+    "suggested_answer_amis": "Hai, mangalay kako tayra miliso' to widang.",
+    "suggested_answer_ch": "是的,我會想去拜訪朋友。"
   },
   {
     "quiz_id": "15",
     "audio_path": "speaking_qa/situation_15.mp3",
     "category_note": " ",
-    "question_amis": " ",
-    "question_ch": " ",
-    "suggested_answer_amis": " ",
-    "suggested_answer_ch": " "
+    "question_amis": "Ira ko ongsing i Angcoh a niyaro', tayraay to kiso a mililoc to ongsing? 一般",
+    "question_ch": "安通部落有溫泉,你有去泡過溫泉了嗎?",
+    "suggested_answer_amis": "Caay katayra kako a mililoc to ongsing. Nawhani, awaay ho ko limaw ako tayra.",
+    "suggested_answer_ch": "我沒有去泡溫泉,因為我還沒有時間過去。"
   },
   {
     "quiz_id": "16",
     "audio_path": "speaking_qa/situation_16.mp3",
     "category_note": " ",
-    "question_amis": " ",
-    "question_ch": " ",
-    "suggested_answer_amis": " ",
-    "suggested_answer_ch": " "
+    "question_amis": "'Aloman to ko aniniay a tamdaw tayra to roma kanatal palafang, tayraay to kiso to roma kanatal a palafang?",
+    "question_ch": "現在有很多人會出國旅遊，你有出國旅遊了嗎?",
+    "suggested_answer_amis": "Hai, tayraay to kako i Ripon a palafang.",
+    "suggested_answer_ch": "是的,我有去過日本旅遊了。"
   },
   {
     "quiz_id": "17",
     "audio_path": "speaking_qa/situation_17.mp3",
     "category_note": " ",
-    "question_amis": " ",
-    "question_ch": " ",
-    "suggested_answer_amis": " ",
-    "suggested_answer_ch": " "
+    "question_amis": "Romi'ami'ad malolay mitangtang to sakalahok, cima ko mitangtangay i loma' namo?",
+    "question_ch": "每天煮午餐很辛苦,你們家是誰在煮呢?",
+    "suggested_answer_amis": "Ci mama ko mitangtangay to sakalahok i loma' niyam.",
+    "suggested_answer_ch": "我們家是爸爸煮午餐。"
   },
   {
     "quiz_id": "18",
     "audio_path": "speaking_qa/situation_18.mp3",
     "category_note": " ",
-    "question_amis": " ",
-    "question_ch": " ",
-    "suggested_answer_amis": " ",
-    "suggested_answer_ch": " "
+    "question_amis": "Adihay ko kaeso'ay a dateng no Pangcah, o maan ko makaenay to no miso?",
+    "question_ch": "過期阿美族有很多美味的菜，你有吃過哪些了?",
+    "suggested_answer_amis": "O dongec, tatokem, kafes, 'aowang, cekiw...ko makaenay to no mako.",
+    "suggested_answer_ch": "我吃過的有藤心,龍葵,溪蝦,海膽,苙螺...。"
   },
   {
     "quiz_id": "19",
     "audio_path": "speaking_qa/situation_19.mp3",
     "category_note": " ",
-    "question_amis": "Ano ira ko patongalay to tayhi a mikaomah ta macakat ko nipalomaan saan i, o mamicowa kiso a milimo'ot to finawlan a midoedo to pikaomah no to'as hakini?",
-    "question_ch": "部落有人提議引入大量化肥的慣行農法提高產量，你如何說服族人保留傳統農法？",
-    "suggested_answer_amis": "Palowaden ko pidoedo to romi'ad no hekal a maomah, a misafa'eloh to fangcalay ato awaay ko warak a tayal, mipa'ading to caayay ka liyaw a sera. Pakayni i kitoh a micakat to 'aca no dateng, ta manga'ay ko pala ato nipili'aca.",
-    "suggested_answer_ch": "倡導以順應自然的傳統耕作期為核心，轉型精緻無毒有機耕作，守護不可再生的土地。透過故事行銷提升農產品附加價值，打造兼顧生態多樣性與經濟的雙贏品牌。"
+    "question_amis": "Ira i salawacan no niyaro' mapaloma ko tahapinangan a pinarengaw no Pangcah, o maan ko i niyaro'ay namo?",
+    "question_ch": "在阿美族的部落會種植象徵的植物，你們的部落有種什麼植物呢?",
+    "suggested_answer_amis": "O 'icep, facidol, kingking ko pinarengaw i niyaro'ay niyam.",
+    "suggested_answer_ch": "在我們的部落有種檳榔樹,麵包樹,龍眼樹。"
   },
   {
     "quiz_id": "20",
     "audio_path": "speaking_qa/situation_20.mp3",
     "category_note": " ",
-    "question_amis": "I pipasifana' to taneng no to'as a mifoting i, o mamicowa kiso a pahapinang to sakarihaday no tamdaw ato hekal hakini?",
-    "question_ch": "在介紹傳統捕魚智慧時，如何向外界解釋其生態倫理？",
-    "suggested_answer_amis": "O nika malacecay ko 'orip no tamdaw ato tarawadaw ato riyar. I pifotingan no to'as i, ira ko pipahanhanan, o lisin ato kasadak no salil. O matiniay a misamaedengay aca a harateng i, o satadamaanay a pingodo to hekal i matini.",
-    "suggested_answer_ch": "族人視溪流與海洋為共生存在。傳統捕魚文化包含嚴格的休漁期規範、祭祀儀式及漁具網目限制。這種只取所需、絕不竭澤而漁的平衡觀念，是現代最推崇的生態倫理。"
-  },
-  {
-    "quiz_id": "21",
-    "audio_path": "speaking_qa/situation_21.mp3",
-    "category_note": " ",
-    "question_amis": "Ano mangalay ko kosi no tao a misateked to heci no 'apalo i, o mamicowa kiso a mico'a'ang pakayni i taneng no to'as hakini?",
-    "question_ch": "外來公司企圖將麵包樹果實註冊為專利，你如何從傳統知識角度抗衡？",
-    "suggested_answer_amis": "Malakapot ko finawlan ato gihing a paheci to nika, halafin to ko 'apalo i kimad, i sikaen ato lisin no mita. O dafong no polong no finawlan konini, o caayay ka nga'ay a ma'afas no tao a taneng no serangawan.",
-    "suggested_answer_ch": "聯合族人與法律專家，舉證證明麵包樹在神話、飲食與祭儀中已存在數百年。它屬於全體族人集體特有的非物質文化遺產，具有排他的傳統生物文化知識主權。"
-  },
-  {
-    "quiz_id": "22",
-    "audio_path": "speaking_qa/situation_22.mp3",
-    "category_note": " ",
-    "question_amis": "Ma'emin a malafas ko sowal no mita i tokay, o mamimaan kiso a mipalowad to sowal no Pangcah hakini?",
-    "question_ch": "都會區二、三代產生嚴重語言流失，你認為族語復振應採取何種創新策略？",
-    "suggested_answer_amis": "Palowaden ko sowal i 'orip ato i tingnaw. Paka i wanglu, misaniyaro' a minanam, palamlamen ko sowal i kapahay a radiw ato kacudo, ta mala o lipahakay a 'orip no kapah i tokay konini.",
-    "suggested_answer_ch": "推動族語的生活化與數位社群化。利用網路播客、沉浸式都會族語營隊，並大膽將族語融入青少年喜愛的流行音樂與短影音中，營造說族語很潮的都會生活氛圍。"
-  },
-  {
-    "quiz_id": "23",
-    "audio_path": "speaking_qa/situation_23.mp3",
-    "category_note": " ",
-    "question_amis": "Ano somowal ko gakkisiya to nika malasawad to ko pisa'alingay no ina saan i, o mamicowa kiso a pacof hakini?",
-    "question_ch": "當學者指稱母系社會已經名存實亡，你該如何理性且專業地予以回應？",
-    "suggested_answer_amis": "Mafalic ko wayway i papotal, nika caay ka lasawad ko nafaloco'an. I pilokelokel no loma', pipalali'ay to kasasi'inget, ato pita'ong to mato'asay a fafahiyan i, 'akawang ho ko 'icel no ina, a midoedo to 'orip no aniniay.",
-    "suggested_answer_ch": "外部形式雖因現代化演變，但文化的內在精神並未消失。在婚喪喜慶決策、親族矛盾協調及對女性長輩的崇高尊崇上，母系核心精神依然強固，正以動態適應現代生活。"
-  },
-  {
-    "quiz_id": "24",
-    "audio_path": "speaking_qa/situation_24.mp3",
-    "category_note": " ",
-    "question_amis": "I pisekingan to tata'angay a papelo i, o mamicowa kiso a midoedo to fangcalay a sowal no to'as a misafaco hakini?",
-    "question_ch": "高級認證考試中的長篇演說題目，你該如何運用傳統修辭美學來架構？",
-    "suggested_answer_amis": "I sa'ayaw i, misanoPangcah a mifohat a miliso' to to'as ato finawlan; i sifo' i, palamlamen ko taneng no to'as to pakayniay i kalalok ato nika lecad no riyar a maemin a midemak; i saikoray i, pasowalen ko kakakayat no selal a malacecay, a pahapinang to kapah no sowal ita.",
-    "suggested_answer_ch": "開頭正式以族語向祖靈與聽眾問候；主體論述應融入刻苦耐勞與如海洋般包容的自然隱喻；結尾引用年齡階層牽手圍舞精神呼籲集體凝聚，展現古典修辭美學。"
-  },
-  {
-    "quiz_id": "25",
-    "audio_path": "speaking_qa/situation_25.mp3",
-    "category_note": " ",
-    "question_amis": "O nano Natawran a sowal ko no mita, malecad to sowal no Mawli ato Hawayi, o mamicowa kiso a pacici to kapah a minanam hakini?",
-    "question_ch": "族語屬於南島語系，與毛利語、夏威夷語高度親緣，你如何利用這點激發青年學習？",
-    "suggested_answer_amis": "Pahapinangen to nika o lalan a talahekal kina sowal ita. Pasowalen ko kapah i tokay, ano mafana' a somowal to no Pangcah i, matira o pakaalaay to sasi a mifohat to fawahan no Taypingyang, a nga'ay a masasowal ato i hekalay a Natawran a tamdaw, ta mala o lalan a talahekal kina sowal ita.",
-    "suggested_answer_ch": "將族語翻轉為具備國際視野的南島語言。告訴都會青年，學好族語等於拿到打開太平洋南島大門的鑰匙，能與國際南島族群對話，提升為跨國文化外交優勢。"
-  },
-  {
-    "quiz_id": "26",
-    "audio_path": "speaking_qa/situation_26.mp3",
-    "category_note": " ",
-    "question_amis": "Ano patelac ko nipitilid no codad to demak no to'as i, o mamicowa kiso a milongoc to siyfu a misalof hakini?",
-    "question_ch": "若教科書將歷史事件片面解讀，你如何提出官方修正意見？",
-    "suggested_answer_amis": "Paki'emelen ko tireng i harateng no Pangcah a milongoc a pahapinang to so'elinay a demak. O mamicelol ko codad a pahapinang: yo mico'a'ang ko selal no fa'inayan to mikowanay a tao i, sa mipa'ading to sera ato ngangan no niyaro', a paheci to 'icel ato taneng naira.",
-    "suggested_answer_ch": "站在原住民族主體史觀立場要求還原真相。教科書必須補正並強調：男子年齡階層在面對外來殖民政權時，為了捍衛土地與族群尊嚴，所展現的抵抗與政治智慧。"
-  },
-  {
-    "quiz_id": "27",
-    "audio_path": "speaking_qa/situation_27.mp3",
-    "category_note": " ",
-    "question_amis": "Ano misamangah ko tao a misanga' to dofot a pa'aca to tata'angay a 'aca a micawkiw to serangawan ita i, o mamimaan kiso a pasowal hakini?",
-    "question_ch": "商家將非正統織布製成仿製情人袋高價販售引發剽竊爭議，你如何發聲？",
-    "suggested_answer_amis": "Midoedo to rikec a mipa'ading to serangawan no mita. Milalang to pisakemot no misanga'ay to tadamaanay a dafong no to'as, milongoc to kosi a masasowal ato niyaro' a pakayra i rikec a maala ko nika hayda, a mapapadang a mipa'ading to rikec no to'as.",
-    "suggested_answer_ch": "商家將非正統織布製成仿製情人袋高價販售引發剽竊爭議，你如何發聲？"
-  },
-  {
-    "quiz_id": "28",
-    "audio_path": "speaking_qa/situation_28.mp3",
-    "category_note": " ",
-    "question_amis": "Caay kanga'ay a palamal ko kapah a mitapoh to to'as i loma' no tokay, o mamicowa kiso a pasifana' i cangraan hakini?",
-    "question_ch": "都市大樓原住民青年反映因空間限制無法依傳統燃煙祭祖，你如何給予建議？",
-    "suggested_answer_amis": "Manga'ay a mafalic ko lisin a midoedo to kaitiraan, o satadamaanay i mata no to'as i, o so'elinay a faloco' no wawa. I tokay a loma' i, manga'ay a miala to cecay a takid a nanom, so'elin ko faloco' a mitolon, ano eca pahereken ko radiw no lisin, pakayni i caayay paka'angtol a demak a mita'ong to to'as.",
-    "suggested_answer_ch": "儀式可因應空間因地制宜，祖靈看重的是後代子孫內心的誠心意念。在都市大樓內，可改用一杯清水、誠心默禱，或播放吟唱祭歌，以低碳安全的方式實踐慎終追遠。"
-  },
-  {
-    "quiz_id": "29",
-    "audio_path": "speaking_qa/situation_29.mp3",
-    "category_note": " ",
-    "question_amis": "Ano ma'enel ko nika minanam i tingnaw a caay ka kapah ko nika minanam to sowal i, o mamicowa kiso a mipadama a mifohat tonini hakini?",
-    "question_ch": "局限於設備或線上互動冷冰冰，族語直播共學課程效果不彰，你如何運用互動文化打破僵局？",
-    "suggested_answer_amis": "Palowaden ko lipahakay a wayway no Pangcah, palamlamen ko pacarcaray a radiw no to'as i nipasifana' i tingnaw. Pakayni i kaysing a misakero to kamay, pasadak to soni no Pangcah a malalitin, ta mala o lipahakay a 'orip no kapah i tokay konini.",
-    "suggested_answer_ch": "發揮族人樂天幽默的特質，將傳統歌謠的應答結構導入線上教學。透過鏡頭進行互動手勢舞、族語語氣詞接龍，重塑課堂集體參與感，化被動聆聽為歡樂體驗。"
-  },
-  {
-    "quiz_id": "30",
-    "audio_path": "speaking_qa/situation_30.mp3",
-    "category_note": " ",
-    "question_amis": "Ano mafalic ko romi'ad a mangalay a malimad ko niyaro' i lawac no riyar i, o mamicowa kiso a palacecay to faloco' no finawlan hakini?",
-    "question_ch": "面臨氣候變遷，部分臨海部落面臨遷村抉擇，你如何凝聚族人共識？",
-    "suggested_answer_amis": "Pasowalen to nika matiya o 'aol ko 'icel no finacadan ita. Talacowa mafalic ko kamaro'an, nika ano caay ka laliwasak ko selal, mado'edo ko sowal, caay ka lasawad ko nika kakakayat no finawlan i, i cowa ko sa'opo no finawlan, i tira ko loma' ita.",
-    "suggested_answer_ch": "宣告我族性格如同竹子般堅韌。雖然居住環境改變了，但只要年齡階層組織不散、語言依然傳唱、族人彼此牽手的信念不滅，哪裡有群體凝聚，哪裡就是家。"
+    "question_amis": "Ira ko mipalomaan a heci no losay i salawacan no loma' nanom?",
+    "question_ch": "你們家周邊有種什麼水果嗎?",
+    "suggested_answer_amis": "Ira ko mipaloma'an a kowa' i aikor no loma' niyam.",
+    "suggested_answer_ch": "我們家後面有種木瓜。"
   }
 ]
