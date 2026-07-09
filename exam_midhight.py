@@ -169,7 +169,7 @@ if current_tab == "📋 認證考試說明":
 
 # 2. 🎧 聽力測驗
 elif current_tab == "🎧 聽力":
-    st.subheader("🎧 聽力測驗 (pitengilan)")
+    st.subheader("🎧 聽力測驗 (pitengil)")
     st.divider()
     listening_sub = st.radio(
         "題型選擇：",
@@ -436,7 +436,7 @@ elif current_tab == "🎧 聽力":
 
 # 3. 🗣️ 口說測驗
 elif current_tab == "🗣️ 口說":
-    st.subheader("🗣️ 口說測驗 (pisowalan)")
+    st.subheader("🗣️ 口說測驗 (pisowal)")
     st.divider()
     speaking_sub = st.radio(
         "題型選擇：",
@@ -707,7 +707,7 @@ elif current_tab == "🗣️ 口說":
 
 # 4. 📖 閱讀測驗
 elif current_tab == "📖 閱讀":
-    st.subheader("📖 閱讀測驗 (piasipan)")
+    st.subheader("📖 閱讀測驗 (piasip)")
     st.divider()
     reading_sub = st.radio(
         "閱讀題型選擇：",
@@ -847,7 +847,7 @@ elif current_tab == "📖 閱讀":
 
 # 5. ✍️ 寫作測驗
 elif current_tab == "✍️ 寫作":
-    st.subheader("✍️ 寫作測驗 (pitilidan)")
+    st.subheader("✍️ 寫作測驗 (pitilid)")
     st.divider()
     writing_sub = st.radio(
         "寫作題型選擇：",
