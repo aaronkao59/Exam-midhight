@@ -3,7 +3,7 @@ import random
 import json
 import os
 
-APP_VERSION = "v3.0.0 (Code-CRF v9.0 Optimized)"
+APP_VERSION = "v3.1.0 (State Defense Optimized)"
 
 st.set_page_config(page_title="中高級認證", page_icon="🎓", layout="centered", initial_sidebar_state="collapsed")
 
@@ -73,8 +73,11 @@ elif current_tab == "🎧 聽力":
     
     if sub_tab == "選擇題-聽音選詞":
         st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
-        if "lw_ptr" not in st.session_state:
+        
+        # 🛡️ 狀態解耦防禦
+        if "lw_ptr" not in st.session_state: 
             st.session_state.lw_ptr = 0
+        if "lw_order" not in st.session_state or len(st.session_state.lw_order) != len(QUIZ_DATA_WORDS):
             st.session_state.lw_order = list(range(len(QUIZ_DATA_WORDS)))
             random.shuffle(st.session_state.lw_order)
             
@@ -122,8 +125,10 @@ elif current_tab == "🎧 聽力":
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             mode = st.radio("選題模式：", ["隨機挑題", "自主選題"], horizontal=True)
             
+            # 🛡️ 狀態解耦防禦
             if "ld_ptr" not in st.session_state:
                 st.session_state.ld_ptr = 0
+            if "ld_order" not in st.session_state or len(st.session_state.ld_order) != len(DB_DIALOGUE):
                 st.session_state.ld_order = list(range(len(DB_DIALOGUE)))
                 random.shuffle(st.session_state.ld_order)
                 
@@ -158,6 +163,12 @@ elif current_tab == "🎧 聽力":
                 if mode == "隨機挑題" and st.button("➡️ 下一題", key=f"ld_next_{q_idx}"):
                     st.session_state.ld_ptr += 1
                     st.rerun()
+            else:
+                st.success("🎉 本輪隨機題組已完成！")
+                if st.button("🔄 重新挑戰"):
+                    st.session_state.ld_ptr = 0
+                    random.shuffle(st.session_state.ld_order)
+                    st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
 
 elif current_tab == "🗣️ 口說":
@@ -185,8 +196,11 @@ elif current_tab == "🗣️ 口說":
         else:
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             mode = st.radio("模式：", ["隨機挑題", "自主選題"], horizontal=True)
+            
+            # 🛡️ 狀態解耦防禦
             if "sqa_ptr" not in st.session_state:
                 st.session_state.sqa_ptr = 0
+            if "sqa_order" not in st.session_state or len(st.session_state.sqa_order) != len(DB_SPEAKING_QA):
                 st.session_state.sqa_order = list(range(len(DB_SPEAKING_QA)))
                 random.shuffle(st.session_state.sqa_order)
                 
@@ -213,6 +227,12 @@ elif current_tab == "🗣️ 口說":
                 
                 if mode == "隨機挑題" and st.button("➡️ 下一題", key=f"sqa_next_{q_idx}"):
                     st.session_state.sqa_ptr += 1
+                    st.rerun()
+            else:
+                st.success("🎉 情境問答隨機練習已完成！")
+                if st.button("🔄 重新挑戰"):
+                    st.session_state.sqa_ptr = 0
+                    random.shuffle(st.session_state.sqa_order)
                     st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
             
@@ -249,14 +269,19 @@ elif current_tab == "📖 閱讀":
         if db:
             st.markdown('<div class="quiz-card">', unsafe_allow_html=True)
             state_ptr = f"r_{target_type}_ptr"
+            state_order = f"r_{target_type}_order"
+            
+            # 🛡️ 狀態解耦防禦
             if state_ptr not in st.session_state:
                 st.session_state[state_ptr] = 0
-                st.session_state[f"{state_ptr}_order"] = list(range(len(db)))
-                random.shuffle(st.session_state[f"{state_ptr}_order"])
+            
+            if state_order not in st.session_state or len(st.session_state[state_order]) != len(db):
+                st.session_state[state_order] = list(range(len(db)))
+                random.shuffle(st.session_state[state_order])
             
             ptr = st.session_state[state_ptr]
             if ptr < len(db):
-                q = db[st.session_state[f"{state_ptr}_order"][ptr]]
+                q = db[st.session_state[state_order][ptr]]
                 st.write(f"**[進度：第 {ptr + 1} 題 / 共 {len(db)} 題]**")
                 st.write(q["question_text"])
                 
@@ -284,6 +309,14 @@ elif current_tab == "📖 閱讀":
                     if st.button("➡️ 下一題", key=f"r_next_{target_type}_{ptr}"):
                         st.session_state[state_ptr] += 1
                         st.rerun()
+            else:
+                # 🚀 修復：補齊閱讀測驗到底時的重置迴圈
+                st.success("🎉 您已完成本項目全部題組練習！")
+                if st.button("🔄 重新洗牌挑戰", key=f"r_reset_{target_type}"):
+                    st.session_state[state_ptr] = 0
+                    random.shuffle(st.session_state[state_order])
+                    st.rerun()
+                    
             st.markdown('</div>', unsafe_allow_html=True)
 
 elif current_tab == "✍️ 寫作":
@@ -325,7 +358,7 @@ elif current_tab == "✍️ 寫作":
                     st.rerun()
             else:
                 st.success("🎉 練習完成！")
-                if st.button("🔄 重新開始"):
+                if st.button("🔄 重新開始", key=f"w_reset_{target_type}"):
                     st.session_state[state_ptr] = 0
                     st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
