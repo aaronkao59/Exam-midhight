@@ -3,171 +3,215 @@ import random
 import json
 import os
 
-APP_VERSION = "v3.4.0 (Obsidian Gold & Lavender Haute Couture UI Edition)"
+APP_VERSION = "v3.1.1 (Image Path Decoupled)"
 
-st.set_page_config(page_title="中高級認證", page_icon="🎓", layout="wide", initial_sidebar_state="collapsed")
+# --- 1. 配置頁面與自定義主題 (黑/冷金/淡紫) ---
+# initial_sidebar_state="collapsed" 保留原設定
+st.set_page_config(
+    page_title="中高級認證",
+    page_icon="🎓",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
 
-# ==============================================================================
-# 🎨 介面視覺與交互架構 - [黑、冷金與淡紫高端奢華風格 Haute Couture UI v9.0]
-# 首席介面視覺架構師 (Chief UIUX Architect) & 首席阿美語本地化架構師 聯合簽核通過
-# 完全套用 UIUX-CRF v9.0、Custom-CRF v9.0 及 Code-CRF v9.0 量化模型
-# ==============================================================================
-st.markdown("""
+# 定義配色常量
+COLOR_GOLD_LIGHT = "#E1D0A3" # 冷金色 (Light)
+COLOR_GOLD_DARK = "#D4AF37"  # 奢華金 (Dark)
+COLOR_PURPLE = "#E6E6FA"     # 淡紫色 (Lavender)
+COLOR_BLACK_BG = "#111111"    # 深黑背景
+COLOR_DEEP_GRAY = "#1E1E1E"  # 卡片/側邊欄深色
+
+# 注入 CSS 樣式
+st.markdown(f"""
     <style>
-    /* ========================================= */
-    /* 1. 全域字體與黑曜石背景基底 (Obsidian Foundation) */
-    /* ========================================= */
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
-    
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
-    }
+    /* === 1. 全局字體與背景設置 === */
+    html, body, [data-testid="stAppViewContainer"] {{
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }}
 
-    /* 全局背景微煞黑色調，維持高奢物理層低熵狀態 */
-    .stApp {
-        background-color: #0B0914 !important;
-    }
+    /* === 2. Light Mode (淺色模式) 樣式 === */
+    /* 目標是：黑金配，淡紫強調 */
+    @media (prefers-color-scheme: light) {{
+        [data-testid="stAppViewContainer"] {{
+            background-color: #FFFFFF !important; /* 白色背景 */
+            color: #111111 !important; /* 深黑文字 */
+        }}
+        
+        /* 標題與副標題 - 冷金色 */
+        h1, h2, h3, h4, h5, h6 {{
+            color: {COLOR_GOLD_DARK} !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.5px !important;
+        }}
+        
+        /* Quiz Card (測驗卡片) - 黑底金邊，奢華感 */
+        .quiz-card {{
+            background-color: {COLOR_BLACK_BG} !important;
+            color: {COLOR_GOLD_LIGHT} !important;
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid {COLOR_GOLD_DARK};
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }}
+        .quiz-card p, .quiz-card li, .quiz-card span, .quiz-card label {{
+            color: {COLOR_GOLD_LIGHT} !important;
+        }}
+        .quiz-card h1, .quiz-card h2, .quiz-card h3 {{
+            color: #FFFFFF !important; /* 卡片內標題用白色 */
+        }}
 
-    /* ========================================= */
-    /* 2. 高端高奢卡片與容器 (Haute Couture Glassmorphism Architecture) */
-    /* ========================================= */
-    .quiz-card {
-        padding: 30px 36px;
-        border-radius: 24px;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        margin-top: 22px;
-        margin-bottom: 32px;
-    }
+        /* Segmented Control (主選單) - 黑金淡紫 */
+        div[data-testid="stSegmentedControl"] button {{
+            border-color: {COLOR_GOLD_DARK} !important;
+            color: {COLOR_GOLD_DARK} !important;
+            background-color: transparent !important;
+        }}
+        div[data-testid="stSegmentedControl"] button[aria-selected="true"] {{
+            background-color: {COLOR_GOLD_DARK} !important;
+            color: {COLOR_BLACK_BG} !important;
+            font-weight: bold !important;
+        }}
 
-    .stAlert {
-        border-radius: 16px !important;
-        border: none !important;
-        backdrop-filter: blur(12px);
-    }
+        /* Radio Buttons, Checkboxes (卡片內選項) - 金色 */
+        .stRadio label, .stCheckbox label {{
+            color: {COLOR_GOLD_LIGHT} !important;
+        }}
+        div[data-testid="stMarkdownContainer"] p {{
+             color: {COLOR_GOLD_LIGHT} !important;
+        }}
+        
+        /* Buttons (按鈕) - 黑金奢華 */
+        .stButton>button {{
+            border-radius: 12px;
+            border: 2px solid {COLOR_GOLD_DARK} !important;
+            background-color: {COLOR_BLACK_BG} !important;
+            color: {COLOR_GOLD_DARK} !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease;
+        }}
+        .stButton>button:hover {{
+            background-color: {COLOR_GOLD_DARK} !important;
+            color: {COLOR_BLACK_BG} !important;
+            transform: translateY(-2px);
+        }}
 
-    div[data-testid="stHorizontalBlock"] {
+        /* Expander, Alert (擴展器/警示) - 淡紫色/金色 */
+        .stAlert {{
+            border-radius: 15px !important;
+            border: none !important;
+            background-color: rgba(230, 230, 250, 0.2) !important; /* 淡紫背景 */
+            color: {COLOR_GOLD_DARK} !important;
+        }}
+        .stExpander {{
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
+            border-radius: 15px !important;
+            background-color: rgba(255, 255, 255, 0.5) !important;
+        }}
+
+    }}
+
+    /* === 3. Dark Mode (深色模式) 樣式 === */
+    /* 目標是：全黑底，金字金邊，淡紫強調 */
+    @media (prefers-color-scheme: dark) {{
+        [data-testid="stAppViewContainer"] {{
+            background-color: {COLOR_BLACK_BG} !important; /* 全黑背景 */
+            color: {COLOR_GOLD_LIGHT} !important; /* 冷金文字 */
+        }}
+        
+        /* 標題與副標題 - 冷金色 */
+        h1, h2, h3, h4, h5, h6 {{
+            color: {COLOR_GOLD_LIGHT} !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.5px !important;
+        }}
+        
+        /* Quiz Card (測驗卡片) - 深黑底金邊，奢華感 */
+        .quiz-card {{
+            background-color: {COLOR_DEEP_GRAY} !important;
+            color: {COLOR_GOLD_LIGHT} !important;
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid {COLOR_GOLD_DARK};
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }}
+        
+        /* Segmented Control (主選單) - 冷金淡紫 */
+        div[data-testid="stSegmentedControl"] button {{
+            border-color: {COLOR_GOLD_LIGHT} !important;
+            color: {COLOR_GOLD_LIGHT} !important;
+            background-color: transparent !important;
+        }}
+        div[data-testid="stSegmentedControl"] button[aria-selected="true"] {{
+            background-color: {COLOR_GOLD_LIGHT} !important;
+            color: {COLOR_BLACK_BG} !important;
+            font-weight: bold !important;
+        }}
+
+        /* Buttons (按鈕) - 金色 */
+        .stButton>button {{
+            border-radius: 12px;
+            border: 2px solid {COLOR_GOLD_LIGHT} !important;
+            background-color: {COLOR_BLACK_BG} !important;
+            color: {COLOR_GOLD_LIGHT} !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease;
+        }}
+        .stButton>button:hover {{
+            background-color: {COLOR_GOLD_LIGHT} !important;
+            color: {COLOR_BLACK_BG} !important;
+            transform: translateY(-2px);
+        }}
+
+        /* Expander, Alert (擴展器/警示) - 淡紫強調 */
+        .stAlert {{
+            border-radius: 15px !important;
+            border: none !important;
+            background-color: rgba(230, 230, 250, 0.1) !important; /* 淡紫背景 */
+            color: {COLOR_GOLD_LIGHT} !important;
+        }}
+        .stExpander {{
+            border: 1px solid rgba(225, 208, 163, 0.2) !important;
+            border-radius: 15px !important;
+            background-color: {COLOR_DEEP_GRAY} !important;
+        }}
+        
+        /* Input & Text Area (輸入框) - 金色邊框 */
+        .stTextInput>div>div>input, .stTextArea>div>div>textarea {{
+            background-color: {COLOR_BLACK_BG} !important;
+            color: {COLOR_GOLD_LIGHT} !important;
+            border: 1px solid rgba(212, 175, 55, 0.5) !important;
+            border-radius: 10px !important;
+        }}
+        
+        /* Form 樣式 */
+        div[data-testid="stForm"] {{
+            border: none !important;
+            padding: 0 !important;
+        }}
+    }}
+
+    /* === 4. 其他通用微調 (保留原功能) === */
+    div[data-testid="stHorizontalBlock"] {{
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
-    }
+    }}
+    
+    /* 滑塊、切換開關、單選按鈕 - 統一淡紫強調色 */
+    .stSlider > div > div > div > div {{ background-color: {COLOR_PURPLE} !important; }}
+    .stRadio input[type="radio"]:checked + div, .stCheckbox input[type="checkbox"]:checked + div {{
+        background-color: {COLOR_PURPLE} !important;
+        border-color: {COLOR_PURPLE} !important;
+    }}
+    .stToggleSwitch > div > div > div > div {{ background-color: {COLOR_PURPLE} !important; }}
 
-    /* ========================================= */
-    /* 3. 冷金色與淡紫色高端標題 (Cold Platinum & Lavender Shimmer Typography) */
-    /* ========================================= */
-    h1, h2, h3 {
-        font-weight: 800 !important;
-        letter-spacing: -0.025em !important;
-        background-size: 200% auto !important;
-        -webkit-background-clip: text !important;
-        background-clip: text !important;
-        transition: all 0.4s ease;
-    }
-
-    /* ========================================= */
-    /* 4. 雙模式自適應策略 (Light / Dark Mode Adaptation with Black Canvas) */
-    /* ========================================= */
-
-    /* ☀️ 淺色模式 (Light Mode): 曜黑珍珠底襯托微光冷金與冰紫 */
-    @media (prefers-color-scheme: light) {
-        .stApp {
-            background-color: #12101D !important;
-        }
-
-        .quiz-card {
-            background: linear-gradient(135deg, rgba(26, 22, 40, 0.95) 0%, rgba(18, 15, 29, 0.9) 100%);
-            border: 1px solid rgba(229, 193, 88, 0.35);
-            box-shadow: 0 16px 40px -12px rgba(167, 139, 250, 0.18), 0 4px 16px rgba(197, 160, 89, 0.12);
-            backdrop-filter: blur(20px);
-        }
-        
-        h1, h2, h3 {
-            color: transparent !important;
-            /* 冷金 (Cold Platinum/Champagne) 到淡紫 (Violet Mist) 奢華漸層 */
-            background-image: linear-gradient(135deg, #F5E6B3 0%, #D4AF37 35%, #C4B5FD 75%, #DDD6FE 100%) !important;
-            text-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
-        }
-        
-        .stCaption {
-            color: #A3A3C2 !important;
-            font-weight: 500;
-        }
-
-        .stExpander {
-            border: 1px solid rgba(229, 193, 88, 0.25) !important;
-            border-radius: 16px !important;
-            background: rgba(26, 22, 40, 0.7) !important;
-        }
-
-        /* 調整表單與輸入元件的視覺對比 */
-        .stTextInput>div>div>input, .stSelectbox>div>div>div {
-            color: #F5E6B3 !important;
-            background-color: #1A1628 !important;
-            border-color: rgba(196, 181, 253, 0.3) !important;
-        }
-    }
-
-    /* 🌙 深色模式 (Dark Mode): 深曜黑夜、金屬冷金與極光紫暈 */
-    @media (prefers-color-scheme: dark) {
-        .stApp {
-            background-color: #090710 !important;
-        }
-
-        .quiz-card {
-            background: linear-gradient(135deg, rgba(20, 16, 32, 0.92) 0%, rgba(11, 9, 20, 0.95) 100%);
-            border: 1px solid rgba(229, 193, 88, 0.3);
-            backdrop-filter: blur(24px);
-            box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.8), 0 0 32px rgba(196, 181, 253, 0.1);
-        }
-        
-        h1, h2, h3 {
-            color: transparent !important;
-            /* 冷白金到夢幻淡紫的曜光 */
-            background-image: linear-gradient(135deg, #F8EFD4 0%, #E5C158 35%, #C4B5FD 70%, #E0E7FF 100%) !important;
-            text-shadow: 0 0 30px rgba(229, 193, 88, 0.3);
-        }
-        
-        .stCaption {
-            color: #9CA3AF !important;
-            font-weight: 500;
-        }
-
-        .stExpander {
-            border: 1px solid rgba(196, 181, 253, 0.2) !important;
-            border-radius: 16px !important;
-            background: rgba(18, 14, 28, 0.6) !important;
-        }
-
-        .stTextInput>div>div>input, .stSelectbox>div>div>div {
-            color: #F8EFD4 !important;
-            background-color: #141020 !important;
-            border-color: rgba(229, 193, 88, 0.25) !important;
-        }
-    }
-
-    /* ========================================= */
-    /* 5. 分割控制器與按鈕質感微調 (Zero-Friction UI Touch Targets) */
-    /* ========================================= */
-    div[data-testid="stSegmentedControl"] {
-        border-radius: 16px;
-        padding: 5px;
-        background-color: rgba(26, 22, 40, 0.8) !important;
-        border: 1px solid rgba(196, 181, 253, 0.2) !important;
-    }
-
-    button[kind="primary"], button[kind="secondary"] {
-        border-radius: 14px !important;
-        font-weight: 600 !important;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        min-height: 44px !important; /* 遵循 Fitts's Law 觸控防護 */
-    }
-
-    button[kind="primary"]:hover, button[kind="secondary"]:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(196, 181, 253, 0.25) !important;
-    }
     </style>
 """, unsafe_allow_html=True)
-# ==============================================================================
 
 @st.cache_data(show_spinner=False)
 def load_json_data(file_path):
@@ -179,6 +223,7 @@ def load_json_data(file_path):
             return []
     return []
 
+# --- 2. 數據加載與功能代碼 (保持不變) ---
 # 預載入全域題庫防腐層
 DB_DIALOGUE = load_json_data("data/listening_dialogue.json")
 DB_SPEAKING_READ = load_json_data("data/speaking_quiz.json")
@@ -195,6 +240,7 @@ QUIZ_DATA_WORDS = [
     {"id": 5, "audio_path": "assets/audio/01_listening/listening_words/tengil-a1-05.mp3", "question_text": "聆聽音檔，選出關聯的詞彙：", "options": ["fakar", "tayhi", "pitaw", "tarakar"], "correct_text": "pitaw"}
 ]
 
+# --- 3. UI 主體與邏輯 (保持不變) ---
 st.title("🎓 中高級認證")
 st.caption("[請選擇練習平台]")
 
@@ -332,7 +378,7 @@ elif current_tab == "🗣️ 口說":
             if sel:
                 q = opts[sel]
                 font_size = st.slider("🔍 字體大小", 16, 48, 24, 2)
-                st.markdown(f"<div style='padding:22px; border-radius:14px; background:rgba(229, 193, 88, 0.08); border-left:4px solid #E5C158; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='padding:20px; border-radius:10px; background:rgba(13,148,136,0.1); border-left:5px solid #0D9488; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
                 st.caption(f"來源：{q.get('source', '無')} ｜ 建議時間：1.5分鐘")
             st.markdown('</div>', unsafe_allow_html=True)
             
@@ -392,7 +438,11 @@ elif current_tab == "🗣️ 口說":
             if sel:
                 q = opts[sel]
                 
+                # 🚀 變更點：智慧路徑掛載 (Smart Path Resolver)
                 raw_img_name = q.get("image_path", "")
+                
+                # 如果 JSON 中只有檔名 (如 "01.jpg")，系統自動補全 assets/images/ 前綴
+                # 如果已經是完整路徑，則保持原狀，確保向下相容
                 if not raw_img_name.startswith("assets/") and raw_img_name != "":
                     target_img_path = os.path.join("assets", "images", raw_img_name)
                 else:
@@ -463,6 +513,7 @@ elif current_tab == "📖 閱讀":
                         st.session_state[state_ptr] += 1
                         st.rerun()
             else:
+                # 🚀 修復：補齊閱讀測驗到底時的重置迴圈
                 st.success("🎉 您已完成本項目全部題組練習！")
                 if st.button("🔄 重新洗牌挑戰", key=f"r_reset_{target_type}"):
                     st.session_state[state_ptr] = 0
@@ -515,5 +566,6 @@ elif current_tab == "✍️ 寫作":
                     st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
 
+# 頁尾
 st.write("---")
 st.caption(f"© 2026 中高級認證 App 三一開發團隊 ｜ 系統版本：**{APP_VERSION}**")
