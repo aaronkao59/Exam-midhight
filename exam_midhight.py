@@ -3,7 +3,7 @@ import random
 import json
 import os
 
-APP_VERSION = "v3.1.0 (State Defense Optimized)"
+APP_VERSION = "v3.1.1 (Image Path Decoupled)"
 
 st.set_page_config(page_title="中高級認證", page_icon="🎓", layout="wide", initial_sidebar_state="collapsed")
 
@@ -245,10 +245,21 @@ elif current_tab == "🗣️ 口說":
             sel = st.selectbox("主題選擇：", list(opts.keys()))
             if sel:
                 q = opts[sel]
-                if os.path.exists(q.get("image_path", "")):
-                    st.image(q["image_path"], use_container_width=True)
+                
+                # 🚀 變更點：智慧路徑掛載 (Smart Path Resolver)
+                raw_img_name = q.get("image_path", "")
+                
+                # 如果 JSON 中只有檔名 (如 "01.jpg")，系統自動補全 assets/images/ 前綴
+                # 如果已經是完整路徑，則保持原狀，確保向下相容
+                if not raw_img_name.startswith("assets/") and raw_img_name != "":
+                    target_img_path = os.path.join("assets", "images", raw_img_name)
                 else:
-                    st.error("⚠️ 圖片遺失")
+                    target_img_path = raw_img_name
+
+                if os.path.exists(target_img_path):
+                    st.image(target_img_path, use_container_width=True)
+                else:
+                    st.error(f"⚠️ 圖片遺失：系統找不到 `{target_img_path}`，請確認檔案已放置於該目錄。")
                 
                 if st.toggle("📝 顯示草稿區", key=f"img_draft_{q.get('quiz_id', 0)}"):
                     st.text_area("寫下回答提示：", key=f"draft_txt_{q.get('quiz_id', 0)}")
