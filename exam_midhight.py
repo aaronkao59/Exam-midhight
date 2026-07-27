@@ -5,7 +5,7 @@ import os
 
 APP_VERSION = "v3.1.0 (State Defense Optimized)"
 
-st.set_page_config(page_title="中高級認證", page_icon="🎓", layout="centered", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="中高級認證", page_icon="🎓", layout="wide", initial_sidebar_state="collapsed")
 
 st.markdown("""
     <style>
