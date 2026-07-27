@@ -3,18 +3,19 @@ import random
 import json
 import os
 
-APP_VERSION = "v3.3.0 (Cool Gold & Lavender Luxury UI Edition)"
+APP_VERSION = "v3.4.0 (Obsidian Gold & Lavender Haute Couture UI Edition)"
 
 st.set_page_config(page_title="中高級認證", page_icon="🎓", layout="wide", initial_sidebar_state="collapsed")
 
 # ==============================================================================
-# 🎨 介面視覺與交互架構 - [冷金色與淡紫色高端奢華風格 Cool Gold & Lavender UI v9.0]
-# 首席介面視覺架構師 (Chief UIUX Architect) 簽核通過
+# 🎨 介面視覺與交互架構 - [黑、冷金與淡紫高端奢華風格 Haute Couture UI v9.0]
+# 首席介面視覺架構師 (Chief UIUX Architect) & 首席阿美語本地化架構師 聯合簽核通過
+# 完全套用 UIUX-CRF v9.0、Custom-CRF v9.0 及 Code-CRF v9.0 量化模型
 # ==============================================================================
 st.markdown("""
     <style>
     /* ========================================= */
-    /* 1. 全域字體與背景基底微調 */
+    /* 1. 全域字體與黑曜石背景基底 (Obsidian Foundation) */
     /* ========================================= */
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
     
@@ -22,8 +23,13 @@ st.markdown("""
         font-family: 'Plus Jakarta Sans', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
     }
 
+    /* 全局背景微煞黑色調，維持高奢物理層低熵狀態 */
+    .stApp {
+        background-color: #0B0914 !important;
+    }
+
     /* ========================================= */
-    /* 2. 高端冷金淡紫卡片與容器 (Luxury Glassmorphism Card) */
+    /* 2. 高端高奢卡片與容器 (Haute Couture Glassmorphism Architecture) */
     /* ========================================= */
     .quiz-card {
         padding: 30px 36px;
@@ -46,7 +52,7 @@ st.markdown("""
     }
 
     /* ========================================= */
-    /* 3. 冷金色與淡紫色高端標題 (Cool Gold & Lavender Typography) */
+    /* 3. 冷金色與淡紫色高端標題 (Cold Platinum & Lavender Shimmer Typography) */
     /* ========================================= */
     h1, h2, h3 {
         font-weight: 800 !important;
@@ -58,52 +64,66 @@ st.markdown("""
     }
 
     /* ========================================= */
-    /* 4. 雙模式自適應 (Light / Dark Mode Adaptation) */
+    /* 4. 雙模式自適應策略 (Light / Dark Mode Adaptation with Black Canvas) */
     /* ========================================= */
 
-    /* ☀️ 淺色模式 (Light Mode): 珍珠香檳白與微光淡紫 */
+    /* ☀️ 淺色模式 (Light Mode): 曜黑珍珠底襯托微光冷金與冰紫 */
     @media (prefers-color-scheme: light) {
+        .stApp {
+            background-color: #12101D !important;
+        }
+
         .quiz-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 246, 255, 0.9) 100%);
-            border: 1px solid rgba(197, 160, 89, 0.25);
-            box-shadow: 0 16px 40px -12px rgba(167, 139, 250, 0.12), 0 4px 12px rgba(197, 160, 89, 0.08);
+            background: linear-gradient(135deg, rgba(26, 22, 40, 0.95) 0%, rgba(18, 15, 29, 0.9) 100%);
+            border: 1px solid rgba(229, 193, 88, 0.35);
+            box-shadow: 0 16px 40px -12px rgba(167, 139, 250, 0.18), 0 4px 16px rgba(197, 160, 89, 0.12);
             backdrop-filter: blur(20px);
         }
         
         h1, h2, h3 {
             color: transparent !important;
-            /* 冷金與深香檳、微紫結合的高奢漸層 */
-            background-image: linear-gradient(135deg, #B38E36 0%, #8B5CF6 50%, #4C1D95 100%) !important;
-            text-shadow: 0 4px 16px rgba(179, 142, 54, 0.12);
+            /* 冷金 (Cold Platinum/Champagne) 到淡紫 (Violet Mist) 奢華漸層 */
+            background-image: linear-gradient(135deg, #F5E6B3 0%, #D4AF37 35%, #C4B5FD 75%, #DDD6FE 100%) !important;
+            text-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
         }
         
         .stCaption {
-            color: #6B7280 !important;
+            color: #A3A3C2 !important;
             font-weight: 500;
         }
 
-        /* Expander 與 Form 視覺質感增強 */
         .stExpander {
-            border: 1px solid rgba(197, 160, 89, 0.2) !important;
+            border: 1px solid rgba(229, 193, 88, 0.25) !important;
             border-radius: 16px !important;
-            background: rgba(255, 255, 255, 0.6) !important;
+            background: rgba(26, 22, 40, 0.7) !important;
+        }
+
+        /* 調整表單與輸入元件的視覺對比 */
+        .stTextInput>div>div>input, .stSelectbox>div>div>div {
+            color: #F5E6B3 !important;
+            background-color: #1A1628 !important;
+            border-color: rgba(196, 181, 253, 0.3) !important;
         }
     }
 
-    /* 🌙 深色模式 (Dark Mode): 曜黑紫夜與冷金光暈 */
+    /* 🌙 深色模式 (Dark Mode): 深曜黑夜、金屬冷金與極光紫暈 */
     @media (prefers-color-scheme: dark) {
+        .stApp {
+            background-color: #090710 !important;
+        }
+
         .quiz-card {
-            background: linear-gradient(135deg, rgba(24, 21, 40, 0.85) 0%, rgba(15, 12, 27, 0.9) 100%);
-            border: 1px solid rgba(229, 193, 88, 0.22);
+            background: linear-gradient(135deg, rgba(20, 16, 32, 0.92) 0%, rgba(11, 9, 20, 0.95) 100%);
+            border: 1px solid rgba(229, 193, 88, 0.3);
             backdrop-filter: blur(24px);
-            box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.65), 0 0 30px rgba(196, 181, 253, 0.06);
+            box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.8), 0 0 32px rgba(196, 181, 253, 0.1);
         }
         
         h1, h2, h3 {
             color: transparent !important;
-            /* 冷金 (Cool Champagne Gold) 到淡紫 (Soft Lavender) 的極致曜光 */
-            background-image: linear-gradient(135deg, #F3E5AB 0%, #E5C158 35%, #C4B5FD 70%, #DDD6FE 100%) !important;
-            text-shadow: 0 0 28px rgba(229, 193, 88, 0.22);
+            /* 冷白金到夢幻淡紫的曜光 */
+            background-image: linear-gradient(135deg, #F8EFD4 0%, #E5C158 35%, #C4B5FD 70%, #E0E7FF 100%) !important;
+            text-shadow: 0 0 30px rgba(229, 193, 88, 0.3);
         }
         
         .stCaption {
@@ -112,28 +132,38 @@ st.markdown("""
         }
 
         .stExpander {
-            border: 1px solid rgba(196, 181, 253, 0.15) !important;
+            border: 1px solid rgba(196, 181, 253, 0.2) !important;
             border-radius: 16px !important;
-            background: rgba(24, 21, 40, 0.5) !important;
+            background: rgba(18, 14, 28, 0.6) !important;
+        }
+
+        .stTextInput>div>div>input, .stSelectbox>div>div>div {
+            color: #F8EFD4 !important;
+            background-color: #141020 !important;
+            border-color: rgba(229, 193, 88, 0.25) !important;
         }
     }
 
     /* ========================================= */
-    /* 5. 分割控制器與按鈕質感微調 */
+    /* 5. 分割控制器與按鈕質感微調 (Zero-Friction UI Touch Targets) */
     /* ========================================= */
     div[data-testid="stSegmentedControl"] {
         border-radius: 16px;
         padding: 5px;
+        background-color: rgba(26, 22, 40, 0.8) !important;
+        border: 1px solid rgba(196, 181, 253, 0.2) !important;
     }
 
     button[kind="primary"], button[kind="secondary"] {
         border-radius: 14px !important;
         font-weight: 600 !important;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        min-height: 44px !important; /* 遵循 Fitts's Law 觸控防護 */
     }
 
     button[kind="primary"]:hover, button[kind="secondary"]:hover {
         transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(196, 181, 253, 0.25) !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -302,7 +332,7 @@ elif current_tab == "🗣️ 口說":
             if sel:
                 q = opts[sel]
                 font_size = st.slider("🔍 字體大小", 16, 48, 24, 2)
-                st.markdown(f"<div style='padding:22px; border-radius:14px; background:rgba(197, 160, 89, 0.08); border-left:4px solid #C5A059; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='padding:22px; border-radius:14px; background:rgba(229, 193, 88, 0.08); border-left:4px solid #E5C158; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
                 st.caption(f"來源：{q.get('source', '無')} ｜ 建議時間：1.5分鐘")
             st.markdown('</div>', unsafe_allow_html=True)
             
