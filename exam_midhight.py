@@ -5,7 +5,7 @@ import os
 
 APP_VERSION = "v3.1.1 (Image Path Decoupled)"
 
-# --- 1. 配置頁面與自定義主題 (黑/冷金/淡紫) ---
+# --- 1. 頁面基礎配置 ---
 st.set_page_config(
     page_title="中高級認證",
     page_icon="🎓",
@@ -13,187 +13,214 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 注入優化後的 CSS 樣式
+# --- 2. 低調高端、時尚奢華配色系統 (Dark & Light 自適應) ---
+# 設計理念：
+# - 深色：曜石黑（Obsidian Black）襯托冷鈦金（Cool Titanium Gold）與微光的薰衣草灰紫（Atmospheric Lavender Gray），展現極致沉穩奢華。
+# - 淺色：米白珍珠光澤（Pearl White/Champagne Tint）搭配香檳古銅金（Bronze Champagne Gold）與深煙燻紫（Smokey Violet），呈顯低調高雅的品質感。
+# - 兩者均避免過高對比度帶來的刺眼感，並大幅提升介面易讀性。
+
 st.markdown("""
     <style>
-    /* === 全局字體與平滑渲染 === */
+    /* 全局字體與平滑渲染 */
     html, body, [data-testid="stAppViewContainer"] {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     /* =========================================================
-       1. LIGHT MODE (淺色模式優化)
+       【LIGHT MODE】高雅香檳珍珠配黑鈦金與深薰衣草紫
        ========================================================= */
     @media (prefers-color-scheme: light) {
-        /* 主背景：優雅暖白 */
+        /* 主背景：潤白珍珠質感 */
         [data-testid="stAppViewContainer"] {
-            background-color: #FAFAFA !important;
-            color: #1A1A1A !important;
+            background-color: #F7F6F3 !important;
+            color: #242426 !important;
         }
 
-        /* 頁面大標題與子標題：深古銅金 */
+        /* 主標題：沉穩香檳金 */
         h1, h2, h3, h4 {
-            color: #B8860B !important;
+            color: #8C734B !important;
             font-weight: 700 !important;
             letter-spacing: -0.3px !important;
         }
 
-        /* 主導覽列 (segmented_control) */
+        /* 導覽切換列 (segmented_control) */
         div[data-testid="stSegmentedControl"] button {
-            border: 1px solid #C5A059 !important;
-            color: #4A4A4A !important;
+            border: 1px solid #D6CEC2 !important;
+            color: #595652 !important;
             background-color: #FFFFFF !important;
-            border-radius: 8px !important;
+            border-radius: 10px !important;
+            transition: all 0.3s ease !important;
         }
         div[data-testid="stSegmentedControl"] button[aria-selected="true"] {
-            background-color: #1A1A1A !important;
-            color: #D4AF37 !important;
-            border-color: #D4AF37 !important;
-            font-weight: bold !important;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
+            background-color: #212024 !important; /* 低調曜石黑 */
+            color: #D6C29A !important;             /* 香檳金 */
+            border-color: #212024 !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
         }
 
-        /* 測驗卡片 (Quiz Card)：奢華黑金風格 */
+        /* 測驗卡片 (Quiz Card) - 低調深黑金底襯，凸顯奢華比重 */
         .quiz-card {
-            background-color: #121212 !important;
-            color: #F4E8C1 !important;
-            padding: 28px;
-            border-radius: 16px;
-            border: 1.5px solid #C5A059;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            background: linear-gradient(145deg, #1D1C20, #252429) !important;
+            color: #E8E3DA !important;
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid rgba(214, 194, 154, 0.25);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
             margin-top: 20px;
             margin-bottom: 25px;
         }
 
-        /* 卡片內部文字與元件控制 */
+        /* 卡片內部文字 */
         .quiz-card p, .quiz-card label, .quiz-card span, .quiz-card div {
-            color: #F4E8C1 !important;
+            color: #E8E3DA !important;
         }
 
-        /* 按鈕 (Buttons) */
+        /* 系統按鈕：薄霧金邊界，懸浮呈奢華紫色 */
         .stButton>button {
             border-radius: 10px !important;
-            border: 1px solid #B8860B !important;
+            border: 1px solid #BCA882 !important;
             background-color: #FFFFFF !important;
-            color: #B8860B !important;
+            color: #6E5B37 !important;
             font-weight: 600 !important;
-            transition: all 0.25s ease !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
         .stButton>button:hover {
-            background-color: #8A73B9 !important; /* 淡紫亮色 */
-            color: #FFFFFF !important;
-            border-color: #8A73B9 !important;
-            box-shadow: 0 4px 12px rgba(138, 115, 185, 0.3) !important;
+            background-color: #5B4C72 !important; /* 煙燻紫 */
+            color: #F7F6F3 !important;
+            border-color: #5B4C72 !important;
+            box-shadow: 0 6px 16px rgba(91, 76, 114, 0.25) !important;
         }
 
-        /* 卡片內部的按鈕 */
+        /* 卡片內部的按鈕特別調校 */
         .quiz-card .stButton>button {
-            background-color: #222222 !important;
-            color: #E6C687 !important;
-            border: 1px solid #C5A059 !important;
+            background-color: #2C2B30 !important;
+            color: #D6C29A !important;
+            border: 1px solid rgba(214, 194, 154, 0.3) !important;
         }
         .quiz-card .stButton>button:hover {
-            background-color: #8A73B9 !important;
+            background-color: #72608D !important;
             color: #FFFFFF !important;
-            border-color: #8A73B9 !important;
+            border-color: #72608D !important;
         }
 
         /* 輸入框 & 下拉選單 */
         .stTextInput input, .stSelectbox select, .stTextArea textarea {
             background-color: #FFFFFF !important;
-            color: #1A1A1A !important;
-            border: 1px solid #C5A059 !important;
-            border-radius: 8px !important;
+            color: #242426 !important;
+            border: 1px solid #D6CEC2 !important;
+            border-radius: 10px !important;
         }
 
         /* 折疊卡片 (Expander) */
         .stExpander {
             background-color: #FFFFFF !important;
-            border: 1px solid #E0D5BE !important;
-            border-radius: 12px !important;
+            border: 1px solid #E5DFD5 !important;
+            border-radius: 14px !important;
         }
 
-        /* 提示框 (Alerts / Info / Success) */
+        /* 提示框與卡片：深薰衣草色為核心 */
         .stAlert {
-            border-radius: 12px !important;
-            background-color: #F2EEF9 !important; /* 柔和淡紫底 */
-            border-left: 5px solid #8A73B9 !important;
-            color: #333333 !important;
+            border-radius: 14px !important;
+            background-color: #EFECEF !important;
+            border-left: 4px solid #72608D !important;
+            color: #242426 !important;
         }
     }
 
     /* =========================================================
-       2. DARK MODE (深色模式)
+       【DARK MODE】曜石深黑配冷鈦金與微光紫羅蘭
        ========================================================= */
     @media (prefers-color-scheme: dark) {
+        /* 主背景：深夜曜石黑 */
         [data-testid="stAppViewContainer"] {
-            background-color: #0E0E10 !important;
-            color: #E2D9C5 !important;
+            background-color: #121214 !important;
+            color: #E6E4E0 !important;
         }
 
+        /* 標題：冰極冷鈦金 */
         h1, h2, h3, h4 {
-            color: #D4AF37 !important;
+            color: #D8C49B !important;
             font-weight: 700 !important;
+            letter-spacing: -0.3px !important;
         }
 
+        /* 導覽切換列 */
         div[data-testid="stSegmentedControl"] button {
-            border: 1px solid #444444 !important;
-            color: #C5A059 !important;
-            background-color: #161618 !important;
+            border: 1px solid rgba(216, 196, 155, 0.2) !important;
+            color: #A39E93 !important;
+            background-color: #1A1A1E !important;
+            border-radius: 10px !important;
         }
         div[data-testid="stSegmentedControl"] button[aria-selected="true"] {
-            background-color: #D4AF37 !important;
-            color: #0E0E10 !important;
-            font-weight: bold !important;
+            background-color: #28262C !important;
+            color: #E2D1AC !important;
+            border-color: #D8C49B !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
         }
 
+        /* 測驗卡片 */
         .quiz-card {
-            background-color: #18181C !important;
-            color: #E2D9C5 !important;
-            padding: 28px;
-            border-radius: 16px;
-            border: 1.5px solid #D4AF37;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(145deg, #1A1A1D, #222227) !important;
+            color: #E6E4E0 !important;
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid rgba(216, 196, 155, 0.2);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
             margin-top: 20px;
             margin-bottom: 25px;
         }
 
+        /* 按鈕樣式 */
         .stButton>button {
             border-radius: 10px !important;
-            border: 1px solid #D4AF37 !important;
-            background-color: #18181C !important;
-            color: #D4AF37 !important;
+            border: 1px solid rgba(216, 196, 155, 0.4) !important;
+            background-color: #1A1A1D !important;
+            color: #D8C49B !important;
             font-weight: 600 !important;
-            transition: all 0.25s ease !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
         .stButton>button:hover {
-            background-color: #8A73B9 !important;
+            background-color: #836DA3 !important; /* 微光紫羅蘭 */
             color: #FFFFFF !important;
-            border-color: #8A73B9 !important;
+            border-color: #836DA3 !important;
+            box-shadow: 0 6px 20px rgba(131, 109, 163, 0.35) !important;
         }
 
+        /* 提示框 */
         .stAlert {
-            border-radius: 12px !important;
-            background-color: #1E1A24 !important;
-            border-left: 5px solid #9B86C6 !important;
-            color: #E2D9C5 !important;
+            border-radius: 14px !important;
+            background-color: #1F1B26 !important;
+            border-left: 4px solid #9B81C2 !important;
+            color: #E6E4E0 !important;
         }
 
+        /* 折疊組件 */
         .stExpander {
-            background-color: #18181C !important;
-            border: 1px solid #333333 !important;
-            border-radius: 12px !important;
+            background-color: #18181B !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 14px !important;
+        }
+
+        /* 輸入框 & 下拉選單 */
+        .stTextInput input, .stSelectbox select, .stTextArea textarea {
+            background-color: #141416 !important;
+            color: #E6E4E0 !important;
+            border: 1px solid rgba(216, 196, 155, 0.3) !important;
+            border-radius: 10px !important;
         }
     }
 
-    /* === 3. 通用元件細節調校 (淡紫色亮點) === */
+    /* === 通用微調組件 (滑塊/單選按鈕/切換鈕) === */
     div[data-testid="stHorizontalBlock"] {
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
     }
-    .stSlider > div > div > div > div { background-color: #8A73B9 !important; }
+    .stSlider > div > div > div > div { background-color: #836DA3 !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -360,7 +387,7 @@ elif current_tab == "🗣️ 口說":
             if sel:
                 q = opts[sel]
                 font_size = st.slider("🔍 字體大小", 16, 48, 24, 2)
-                st.markdown(f"<div style='padding:20px; border-radius:10px; background:rgba(197,160,89,0.15); border-left:5px solid #C5A059; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='padding:20px; border-radius:12px; background:rgba(216, 196, 155, 0.12); border-left:4px solid #D8C49B; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
                 st.caption(f"來源：{q.get('source', '無')} ｜ 建議時間：1.5分鐘")
             st.markdown('</div>', unsafe_allow_html=True)
             
