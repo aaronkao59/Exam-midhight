@@ -3,12 +3,12 @@ import random
 import json
 import os
 
-APP_VERSION = "v3.2.0 (Cool Luxury Fashion UI Edition)"
+APP_VERSION = "v3.3.0 (Cool Gold & Lavender Luxury UI Edition)"
 
 st.set_page_config(page_title="中高級認證", page_icon="🎓", layout="wide", initial_sidebar_state="collapsed")
 
 # ==============================================================================
-# 🎨 介面視覺與交互架構 - [冷色系高端時尚風格 Cool Luxury UI v9.0]
+# 🎨 介面視覺與交互架構 - [冷金色與淡紫色高端奢華風格 Cool Gold & Lavender UI v9.0]
 # 首席介面視覺架構師 (Chief UIUX Architect) 簽核通過
 # ==============================================================================
 st.markdown("""
@@ -16,27 +16,27 @@ st.markdown("""
     /* ========================================= */
     /* 1. 全域字體與背景基底微調 */
     /* ========================================= */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
     
     html, body, [class*="css"] {
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: 'Plus Jakarta Sans', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
     }
 
     /* ========================================= */
-    /* 2. 高端冷色系卡片與容器 (Quiz Card Architecture) */
+    /* 2. 高端冷金淡紫卡片與容器 (Luxury Glassmorphism Card) */
     /* ========================================= */
     .quiz-card {
-        padding: 28px 32px;
-        border-radius: 20px;
-        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        margin-top: 20px;
-        margin-bottom: 30px;
+        padding: 30px 36px;
+        border-radius: 24px;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        margin-top: 22px;
+        margin-bottom: 32px;
     }
 
     .stAlert {
-        border-radius: 14px !important;
+        border-radius: 16px !important;
         border: none !important;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(12px);
     }
 
     div[data-testid="stHorizontalBlock"] {
@@ -46,57 +46,75 @@ st.markdown("""
     }
 
     /* ========================================= */
-    /* 3. 冷色系高端標題 (Cool Luxury Gradient Typography) */
+    /* 3. 冷金色與淡紫色高端標題 (Cool Gold & Lavender Typography) */
     /* ========================================= */
     h1, h2, h3 {
         font-weight: 800 !important;
-        letter-spacing: -0.03em !important;
+        letter-spacing: -0.025em !important;
         background-size: 200% auto !important;
         -webkit-background-clip: text !important;
         background-clip: text !important;
-        transition: color 0.3s ease;
+        transition: all 0.4s ease;
     }
 
     /* ========================================= */
     /* 4. 雙模式自適應 (Light / Dark Mode Adaptation) */
     /* ========================================= */
 
-    /* ☀️ 淺色模式 (Light Mode): 極致珍珠冰白與鈦金質感 */
+    /* ☀️ 淺色模式 (Light Mode): 珍珠香檳白與微光淡紫 */
     @media (prefers-color-scheme: light) {
         .quiz-card {
-            background-color: #FFFFFF;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            box-shadow: 0 10px 30px -10px rgba(148, 163, 184, 0.15), 0 4px 6px -2px rgba(148, 163, 184, 0.05);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 246, 255, 0.9) 100%);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            box-shadow: 0 16px 40px -12px rgba(167, 139, 250, 0.12), 0 4px 12px rgba(197, 160, 89, 0.08);
+            backdrop-filter: blur(20px);
         }
         
         h1, h2, h3 {
             color: transparent !important;
-            background-image: linear-gradient(135deg, #0284C7 0%, #0369A1 50%, #475569 100%) !important;
-            text-shadow: 0 2px 10px rgba(2, 132, 199, 0.08);
+            /* 冷金與深香檳、微紫結合的高奢漸層 */
+            background-image: linear-gradient(135deg, #B38E36 0%, #8B5CF6 50%, #4C1D95 100%) !important;
+            text-shadow: 0 4px 16px rgba(179, 142, 54, 0.12);
         }
         
         .stCaption {
-            color: #64748B !important;
+            color: #6B7280 !important;
+            font-weight: 500;
+        }
+
+        /* Expander 與 Form 視覺質感增強 */
+        .stExpander {
+            border: 1px solid rgba(197, 160, 89, 0.2) !important;
+            border-radius: 16px !important;
+            background: rgba(255, 255, 255, 0.6) !important;
         }
     }
 
-    /* 🌙 深色模式 (Dark Mode): 深海夜藍與冰晶極光 */
+    /* 🌙 深色模式 (Dark Mode): 曜黑紫夜與冷金光暈 */
     @media (prefers-color-scheme: dark) {
         .quiz-card {
-            background-color: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(16px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 20px 0 rgba(56, 189, 248, 0.05);
+            background: linear-gradient(135deg, rgba(24, 21, 40, 0.85) 0%, rgba(15, 12, 27, 0.9) 100%);
+            border: 1px solid rgba(229, 193, 88, 0.22);
+            backdrop-filter: blur(24px);
+            box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.65), 0 0 30px rgba(196, 181, 253, 0.06);
         }
         
         h1, h2, h3 {
             color: transparent !important;
-            background-image: linear-gradient(135deg, #38BDF8 0%, #818CF8 50%, #E2E8F0 100%) !important;
-            text-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+            /* 冷金 (Cool Champagne Gold) 到淡紫 (Soft Lavender) 的極致曜光 */
+            background-image: linear-gradient(135deg, #F3E5AB 0%, #E5C158 35%, #C4B5FD 70%, #DDD6FE 100%) !important;
+            text-shadow: 0 0 28px rgba(229, 193, 88, 0.22);
         }
         
         .stCaption {
-            color: #94A3B8 !important;
+            color: #9CA3AF !important;
+            font-weight: 500;
+        }
+
+        .stExpander {
+            border: 1px solid rgba(196, 181, 253, 0.15) !important;
+            border-radius: 16px !important;
+            background: rgba(24, 21, 40, 0.5) !important;
         }
     }
 
@@ -104,17 +122,22 @@ st.markdown("""
     /* 5. 分割控制器與按鈕質感微調 */
     /* ========================================= */
     div[data-testid="stSegmentedControl"] {
-        border-radius: 14px;
-        padding: 4px;
+        border-radius: 16px;
+        padding: 5px;
     }
 
     button[kind="primary"], button[kind="secondary"] {
-        border-radius: 12px !important;
+        border-radius: 14px !important;
         font-weight: 600 !important;
-        transition: all 0.25s ease !important;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    button[kind="primary"]:hover, button[kind="secondary"]:hover {
+        transform: translateY(-2px);
     }
     </style>
 """, unsafe_allow_html=True)
+# ==============================================================================
 
 @st.cache_data(show_spinner=False)
 def load_json_data(file_path):
@@ -279,7 +302,7 @@ elif current_tab == "🗣️ 口說":
             if sel:
                 q = opts[sel]
                 font_size = st.slider("🔍 字體大小", 16, 48, 24, 2)
-                st.markdown(f"<div style='padding:20px; border-radius:12px; background:rgba(2, 132, 199, 0.08); border-left:4px solid #0284C7; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='padding:22px; border-radius:14px; background:rgba(197, 160, 89, 0.08); border-left:4px solid #C5A059; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
                 st.caption(f"來源：{q.get('source', '無')} ｜ 建議時間：1.5分鐘")
             st.markdown('</div>', unsafe_allow_html=True)
             
