@@ -7,107 +7,19 @@ APP_VERSION = "v3.1.1 (Image Path Decoupled)"
 
 st.set_page_config(page_title="中高級認證", page_icon="🎓", layout="wide", initial_sidebar_state="collapsed")
 
-# 注入漸層淡金黃色背景與高可讀性字體配色樣式
 st.markdown("""
     <style>
-    /* 全局背景：優雅的微光淡金黃色漸層 */
-    [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #FFFDF0 0%, #FAF3DD 50%, #F5E6C8 100%) !important;
-        color: #2C251E !important;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-    }
-
-    /* 頂部 Header 透明化 */
-    [data-testid="stHeader"] {
-        background: transparent !important;
-    }
-
-    /* 標題與次標題配色：溫潤深古銅金，確保對比清晰 */
-    h1, h2, h3, h4 {
-        color: #7A5C1E !important;
-        font-weight: 700 !important;
-    }
-
-    /* 主導覽列 (segmented_control) 樣式 */
-    div[data-testid="stSegmentedControl"] button {
-        background-color: #FFFFFF !important;
-        border: 1px solid #D4C39D !important;
-        color: #5A4A32 !important;
-        border-radius: 10px !important;
-        transition: all 0.3s ease !important;
-    }
-    div[data-testid="stSegmentedControl"] button[aria-selected="true"] {
-        background-color: #7A5C1E !important;
-        color: #FFFFFF !important;
-        border-color: #7A5C1E !important;
-        font-weight: bold !important;
-        box-shadow: 0 4px 12px rgba(122, 92, 30, 0.25) !important;
-    }
-
-    /* 測驗卡片 (quiz-card)：純白底襯搭配淡金邊框，文字視覺極致清晰 */
     .quiz-card {
-        background-color: #FFFFFF !important;
-        padding: 28px; 
-        border-radius: 16px;
-        border: 1px solid #E8D8B8 !important;
-        box-shadow: 0 6px 20px rgba(122, 92, 30, 0.08);
-        margin-top: 15px; 
-        margin-bottom: 25px;
+        background-color: var(--secondary-background-color);
+        padding: 24px; border-radius: 16px;
+        border: 1px solid rgba(128, 128, 128, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-top: 15px; margin-bottom: 25px;
     }
-    .quiz-card p, .quiz-card label, .quiz-card span, .quiz-card div {
-        color: #2C251E !important;
-    }
-
-    /* 按鈕 (Buttons) 樣式 */
-    .stButton>button {
-        border-radius: 10px !important;
-        border: 1px solid #8C6D27 !important;
-        background-color: #FFFFFF !important;
-        color: #8C6D27 !important;
-        font-weight: 600 !important;
-        transition: all 0.25s ease !important;
-    }
-    .stButton>button:hover {
-        background-color: #8C6D27 !important;
-        color: #FFFFFF !important;
-        box-shadow: 0 4px 12px rgba(140, 109, 39, 0.3) !important;
-    }
-
-    /* 表單與輸入框樣式 */
-    .stTextInput input, .stSelectbox select, .stTextArea textarea {
-        background-color: #FFFFFF !important;
-        color: #2C251E !important;
-        border: 1px solid #D4C39D !important;
-        border-radius: 8px !important;
-    }
-
-    /* 折疊面板 (Expander) */
-    .stExpander {
-        background-color: #FFFFFF !important;
-        border: 1px solid #E8D8B8 !important;
-        border-radius: 12px !important;
-    }
-
-    /* 提示訊息框 (stAlert) */
-    .stAlert { 
-        border-radius: 12px !important; 
-        border: none !important;
-        background-color: #F7EFCB !important;
-        color: #4A3810 !important;
-    }
-
-    /* 通用佈局微調 */
-    div[data-testid="stHorizontalBlock"] { 
-        background: transparent !important; 
-        border: none !important; 
-        box-shadow: none !important; 
-    }
-    hr {
-        border-color: #E8D8B8 !important;
-    }
-    .stSlider > div > div > div > div {
-        background-color: #8C6D27 !important;
-    }
+    h1, h2, h3 { color: #0D9488 !important; }
+    @media (prefers-color-scheme: dark) { h1, h2, h3 { color: #2DD4BF !important; } }
+    .stAlert { border-radius: 12px !important; border: none !important; }
+    div[data-testid="stHorizontalBlock"] { background: transparent !important; border: none !important; box-shadow: none !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -274,7 +186,7 @@ elif current_tab == "🗣️ 口說":
             if sel:
                 q = opts[sel]
                 font_size = st.slider("🔍 字體大小", 16, 48, 24, 2)
-                st.markdown(f"<div style='padding:20px; border-radius:10px; background:rgba(140,109,39,0.1); border-left:5px solid #8C6D27; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='padding:20px; border-radius:10px; background:rgba(13,148,136,0.1); border-left:5px solid #0D9488; font-size:{font_size}px;'>{q['content']}</div>", unsafe_allow_html=True)
                 st.caption(f"來源：{q.get('source', '無')} ｜ 建議時間：1.5分鐘")
             st.markdown('</div>', unsafe_allow_html=True)
             
