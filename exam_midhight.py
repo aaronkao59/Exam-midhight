@@ -64,10 +64,7 @@ if current_tab == "📋 認證考試說明":
         st.caption("中高級認證總分為100分，[聽力(20分)/口說(30分)/閱讀(30分)/寫作(20分)四個項目]")
         st.markdown("* **聽力測驗** (聽音選詞, 對話理解)\n* **口說測驗** (段落朗讀, 情境問答, 看圖表達)\n* **閱讀測驗** (詞彙語意, 語言結構)\n* **寫作測驗** (句子聽寫, 問答題)")
     with st.expander("3. 合格標準", expanded=False):
-        st.markdown("總分達60分以上，且單項成績達聽力15分、口說15分、閱讀18分、寫作12分以上。")
- if current_tab == "📜 皇家認證說明":
-        st.subheader("📜 [皇家認證考試說明](https://lokahsu.ilrdf.org.tw/web_lokahsu/Files/Guide/113_3_1.pdf)")
-        st.divider()        
+        st.markdown("總分達60分以上，且單項成績達聽力15分、口說15分、閱讀18分、寫作12分以上。")     
 
 elif current_tab == "🎧 聽力":
     st.subheader("🎧 聽力測驗 (pitengil)")
